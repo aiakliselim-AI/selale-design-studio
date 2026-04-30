@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelye — El Emeği Dükkânı</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6f0;--warm:#f5ede0;--caramel:#c8956c;
+  --dark:#2c2118;--muted:#8a7060;--blush:#e8c4a8;
+  --sage:#a8b89a;--rose:#d4857a;--wa:#25d366;
+  --gold:#c8956c;--lavender:#c4b8d4;--mint:#a8c8b8;
+  --ig1:#f09433;--ig2:#e6683c;--ig3:#dc2743;--ig4:#cc2366;--ig5:#bc1888;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+
+/* ═══ DRAWER ═══ */
+.drawer-overlay{position:fixed;inset:0;z-index:500;background:rgba(44,33,24,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:310px;max-width:88vw;background:var(--cream);z-index:600;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .38s cubic-bezier(.4,0,.2,1);box-shadow:8px 0 40px rgba(44,33,24,.18);overflow-y:auto;}
+.drawer.open{transform:translateX(0);}
+.drawer-head{padding:1.8rem 1.6rem 1.2rem;border-bottom:1px solid rgba(200,149,108,.2);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--cream);z-index:2;}
+.drawer-logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--dark);}
+.drawer-logo span{color:var(--caramel);font-style:italic;}
+.drawer-close{background:var(--warm);border:none;border-radius:50%;width:36px;height:36px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.drawer-close:hover{background:var(--blush);}
+
+.drawer-section-label{padding:.9rem 1.6rem .4rem;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.drawer-link{display:flex;align-items:center;gap:.9rem;padding:.75rem 1.6rem;color:var(--dark);text-decoration:none;font-size:.9rem;font-weight:400;transition:background .2s,color .2s;cursor:pointer;border:none;background:transparent;font-family:'Jost',sans-serif;width:100%;text-align:left;}
+.drawer-link:hover,.drawer-link.active{background:var(--warm);color:var(--caramel);}
+.drawer-link .dl-icon{font-size:1.1rem;width:26px;text-align:center;flex-shrink:0;}
+.drawer-link .dl-arrow{margin-left:auto;color:var(--muted);font-size:.7rem;}
+.drawer-link .dl-badge{margin-left:auto;background:var(--caramel);color:#fff;border-radius:50px;font-size:.68rem;padding:.18rem .5rem;font-weight:500;min-width:20px;text-align:center;}
+.drawer-divider{height:1px;background:rgba(200,149,108,.15);margin:.4rem 1.6rem;}
+.drawer-footer{padding:1.2rem 1.6rem 1.6rem;border-top:1px solid rgba(200,149,108,.2);margin-top:.5rem;}
+.drawer-wa{display:flex;align-items:center;gap:.8rem;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:.9rem 1.2rem;width:100%;cursor:pointer;font-size:.88rem;font-weight:500;font-family:'Jost',sans-serif;transition:opacity .2s;text-decoration:none;}
+.drawer-wa:hover{opacity:.88;}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 4%;background:rgba(250,246,240,.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,149,108,.15);transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(44,33,24,.08);}
+.nav-left{display:flex;align-items:center;gap:1rem;}
+.hamburger{background:var(--warm);border:none;border-radius:12px;width:40px;height:40px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:background .2s;flex-shrink:0;}
+.hamburger:hover{background:var(--blush);}
+.hamburger span{display:block;width:18px;height:2px;background:var(--dark);border-radius:2px;}
+.logo{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--dark);letter-spacing:1px;white-space:nowrap;cursor:pointer;}
+.logo span{color:var(--caramel);font-style:italic;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;transition:color .25s;white-space:nowrap;cursor:pointer;}
+.nav-links a:hover{color:var(--caramel);}
+.nav-actions{display:flex;gap:.5rem;align-items:center;}
+.nav-icon-btn{background:var(--warm);border:none;border-radius:12px;width:40px;height:40px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:background .2s;}
+.nav-icon-btn:hover{background:var(--blush);}
+.nav-badge{position:absolute;top:-4px;right:-4px;background:var(--rose);color:#fff;border-radius:50%;width:17px;height:17px;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:600;}
+.btn-wa-nav{background:var(--wa);color:#fff;border:none;border-radius:50px;padding:.5rem 1.1rem;font-size:.78rem;cursor:pointer;transition:opacity .2s;font-family:'Jost',sans-serif;display:flex;align-items:center;gap:.35rem;text-decoration:none;white-space:nowrap;}
+.btn-wa-nav:hover{opacity:.85;}
+
+/* ═══ FAV PAGE ═══ */
+.favpage{position:fixed;inset:0;z-index:800;background:var(--cream);overflow-y:auto;transform:translateX(100%);transition:transform .38s cubic-bezier(.4,0,.2,1);}
+.favpage.open{transform:translateX(0);}
+.favpage-head{position:sticky;top:0;background:rgba(250,246,240,.95);backdrop-filter:blur(10px);padding:1.2rem 5%;display:flex;align-items:center;gap:1rem;border-bottom:1px solid rgba(200,149,108,.15);z-index:10;}
+.favpage-head h2{font-family:'Playfair Display',serif;font-size:1.4rem;}
+.favpage-back{background:var(--warm);border:none;border-radius:12px;width:40px;height:40px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.favpage-back:hover{background:var(--blush);}
+.favpage-body{padding:2rem 5% 4rem;}
+.fav-empty{text-align:center;padding:5rem 2rem;}
+.fav-empty .empty-icon{font-size:4rem;margin-bottom:1rem;}
+.fav-empty p{color:var(--muted);margin-bottom:1.5rem;}
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;}
+.fav-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(200,149,108,.12);transition:transform .3s,box-shadow .3s;}
+.fav-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(44,33,24,.1);}
+.fav-img{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;}
+.fav-remove{position:absolute;top:.7rem;right:.7rem;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;z-index:2;}
+.fav-info{padding:1rem;}
+.fav-info h4{font-family:'Playfair Display',serif;font-size:.92rem;margin-bottom:.3rem;}
+.fav-price{color:var(--caramel);font-size:.88rem;font-weight:500;margin-bottom:.8rem;}
+.fav-wa{display:flex;align-items:center;gap:.4rem;justify-content:center;background:var(--wa);color:#fff;border:none;border-radius:50px;padding:.5rem 1rem;font-size:.76rem;cursor:pointer;width:100%;font-family:'Jost',sans-serif;transition:opacity .2s;text-decoration:none;}
+.fav-wa:hover{opacity:.85;}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:6rem 5% 3rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 80% 50%,rgba(232,196,168,.35) 0%,transparent 70%);pointer-events:none;}
+.hero-text{position:relative;z-index:2;}
+.hero-tag{display:inline-block;background:var(--warm);border:1px solid var(--blush);color:var(--caramel);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.5rem;animation:fadeUp .8s ease both;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;color:var(--dark);margin-bottom:1.5rem;animation:fadeUp .8s .15s ease both;}
+.hero h1 em{color:var(--caramel);font-style:italic;display:block;}
+.hero p{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:440px;margin-bottom:2.5rem;animation:fadeUp .8s .3s ease both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .45s ease both;}
+.btn-primary{background:var(--caramel);color:#fff;border:none;border-radius:50px;padding:.82rem 2rem;font-size:.88rem;letter-spacing:1px;cursor:pointer;transition:all .25s;font-family:'Jost',sans-serif;font-weight:500;}
+.btn-primary:hover{background:var(--dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(44,33,24,.2);}
+.btn-outline{background:transparent;color:var(--dark);border:1.5px solid var(--dark);border-radius:50px;padding:.82rem 2rem;font-size:.88rem;letter-spacing:1px;cursor:pointer;transition:all .25s;font-family:'Jost',sans-serif;}
+.btn-outline:hover{background:var(--dark);color:#fff;transform:translateY(-2px);}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;animation:fadeUp .8s .2s ease both;}
+.hero-canvas{width:min(380px,90%);aspect-ratio:3/4;background:linear-gradient(145deg,var(--warm) 0%,var(--blush) 60%,var(--caramel) 100%);border-radius:40% 60% 55% 45%/45% 40% 60% 55%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:2.2rem;box-shadow:30px 30px 80px rgba(200,149,108,.25),-10px -10px 40px rgba(250,246,240,.8);animation:float 6s ease-in-out infinite;position:relative;overflow:hidden;}
+.hero-canvas::before{content:'';position:absolute;top:-30%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(255,255,255,.4) 0%,transparent 70%);border-radius:50%;}
+.hero-mini-card{background:rgba(255,255,255,.72);backdrop-filter:blur(8px);border-radius:18px;padding:1rem 1.2rem;text-align:center;width:100%;border:1px solid rgba(255,255,255,.9);}
+.hero-mini-card .icon{font-size:2.2rem;display:block;margin-bottom:.4rem;}
+.hero-mini-card .name{font-family:'Playfair Display',serif;font-size:.88rem;color:var(--dark);display:block;}
+.hero-mini-card .price{color:var(--caramel);font-size:.82rem;font-weight:500;}
+.hero-badge{position:absolute;bottom:-20px;right:-20px;background:var(--dark);color:#fff;border-radius:50%;width:90px;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:1px;text-align:center;text-transform:uppercase;line-height:1.4;animation:spin 20s linear infinite;box-shadow:0 10px 30px rgba(44,33,24,.3);}
+.hero-badge strong{font-size:1.1rem;display:block;letter-spacing:0;}
+
+/* ═══ MARQUEE ═══ */
+.marquee-bar{background:var(--dark);color:var(--blush);padding:.8rem 0;overflow:hidden;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;}
+.marquee-inner{display:flex;gap:3rem;animation:marquee 20s linear infinite;white-space:nowrap;}
+.marquee-inner span::before{content:'✦ ';color:var(--caramel);}
+
+/* ═══ SECTION TITLE ═══ */
+.section-title{text-align:center;margin-bottom:3rem;}
+.section-title .tag{display:inline-block;color:var(--caramel);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.7rem;}
+.section-title h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--dark);line-height:1.2;}
+.section-title h2 em{color:var(--caramel);font-style:italic;}
+
+/* ═══ CATEGORIES ═══ */
+.categories{padding:5rem 5%;background:var(--warm);}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1.2rem;}
+.cat-card{border-radius:22px;overflow:hidden;aspect-ratio:3/4;position:relative;cursor:pointer;transition:transform .35s,box-shadow .3s;display:flex;align-items:flex-end;}
+.cat-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(44,33,24,.14);}
+.cat-card:hover .cat-overlay{opacity:1;}
+.cat-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;}
+.c1{background:linear-gradient(160deg,#f2dcc8,#e8b89a);}
+.c2{background:linear-gradient(160deg,#dde8d5,#b8cca8);}
+.c3{background:linear-gradient(160deg,#f0d5d5,#d4908a);}
+.c4{background:linear-gradient(160deg,#e8e8d0,#c8c090);}
+.c5{background:linear-gradient(160deg,#e0d4ec,#c4a8d8);}
+.c6{background:linear-gradient(160deg,#d0e8e0,#90c0b0);}
+.c7{background:linear-gradient(160deg,#d8e8f4,#90b8d8);}
+.c8{background:linear-gradient(160deg,#f4e8d0,#d8c090);}
+.cat-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(44,33,24,.25);opacity:0;transition:opacity .3s;}
+.cat-overlay span{background:#fff;color:var(--caramel);border-radius:50px;padding:.45rem 1.3rem;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;}
+.cat-info{position:relative;z-index:2;padding:1.2rem;width:100%;background:linear-gradient(transparent,rgba(44,33,24,.78));}
+.cat-info h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.25rem;}
+.cat-info p{font-size:.72rem;color:rgba(255,255,255,.8);letter-spacing:.5px;}
+
+/* ═══ PRODUCTS ═══ */
+.products{padding:5rem 5%;}
+.filter-bar{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;}
+.filter-btn{border:1.5px solid var(--blush);background:transparent;color:var(--muted);border-radius:50px;padding:.45rem 1.2rem;font-size:.78rem;letter-spacing:.8px;cursor:pointer;transition:all .25s;font-family:'Jost',sans-serif;}
+.filter-btn.active,.filter-btn:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.8rem;}
+.product-card{background:#fff;border-radius:22px;overflow:hidden;transition:transform .3s,box-shadow .3s;border:1px solid rgba(200,149,108,.12);position:relative;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(44,33,24,.12);}
+.product-img{aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;}
+.product-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.p1{background:linear-gradient(135deg,#faeee4,#f0d4bc);}
+.p2{background:linear-gradient(135deg,#e8eed8,#d0dcc0);}
+.p3{background:linear-gradient(135deg,#fce4e4,#f0c8c4);}
+.p4{background:linear-gradient(135deg,#e8e4f4,#d4cce8);}
+.p5{background:linear-gradient(135deg,#fff4e0,#ffe4b4);}
+.p6{background:linear-gradient(135deg,#e4f0e8,#c8dcc8);}
+.p7{background:linear-gradient(135deg,#f4e8ec,#e0c0c8);}
+.p8{background:linear-gradient(135deg,#e8f4f8,#c0d8e8);}
+.product-badge{position:absolute;top:1rem;left:1rem;background:var(--caramel);color:#fff;font-size:.65rem;letter-spacing:.8px;text-transform:uppercase;padding:.28rem .75rem;border-radius:50px;z-index:2;}
+.product-badge.new{background:var(--sage);}
+.product-fav{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.92);border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transition:transform .2s,background .2s;box-shadow:0 2px 10px rgba(44,33,24,.12);z-index:2;}
+.product-fav:hover{transform:scale(1.15);}
+.product-fav.faved{background:#fde8e8;}
+.product-info{padding:1.2rem;}
+.product-info h3{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--dark);margin-bottom:.35rem;}
+.product-info p{font-size:.78rem;color:var(--muted);margin-bottom:.9rem;line-height:1.5;}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
+.product-price{font-size:1rem;font-weight:500;color:var(--caramel);}
+.product-price small{font-size:.72rem;color:var(--muted);text-decoration:line-through;margin-left:.3rem;}
+.btn-detail{background:var(--dark);color:#fff;border:none;border-radius:50px;padding:.45rem 1.1rem;font-size:.76rem;cursor:pointer;transition:background .25s;font-family:'Jost',sans-serif;}
+.btn-detail:hover{background:var(--caramel);}
+
+/* ═══ ÖZEL GÜN KONSEPT BÖLÜMÜ ═══ */
+.events-section{padding:5rem 5%;background:var(--dark);}
+.events-section .section-title h2{color:#fff;}
+.events-section .section-title .tag{color:var(--blush);}
+.events-section .section-title p{color:rgba(255,255,255,.5);margin-top:.5rem;font-size:.88rem;}
+.event-tabs{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.event-tab{border:1.5px solid rgba(200,149,108,.3);background:transparent;color:rgba(255,255,255,.6);border-radius:50px;padding:.5rem 1.3rem;font-size:.8rem;cursor:pointer;transition:all .25s;font-family:'Jost',sans-serif;display:flex;align-items:center;gap:.4rem;}
+.event-tab.active,.event-tab:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
+.event-content{display:none;}
+.event-content.active{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.event-visual{border-radius:28px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:7rem;position:relative;}
+.ev1{background:linear-gradient(160deg,#3a1a2a,#7a3060);}
+.ev2{background:linear-gradient(160deg,#1a2a3a,#306070);}
+.ev3{background:linear-gradient(160deg,#3a2a10,#806020);}
+.ev4{background:linear-gradient(160deg,#102a1a,#205040);}
+.ev5{background:linear-gradient(160deg,#2a1a3a,#604080);}
+.event-text{color:rgba(255,255,255,.85);}
+.event-text h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:1rem;line-height:1.2;}
+.event-text h3 em{color:var(--blush);font-style:italic;}
+.event-text p{font-size:.88rem;line-height:1.8;margin-bottom:1.5rem;color:rgba(255,255,255,.6);}
+.event-items{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem;}
+.event-item{display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:rgba(255,255,255,.75);}
+.event-item span:first-child{width:28px;height:28px;background:rgba(200,149,108,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.event-price{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.event-price .from{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;}
+.event-price .amount{font-size:1.8rem;color:var(--blush);font-family:'Playfair Display',serif;}
+.btn-event{background:var(--caramel);color:#fff;border:none;border-radius:50px;padding:.8rem 2rem;font-size:.85rem;cursor:pointer;transition:all .25s;font-family:'Jost',sans-serif;display:inline-flex;align-items:center;gap:.5rem;}
+.btn-event:hover{background:#fff;color:var(--dark);transform:translateY(-2px);}
+
+/* ═══ 3D BASKI ═══ */
+.printer-section{padding:5rem 5%;}
+.printer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.printer-visual{border-radius:28px;background:linear-gradient(145deg,#1a1a2a,#2a2a4a);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2.5rem;position:relative;overflow:hidden;}
+.printer-visual::before{content:'';position:absolute;top:-30%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(100,120,200,.15) 0%,transparent 70%);border-radius:50%;}
+.printer-icon{font-size:5rem;animation:float 4s ease-in-out infinite;}
+.printer-samples{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.printer-sample{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:.6rem 1rem;font-size:.78rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.4rem;}
+.printer-text{}
+.printer-text .tag{display:inline-block;color:var(--caramel);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.7rem;}
+.printer-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--dark);line-height:1.2;margin-bottom:1rem;}
+.printer-text h2 em{color:var(--caramel);font-style:italic;}
+.printer-text p{color:var(--muted);line-height:1.8;font-size:.9rem;margin-bottom:1.5rem;}
+.printer-cats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:2rem;}
+.printer-cat{background:var(--warm);border-radius:16px;padding:1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:background .2s,transform .2s;border:1.5px solid transparent;}
+.printer-cat:hover{background:var(--blush);transform:translateY(-2px);border-color:var(--caramel);}
+.printer-cat .pci{font-size:1.5rem;}
+.printer-cat-text h4{font-size:.85rem;font-weight:500;color:var(--dark);}
+.printer-cat-text p{font-size:.72rem;color:var(--muted);}
+
+/* ═══ ABOUT ═══ */
+.about{padding:6rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-main{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,var(--warm),var(--blush));border-radius:35% 65% 60% 40%/40% 35% 65% 60%;display:flex;align-items:center;justify-content:center;font-size:7rem;box-shadow:25px 25px 60px rgba(200,149,108,.2);animation:float 8s ease-in-out infinite;}
+.about-visual{position:relative;}
+.about-stat{position:absolute;background:#fff;border-radius:20px;padding:1rem 1.4rem;box-shadow:0 15px 40px rgba(44,33,24,.1);text-align:center;}
+.about-stat:nth-child(2){top:10%;right:-8%;}
+.about-stat:nth-child(3){bottom:15%;left:-8%;}
+.about-stat strong{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--caramel);display:block;}
+.about-stat span{font-size:.72rem;color:var(--muted);letter-spacing:1px;}
+.about-text .tag{display:inline-block;color:var(--caramel);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;}
+.about-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;color:var(--dark);margin-bottom:1.5rem;}
+.about-text h2 em{color:var(--caramel);font-style:italic;}
+.about-text p{color:var(--muted);line-height:1.9;margin-bottom:1rem;font-size:.9rem;}
+.about-features{display:flex;flex-direction:column;gap:.7rem;margin:1.5rem 0;}
+.about-feature{display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--dark);}
+.about-feature span:first-child{width:30px;height:30px;background:var(--warm);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.btn-wa-order{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:.9rem 1.5rem;font-size:.9rem;font-weight:500;cursor:pointer;width:100%;margin-top:1.5rem;font-family:'Jost',sans-serif;transition:opacity .2s,transform .2s;text-decoration:none;}
+.btn-wa-order:hover{opacity:.88;transform:translateY(-2px);}
+
+/* ═══ REVIEWS ═══ */
+.testimonials{padding:5rem 5%;background:var(--warm);}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+.review-card{background:#fff;border-radius:22px;padding:1.8rem;border:1px solid rgba(200,149,108,.15);transition:transform .3s,box-shadow .3s;}
+.review-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(44,33,24,.08);}
+.review-stars{color:var(--caramel);font-size:.95rem;margin-bottom:.9rem;}
+.review-text{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem;}
+.review-author{display:flex;align-items:center;gap:.8rem;}
+.review-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--warm);flex-shrink:0;}
+.review-name{font-size:.85rem;font-weight:500;}
+.review-date{font-size:.72rem;color:var(--muted);}
+
+/* ═══ NEWSLETTER ═══ */
+.newsletter{padding:5rem 5%;text-align:center;background:linear-gradient(135deg,var(--dark),#4a3020);position:relative;overflow:hidden;}
+.newsletter::before{content:'✦';position:absolute;font-size:20rem;color:rgba(255,255,255,.018);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.newsletter h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:#fff;margin-bottom:.8rem;}
+.newsletter h2 em{color:var(--blush);}
+.newsletter p{color:rgba(255,255,255,.5);margin-bottom:1.8rem;font-size:.88rem;}
+.newsletter-form{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;}
+.newsletter-form input{border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#fff;border-radius:50px;padding:.85rem 1.8rem;font-size:.88rem;min-width:260px;outline:none;font-family:'Jost',sans-serif;transition:border-color .25s;}
+.newsletter-form input::placeholder{color:rgba(255,255,255,.35);}
+.newsletter-form input:focus{border-color:var(--blush);}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+.footer-brand .logo{display:block;margin-bottom:1rem;font-size:1.3rem;}
+.footer-brand p{font-size:.85rem;line-height:1.8;max-width:240px;}
+.footer-socials{display:flex;gap:.7rem;margin-top:1.5rem;}
+.social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.88rem;cursor:pointer;transition:all .25s;background:transparent;color:rgba(255,255,255,.55);}
+.social-btn:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
+.footer-col h4{color:#fff;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.footer-col a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.85rem;transition:color .25s;cursor:pointer;}
+.footer-col a:hover{color:var(--blush);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;flex-wrap:wrap;gap:.8rem;}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;z-index:700;background:rgba(44,33,24,.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:#fff;border-radius:28px;max-width:480px;width:100%;padding:2.2rem;transform:translateY(30px) scale(.96);transition:transform .35s;position:relative;max-height:90vh;overflow-y:auto;}
+.modal-overlay.open .modal{transform:none;}
+.modal-close{position:absolute;top:1.3rem;right:1.3rem;background:var(--warm);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.modal-product{display:flex;gap:1.2rem;margin:1.5rem 0;align-items:center;}
+.modal-img{width:105px;height:105px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;flex-shrink:0;overflow:hidden;}
+.modal-details h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.3rem;}
+.modal-details p{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.modal-price{font-size:1.3rem;color:var(--caramel);font-weight:500;margin-top:.5rem;}
+.modal-fav-row{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;}
+.modal-fav-btn{display:flex;align-items:center;gap:.5rem;background:var(--warm);border:none;border-radius:50px;padding:.55rem 1.2rem;cursor:pointer;font-size:.82rem;font-family:'Jost',sans-serif;color:var(--dark);transition:background .2s;}
+.modal-fav-btn:hover{background:var(--blush);}
+.modal-fav-btn.faved{background:#fde8e8;color:var(--rose);}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:2000;background:var(--dark);color:#fff;border-radius:16px;padding:.9rem 1.4rem;display:flex;align-items:center;gap:.7rem;box-shadow:0 15px 40px rgba(44,33,24,.25);transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);font-size:.88rem;pointer-events:none;}
+.toast.show{transform:none;opacity:1;}
+
+/* ═══ WA FLOAT ═══ */
+.wa-float{position:fixed;bottom:2rem;left:2rem;z-index:400;width:54px;height:54px;background:var(--wa);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 8px 25px rgba(37,211,102,.4);cursor:pointer;transition:transform .25s;text-decoration:none;animation:pulse 2.5s ease-in-out infinite;}
+.wa-float:hover{transform:scale(1.12);}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 8px 25px rgba(37,211,102,.4)}50%{box-shadow:0 8px 35px rgba(37,211,102,.7)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .nav-links{gap:.8rem;}
+  .nav-links a{font-size:.7rem;}
+  .event-content.active{grid-template-columns:1fr;}
+  .printer-grid{grid-template-columns:1fr;}
+}
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:6rem;}
+  .hero p{max-width:100%;}
+  .hero-btns{justify-content:center;}
+  .hero-visual{margin-top:2.5rem;}
+  .nav-links{display:none;}
+  .about{grid-template-columns:1fr;gap:3rem;}
+  .about-stat:nth-child(2){right:0;}
+  .about-stat:nth-child(3){left:0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:600px){
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .printer-cats{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .btn-wa-text{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER -->
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="drawer-logo">Atelye <span>El Emeği</span></div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+
+  <!-- Ana -->
+  <button class="drawer-link" onclick="goTo('hero-anchor');closeDrawer()"><span class="dl-icon">🏠</span> Ana Sayfa</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('hepsi',null);closeDrawer()"><span class="dl-icon">🛍️</span> Tüm Ürünler</button>
+
+  <!-- Takı -->
+  <div class="drawer-section-label">📿 Miyuki Takı & Aksesuar</div>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('bileklik',null);closeDrawer()"><span class="dl-icon">📿</span> Miyuki Bileklik</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('kolye',null);closeDrawer()"><span class="dl-icon">💎</span> Miyuki Kolye</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('kupe',null);closeDrawer()"><span class="dl-icon">✨</span> Miyuki Küpe</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('yuzuk',null);closeDrawer()"><span class="dl-icon">💍</span> Miyuki Yüzük</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('anahtarlik',null);closeDrawer()"><span class="dl-icon">🔑</span> Miyuki Anahtarlık</button>
+
+  <!-- Ev -->
+  <div class="drawer-section-label">🏠 Ev & Dekor</div>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('mum',null);closeDrawer()"><span class="dl-icon">🕯️</span> El Yapımı Mumlar</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('susleme',null);closeDrawer()"><span class="dl-icon">🌸</span> Süsleme Ürünleri</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('sisedeko',null);closeDrawer()"><span class="dl-icon">🫙</span> Süslü Şişe & Dekor</button>
+
+  <!-- 3D -->
+  <div class="drawer-section-label">🖨️ 3D Baskı</div>
+  <button class="drawer-link" onclick="goTo('printer-section');closeDrawer()"><span class="dl-icon">🖨️</span> 3D Baskı Ürünleri</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('3d',null);closeDrawer()"><span class="dl-icon">⚙️</span> Tüm 3D Ürünler</button>
+
+  <!-- Özel Günler -->
+  <div class="drawer-section-label">🎉 Özel Gün Konseptleri</div>
+  <button class="drawer-link" onclick="goTo('events-section');setEventTab('dugun');closeDrawer()"><span class="dl-icon">💒</span> Düğün Konsepti</button>
+  <button class="drawer-link" onclick="goTo('events-section');setEventTab('nishan');closeDrawer()"><span class="dl-icon">💍</span> Nişan Konsepti</button>
+  <button class="drawer-link" onclick="goTo('events-section');setEventTab('dogumgunu');closeDrawer()"><span class="dl-icon">🎂</span> Doğum Günü</button>
+  <button class="drawer-link" onclick="goTo('events-section');setEventTab('babyshower');closeDrawer()"><span class="dl-icon">👶</span> Baby Shower</button>
+  <button class="drawer-link" onclick="goTo('events-section');setEventTab('mezuniyet');closeDrawer()"><span class="dl-icon">🎓</span> Mezuniyet</button>
+
+  <div class="drawer-divider"></div>
+  <button class="drawer-link" onclick="openFavPage();closeDrawer()">
+    <span class="dl-icon">❤️</span> Favorilerim
+    <span class="dl-badge" id="drawerFavCount">0</span>
+  </button>
+  <button class="drawer-link" onclick="goTo('about');closeDrawer()"><span class="dl-icon">🌿</span> Hakkımızda</button>
+
+  <div class="drawer-footer">
+    <a class="drawer-wa" href="https://wa.me/905330944969" target="_blank">
+      <span style="font-size:1.2rem">📱</span> WhatsApp'tan Sipariş
+    </a>
+  </div>
+</aside>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-left">
+    <button class="hamburger" onclick="openDrawer()"><span></span><span></span><span></span></button>
+    <div class="logo" onclick="scrollToTop()">Atelye <span>El Emeği</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="goTo('categories')">Kategoriler</a></li>
+    <li><a onclick="goTo('products');filterProducts('miyuki',null)">📿 Takılar</a></li>
+    <li><a onclick="goTo('products');filterProducts('mum',null)">🕯️ Mumlar</a></li>
+    <li><a onclick="goTo('events-section')">🎉 Özel Günler</a></li>
+    <li><a onclick="goTo('printer-section')">🖨️ 3D Baskı</a></li>
+    <li><a onclick="goTo('about')">Hakkımızda</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" onclick="openFavPage()" title="Favorilerim">
+      ❤️<span class="nav-badge" id="navFavCount">0</span>
+    </button>
+    <a class="btn-wa-nav" href="https://wa.me/905330944969" target="_blank">
+      📱 <span class="btn-wa-text">WhatsApp</span>
+    </a>
+  </div>
+</nav>
+
+<!-- FAV PAGE -->
+<div class="favpage" id="favPage">
+  <div class="favpage-head">
+    <button class="favpage-back" onclick="closeFavPage()">←</button>
+    <h2>❤️ Favorilerim <span id="favCount" style="color:var(--caramel)"></span></h2>
+  </div>
+  <div class="favpage-body" id="favBody"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero-anchor">
+  <div class="hero-text">
+    <div class="hero-tag">✦ El Yapımı & Özel Tasarım</div>
+    <h1>Her el emeğinde<br><em>bir sevgi var.</em></h1>
+    <p>Miyuki takılar, el yapımı mumlar, özel gün konseptleri, hediyelikler ve 3D baskılar — hepsinde yalnızca özen ve el emeği.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="goTo('categories')">Koleksiyonu Keşfet</button>
+      <button class="btn-outline" onclick="goTo('events-section')">Özel Gün Konseptleri</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-canvas">
+      <div class="hero-mini-card"><span class="icon">📿</span><span class="name">Miyuki Bileklik</span><span class="price">₺190</span></div>
+      <div class="hero-mini-card"><span class="icon">🕯️</span><span class="name">El Yapımı Mum</span><span class="price">₺185</span></div>
+      <div class="hero-mini-card"><span class="icon">💍</span><span class="name">Nişan Konsepti</span><span class="price">₺680'den</span></div>
+    </div>
+    <div class="hero-badge"><strong>💛</strong>%100<br>El Yapımı</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>Miyuki Takılar</span><span>El Yapımı Mum</span><span>Nişan Konsepti</span><span>Düğün Süsü</span>
+    <span>3D Baskı</span><span>Doğum Günü</span><span>Özel Sipariş</span><span>Hediyelik</span>
+    <span>Miyuki Takılar</span><span>El Yapımı Mum</span><span>Nişan Konsepti</span><span>Düğün Süsü</span>
+    <span>3D Baskı</span><span>Doğum Günü</span><span>Özel Sipariş</span><span>Hediyelik</span>
+  </div>
+</div>
+
+<!-- KATEGORİLER -->
+<section class="categories" id="categories">
+  <div class="section-title reveal">
+    <div class="tag">✦ Kategoriler</div>
+    <h2>Ne arıyorsunuz <em>bugün?</em></h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card reveal" onclick="goTo('products');filterProducts('miyuki',null)">
+      <div class="cat-bg c1">📿</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>Miyuki Takılar</h3><p>Bileklik · Kolye · Küpe · Yüzük</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('products');filterProducts('mum',null)">
+      <div class="cat-bg c2">🕯️</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>El Yapımı Mumlar</h3><p>Şekilli · Kokulu · Dekoratif</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('events-section');setEventTab('nishan')">
+      <div class="cat-bg c3">💍</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>Nişan Konsepti</h3><p>Masa · Balon · Arka Plan</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('events-section');setEventTab('dugun')">
+      <div class="cat-bg c4">💒</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>Düğün Konsepti</h3><p>Tablo · Süsleme · Dekor</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('events-section');setEventTab('dogumgunu')">
+      <div class="cat-bg c5">🎂</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>Doğum Günü</h3><p>Pasta · Masa · Balon Süsü</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('products');filterProducts('sisedeko',null)">
+      <div class="cat-bg c6">🫙</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>Süslü Şişe & Dekor</h3><p>Kurdele · Boncuk · Cam</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('printer-section')">
+      <div class="cat-bg c7">🖨️</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>3D Baskı</h3><p>Anahtarlık · Alet · Oyuncak</p></div>
+    </div>
+    <div class="cat-card reveal" onclick="goTo('products');filterProducts('anahtarlik',null)">
+      <div class="cat-bg c8">🔑</div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>Anahtarlık</h3><p>Miyuki · 3D Baskı · Kişisel</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ÜRÜNLER -->
+<section class="products" id="products">
+  <div class="section-title reveal">
+    <div class="tag">✦ Koleksiyon</div>
+    <h2>Öne Çıkan <em>Ürünler</em></h2>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('hepsi',this)">Hepsi</button>
+    <button class="filter-btn" onclick="filterProducts('miyuki',this)">📿 Miyuki</button>
+    <button class="filter-btn" onclick="filterProducts('bileklik',this)">〰️ Bileklik</button>
+    <button class="filter-btn" onclick="filterProducts('kolye',this)">💎 Kolye</button>
+    <button class="filter-btn" onclick="filterProducts('kupe',this)">✨ Küpe</button>
+    <button class="filter-btn" onclick="filterProducts('yuzuk',this)">💍 Yüzük</button>
+    <button class="filter-btn" onclick="filterProducts('anahtarlik',this)">🔑 Anahtarlık</button>
+    <button class="filter-btn" onclick="filterProducts('mum',this)">🕯️ Mumlar</button>
+    <button class="filter-btn" onclick="filterProducts('sisedeko',this)">🫙 Şişe & Dekor</button>
+    <button class="filter-btn" onclick="filterProducts('3d',this)">🖨️ 3D Baskı</button>
+    <button class="filter-btn" onclick="filterProducts('yeni',this)">🆕 Yeni</button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- ÖZEL GÜN KONSEPTLERİ -->
+<section class="events-section" id="events-section">
+  <div class="section-title reveal">
+    <div class="tag">✦ Özel Gün Konseptleri</div>
+    <h2>Hangi <em>güne</em> hazırlanıyorsunuz?</h2>
+    <p>Düğününüzden nişanınıza, doğum gününden baby shower'a — komple dekorasyon konseptleri hazırlıyoruz.</p>
+  </div>
+  <div class="event-tabs">
+    <button class="event-tab active" data-tab="nishan" onclick="setEventTab('nishan')">💍 Nişan</button>
+    <button class="event-tab" data-tab="dugun" onclick="setEventTab('dugun')">💒 Düğün</button>
+    <button class="event-tab" data-tab="dogumgunu" onclick="setEventTab('dogumgunu')">🎂 Doğum Günü</button>
+    <button class="event-tab" data-tab="babyshower" onclick="setEventTab('babyshower')">👶 Baby Shower</button>
+    <button class="event-tab" data-tab="mezuniyet" onclick="setEventTab('mezuniyet')">🎓 Mezuniyet</button>
+  </div>
+
+  <!-- Nişan -->
+  <div class="event-content active" id="tab-nishan">
+    <div class="event-visual ev1">💍</div>
+    <div class="event-text">
+      <h3>Nişan Gecenizi<br><em>Unutulmaz Yapın</em></h3>
+      <p>Balon kemerleri, masa süsleri, arka plan dekorasyonu ve kişiye özel Miyuki hediye setleriyle nişan anlarınızı taçlandırıyoruz.</p>
+      <div class="event-items">
+        <div class="event-item"><span>🎈</span> Renk uyumlu balon kemeri & zinciri</div>
+        <div class="event-item"><span>🌸</span> Çiçek panosu & tül arka plan</div>
+        <div class="event-item"><span>🕯️</span> Masa üstü mum & çiçek aranjmanı</div>
+        <div class="event-item"><span>📿</span> Nişan çiftine özel Miyuki hediye seti</div>
+        <div class="event-item"><span>🫙</span> Kurdele & boncuk süslü cam şişe</div>
+      </div>
+      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺680</span></div>
+      <button class="btn-event" onclick="openWA('Nişan Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+    </div>
+  </div>
+
+  <!-- Düğün -->
+  <div class="event-content" id="tab-dugun">
+    <div class="event-visual ev2">💒</div>
+    <div class="event-text">
+      <h3>Düğününüz için<br><em>Özel Tasarım</em></h3>
+      <p>Masa tabelaları, balon süsü, nikah şekeri konsepti ve el yapımı davetiye takıları ile düğününüzü kişiselleştiriyoruz.</p>
+      <div class="event-items">
+        <div class="event-item"><span>💌</span> El yapımı nikah şekeri konsepti</div>
+        <div class="event-item"><span>🎀</span> Masa üstü tablo & isim kartları</div>
+        <div class="event-item"><span>🕯️</span> Pillar mum & çiçek dekor seti</div>
+        <div class="event-item"><span>📿</span> Gelin & damat Miyuki bileklik hediyesi</div>
+        <div class="event-item"><span>🎈</span> Salon girişi balon süslemesi</div>
+      </div>
+      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺950</span></div>
+      <button class="btn-event" onclick="openWA('Düğün Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+    </div>
+  </div>
+
+  <!-- Doğum Günü -->
+  <div class="event-content" id="tab-dogumgunu">
+    <div class="event-visual ev3">🎂</div>
+    <div class="event-text">
+      <h3>Doğum Günü<br><em>Sürprizi</em></h3>
+      <p>Pasta masası süsleri, balon panosu, isme özel konfeti ve özel tema seçenekleriyle doğum günlerini renklendiriyoruz.</p>
+      <div class="event-items">
+        <div class="event-item"><span>🎉</span> Tema uyumlu balon & konfeti seti</div>
+        <div class="event-item"><span>🎀</span> İsme özel pasta üstü süs</div>
+        <div class="event-item"><span>📸</span> Fotoğraf köşesi arka plan süsü</div>
+        <div class="event-item"><span>📿</span> Doğum günü Miyuki bileklik hediyesi</div>
+        <div class="event-item"><span>🎁</span> Özel hediye paketleme</div>
+      </div>
+      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺490</span></div>
+      <button class="btn-event" onclick="openWA('Doğum Günü Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+    </div>
+  </div>
+
+  <!-- Baby Shower -->
+  <div class="event-content" id="tab-babyshower">
+    <div class="event-visual ev4">👶</div>
+    <div class="event-text">
+      <h3>Baby Shower için<br><em>Pastel Renkler</em></h3>
+      <p>Pembe ya da mavi temalı balon süsleri, bebek figürlü mumlar ve kişiselleştirilmiş hatıra setleriyle o özel günü hazırlıyoruz.</p>
+      <div class="event-items">
+        <div class="event-item"><span>🩷</span> Pembe / mavi / nötr tema balon seti</div>
+        <div class="event-item"><span>🍼</span> Bebek figürlü dekoratif mum</div>
+        <div class="event-item"><span>🎀</span> İsme özel hatıra mumu seti</div>
+        <div class="event-item"><span>🫙</span> Süslü şişe & boncuk dekor</div>
+        <div class="event-item"><span>📿</span> Anne için Miyuki hediye bileklik</div>
+      </div>
+      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺420</span></div>
+      <button class="btn-event" onclick="openWA('Baby Shower Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+    </div>
+  </div>
+
+  <!-- Mezuniyet -->
+  <div class="event-content" id="tab-mezuniyet">
+    <div class="event-visual ev5">🎓</div>
+    <div class="event-text">
+      <h3>Mezuniyet<br><em>Kutlaması</em></h3>
+      <p>Kep & cüppe figürlü dekorlar, isme özel hatıra Miyuki setleri ve masa düzenlemeleriyle mezuniyeti anlamlı kılıyoruz.</p>
+      <div class="event-items">
+        <div class="event-item"><span>🎓</span> Kep figürlü balon & dekor seti</div>
+        <div class="event-item"><span>📸</span> Fotoğraf köşesi panosu</div>
+        <div class="event-item"><span>📿</span> İsme özel Miyuki hatıra bileklik</div>
+        <div class="event-item"><span>🕯️</span> Kutlama temalı mum seti</div>
+        <div class="event-item"><span>🎁</span> Özel hediye kutu & paketleme</div>
+      </div>
+      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺350</span></div>
+      <button class="btn-event" onclick="openWA('Mezuniyet Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+    </div>
+  </div>
+</section>
+
+<!-- 3D BASKI -->
+<section class="printer-section" id="printer-section">
+  <div class="section-title reveal">
+    <div class="tag">✦ 3D Baskı</div>
+    <h2>Hayal ettiğinizi <em>basıyoruz</em></h2>
+  </div>
+  <div class="printer-grid">
+    <div class="printer-visual reveal">
+      <div class="printer-icon">🖨️</div>
+      <div class="printer-samples">
+        <div class="printer-sample">🔑 Anahtarlık</div>
+        <div class="printer-sample">⚙️ Araba Parçası</div>
+        <div class="printer-sample">🧸 Oyuncak</div>
+        <div class="printer-sample">🔧 Alet</div>
+        <div class="printer-sample">🏠 Eşya Parçası</div>
+        <div class="printer-sample">🎮 Aksesuvar</div>
+      </div>
+    </div>
+    <div class="printer-text reveal">
+      <div class="tag">✦ 3D Baskı Kategorileri</div>
+      <h2>Her fikir <em>gerçek olur</em></h2>
+      <p>Kişiselleştirilmiş anahtarlıktan araç aksesuvara, oyuncaktan ev eşyası parçasına — üç boyutlu yazıcımızla üretiyoruz.</p>
+      <div class="printer-cats">
+        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-anahtarlik',null)">
+          <span class="pci">🔑</span>
+          <div class="printer-cat-text"><h4>Anahtarlık</h4><p>İsme özel, 3D baskı</p></div>
+        </div>
+        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-oyuncak',null)">
+          <span class="pci">🧸</span>
+          <div class="printer-cat-text"><h4>Oyuncak & Figür</h4><p>Kişiselleştirilebilir</p></div>
+        </div>
+        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-alet',null)">
+          <span class="pci">🔧</span>
+          <div class="printer-cat-text"><h4>Alet & Parça</h4><p>Araba, ev, elektronik</p></div>
+        </div>
+        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-deko',null)">
+          <span class="pci">🏺</span>
+          <div class="printer-cat-text"><h4>Dekoratif</h4><p>Ev & masa dekoru</p></div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="goTo('products');filterProducts('3d',null)">Tüm 3D Ürünleri Gör</button>
+    </div>
+  </div>
+</section>
+
+<!-- HAKKIMIZDA -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-main">✋</div>
+    <div class="about-stat"><strong>500+</strong><span>Mutlu Müşteri</span></div>
+    <div class="about-stat"><strong>3 Yıl</strong><span>Deneyim</span></div>
+  </div>
+  <div class="about-text reveal">
+    <div class="tag">✦ Hikayemiz</div>
+    <h2>Sevgiyle yapılan her şeyin <em>farkı vardır.</em></h2>
+    <p>Küçük bir atölyeden doğan büyük bir tutku. Her ürünümüz sabırla, özenle ve gerçek el emeğiyle hazırlanır.</p>
+    <p>Takıdan muma, özel gün konseptinden 3D baskıya — her kategoride aynı özen, aynı sevgi.</p>
+    <div class="about-features">
+      <div class="about-feature"><span>💎</span> %100 El Yapımı, Seri Üretim Yok</div>
+      <div class="about-feature"><span>🎨</span> Özel Renk & Kişiselleştirme</div>
+      <div class="about-feature"><span>🎁</span> Özenli Hediye Paketleme</div>
+      <div class="about-feature"><span>🚀</span> Hızlı Kargo, Güvenli Teslimat</div>
+      <div class="about-feature"><span>🖨️</span> Profesyonel 3D Baskı Hizmeti</div>
+    </div>
+    <a class="btn-wa-order" href="https://wa.me/905330944969" target="_blank">
+      📱 WhatsApp'tan Sipariş / Soru
+    </a>
+  </div>
+</section>
+
+<!-- YORUMLAR -->
+<section class="testimonials reveal" id="testimonials">
+  <div class="section-title">
+    <div class="tag">✦ Müşteri Yorumları</div>
+    <h2>Onlar ne <em>dedi?</em></h2>
+  </div>
+  <div class="review-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Nişan konseptimiz harikaydı. Balon kemeri ve masa süsleri tam hayal ettiğim gibiydi. Çok teşekkürler!"</div>
+      <div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Selin A.</div><div class="review-date">Nişan Konsepti · Mart 2025</div></div></div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Miyuki bilekliği için özel renk istedim, tam istediğim oldu. Paketleme de çok özeldi, hediye gibi geldi."</div>
+      <div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Merve K.</div><div class="review-date">Miyuki Bileklik · Şubat 2025</div></div></div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"3D anahtarlık için özel dosya gönderdim, mükemmel baskıladı. Kalite çok iyiydi, çok hızlı geldi."</div>
+      <div class="review-author"><div class="review-avatar">👨</div><div><div class="review-name">Murat T.</div><div class="review-date">3D Baskı · Ocak 2025</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>Yeni ürünleri <em>ilk siz</em> görün</h2>
+  <p>Özel indirimler ve yeni konseptler için bültenimize katılın.</p>
+  <div class="newsletter-form">
+    <input type="email" id="nlInput" placeholder="E-posta adresiniz">
+    <button class="btn-primary" onclick="subscribeNewsletter()">Abone Ol</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Atelye <span>El Emeği</span></div>
+      <p>El emeği, özen ve yaratıcılıkla üretilmiş ürünler. Her parça bir hikâye anlatır.</p>
+      <div class="footer-socials">
+        <button class="social-btn" title="Instagram">📸</button>
+        <button class="social-btn" title="WhatsApp">📱</button>
+        <button class="social-btn" title="TikTok">🎵</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Takı</h4>
+      <ul>
+        <li><a onclick="goTo('products');filterProducts('bileklik',null)">Miyuki Bileklik</a></li>
+        <li><a onclick="goTo('products');filterProducts('kolye',null)">Miyuki Kolye</a></li>
+        <li><a onclick="goTo('products');filterProducts('kupe',null)">Küpe</a></li>
+        <li><a onclick="goTo('products');filterProducts('yuzuk',null)">Yüzük</a></li>
+        <li><a onclick="goTo('products');filterProducts('anahtarlik',null)">Anahtarlık</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Özel Günler</h4>
+      <ul>
+        <li><a onclick="goTo('events-section');setEventTab('nishan')">Nişan Konsepti</a></li>
+        <li><a onclick="goTo('events-section');setEventTab('dugun')">Düğün Konsepti</a></li>
+        <li><a onclick="goTo('events-section');setEventTab('dogumgunu')">Doğum Günü</a></li>
+        <li><a onclick="goTo('events-section');setEventTab('babyshower')">Baby Shower</a></li>
+        <li><a onclick="goTo('events-section');setEventTab('mezuniyet')">Mezuniyet</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Bilgi</h4>
+      <ul>
+        <li><a onclick="goTo('about')">Hakkımızda</a></li>
+        <li><a onclick="goTo('products');filterProducts('3d',null)">3D Baskı</a></li>
+        <li><a>Kargo & İade</a></li>
+        <li><a>Özel Sipariş</a></li>
+        <li><a href="https://wa.me/905330944969" target="_blank">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Atelye — El Emeği Dükkânı</span>
+    <span>Tüm hakları saklıdır</span>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/905330944969" target="_blank" title="WhatsApp">📱</a>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-product">
+      <div class="modal-img" id="modalImg"></div>
+      <div class="modal-details">
+        <h4 id="modalName"></h4>
+        <p id="modalDesc"></p>
+        <div class="modal-price" id="modalPrice"></div>
+      </div>
+    </div>
+    <div class="modal-fav-row">
+      <button class="modal-fav-btn" id="modalFavBtn" onclick="toggleFavFromModal()">🤍 Favorilere Ekle</button>
+    </div>
+    <a class="btn-wa-order" id="modalWaBtn" href="#" target="_blank">
+      <span>📱</span> WhatsApp'tan Sipariş Ver
+    </a>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastIcon">❤️</span><span id="toastMsg">Favorilere eklendi!</span></div>
+
+<script>
+/* ════ AYARLAR ════ */
+const WA_NUMBER = '905330944969';
+
+/* ════ ÜRÜN VERİLERİ ════ */
+const products = [
+  /* MİYUKİ BİLEKLİK */
+  {id:1,  name:'Pastel Miyuki Bileklik',      desc:'El yapımı pastel tonlarda Miyuki boncuk bileklik. İstenen renkte yapılır.',             price:'₺190', oldPrice:'₺240', icon:'📿', bg:'p1', badge:'Çok Satan',  cat:['miyuki','bileklik'],              isNew:false, image:''},
+  {id:2,  name:'Çift Kişilik Bileklik Set',   desc:'Sevgililer için uyumlu renk Miyuki bileklik seti. İsme özel hazırlanır.',               price:'₺320', oldPrice:'',     icon:'💞', bg:'p2', badge:'Yeni',       cat:['miyuki','bileklik'],              isNew:true,  image:''},
+  {id:3,  name:'Gökkuşağı Bileklik',          desc:'Renkli Miyuki boncuklarla gökkuşağı desenli bileklik.',                                 price:'₺210', oldPrice:'',     icon:'🌈', bg:'p3', badge:'',           cat:['miyuki','bileklik'],              isNew:false, image:''},
+  /* MİYUKİ KOLYE */
+  {id:4,  name:'İnce Miyuki Kolye',           desc:'İnce zincir üzerine el yapımı Miyuki boncuk kolye. Kişiselleştirilebilir.',              price:'₺240', oldPrice:'',     icon:'💎', bg:'p4', badge:'',           cat:['miyuki','kolye'],                 isNew:false, image:''},
+  {id:5,  name:'Çiçek Desenli Kolye',         desc:'Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.',                           price:'₺270', oldPrice:'₺320', icon:'🌸', bg:'p5', badge:'Popüler',    cat:['miyuki','kolye'],                 isNew:false, image:''},
+  /* MİYUKİ KÜPE */
+  {id:6,  name:'Miyuki Sallantı Küpe',        desc:'El yapımı Miyuki boncuklu küpe. Hafif ve şık, her kıyafete uyar.',                      price:'₺160', oldPrice:'',     icon:'✨', bg:'p6', badge:'Yeni',       cat:['miyuki','kupe'],                  isNew:true,  image:''},
+  /* MİYUKİ YÜZÜK */
+  {id:7,  name:'Miyuki Mercan Yüzük',         desc:'El yapımı mercan renkli Miyuki boncuk yüzük. Özel beden seçeneği.',                     price:'₺140', oldPrice:'',     icon:'💍', bg:'p7', badge:'Yeni',       cat:['miyuki','yuzuk'],                 isNew:true,  image:''},
+  /* MİYUKİ ANAHTARLIK */
+  {id:8,  name:'Miyuki İsim Anahtarlık',      desc:'İsme özel Miyuki boncuk anahtarlık. Farklı renk seçenekleri.',                          price:'₺75',  oldPrice:'₺95',  icon:'🔑', bg:'p8', badge:'',           cat:['miyuki','anahtarlik'],            isNew:false, image:''},
+  /* MUMLAR */
+  {id:9,  name:'Çiçek Şekilli Mum',           desc:'El yapımı çiçek formunda dekoratif mum. Masa süsü.',                                    price:'₺220', oldPrice:'',     icon:'🌺', bg:'p1', badge:'Yeni',       cat:['mum'],                            isNew:true,  image:''},
+  {id:10, name:'Taş Dokulu Mum',              desc:'Taş görünümlü el yapımı dekoratif mum. Çeşit renk seçeneği.',                           price:'₺190', oldPrice:'₺240', icon:'🪨', bg:'p2', badge:'Çok Satan',  cat:['mum'],                            isNew:false, image:''},
+  {id:11, name:'Kabartmalı Mum Seti (3\'lü)', desc:'3\'lü kabartmalı desen mum seti. Hediye paketinde teslim.',                             price:'₺350', oldPrice:'',     icon:'🕯️', bg:'p3', badge:'',           cat:['mum'],                            isNew:false, image:''},
+  {id:12, name:'Koku Mumu',                   desc:'Lavanta · Vanilya · Gül · Sandal ağacı kokusu seçenekli el yapımı mum.',                price:'₺175', oldPrice:'',     icon:'🌿', bg:'p4', badge:'',           cat:['mum'],                            isNew:false, image:''},
+  /* ŞİŞE & DEKOR */
+  {id:13, name:'Süslü Cam Şişe',              desc:'Kurdele, boncuk ve çiçeklerle süslenmiş dekoratif cam şişe. Masa hediyesi.',             price:'₺125', oldPrice:'',     icon:'🫙', bg:'p5', badge:'Yeni',       cat:['sisedeko'],                       isNew:true,  image:''},
+  {id:14, name:'Parfüm Dekor Şişesi',         desc:'İsme özel süslemeli parfüm şişesi. Kişiye özel mesaj eklenebilir.',                     price:'₺340', oldPrice:'',     icon:'🌷', bg:'p6', badge:'',           cat:['sisedeko'],                       isNew:false, image:''},
+  {id:15, name:'Karma Dekor Seti',            desc:'Mum + süslü şişe + Miyuki bileklik + hediye kutusu. Komple özel gün seti.',              price:'₺580', oldPrice:'₺720', icon:'✨', bg:'p7', badge:'Popüler',    cat:['sisedeko','mum','miyuki'],        isNew:false, image:''},
+  /* 3D BASKI */
+  {id:16, name:'Özel 3D Anahtarlık',          desc:'İsim, logo veya özel tasarım 3D baskı anahtarlık. Dayanıklı PLA/PETG malzeme.',         price:'₺60',  oldPrice:'',     icon:'🔑', bg:'p8', badge:'',           cat:['3d','anahtarlik','3d-anahtarlik'],isNew:false, image:''},
+  {id:17, name:'3D Figür & Oyuncak',          desc:'İstediğiniz karakter veya figür 3D baskı. Oyuncak ve dekoratif amaçlı.',                price:'₺85',  oldPrice:'',     icon:'🧸', bg:'p1', badge:'Yeni',       cat:['3d','3d-oyuncak'],                isNew:true,  image:''},
+  {id:18, name:'3D Araba Aksesuar Parçası',   desc:'Araba içi tutucu, klips, kapak vb. yedek veya özel parçalar. Ölçüye göre üretilir.',    price:'₺95',  oldPrice:'',     icon:'⚙️', bg:'p2', badge:'',           cat:['3d','3d-alet'],                   isNew:false, image:''},
+  {id:19, name:'3D Dekoratif Obje',           desc:'Ev & masa dekoru için 3D baskı vazolar, çerçeveler, süs nesneleri.',                    price:'₺110', oldPrice:'',     icon:'🏺', bg:'p3', badge:'',           cat:['3d','3d-deko'],                   isNew:false, image:''},
+  {id:20, name:'3D Faydalı Alet',             desc:'Kapı takozundan telefon standına — hayatı kolaylaştıran 3D baskı çözümler.',            price:'₺70',  oldPrice:'',     icon:'🔧', bg:'p4', badge:'',           cat:['3d','3d-alet'],                   isNew:false, image:''},
+];
+
+/* ════ FAVORİLER ════ */
+let favorites = [];
+try{ favorites = JSON.parse(localStorage.getItem('atelyeFavs')||'[]'); }catch(e){}
+let currentProduct = null;
+
+function saveFavs(){ try{localStorage.setItem('atelyeFavs',JSON.stringify(favorites));}catch(e){} updateFavCounts(); }
+function isFaved(id){ return favorites.includes(id); }
+function updateFavCounts(){
+  const c = favorites.length;
+  document.getElementById('navFavCount').textContent    = c;
+  document.getElementById('drawerFavCount').textContent = c;
+  document.getElementById('favCount').textContent       = c > 0 ? `(${c})` : '';
+}
+function toggleFav(id){
+  if(isFaved(id)){ favorites = favorites.filter(f=>f!==id); showToast('🤍','Favorilerden çıkarıldı'); }
+  else            { favorites.push(id); showToast('❤️','Favorilere eklendi!'); }
+  saveFavs(); updateCardFavButtons();
+}
+function toggleFavFromModal(){ if(!currentProduct) return; toggleFav(currentProduct.id); updateModalFavBtn(); }
+function updateModalFavBtn(){
+  if(!currentProduct) return;
+  const btn = document.getElementById('modalFavBtn');
+  const faved = isFaved(currentProduct.id);
+  btn.textContent = faved ? '❤️ Favorilerimde' : '🤍 Favorilere Ekle';
+  btn.className   = 'modal-fav-btn' + (faved ? ' faved' : '');
+}
+function updateCardFavButtons(){
+  document.querySelectorAll('.product-fav[data-id]').forEach(btn=>{
+    const id = parseInt(btn.dataset.id);
+    btn.textContent = isFaved(id) ? '❤️' : '🤍';
+    btn.className   = 'product-fav' + (isFaved(id) ? ' faved' : '');
+  });
+}
+
+/* ════ IMG HELPER ════ */
+function imgContent(p){
+  if(p.image) return `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">`;
+  return `<span style="position:relative;z-index:1">${p.icon}</span>`;
+}
+
+/* ════ RENDER ════ */
+function renderProducts(list){
+  const grid = document.getElementById('productGrid');
+  if(!list.length){ grid.innerHTML='<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Bu kategoride ürün bulunamadı.</p>'; return; }
+  grid.innerHTML = list.map(p=>`
+    <div class="product-card">
+      <div class="product-img ${p.bg}">
+        ${imgContent(p)}
+        ${p.badge ? `<div class="product-badge ${p.isNew?'new':''}">${p.badge}</div>` : ''}
+        <button class="product-fav ${isFaved(p.id)?'faved':''}" data-id="${p.id}"
+          onclick="event.stopPropagation();toggleFav(${p.id})">
+          ${isFaved(p.id)?'❤️':'🤍'}
+        </button>
+      </div>
+      <div class="product-info">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="product-bottom">
+          <div class="product-price">${p.price}${p.oldPrice?`<small>${p.oldPrice}</small>`:''}</div>
+          <button class="btn-detail" onclick="openModal(${p.id})">İncele</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterProducts(cat, btn){
+  if(btn){ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+  const f = cat==='hepsi' ? products
+    : cat==='yeni'        ? products.filter(p=>p.isNew)
+    : cat==='miyuki'      ? products.filter(p=>Array.isArray(p.cat)?p.cat.some(c=>['miyuki','bileklik','kolye','kupe','yuzuk'].includes(c)):false)
+    : products.filter(p=> Array.isArray(p.cat) ? p.cat.includes(cat) : p.cat===cat);
+  renderProducts(f.length ? f : products);
+  setTimeout(()=>document.getElementById('products').scrollIntoView({behavior:'smooth'}),50);
+}
+
+/* ════ MODAL ════ */
+function openModal(id){
+  currentProduct = products.find(p=>p.id===id); if(!currentProduct) return;
+  document.getElementById('modalName').textContent  = currentProduct.name;
+  document.getElementById('modalDesc').textContent  = currentProduct.desc;
+  document.getElementById('modalPrice').textContent = currentProduct.price;
+  const imgEl = document.getElementById('modalImg');
+  imgEl.className = 'modal-img ' + currentProduct.bg;
+  imgEl.innerHTML = imgContent(currentProduct);
+  const waMsg = encodeURIComponent(`Merhaba! "${currentProduct.name}" ürününü sipariş etmek istiyorum.`);
+  document.getElementById('modalWaBtn').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+  updateModalFavBtn();
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){ if(e.target===document.getElementById('modalOverlay')) closeModalDirect(); }
+function closeModalDirect(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ════ FAV PAGE ════ */
+function renderFavPage(){
+  const body = document.getElementById('favBody');
+  if(!favorites.length){
+    body.innerHTML=`<div class="fav-empty"><div class="empty-icon">🤍</div><p>Henüz favori eklemediniz.<br>Ürünlerin ❤️ butonuna tıklayın.</p><button class="btn-primary" onclick="closeFavPage()">Ürünlere Git</button></div>`;
+    return;
+  }
+  const fp = products.filter(p=>favorites.includes(p.id));
+  body.innerHTML=`<div class="fav-grid">${fp.map(p=>{
+    const waMsg=encodeURIComponent(`Merhaba! "${p.name}" ürününü sipariş etmek istiyorum.`);
+    return `<div class="fav-card">
+      <div class="fav-img ${p.bg}">${imgContent(p)}
+        <button class="fav-remove" onclick="toggleFav(${p.id});renderFavPage()" title="Çıkar">✕</button>
+      </div>
+      <div class="fav-info">
+        <h4>${p.name}</h4>
+        <div class="fav-price">${p.price}</div>
+        <a class="fav-wa" href="https://wa.me/${WA_NUMBER}?text=${waMsg}" target="_blank">📱 Sipariş Ver</a>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+function openFavPage(){ renderFavPage(); document.getElementById('favPage').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeFavPage(){ document.getElementById('favPage').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ════ DRAWER ════ */
+function openDrawer(){ document.getElementById('drawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDrawer(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function goTo(id){ setTimeout(()=>{ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); },100); }
+function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
+
+/* ════ EVENT TABS ════ */
+function setEventTab(tab){
+  document.querySelectorAll('.event-tab').forEach(t=>{
+    t.classList.toggle('active', t.dataset.tab===tab);
+  });
+  document.querySelectorAll('.event-content').forEach(c=>{
+    c.classList.toggle('active', c.id==='tab-'+tab);
+  });
+}
+
+/* ════ WA HELPER ════ */
+function openWA(msg){ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Merhaba! '+msg)}`,'_blank'); }
+
+/* ════ TOAST ════ */
+function showToast(icon,msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastIcon').textContent=icon;
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ════ NEWSLETTER ════ */
+function subscribeNewsletter(){
+  const input=document.getElementById('nlInput');
+  if(input.value.includes('@')){
+    input.value='✓ Abone oldunuz, teşekkürler!';
+    input.style.borderColor='var(--sage)';
+    setTimeout(()=>{input.value='';input.style.borderColor='';},3000);
+  }
+}
+
+/* ════ NAV SCROLL ════ */
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
+
+/* ════ SCROLL REVEAL ════ */
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ════ BAŞLAT ════ */
+renderProducts(products);
+updateFavCounts();
+</script>
+</body>
+</html>
