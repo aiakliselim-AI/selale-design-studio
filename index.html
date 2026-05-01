@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Atelye — El Emeği Dükkânı</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -329,6 +331,59 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
   .footer-grid{grid-template-columns:1fr;}
   .footer-bottom{flex-direction:column;text-align:center;}
   .btn-wa-text{display:none;}
+}
+
+/* ═══ AI ASİSTAN ═══ */
+.ai-fab{position:fixed;bottom:25px;right:25px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--caramel),var(--rose));color:#fff;border:none;cursor:pointer;font-size:1.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(200,149,108,.4);z-index:700;transition:transform .25s,box-shadow .25s;animation:fabPulse 2.5s ease-in-out infinite;}
+.ai-fab:hover{transform:scale(1.08);box-shadow:0 12px 35px rgba(200,149,108,.55);}
+.ai-fab.hidden{display:none;}
+@keyframes fabPulse{0%,100%{box-shadow:0 8px 25px rgba(200,149,108,.4);}50%{box-shadow:0 8px 25px rgba(200,149,108,.4),0 0 0 12px rgba(200,149,108,0);}}
+
+.ai-panel{position:fixed;bottom:25px;right:25px;width:360px;max-width:calc(100vw - 30px);height:520px;max-height:calc(100vh - 50px);background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(44,33,24,.25);z-index:700;display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);transform-origin:bottom right;}
+.ai-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.ai-head{background:linear-gradient(135deg,var(--caramel),var(--rose));color:#fff;padding:1rem 1.2rem;display:flex;align-items:center;gap:.7rem;}
+.ai-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.ai-head-text{flex:1;}
+.ai-head-text h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;}
+.ai-head-text p{font-size:.7rem;opacity:.9;display:flex;align-items:center;gap:.3rem;}
+.ai-head-text p::before{content:'';width:7px;height:7px;background:#7fff7f;border-radius:50%;display:inline-block;box-shadow:0 0 6px #7fff7f;}
+.ai-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.ai-close:hover{background:rgba(255,255,255,.35);}
+
+.ai-body{flex:1;overflow-y:auto;padding:1.1rem;background:var(--cream);display:flex;flex-direction:column;gap:.7rem;}
+.ai-msg{max-width:85%;padding:.7rem 1rem;border-radius:18px;font-size:.88rem;line-height:1.45;animation:msgIn .3s ease;}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.ai-msg.bot{background:#fff;color:var(--dark);border-bottom-left-radius:6px;align-self:flex-start;box-shadow:0 2px 8px rgba(44,33,24,.06);}
+.ai-msg.user{background:var(--caramel);color:#fff;border-bottom-right-radius:6px;align-self:flex-end;}
+.ai-typing{display:inline-flex;gap:4px;padding:.4rem 0;}
+.ai-typing span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:typing 1.2s ease-in-out infinite;}
+.ai-typing span:nth-child(2){animation-delay:.2s;}
+.ai-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-3px);}}
+
+.ai-quick{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem;}
+.ai-chip{background:#fff;border:1.5px solid var(--blush);color:var(--dark);border-radius:50px;padding:.45rem .9rem;font-size:.78rem;cursor:pointer;font-family:'Jost',sans-serif;transition:all .2s;}
+.ai-chip:hover{background:var(--caramel);color:#fff;border-color:var(--caramel);transform:translateY(-1px);}
+.ai-confirm{display:flex;gap:.5rem;margin-top:.4rem;}
+.ai-confirm button{flex:1;border:none;border-radius:12px;padding:.6rem;font-size:.82rem;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;transition:opacity .2s,transform .2s;}
+.ai-confirm .yes{background:var(--caramel);color:#fff;}
+.ai-confirm .no{background:#fff;color:var(--muted);border:1.5px solid var(--blush);}
+.ai-confirm button:hover{transform:translateY(-1px);}
+.ai-confirm button:disabled{opacity:.5;cursor:default;transform:none;}
+
+.ai-footer{padding:.8rem;background:#fff;border-top:1px solid rgba(200,149,108,.15);display:flex;gap:.5rem;align-items:center;}
+.ai-input{flex:1;border:1.5px solid var(--warm);border-radius:50px;padding:.65rem 1rem;font-size:.85rem;font-family:'Jost',sans-serif;background:var(--cream);outline:none;transition:border-color .2s;}
+.ai-input:focus{border-color:var(--caramel);}
+.ai-send{width:40px;height:40px;border-radius:50%;background:var(--caramel);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;}
+.ai-send:hover{background:var(--dark);}
+
+/* Vurgu efekti */
+.product-card.ai-highlight{box-shadow:0 0 0 3px var(--caramel),0 15px 40px rgba(200,149,108,.3)!important;transform:translateY(-4px);}
+.product-card.ai-dim{opacity:.35;filter:grayscale(.5);transition:opacity .4s,filter .4s;}
+
+@media(max-width:480px){
+  .ai-panel{bottom:0;right:0;left:0;width:100%;max-width:100%;height:100%;max-height:100%;border-radius:0;}
+  .ai-fab{bottom:80px;right:15px;width:54px;height:54px;font-size:1.5rem;}
 }
 </style>
 </head>
@@ -812,6 +867,24 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 <!-- TOAST -->
 <div class="toast" id="toast"><span id="toastIcon">❤️</span><span id="toastMsg">Favorilere eklendi!</span></div>
 
+<!-- AI ASİSTAN -->
+<button class="ai-fab" id="aiFab" onclick="toggleAI()" title="Yardımcı Asistan">💬</button>
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-head">
+    <div class="ai-avatar">🌸</div>
+    <div class="ai-head-text">
+      <h4>Şelale Asistan</h4>
+      <p>Çevrimiçi · Yardıma hazır</p>
+    </div>
+    <button class="ai-close" onclick="toggleAI()" title="Kapat">✕</button>
+  </div>
+  <div class="ai-body" id="aiBody"></div>
+  <div class="ai-footer">
+    <input type="text" class="ai-input" id="aiInput" placeholder="Ne arıyorsunuz?" onkeydown="if(event.key==='Enter')aiSend()">
+    <button class="ai-send" onclick="aiSend()" title="Gönder">➤</button>
+  </div>
+</div>
+
 <script>
 /* ════ AYARLAR ════ */
 const WA_NUMBER = '905330944969';
@@ -819,33 +892,33 @@ const WA_NUMBER = '905330944969';
 /* ════ ÜRÜN VERİLERİ ════ */
 const products = [
   /* MİYUKİ BİLEKLİK */
-  {id:1,  name:'Pastel Miyuki Bileklik',      desc:'El yapımı pastel tonlarda Miyuki boncuk bileklik. İstenen renkte yapılır.',             price:'₺190', oldPrice:'₺240', icon:'📿', bg:'p1', badge:'Çok Satan',  cat:['miyuki','bileklik'],              isNew:false, image:''},
-  {id:2,  name:'Çift Kişilik Bileklik Set',   desc:'Sevgililer için uyumlu renk Miyuki bileklik seti. İsme özel hazırlanır.',               price:'₺320', oldPrice:'',     icon:'💞', bg:'p2', badge:'Yeni',       cat:['miyuki','bileklik'],              isNew:true,  image:''},
-  {id:3,  name:'Gökkuşağı Bileklik',          desc:'Renkli Miyuki boncuklarla gökkuşağı desenli bileklik.',                                 price:'₺210', oldPrice:'',     icon:'🌈', bg:'p3', badge:'',           cat:['miyuki','bileklik'],              isNew:false, image:''},
+  {id:1,  name:'Pastel Miyuki Bileklik',      desc:'El yapımı pastel tonlarda Miyuki boncuk bileklik. İstenen renkte yapılır.',             price:'₺190', oldPrice:'₺240', icon:'📿', bg:'p1', badge:'Çok Satan',  cat:['miyuki','bileklik'],              colors:['pembe','mavi','sari','yesil','mor','pastel'], isNew:false, image:''},
+  {id:2,  name:'Çift Kişilik Bileklik Set',   desc:'Sevgililer için uyumlu renk Miyuki bileklik seti. İsme özel hazırlanır.',               price:'₺320', oldPrice:'',     icon:'💞', bg:'p2', badge:'Yeni',       cat:['miyuki','bileklik'],              colors:['kirmizi','pembe','mavi','siyah','beyaz'], isNew:true,  image:''},
+  {id:3,  name:'Gökkuşağı Bileklik',          desc:'Renkli Miyuki boncuklarla gökkuşağı desenli bileklik.',                                 price:'₺210', oldPrice:'',     icon:'🌈', bg:'p3', badge:'',           cat:['miyuki','bileklik'],              colors:['kirmizi','turuncu','sari','yesil','mavi','mor','pembe'], isNew:false, image:''},
   /* MİYUKİ KOLYE */
-  {id:4,  name:'İnce Miyuki Kolye',           desc:'İnce zincir üzerine el yapımı Miyuki boncuk kolye. Kişiselleştirilebilir.',              price:'₺240', oldPrice:'',     icon:'💎', bg:'p4', badge:'',           cat:['miyuki','kolye'],                 isNew:false, image:''},
-  {id:5,  name:'Çiçek Desenli Kolye',         desc:'Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.',                           price:'₺270', oldPrice:'₺320', icon:'🌸', bg:'p5', badge:'Popüler',    cat:['miyuki','kolye'],                 isNew:false, image:''},
+  {id:4,  name:'İnce Miyuki Kolye',           desc:'İnce zincir üzerine el yapımı Miyuki boncuk kolye. Kişiselleştirilebilir.',              price:'₺240', oldPrice:'',     icon:'💎', bg:'p4', badge:'',           cat:['miyuki','kolye'],                 colors:['altin','gumus','beyaz','siyah','mavi','pembe'], isNew:false, image:''},
+  {id:5,  name:'Çiçek Desenli Kolye',         desc:'Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.',                           price:'₺270', oldPrice:'₺320', icon:'🌸', bg:'p5', badge:'Popüler',    cat:['miyuki','kolye'],                 colors:['pembe','beyaz','sari','mor','yesil'], isNew:false, image:''},
   /* MİYUKİ KÜPE */
-  {id:6,  name:'Miyuki Sallantı Küpe',        desc:'El yapımı Miyuki boncuklu küpe. Hafif ve şık, her kıyafete uyar.',                      price:'₺160', oldPrice:'',     icon:'✨', bg:'p6', badge:'Yeni',       cat:['miyuki','kupe'],                  isNew:true,  image:''},
+  {id:6,  name:'Miyuki Sallantı Küpe',        desc:'El yapımı Miyuki boncuklu küpe. Hafif ve şık, her kıyafete uyar.',                      price:'₺160', oldPrice:'',     icon:'✨', bg:'p6', badge:'Yeni',       cat:['miyuki','kupe'],                  colors:['altin','gumus','mavi','pembe','siyah'], isNew:true,  image:''},
   /* MİYUKİ YÜZÜK */
-  {id:7,  name:'Miyuki Mercan Yüzük',         desc:'El yapımı mercan renkli Miyuki boncuk yüzük. Özel beden seçeneği.',                     price:'₺140', oldPrice:'',     icon:'💍', bg:'p7', badge:'Yeni',       cat:['miyuki','yuzuk'],                 isNew:true,  image:''},
+  {id:7,  name:'Miyuki Mercan Yüzük',         desc:'El yapımı mercan renkli Miyuki boncuk yüzük. Özel beden seçeneği.',                     price:'₺140', oldPrice:'',     icon:'💍', bg:'p7', badge:'Yeni',       cat:['miyuki','yuzuk'],                 colors:['kirmizi','mercan','turuncu','pembe'], isNew:true,  image:''},
   /* MİYUKİ ANAHTARLIK */
-  {id:8,  name:'Miyuki İsim Anahtarlık',      desc:'İsme özel Miyuki boncuk anahtarlık. Farklı renk seçenekleri.',                          price:'₺75',  oldPrice:'₺95',  icon:'🔑', bg:'p8', badge:'',           cat:['miyuki','anahtarlik'],            isNew:false, image:''},
+  {id:8,  name:'Miyuki İsim Anahtarlık',      desc:'İsme özel Miyuki boncuk anahtarlık. Farklı renk seçenekleri.',                          price:'₺75',  oldPrice:'₺95',  icon:'🔑', bg:'p8', badge:'',           cat:['miyuki','anahtarlik'],            colors:['kirmizi','mavi','yesil','sari','pembe','siyah','beyaz','mor'], isNew:false, image:''},
   /* MUMLAR */
-  {id:9,  name:'Çiçek Şekilli Mum',           desc:'El yapımı çiçek formunda dekoratif mum. Masa süsü.',                                    price:'₺220', oldPrice:'',     icon:'🌺', bg:'p1', badge:'Yeni',       cat:['mum'],                            isNew:true,  image:''},
-  {id:10, name:'Taş Dokulu Mum',              desc:'Taş görünümlü el yapımı dekoratif mum. Çeşit renk seçeneği.',                           price:'₺190', oldPrice:'₺240', icon:'🪨', bg:'p2', badge:'Çok Satan',  cat:['mum'],                            isNew:false, image:''},
-  {id:11, name:'Kabartmalı Mum Seti (3\'lü)', desc:'3\'lü kabartmalı desen mum seti. Hediye paketinde teslim.',                             price:'₺350', oldPrice:'',     icon:'🕯️', bg:'p3', badge:'',           cat:['mum'],                            isNew:false, image:''},
-  {id:12, name:'Koku Mumu',                   desc:'Lavanta · Vanilya · Gül · Sandal ağacı kokusu seçenekli el yapımı mum.',                price:'₺175', oldPrice:'',     icon:'🌿', bg:'p4', badge:'',           cat:['mum'],                            isNew:false, image:''},
+  {id:9,  name:'Çiçek Şekilli Mum',           desc:'El yapımı çiçek formunda dekoratif mum. Masa süsü.',                                    price:'₺220', oldPrice:'',     icon:'🌺', bg:'p1', badge:'Yeni',       cat:['mum'],                            colors:['pembe','beyaz','kirmizi','sari'], isNew:true,  image:''},
+  {id:10, name:'Taş Dokulu Mum',              desc:'Taş görünümlü el yapımı dekoratif mum. Çeşit renk seçeneği.',                           price:'₺190', oldPrice:'₺240', icon:'🪨', bg:'p2', badge:'Çok Satan',  cat:['mum'],                            colors:['gri','bej','beyaz','siyah','kahverengi'], isNew:false, image:''},
+  {id:11, name:'Kabartmalı Mum Seti (3\'lü)', desc:'3\'lü kabartmalı desen mum seti. Hediye paketinde teslim.',                             price:'₺350', oldPrice:'',     icon:'🕯️', bg:'p3', badge:'',           cat:['mum'],                            colors:['beyaz','bej','pembe'], isNew:false, image:''},
+  {id:12, name:'Koku Mumu',                   desc:'Lavanta · Vanilya · Gül · Sandal ağacı kokusu seçenekli el yapımı mum.',                price:'₺175', oldPrice:'',     icon:'🌿', bg:'p4', badge:'',           cat:['mum'],                            colors:['mor','beyaz','sari','yesil'], isNew:false, image:''},
   /* ŞİŞE & DEKOR */
-  {id:13, name:'Süslü Cam Şişe',              desc:'Kurdele, boncuk ve çiçeklerle süslenmiş dekoratif cam şişe. Masa hediyesi.',             price:'₺125', oldPrice:'',     icon:'🫙', bg:'p5', badge:'Yeni',       cat:['sisedeko'],                       isNew:true,  image:''},
-  {id:14, name:'Parfüm Dekor Şişesi',         desc:'İsme özel süslemeli parfüm şişesi. Kişiye özel mesaj eklenebilir.',                     price:'₺340', oldPrice:'',     icon:'🌷', bg:'p6', badge:'',           cat:['sisedeko'],                       isNew:false, image:''},
-  {id:15, name:'Karma Dekor Seti',            desc:'Mum + süslü şişe + Miyuki bileklik + hediye kutusu. Komple özel gün seti.',              price:'₺580', oldPrice:'₺720', icon:'✨', bg:'p7', badge:'Popüler',    cat:['sisedeko','mum','miyuki'],        isNew:false, image:''},
+  {id:13, name:'Süslü Cam Şişe',              desc:'Kurdele, boncuk ve çiçeklerle süslenmiş dekoratif cam şişe. Masa hediyesi.',             price:'₺125', oldPrice:'',     icon:'🫙', bg:'p5', badge:'Yeni',       cat:['sisedeko'],                       colors:['seffaf','beyaz','pembe','altin'], isNew:true,  image:''},
+  {id:14, name:'Parfüm Dekor Şişesi',         desc:'İsme özel süslemeli parfüm şişesi. Kişiye özel mesaj eklenebilir.',                     price:'₺340', oldPrice:'',     icon:'🌷', bg:'p6', badge:'',           cat:['sisedeko'],                       colors:['altin','gumus','pembe','beyaz'], isNew:false, image:''},
+  {id:15, name:'Karma Dekor Seti',            desc:'Mum + süslü şişe + Miyuki bileklik + hediye kutusu. Komple özel gün seti.',              price:'₺580', oldPrice:'₺720', icon:'✨', bg:'p7', badge:'Popüler',    cat:['sisedeko','mum','miyuki'],        colors:['pembe','beyaz','altin','bej'], isNew:false, image:''},
   /* 3D BASKI */
-  {id:16, name:'Özel 3D Anahtarlık',          desc:'İsim, logo veya özel tasarım 3D baskı anahtarlık. Dayanıklı PLA/PETG malzeme.',         price:'₺60',  oldPrice:'',     icon:'🔑', bg:'p8', badge:'',           cat:['3d','anahtarlik','3d-anahtarlik'],isNew:false, image:''},
-  {id:17, name:'3D Figür & Oyuncak',          desc:'İstediğiniz karakter veya figür 3D baskı. Oyuncak ve dekoratif amaçlı.',                price:'₺85',  oldPrice:'',     icon:'🧸', bg:'p1', badge:'Yeni',       cat:['3d','3d-oyuncak'],                isNew:true,  image:''},
-  {id:18, name:'3D Araba Aksesuar Parçası',   desc:'Araba içi tutucu, klips, kapak vb. yedek veya özel parçalar. Ölçüye göre üretilir.',    price:'₺95',  oldPrice:'',     icon:'⚙️', bg:'p2', badge:'',           cat:['3d','3d-alet'],                   isNew:false, image:''},
-  {id:19, name:'3D Dekoratif Obje',           desc:'Ev & masa dekoru için 3D baskı vazolar, çerçeveler, süs nesneleri.',                    price:'₺110', oldPrice:'',     icon:'🏺', bg:'p3', badge:'',           cat:['3d','3d-deko'],                   isNew:false, image:''},
-  {id:20, name:'3D Faydalı Alet',             desc:'Kapı takozundan telefon standına — hayatı kolaylaştıran 3D baskı çözümler.',            price:'₺70',  oldPrice:'',     icon:'🔧', bg:'p4', badge:'',           cat:['3d','3d-alet'],                   isNew:false, image:''},
+  {id:16, name:'Özel 3D Anahtarlık',          desc:'İsim, logo veya özel tasarım 3D baskı anahtarlık. Dayanıklı PLA/PETG malzeme.',         price:'₺60',  oldPrice:'',     icon:'🔑', bg:'p8', badge:'',           cat:['3d','anahtarlik','3d-anahtarlik'],colors:['kirmizi','mavi','yesil','sari','siyah','beyaz','turuncu','mor','pembe'], isNew:false, image:''},
+  {id:17, name:'3D Figür & Oyuncak',          desc:'İstediğiniz karakter veya figür 3D baskı. Oyuncak ve dekoratif amaçlı.',                price:'₺85',  oldPrice:'',     icon:'🧸', bg:'p1', badge:'Yeni',       cat:['3d','3d-oyuncak'],                colors:['kirmizi','mavi','yesil','sari','siyah','beyaz','turuncu','mor','pembe'], isNew:true,  image:''},
+  {id:18, name:'3D Araba Aksesuar Parçası',   desc:'Araba içi tutucu, klips, kapak vb. yedek veya özel parçalar. Ölçüye göre üretilir.',    price:'₺95',  oldPrice:'',     icon:'⚙️', bg:'p2', badge:'',           cat:['3d','3d-alet'],                   colors:['siyah','beyaz','gri'], isNew:false, image:''},
+  {id:19, name:'3D Dekoratif Obje',           desc:'Ev & masa dekoru için 3D baskı vazolar, çerçeveler, süs nesneleri.',                    price:'₺110', oldPrice:'',     icon:'🏺', bg:'p3', badge:'',           cat:['3d','3d-deko'],                   colors:['beyaz','siyah','altin','gumus','pembe'], isNew:false, image:''},
+  {id:20, name:'3D Faydalı Alet',             desc:'Kapı takozundan telefon standına — hayatı kolaylaştıran 3D baskı çözümler.',            price:'₺70',  oldPrice:'',     icon:'🔧', bg:'p4', badge:'',           cat:['3d','3d-alet'],                   colors:['siyah','beyaz','gri'], isNew:false, image:''},
 ];
 
 /* ════ FAVORİLER ════ */
@@ -884,8 +957,8 @@ function updateCardFavButtons(){
 
 /* ════ IMG HELPER ════ */
 function imgContent(p){
-  if(p.image) return `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">`;
-  return `<span style="position:relative;z-index:1">${p.icon}</span>`;
+  if(p.image) return `<img src="${aiEscape(p.image)}" alt="${aiEscape(p.name)}" onerror="this.style.display='none'">`;
+  return `<span style="position:relative;z-index:1">${aiEscape(p.icon)}</span>`;
 }
 
 /* ════ RENDER ════ */
@@ -894,19 +967,19 @@ function renderProducts(list){
   if(!list.length){ grid.innerHTML='<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Bu kategoride ürün bulunamadı.</p>'; return; }
   grid.innerHTML = list.map(p=>`
     <div class="product-card">
-      <div class="product-img ${p.bg}">
+      <div class="product-img ${aiEscape(p.bg)}">
         ${imgContent(p)}
-        ${p.badge ? `<div class="product-badge ${p.isNew?'new':''}">${p.badge}</div>` : ''}
+        ${p.badge ? `<div class="product-badge ${p.isNew?'new':''}">${aiEscape(p.badge)}</div>` : ''}
         <button class="product-fav ${isFaved(p.id)?'faved':''}" data-id="${p.id}"
           onclick="event.stopPropagation();toggleFav(${p.id})">
           ${isFaved(p.id)?'❤️':'🤍'}
         </button>
       </div>
       <div class="product-info">
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
+        <h3>${aiEscape(p.name)}</h3>
+        <p>${aiEscape(p.desc)}</p>
         <div class="product-bottom">
-          <div class="product-price">${p.price}${p.oldPrice?`<small>${p.oldPrice}</small>`:''}</div>
+          <div class="product-price">${aiEscape(p.price)}${p.oldPrice?`<small>${aiEscape(p.oldPrice)}</small>`:''}</div>
           <button class="btn-detail" onclick="openModal(${p.id})">İncele</button>
         </div>
       </div>
@@ -952,12 +1025,12 @@ function renderFavPage(){
   body.innerHTML=`<div class="fav-grid">${fp.map(p=>{
     const waMsg=encodeURIComponent(`Merhaba! "${p.name}" ürününü sipariş etmek istiyorum.`);
     return `<div class="fav-card">
-      <div class="fav-img ${p.bg}">${imgContent(p)}
+      <div class="fav-img ${aiEscape(p.bg)}">${imgContent(p)}
         <button class="fav-remove" onclick="toggleFav(${p.id});renderFavPage()" title="Çıkar">✕</button>
       </div>
       <div class="fav-info">
-        <h4>${p.name}</h4>
-        <div class="fav-price">${p.price}</div>
+        <h4>${aiEscape(p.name)}</h4>
+        <div class="fav-price">${aiEscape(p.price)}</div>
         <a class="fav-wa" href="https://wa.me/${WA_NUMBER}?text=${waMsg}" target="_blank">📱 Sipariş Ver</a>
       </div>
     </div>`;
@@ -1009,6 +1082,333 @@ window.addEventListener('scroll',()=>document.getElementById('navbar').classList
 /* ════ SCROLL REVEAL ════ */
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ════════════════════════════════════════════════════════════════
+   AI ASİSTAN — Akıllı Anahtar Kelime Tabanlı Yardımcı
+   ════════════════════════════════════════════════════════════════ */
+
+/* HTML escape — XSS koruması */
+function aiEscape(s){
+  return String(s||'')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
+}
+
+/* Türkçe karakterleri normalize et: "küpe" → "kupe", "yüzük" → "yuzuk" */
+function aiNormalize(s){
+  return (s||'').toLowerCase()
+    .replaceAll('ı','i').replaceAll('İ','i').replaceAll('ş','s').replaceAll('Ş','s')
+    .replaceAll('ğ','g').replaceAll('Ğ','g').replaceAll('ü','u').replaceAll('Ü','u')
+    .replaceAll('ö','o').replaceAll('Ö','o').replaceAll('ç','c').replaceAll('Ç','c')
+    .replace(/[^\w\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+/* Renk eş anlamlıları — kullanıcı ne yazarsa hangi renge eşlesin */
+const AI_COLORS = {
+  mavi:      ['mavi','lacivert','turkuaz','navy','indigo','gokmavisi'],
+  pembe:     ['pembe','gul','blush','fusya','rozet'],
+  kirmizi:   ['kirmizi','red','bordo','vişne','visne','mercan'],
+  sari:      ['sari','altin','golden','hardal'],
+  yesil:     ['yesil','green','mint','sage','zümrut','zumrut','cimen'],
+  mor:       ['mor','lila','lavanta','purple','eflatun','menekse'],
+  beyaz:     ['beyaz','white','krem','fildisi','kirik beyaz'],
+  siyah:     ['siyah','black','antrasit'],
+  gri:       ['gri','grey','gray','duman'],
+  turuncu:   ['turuncu','orange','somon'],
+  kahverengi:['kahverengi','kahve','brown','bej','taba','karamel'],
+  altin:     ['altin','gold','gold rengi'],
+  gumus:     ['gumus','silver'],
+  pastel:    ['pastel','soft','soluk']
+};
+
+/* Kategori eş anlamlıları — kullanıcı sözcükleri → site kategorisi (cat alanı) */
+const AI_CATS = {
+  miyuki:      ['miyuki','boncuk','boncuklu'],
+  bileklik:    ['bileklik','bileklikler','bilezik','wristband','bracelet'],
+  kolye:       ['kolye','kolyeler','necklace','zincir'],
+  kupe:        ['kupe','kupeler','earring','sallanti'],
+  yuzuk:       ['yuzuk','yuzukler','ring','alyans'],
+  anahtarlik:  ['anahtarlik','anahtarliklar','keychain'],
+  mum:         ['mum','mumlar','candle','kokulu mum','koku mumu'],
+  sisedeko:    ['sise','sisedeko','dekor','dekorasyon','parfum','vazo'],
+  '3d':        ['3d','3 d','baski','baskı','print','figur','figür','oyuncak','aksesuar']
+};
+
+/* Site bölümlerinin id'leri */
+const AI_SECTIONS = {
+  miyuki:'products', bileklik:'products', kolye:'products', kupe:'products',
+  yuzuk:'products', anahtarlik:'products', mum:'products', sisedeko:'products',
+  '3d':'printer-section'
+};
+
+/* Niyet (intent) çıkar — kullanıcı mesajından renk, kategori ve özel istek bul */
+function aiParseIntent(text){
+  const n = aiNormalize(text);
+  const found = { colors:[], cats:[], specials:[], raw:text };
+
+  // Renk eşle
+  for(const [key, syns] of Object.entries(AI_COLORS)){
+    if(syns.some(s=>n.includes(aiNormalize(s)))) found.colors.push(key);
+  }
+  // Kategori eşle
+  for(const [key, syns] of Object.entries(AI_CATS)){
+    if(syns.some(s=>n.includes(aiNormalize(s)))) found.cats.push(key);
+  }
+  // Özel istekler
+  if(/\byeni\b|new/.test(n))                       found.specials.push('yeni');
+  if(/popüler|populer|cok satan|çok satan/.test(n))found.specials.push('populer');
+  if(/ucuz|en az|dusuk fiyat|düşük fiyat/.test(n)) found.specials.push('ucuz');
+  if(/pahali|pahalı|en cok|en pahali/.test(n))     found.specials.push('pahali');
+  if(/hediye|gift/.test(n))                        found.specials.push('hediye');
+  if(/iletisim|iletişim|whatsapp|wa|tel|numara/.test(n)) found.specials.push('iletisim');
+
+  return found;
+}
+
+/* Niyete göre eşleşen ürünleri bul */
+function aiMatchProducts(intent){
+  let list = products.slice();
+  if(intent.cats.length){
+    list = list.filter(p=>{
+      const pc = Array.isArray(p.cat)?p.cat:[p.cat];
+      return intent.cats.some(c=>pc.includes(c));
+    });
+  }
+  if(intent.colors.length){
+    list = list.filter(p=>{
+      const pcolors = p.colors||[];
+      return intent.colors.some(c=>pcolors.includes(c));
+    });
+  }
+  if(intent.specials.includes('yeni'))    list = list.filter(p=>p.isNew);
+  if(intent.specials.includes('populer')) list = list.filter(p=>p.badge==='Popüler' || p.badge==='Çok Satan');
+  return list;
+}
+
+/* Bekleyen aksiyonu tutan değişken — onay için */
+let aiPending = null;
+
+/* Mesaj gönderme — bot/user UI'ya ekler */
+function aiBotMsg(html){
+  const body = document.getElementById('aiBody');
+  const div = document.createElement('div');
+  div.className = 'ai-msg bot';
+  div.innerHTML = html;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+  return div;
+}
+function aiUserMsg(text){
+  const body = document.getElementById('aiBody');
+  const div = document.createElement('div');
+  div.className = 'ai-msg user';
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function aiTyping(){
+  const body = document.getElementById('aiBody');
+  const div = document.createElement('div');
+  div.className = 'ai-msg bot';
+  div.id = 'aiTypingBubble';
+  div.innerHTML = '<span class="ai-typing"><span></span><span></span><span></span></span>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function aiTypingDone(){
+  const t = document.getElementById('aiTypingBubble');
+  if(t) t.remove();
+}
+
+/* AI'a "söyleyeceği şeyi gerçekçi hissettirmek için" küçük bir gecikme */
+function aiAfter(ms, fn){ aiTyping(); setTimeout(()=>{ aiTypingDone(); fn(); }, ms); }
+
+/* Türkçe renk insancil isim */
+const AI_COLOR_LABEL = {
+  mavi:'mavi',pembe:'pembe',kirmizi:'kırmızı',sari:'sarı',yesil:'yeşil',mor:'mor',
+  beyaz:'beyaz',siyah:'siyah',gri:'gri',turuncu:'turuncu',kahverengi:'kahverengi',
+  altin:'altın',gumus:'gümüş',pastel:'pastel'
+};
+const AI_CAT_LABEL = {
+  miyuki:'Miyuki ürünleri',bileklik:'bileklik',kolye:'kolye',kupe:'küpe',
+  yuzuk:'yüzük',anahtarlik:'anahtarlık',mum:'mum',sisedeko:'şişe & dekor',
+  '3d':'3D baskı ürünleri'
+};
+
+/* Onay butonları */
+function aiAskConfirm(message, onYes, onNo){
+  const div = aiBotMsg(message + `
+    <div class="ai-confirm">
+      <button class="yes" onclick="aiConfirmYes(this)">✓ Evet, göster</button>
+      <button class="no"  onclick="aiConfirmNo(this)">✕ Hayır</button>
+    </div>`);
+  aiPending = { yes:onYes, no:onNo, el:div };
+}
+function aiConfirmYes(btn){
+  // Butonları devre dışı bırak
+  btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);
+  if(aiPending && aiPending.yes){ const fn = aiPending.yes; aiPending = null; fn(); }
+}
+function aiConfirmNo(btn){
+  btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);
+  if(aiPending && aiPending.no){ const fn = aiPending.no; aiPending = null; fn(); }
+  else { aiPending = null; aiAfter(500, ()=>aiBotMsg('Tamam 🌸 Başka bir şey arıyor musunuz?')); }
+}
+
+/* Hızlı seçim chip'leri */
+function aiQuickChips(){
+  return `<div class="ai-quick">
+    <button class="ai-chip" onclick="aiQuick('Miyuki bileklik')">Miyuki bileklik</button>
+    <button class="ai-chip" onclick="aiQuick('Mumlar')">Mumlar</button>
+    <button class="ai-chip" onclick="aiQuick('3D baskı')">3D baskı</button>
+    <button class="ai-chip" onclick="aiQuick('Yeni ürünler')">Yeni ürünler</button>
+  </div>`;
+}
+function aiQuick(text){
+  document.getElementById('aiInput').value = text;
+  aiSend();
+}
+
+/* === EN ÖNEMLİ KISIM: Kullanıcının istediği yere git ve vurgula === */
+function aiShowMatches(matches, intent){
+  // 1. Eşleşen ürünleri grid'e bas
+  renderProducts(matches);
+
+  // 2. Filter butonlarındaki "active" durumunu kaldır
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+
+  // 3. 3D ürünleri varsa printer-section'a, değilse products bölümüne kay
+  const hasOnly3D = matches.length && matches.every(p=>{
+    const c = Array.isArray(p.cat)?p.cat:[p.cat];
+    return c.includes('3d');
+  });
+  const targetId = hasOnly3D ? 'printer-section' : 'products';
+
+  // 4. Asistan paneli açıksa biraz daralt değil — paneli olduğu yerde bırak
+  setTimeout(()=>{
+    const target = document.getElementById(targetId);
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 100);
+
+  // 5. Vurgulama: eşleşen ID'leri parlak yap, diğerleri zaten gizli (renderProducts liste verdi)
+  // Tüm liste yerine sadece eşleşmeleri gösterdik, ekstra vurgu için ilk 3'ü daha belirgin yap
+  setTimeout(()=>{
+    const cards = document.querySelectorAll('#productGrid .product-card');
+    cards.forEach((c,i)=>{
+      if(i < 3) c.classList.add('ai-highlight');
+    });
+    // 3 saniye sonra vurguyu kaldır
+    setTimeout(()=>cards.forEach(c=>c.classList.remove('ai-highlight')), 3000);
+  }, 700);
+}
+
+/* "Tüm ürünleri göster" — sıfırlama */
+function aiResetView(){
+  renderProducts(products);
+  document.querySelectorAll('.product-card').forEach(c=>{
+    c.classList.remove('ai-highlight','ai-dim');
+  });
+  // "Hepsi" filter butonunu aktif et
+  const allBtn = document.querySelector('.filter-btn[onclick*="hepsi"]');
+  if(allBtn){ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); allBtn.classList.add('active'); }
+}
+
+/* Ana mesaj işleyici */
+function aiHandle(text){
+  const intent = aiParseIntent(text);
+
+  // Selamlama / boş niyet
+  const n = aiNormalize(text);
+  if(/^(selam|merhaba|mrb|hi|hello|iyi gunler|gunaydin|iyi aksamlar)\b/.test(n) && !intent.cats.length && !intent.colors.length){
+    aiAfter(500, ()=>aiBotMsg('Merhaba! 🌸 Size nasıl yardımcı olabilirim? Bir kategori veya renk arıyor musunuz?' + aiQuickChips()));
+    return;
+  }
+
+  // İletişim isteği
+  if(intent.specials.includes('iletisim')){
+    aiAfter(500, ()=>aiBotMsg(`İletişim için WhatsApp: <a href="https://wa.me/${WA_NUMBER}" target="_blank" style="color:var(--caramel);font-weight:500">0533 094 49 69</a> 📱`));
+    return;
+  }
+
+  // Eşleşen ürünleri bul
+  const matches = aiMatchProducts(intent);
+
+  // Hiç anlamadıysak
+  if(!intent.cats.length && !intent.colors.length && !intent.specials.length){
+    aiAfter(600, ()=>aiBotMsg('Tam olarak anlayamadım 🤔 Şunlardan birini deneyebilirsiniz:' + aiQuickChips()));
+    return;
+  }
+
+  // Eşleşme yoksa
+  if(!matches.length){
+    aiAfter(600, ()=>{
+      aiBotMsg(`Üzgünüm, "${aiEscape(text)}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?` + aiQuickChips());
+    });
+    return;
+  }
+
+  // Onay sorusu hazırla
+  const colorTxt = intent.colors.map(c=>AI_COLOR_LABEL[c]).join(' / ');
+  const catTxt   = intent.cats.length ? intent.cats.map(c=>AI_CAT_LABEL[c]).join(' / ') : 'ürün';
+  const specialTxt = intent.specials.includes('yeni') ? ' yeni' : '';
+  const desc = (colorTxt ? `${colorTxt} renkli ` : '') + specialTxt + ' ' + catTxt;
+
+  aiAfter(700, ()=>{
+    aiAskConfirm(
+      `${matches.length} adet <b>${desc.trim()}</b> buldum. Sitede göstermemi ister misiniz?`,
+      ()=>{
+        aiAfter(400, ()=>{
+          aiBotMsg(`Tamam, gösteriyorum 🌸<br>Ürünleri sayfada görüntüleyebilirsiniz.`);
+          aiShowMatches(matches, intent);
+        });
+      },
+      ()=>{
+        aiAfter(400, ()=>aiBotMsg('Tamam, başka ne arıyorsunuz?' + aiQuickChips()));
+      }
+    );
+  });
+}
+
+/* Mesaj gönder */
+function aiSend(){
+  const input = document.getElementById('aiInput');
+  const text = (input.value||'').trim();
+  if(!text) return;
+  input.value = '';
+  aiUserMsg(text);
+
+  // Onay bekleniyorsa, "evet/hayır" yazılı yanıtları yakala
+  if(aiPending){
+    if(/^(evet|olur|tamam|ok|tabi|tabii|olur tabi|göster|goster|hadi)\b/i.test(aiNormalize(text))){
+      const fn = aiPending.yes; aiPending = null; if(fn) fn(); return;
+    }
+    if(/^(hayir|yok|istemem|gerek yok|kapat|hayır)\b/i.test(aiNormalize(text))){
+      const fn = aiPending.no; aiPending = null; if(fn) fn(); else aiAfter(400,()=>aiBotMsg('Tamam 🌸'));
+      return;
+    }
+    aiPending = null; // Yeni soru sorulduysa onayı iptal et
+  }
+
+  aiHandle(text);
+}
+
+/* Paneli aç/kapat */
+function toggleAI(){
+  const panel = document.getElementById('aiPanel');
+  const fab   = document.getElementById('aiFab');
+  const isOpen = panel.classList.toggle('open');
+  fab.classList.toggle('hidden', isOpen);
+  if(isOpen && !panel.dataset.greeted){
+    panel.dataset.greeted = '1';
+    aiAfter(400, ()=>{
+      aiBotMsg('Merhaba! 🌸 Ben Şelale\'nin sanal asistanıyım. Ne arıyorsunuz?' + aiQuickChips());
+    });
+  }
+  if(isOpen) setTimeout(()=>document.getElementById('aiInput').focus(), 350);
+}
 
 /* ════ BAŞLAT ════ */
 renderProducts(products);
