@@ -3,6 +3,8 @@ backend:
   repo: aiakliselim-AI/selale-design-studio
   branch: main
   base_url: https://sveltia-cms-auth.aiakliselim.workers.dev
+  auth_endpoint: auth
+  auth_scope: repo
 
 site_url: https://selale-design-studio.com
 display_url: https://selale-design-studio.com
