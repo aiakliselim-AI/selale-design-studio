@@ -1,0 +1,74 @@
+backend:
+  name: github
+  repo: aiakliselim-AI/selale-design-studio
+  branch: main
+  base_url: https://sveltia-cms-auth.aiakliselim.workers.dev
+
+site_url: https://selale-design-studio.com
+display_url: https://selale-design-studio.com
+locale: tr
+
+media_folder: images/products
+public_folder: /images/products
+
+collections:
+  - name: products
+    label: Ürünler
+    label_singular: Ürün
+    folder: products
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    summary: '{{name}} — {{price}}'
+    sortable_fields: ['name', 'price', 'order']
+    fields:
+      - { label: 'Ürün Adı', name: name, widget: string }
+      - { label: 'Fiyat', name: price, widget: string, hint: 'Örnek: ₺190' }
+      - { label: 'Eski Fiyat (indirim için)', name: oldPrice, widget: string, required: false, hint: 'Boş bırakabilirsiniz' }
+      - { label: 'Açıklama', name: desc, widget: text }
+      - { label: 'Emoji İkon', name: icon, widget: string, hint: 'Örnek: 📿 🕯️ 💎' }
+      - label: 'Kategori'
+        name: cat
+        widget: select
+        multiple: true
+        options:
+          - { label: 'Miyuki Takı', value: miyuki }
+          - { label: 'Bileklik', value: bileklik }
+          - { label: 'Kolye', value: kolye }
+          - { label: 'Küpe', value: kupe }
+          - { label: 'Yüzük', value: yuzuk }
+          - { label: 'Anahtarlık', value: anahtarlik }
+          - { label: 'Mum', value: mum }
+          - { label: 'Şişe & Dekor', value: sisedeko }
+          - { label: '3D Baskı', value: '3d' }
+          - { label: '3D Anahtarlık', value: '3d-anahtarlik' }
+          - { label: '3D Oyuncak', value: '3d-oyuncak' }
+          - { label: '3D Alet', value: '3d-alet' }
+          - { label: '3D Dekor', value: '3d-deko' }
+      - label: 'Renkler'
+        name: colors
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: 'Pembe', value: pembe }
+          - { label: 'Mavi', value: mavi }
+          - { label: 'Kırmızı', value: kirmizi }
+          - { label: 'Sarı', value: sari }
+          - { label: 'Yeşil', value: yesil }
+          - { label: 'Mor', value: mor }
+          - { label: 'Beyaz', value: beyaz }
+          - { label: 'Siyah', value: siyah }
+          - { label: 'Gri', value: gri }
+          - { label: 'Turuncu', value: turuncu }
+          - { label: 'Kahverengi', value: kahverengi }
+          - { label: 'Altın', value: altin }
+          - { label: 'Gümüş', value: gumus }
+          - { label: 'Pastel', value: pastel }
+          - { label: 'Mercan', value: mercan }
+      - { label: 'Rozet (Yeni / Çok Satan vb)', name: badge, widget: string, required: false }
+      - { label: 'Yeni Ürün mü?', name: isNew, widget: boolean, default: false }
+      - { label: 'Ürün Fotoğrafı', name: image, widget: image, required: false }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, hint: 'Küçük sayı önce gösterilir' }
