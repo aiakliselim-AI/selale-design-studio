@@ -1,0 +1,57 @@
+# ─── OS ───
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ─── Editör / IDE ───
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# ─── Ortam değişkenleri / sırlar ───
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+secrets.json
+credentials.json
+
+# ─── Loglar ───
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Bağımlılık & build (ileride eklenirse) ───
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.output/
+
+# ─── Sveltia/Decap CMS yerel ───
+.netlify/
+.cloudflare/
+.wrangler/
+
+# ─── Geçici ───
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
