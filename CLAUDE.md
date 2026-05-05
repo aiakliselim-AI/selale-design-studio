@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project shape
 
-Single-page static site for **Şelale Design Studio**, a Turkish handmade-goods storefront. Deploys as static files (Cloudflare Pages — see `_headers`). There is no build system, package manager, test suite, or framework — just HTML/CSS/JS served as-is.
+Single-page static site for **Şelale Design Studio**, a Turkish handmade-goods storefront. Deploys as static files on **Netlify** (the `_headers` file is Netlify's security-header convention). There is no build system, package manager, test suite, or framework — just HTML/CSS/JS served as-is. Pushes to `main` trigger a deploy.
 
 To preview: open `index.html` in a browser, or serve the repo root with any static file server. There are no commands to run, lint, or test.
 
