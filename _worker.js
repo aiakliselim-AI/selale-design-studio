@@ -1,3 +1,4 @@
+// Force rebuild 2026-05-06
 // Cloudflare Pages Advanced Mode worker.
 // Statik dosyalari env.ASSETS uzerinden servis eder ve guvenlik header'larini
 // path'e gore set eder. Bu dosya `_headers`'in yerini alir; CF Workers ortaminda
