@@ -10,31 +10,263 @@ site_url: https://selale-design-studio.com
 display_url: https://selale-design-studio.com
 locale: tr
 
-media_folder: images/products
-public_folder: /images/products
+# Varsayılan medya klasörleri — koleksiyon bazında override edilir
+media_folder: images
+public_folder: /images
 
 collections:
+
+  # ─────────────────────────────────────────────────────────
+  # 1) ÇEKMECE MENÜSÜ (Drawer)
+  # ─────────────────────────────────────────────────────────
+  - name: drawer
+    label: 1. Çekmece Menüsü
+    label_singular: Çekmece Ayarı
+    description: Sol taraftan açılan hamburger menünün içeriği. Bölüm başlıkları ve alt linkler buradan düzenlenir.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: drawer
+        label: Çekmece Menüsü
+        file: data/drawer.yml
+        fields:
+          - label: Üst Linkler
+            name: top_links
+            widget: list
+            hint: Bölüm başlıklarının üzerinde, en üstte görünen linkler (Ana Sayfa, Tüm Ürünler vb.)
+            fields:
+              - { label: Emoji, name: icon, widget: string }
+              - { label: Yazı, name: label, widget: string }
+              - label: Hedef Tipi
+                name: action_type
+                widget: select
+                options:
+                  - { label: 'Bölüme Git (scroll)', value: scroll }
+                  - { label: 'Ürün Filtrele', value: filter }
+                  - { label: 'Sayfa Aç (favoriler vb.)', value: page }
+              - { label: 'Hedef Değer', name: action_value, widget: string, hint: 'scroll için bölüm id (ör. hero-anchor), filter için kategori (ör. miyuki), page için: favoriler' }
+          - label: Bölümler
+            name: sections
+            widget: list
+            hint: Her bölüm bir başlık ve altındaki linklerden oluşur.
+            fields:
+              - { label: Başlık (Emoji + Metin), name: title, widget: string, hint: 'Örn: 📿 Miyuki Takı & Aksesuar' }
+              - label: Linkler
+                name: links
+                widget: list
+                fields:
+                  - { label: Emoji, name: icon, widget: string }
+                  - { label: Yazı, name: label, widget: string }
+                  - label: Hedef Tipi
+                    name: action_type
+                    widget: select
+                    options:
+                      - { label: 'Bölüme Git (scroll)', value: scroll }
+                      - { label: 'Ürün Filtrele', value: filter }
+                      - { label: 'Etkinlik Sekmesi Aç', value: event }
+                  - { label: 'Hedef Değer', name: action_value, widget: string, hint: 'scroll için id; filter için kategori; event için sekme adı (nishan, dugun vb.)' }
+          - label: Alt WhatsApp Butonu
+            name: whatsapp
+            widget: object
+            fields:
+              - { label: Yazı, name: label, widget: string, default: 'WhatsApp İletişim' }
+              - { label: Aktif mi?, name: enabled, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 2) SİTE AYARLARI
+  # ─────────────────────────────────────────────────────────
+  - name: site_settings
+    label: 2. Site Ayarları
+    description: Marka adı, iletişim numarası, sosyal medya ve site genelinde kullanılan ayarlar.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: settings
+        label: Genel Ayarlar
+        file: data/settings.yml
+        fields:
+          - { label: 'Marka Adı (büyük)', name: brand_name, widget: string, default: 'Şelale', hint: 'Logoda büyük yazı' }
+          - { label: 'Marka Alt Adı (italik)', name: brand_subname, widget: string, default: 'Design Studio', hint: 'Logoda italik karamel renkli alt yazı' }
+          - { label: 'Site Sloganı', name: tagline, widget: string, default: 'Kişiye Özel Tasarım', hint: 'Tarayıcı sekmesinde başlıktan sonra görünür' }
+          - { label: 'Meta Açıklama (SEO)', name: meta_description, widget: text, hint: 'Google sonuçlarında görünen kısa açıklama, en fazla 160 karakter' }
+          - label: WhatsApp
+            name: whatsapp
+            widget: object
+            fields:
+              - { label: 'Numara (başında ülke kodu, boşluksuz)', name: number, widget: string, default: '905330944969', pattern: ['^\d{10,15}$', 'Sadece rakam, ülke kodu dahil'] }
+              - { label: 'Görünen Numara (insancıl)', name: display, widget: string, default: '0533 094 49 69' }
+          - label: Sosyal Medya
+            name: socials
+            widget: list
+            fields:
+              - label: Platform
+                name: platform
+                widget: select
+                options: ['Instagram', 'TikTok', 'Facebook', 'Pinterest', 'YouTube', 'X']
+              - { label: Emoji İkon, name: icon, widget: string, hint: 'Örn: 📸 🎵' }
+              - { label: 'URL', name: url, widget: string, pattern: ['^https?://', 'http(s):// ile başlamalı'] }
+              - { label: Aktif mi?, name: enabled, widget: boolean, default: true }
+          - label: Üst Banner (Marquee)
+            name: marquee
+            widget: list
+            hint: Sayfanın üst kısmında kayan etiketler. Her satır bir etiket.
+            field: { label: Etiket, name: text, widget: string }
+          - { label: 'Telif Yazısı', name: copyright, widget: string, default: '© 2025 Şelale Design Studio', hint: 'Footer altındaki yıl ve marka' }
+
+  # ─────────────────────────────────────────────────────────
+  # 3) HERO (Açılış Bölümü)
+  # ─────────────────────────────────────────────────────────
+  - name: hero
+    label: 3. Hero
+    description: Sayfanın en üstündeki açılış bölümü — büyük başlık, açıklama, butonlar ve mini kartlar.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: hero
+        label: Hero
+        file: data/hero.yml
+        fields:
+          - { label: Üst Etiket, name: tag, widget: string, default: '✦ El Yapımı & Özel Tasarım' }
+          - { label: 'Başlık - Üst Satır', name: title_top, widget: string, default: 'Her el emeğinde', hint: 'Büyük başlığın ilk satırı' }
+          - { label: 'Başlık - Vurgu (italik)', name: title_emphasis, widget: string, default: 'bir sevgi var.', hint: 'Karamel renkli italik kısım' }
+          - { label: Açıklama, name: description, widget: text }
+          - label: Birincil Buton
+            name: btn_primary
+            widget: object
+            fields:
+              - { label: Yazı, name: label, widget: string, default: 'Koleksiyonu Keşfet' }
+              - { label: 'Hedef Bölüm ID', name: target, widget: string, default: 'categories' }
+          - label: İkincil Buton
+            name: btn_secondary
+            widget: object
+            fields:
+              - { label: Yazı, name: label, widget: string, default: 'Özel Gün Konseptleri' }
+              - { label: 'Hedef Bölüm ID', name: target, widget: string, default: 'events-section' }
+          - label: Mini Kartlar (3 adet önerilir)
+            name: mini_cards
+            widget: list
+            max: 4
+            fields:
+              - { label: Emoji, name: icon, widget: string }
+              - { label: 'Ürün Adı', name: name, widget: string }
+              - { label: Fiyat, name: price, widget: string, hint: 'Örn: ₺190 veya ₺680''den' }
+          - label: Rozet (sağ alt köşe)
+            name: badge
+            widget: object
+            fields:
+              - { label: Üst Emoji, name: top_emoji, widget: string, default: '💛' }
+              - { label: 'Üst Yazı', name: top_text, widget: string, default: '%100' }
+              - { label: 'Alt Yazı', name: bottom_text, widget: string, default: 'El Yapımı' }
+              - { label: 'Görünür mü?', name: enabled, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 4) HAKKIMIZDA
+  # ─────────────────────────────────────────────────────────
+  - name: about
+    label: 4. Hakkımızda
+    description: Hakkımızda bölümü — hikaye, istatistikler ve özellik listesi.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: about
+        label: Hakkımızda
+        file: data/about.yml
+        fields:
+          - { label: Üst Etiket, name: tag, widget: string, default: '✦ Hikayemiz' }
+          - { label: 'Başlık - Düz Kısım', name: title_plain, widget: string, default: 'Sevgiyle yapılan her şeyin' }
+          - { label: 'Başlık - Vurgu (italik)', name: title_emphasis, widget: string, default: 'farkı vardır.' }
+          - label: Paragraflar
+            name: paragraphs
+            widget: list
+            field: { label: Paragraf, name: text, widget: text }
+          - label: İstatistikler (sol görsel kart)
+            name: stats
+            widget: list
+            max: 3
+            fields:
+              - { label: Sayı/Değer, name: value, widget: string, hint: 'Örn: 500+, 3 Yıl' }
+              - { label: Açıklama, name: label, widget: string, hint: 'Örn: Mutlu Müşteri, Deneyim' }
+          - label: Özellikler Listesi
+            name: features
+            widget: list
+            fields:
+              - { label: Emoji, name: icon, widget: string, hint: 'Örn: 💎 🎨 🎁' }
+              - { label: Metin, name: text, widget: string }
+          - { label: 'WhatsApp Buton Metni', name: cta_label, widget: string, default: '📱 WhatsApp''tan Sipariş / Soru' }
+
+  # ─────────────────────────────────────────────────────────
+  # 5) KATEGORİ KARTLARI
+  # ─────────────────────────────────────────────────────────
+  - name: categories
+    label: 5. Kategori Kartları
+    label_singular: Kategori Kartı
+    description: Ana sayfadaki büyük kategori kartları (Miyuki Takılar, Mumlar vb.). Sıraya göre dizilir.
+    folder: categories
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    media_folder: '/images/categories'
+    public_folder: '/images/categories'
+    summary: '{{title}} — {{order}}'
+    sortable_fields: ['order', 'title']
+    fields:
+      - { label: 'Kart Başlığı', name: title, widget: string, hint: 'Örn: Miyuki Takılar' }
+      - { label: 'Alt Açıklama', name: subtitle, widget: string, hint: 'Örn: Bileklik · Kolye · Küpe · Yüzük' }
+      - { label: 'Emoji İkon', name: icon, widget: string, hint: 'Örn: 📿 🕯️ 💍' }
+      - label: 'Arka Plan Stili'
+        name: bg
+        widget: select
+        default: c1
+        options:
+          - { label: 'C1 — Bej-Şeftali', value: c1 }
+          - { label: 'C2 — Sage Yeşil', value: c2 }
+          - { label: 'C3 — Pembe-Gül', value: c3 }
+          - { label: 'C4 — Sarı-Hardal', value: c4 }
+          - { label: 'C5 — Lavanta', value: c5 }
+          - { label: 'C6 — Mint-Petrol', value: c6 }
+          - { label: 'C7 — Açık Mavi', value: c7 }
+          - { label: 'C8 — Karamel-Krem', value: c8 }
+      - label: 'Tıklayınca Yapılacak'
+        name: action_type
+        widget: select
+        options:
+          - { label: 'Ürün Filtrele', value: filter }
+          - { label: 'Bölüme Git (scroll)', value: scroll }
+          - { label: 'Etkinlik Sekmesi Aç', value: event }
+      - { label: 'Hedef Değer', name: action_value, widget: string, hint: 'filter için kategori (miyuki); scroll için id (printer-section); event için sekme (nishan)' }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int, hint: 'Küçük sayı önce gösterilir' }
+      - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 6) ÜRÜNLER
+  # ─────────────────────────────────────────────────────────
   - name: products
-    label: Ürünler
+    label: 6. Ürünler
     label_singular: Ürün
+    description: Mağazada satılan tüm ürünler — Miyuki takılar, mumlar, 3D baskılar vb.
     folder: products
     create: true
     delete: true
     slug: '{{slug}}'
     extension: md
     format: yaml-frontmatter
+    media_folder: '/images/products'
+    public_folder: '/images/products'
     summary: '{{name}} — {{price}}'
     sortable_fields: ['name', 'price', 'order']
     fields:
       - { label: 'Ürün Adı', name: name, widget: string }
-      - { label: 'Fiyat', name: price, widget: string, hint: 'Örnek: ₺190' }
+      - { label: 'Fiyat', name: price, widget: string, hint: 'Örn: ₺190' }
       - { label: 'Eski Fiyat (indirim için)', name: oldPrice, widget: string, required: false, hint: 'Boş bırakabilirsiniz' }
       - { label: 'Açıklama', name: desc, widget: text }
-      - { label: 'Emoji İkon', name: icon, widget: string, hint: 'Örnek: 📿 🕯️ 💎' }
-      - label: 'Kategori'
+      - { label: 'Emoji İkon (görsel yoksa)', name: icon, widget: string, hint: 'Örn: 📿 🕯️ 💎 — image yüklenmezse fallback olarak gösterilir' }
+      - label: 'Kategoriler'
         name: cat
         widget: select
         multiple: true
+        min: 1
         options:
           - { label: 'Miyuki Takı', value: miyuki }
           - { label: 'Bileklik', value: bileklik }
@@ -44,7 +276,7 @@ collections:
           - { label: 'Anahtarlık', value: anahtarlik }
           - { label: 'Mum', value: mum }
           - { label: 'Şişe & Dekor', value: sisedeko }
-          - { label: '3D Baskı', value: '3d' }
+          - { label: '3D Baskı (genel)', value: '3d' }
           - { label: '3D Anahtarlık', value: '3d-anahtarlik' }
           - { label: '3D Oyuncak', value: '3d-oyuncak' }
           - { label: '3D Alet', value: '3d-alet' }
@@ -70,7 +302,206 @@ collections:
           - { label: 'Gümüş', value: gumus }
           - { label: 'Pastel', value: pastel }
           - { label: 'Mercan', value: mercan }
-      - { label: 'Rozet (Yeni / Çok Satan vb)', name: badge, widget: string, required: false }
+      - label: 'Arka Plan Stili (kart)'
+        name: bg
+        widget: select
+        default: p1
+        options:
+          - { label: 'P1', value: p1 }
+          - { label: 'P2', value: p2 }
+          - { label: 'P3', value: p3 }
+          - { label: 'P4', value: p4 }
+          - { label: 'P5', value: p5 }
+          - { label: 'P6', value: p6 }
+          - { label: 'P7', value: p7 }
+          - { label: 'P8', value: p8 }
+      - { label: 'Rozet', name: badge, widget: string, required: false, hint: 'Yeni / Çok Satan / Popüler — boş bırakılabilir' }
       - { label: 'Yeni Ürün mü?', name: isNew, widget: boolean, default: false }
       - { label: 'Ürün Fotoğrafı', name: image, widget: image, required: false }
-      - { label: 'Sıralama', name: order, widget: number, default: 0, hint: 'Küçük sayı önce gösterilir' }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int, hint: 'Küçük sayı önce gösterilir' }
+
+  # ─────────────────────────────────────────────────────────
+  # 7) ÖZEL GÜN KONSEPTLERİ (Etkinlikler)
+  # ─────────────────────────────────────────────────────────
+  - name: events
+    label: 7. Özel Gün Konseptleri
+    label_singular: Konsept
+    description: Nişan, düğün, doğum günü vb. özel gün konseptleri — sekme olarak gösterilir.
+    folder: events
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    media_folder: '/images/events'
+    public_folder: '/images/events'
+    summary: '{{title}} — {{price_amount}}'
+    sortable_fields: ['order', 'title']
+    fields:
+      - { label: 'Sekme Adı', name: title, widget: string, hint: 'Örn: Nişan, Düğün, Doğum Günü' }
+      - { label: 'Sekme Slug (URL)', name: slug, widget: string, pattern: ['^[a-z0-9]+$', 'Sadece küçük harf ve rakam'], hint: 'Örn: nishan, dugun, dogumgunu, babyshower, mezuniyet' }
+      - { label: 'Sekme Emoji', name: tab_icon, widget: string, hint: 'Sekme butonunda görünür' }
+      - { label: 'Görsel Emoji (büyük)', name: visual_icon, widget: string, hint: 'Sol panelde büyük gösterilir' }
+      - label: 'Görsel Stil'
+        name: visual_style
+        widget: select
+        default: ev1
+        options: ['ev1', 'ev2', 'ev3', 'ev4', 'ev5']
+      - { label: 'Başlık - Üst Satır', name: title_top, widget: string, hint: 'Örn: Nişan Gecenizi' }
+      - { label: 'Başlık - Vurgu (italik)', name: title_emphasis, widget: string, hint: 'Örn: Unutulmaz Yapın' }
+      - { label: 'Açıklama', name: description, widget: text }
+      - label: 'Maddeler'
+        name: items
+        widget: list
+        fields:
+          - { label: Emoji, name: icon, widget: string }
+          - { label: Metin, name: text, widget: string }
+      - { label: 'Fiyat Etiketi', name: price_label, widget: string, default: 'Fiyat başlangıcı' }
+      - { label: 'Fiyat Değeri', name: price_amount, widget: string, hint: 'Örn: ₺680' }
+      - { label: 'WhatsApp Mesaj Metni', name: wa_message, widget: string, hint: 'Örn: Nişan Konsepti hakkında bilgi almak istiyorum.' }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int }
+      - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 8) 3D BASKI Bölümü
+  # ─────────────────────────────────────────────────────────
+  - name: printer
+    label: 8. 3D Baskı Bölümü
+    description: 3D baskı tanıtım bölümü — örnekler, alt kategoriler ve tanıtım metni.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: printer
+        label: 3D Baskı
+        file: data/printer.yml
+        fields:
+          - { label: 'Üst Etiket', name: tag_top, widget: string, default: '✦ 3D Baskı' }
+          - { label: 'Üst Başlık - Düz', name: title_top_plain, widget: string, default: 'Hayal ettiğinizi' }
+          - { label: 'Üst Başlık - Vurgu', name: title_top_emphasis, widget: string, default: 'basıyoruz' }
+          - { label: 'Sol Panel Ana Emoji', name: visual_icon, widget: string, default: '🖨️' }
+          - label: 'Sol Panel Örnek Etiketler'
+            name: samples
+            widget: list
+            hint: 'Yazıcı görselinin altındaki örnek baskı etiketleri'
+            fields:
+              - { label: Emoji, name: icon, widget: string }
+              - { label: Metin, name: text, widget: string }
+          - { label: 'Alt Etiket', name: tag_bottom, widget: string, default: '✦ 3D Baskı Kategorileri' }
+          - { label: 'Alt Başlık - Düz', name: title_bottom_plain, widget: string, default: 'Her fikir' }
+          - { label: 'Alt Başlık - Vurgu', name: title_bottom_emphasis, widget: string, default: 'gerçek olur' }
+          - { label: 'Açıklama', name: description, widget: text }
+          - label: 'Alt Kategori Kartları'
+            name: subcategories
+            widget: list
+            fields:
+              - { label: Emoji, name: icon, widget: string }
+              - { label: Başlık, name: title, widget: string }
+              - { label: Açıklama, name: subtitle, widget: string }
+              - { label: 'Filtre Hedefi', name: filter, widget: string, hint: 'Örn: 3d-anahtarlik, 3d-oyuncak' }
+          - { label: 'CTA Buton Metni', name: cta_label, widget: string, default: 'Tüm 3D Ürünleri Gör' }
+          - { label: 'CTA Filtre Hedefi', name: cta_filter, widget: string, default: '3d' }
+
+  # ─────────────────────────────────────────────────────────
+  # 9) MÜŞTERİ YORUMLARI
+  # ─────────────────────────────────────────────────────────
+  - name: reviews
+    label: 9. Müşteri Yorumları
+    label_singular: Yorum
+    description: Müşteri yorumları kartları — siteye eklenen her yorum bir karttır.
+    folder: reviews
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    media_folder: '/images/reviews'
+    public_folder: '/images/reviews'
+    summary: '{{author}} — {{topic}} ({{stars}}★)'
+    sortable_fields: ['order', 'date', 'author']
+    fields:
+      - { label: 'Müşteri Adı', name: author, widget: string, hint: 'Örn: Selin A., Murat T.' }
+      - { label: 'Yorum Metni', name: text, widget: text }
+      - label: 'Yıldız Sayısı'
+        name: stars
+        widget: select
+        default: '5'
+        options: ['1', '2', '3', '4', '5']
+      - { label: 'Avatar Emoji', name: avatar, widget: string, default: '👤', hint: 'Örn: 👩 👨 🧑' }
+      - { label: 'Konu / Ürün', name: topic, widget: string, hint: 'Örn: Nişan Konsepti, Miyuki Bileklik, 3D Baskı' }
+      - { label: 'Tarih (görünen)', name: date, widget: string, hint: 'Örn: Mart 2025 — serbest metin, format zorunlu değil' }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int }
+      - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 10) AI ASİSTAN
+  # ─────────────────────────────────────────────────────────
+  - name: ai_assistant
+    label: 10. AI Asistan
+    description: Sağ alttaki sohbet asistanı — karşılama mesajı, hızlı seçenekler ve hata mesajları.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: ai
+        label: AI Asistan
+        file: data/ai.yml
+        fields:
+          - { label: 'Aktif mi?', name: enabled, widget: boolean, default: true }
+          - { label: 'Avatar Emoji', name: avatar, widget: string, default: '🌸' }
+          - { label: 'Asistan Adı', name: name, widget: string, default: 'Şelale Asistan' }
+          - { label: 'Durum Metni', name: status, widget: string, default: 'Çevrimiçi · Yardıma hazır' }
+          - { label: 'Karşılama Mesajı', name: greeting, widget: text, default: 'Merhaba! 🌸 Ben Şelale''nin sanal asistanıyım. Ne arıyorsunuz?' }
+          - { label: 'Input Placeholder', name: input_placeholder, widget: string, default: 'Ne arıyorsunuz?' }
+          - label: 'Hızlı Seçenek Çipleri'
+            name: quick_chips
+            widget: list
+            hint: 'Karşılama altında gösterilen hızlı tıklanabilir öneriler'
+            field: { label: Metin, name: text, widget: string }
+          - { label: 'Sonuç Bulunamadı Mesajı', name: not_found, widget: text, default: 'Üzgünüm, "{q}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?', hint: '{q} kullanıcının yazdığı sorgu yerine geçer' }
+          - { label: 'İletişim Yanıtı', name: contact_reply, widget: text, default: 'İletişim için WhatsApp: 0533 094 49 69 📱' }
+
+  # ─────────────────────────────────────────────────────────
+  # 11) FOOTER
+  # ─────────────────────────────────────────────────────────
+  - name: footer
+    label: 11. Footer
+    description: Sayfa altı — marka açıklaması, sosyal ikonlar, link kolonları ve telif yazısı.
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: footer
+        label: Footer
+        file: data/footer.yml
+        fields:
+          - { label: 'Marka Açıklaması', name: brand_description, widget: text, default: 'El emeği, özen ve yaratıcılıkla üretilmiş ürünler. Her parça bir hikâye anlatır.' }
+          - label: 'Sosyal İkonlar'
+            name: socials
+            widget: list
+            fields:
+              - { label: 'Başlık (tooltip)', name: title, widget: string, hint: 'Örn: Instagram, WhatsApp, TikTok' }
+              - { label: 'Emoji', name: icon, widget: string }
+              - { label: 'URL', name: url, widget: string, required: false }
+          - label: 'Link Kolonları'
+            name: columns
+            widget: list
+            min: 1
+            max: 4
+            fields:
+              - { label: 'Kolon Başlığı', name: heading, widget: string, hint: 'Örn: Takı, Özel Günler, Bilgi' }
+              - label: 'Linkler'
+                name: links
+                widget: list
+                fields:
+                  - { label: 'Yazı', name: label, widget: string }
+                  - label: 'Hedef Tipi'
+                    name: action_type
+                    widget: select
+                    options:
+                      - { label: 'Bölüme Git (scroll)', value: scroll }
+                      - { label: 'Ürün Filtrele', value: filter }
+                      - { label: 'Etkinlik Sekmesi Aç', value: event }
+                      - { label: 'Dış URL', value: url }
+                      - { label: 'WhatsApp', value: whatsapp }
+                      - { label: 'Pasif (tıklanmaz)', value: none }
+                  - { label: 'Hedef Değer', name: action_value, widget: string, required: false, hint: 'scroll/filter/event için anahtar; url için tam URL; whatsapp ve none için boş' }
+          - { label: 'Alt Yazı 1', name: bottom_left, widget: string, default: '© 2025 Şelale Design Studio' }
+          - { label: 'Alt Yazı 2', name: bottom_right, widget: string, default: 'Tüm hakları saklıdır' }
