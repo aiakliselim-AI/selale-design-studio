@@ -18,7 +18,7 @@ UI strings and code comments are in Turkish. Preserve Turkish when editing user-
 
 ### Product data flow
 
-Products live in `products/<slug>.md` (Sveltia CMS frontmatter — schema in `admin/config.yml`). On push to `main`, `.github/workflows/build-products-manifest.yml` runs `scripts/build-products-manifest.mjs` to compile `products/*.md` into `data/products.json` and commits the result with `[skip ci]` so the action doesn't loop. The live site's `loadProducts()` (around `index.html:1421`) fetches that JSON on load and feeds the result into `renderProducts()`.
+Products live in `products/<slug>.md` (Sveltia CMS frontmatter — schema in `admin/config.yml`). On push to `main`, `.github/workflows/build-products-manifest.yml` runs `scripts/build-products-manifest.mjs` to compile `products/*.md` into `data/products.json` and commits the result. The workflow uses a `paths` filter limited to `products/**` / `scripts/...` / its own YAML, so a commit that only touches `data/products.json` does **not** re-trigger it — that is the loop guard. **Do not add `[skip ci]` (or any CI-skip marker) to that commit message:** Cloudflare Pages treats those markers as "skip deploy" and the regenerated manifest never makes it to production while `products/<slug>.md` does, leaving the live site with a stale `products.json` that ignores the new product. The live site's `loadProducts()` (around `index.html:1421`) fetches that JSON on load and feeds the result into `renderProducts()`.
 
 When asked to "edit a product," edit the markdown in `products/` (or use Sveltia at `/admin/`). **Don't hand-edit `data/products.json`** — the manifest action regenerates it on every push.
 
