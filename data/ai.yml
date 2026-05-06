@@ -1,0 +1,15 @@
+enabled: true
+avatar: 🌸
+name: Şelale Asistan
+status: Çevrimiçi · Yardıma hazır
+greeting: "Merhaba! 🌸 Ben Şelale'nin sanal asistanıyım. Ne arıyorsunuz?"
+input_placeholder: Ne arıyorsunuz?
+
+quick_chips:
+  - text: Miyuki bileklik
+  - text: Mumlar
+  - text: 3D baskı
+  - text: Yeni ürünler
+
+not_found: 'Üzgünüm, "{q}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?'
+contact_reply: 'İletişim için WhatsApp: 0533 094 49 69 📱'

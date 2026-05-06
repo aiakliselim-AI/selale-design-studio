@@ -1,0 +1,25 @@
+tag: ✦ El Yapımı & Özel Tasarım
+title_top: Her el emeğinde
+title_emphasis: bir sevgi var.
+description: >
+  Miyuki takılar, el yapımı mumlar, özel gün konseptleri, hediyelikler ve 3D baskılar
+  — hepsinde yalnızca özen ve el emeği.
+
+btn_primary:
+  label: Koleksiyonu Keşfet
+  target: categories
+
+btn_secondary:
+  label: Özel Gün Konseptleri
+  target: events-section
+
+mini_cards:
+  - { icon: '📿', name: 'Miyuki Bileklik', price: '₺190' }
+  - { icon: '🕯️', name: 'El Yapımı Mum',  price: '₺185' }
+  - { icon: '💍', name: 'Nişan Konsepti', price: "₺680'den" }
+
+badge:
+  top_emoji: 💛
+  top_text: '%100'
+  bottom_text: El Yapımı
+  enabled: true

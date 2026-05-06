@@ -1,0 +1,45 @@
+top_links:
+  - icon: 🏠
+    label: Ana Sayfa
+    action_type: scroll
+    action_value: hero-anchor
+  - icon: 🛍️
+    label: Tüm Ürünler
+    action_type: filter
+    action_value: hepsi
+  - icon: ❤️
+    label: Favorilerim
+    action_type: page
+    action_value: favoriler
+
+sections:
+  - title: 📿 Miyuki Takı & Aksesuar
+    links:
+      - { icon: '📿', label: 'Miyuki Bileklik',  action_type: filter, action_value: bileklik }
+      - { icon: '💎', label: 'Miyuki Kolye',     action_type: filter, action_value: kolye }
+      - { icon: '✨', label: 'Miyuki Küpe',      action_type: filter, action_value: kupe }
+      - { icon: '💍', label: 'Miyuki Yüzük',     action_type: filter, action_value: yuzuk }
+      - { icon: '🔑', label: 'Miyuki Anahtarlık', action_type: filter, action_value: anahtarlik }
+
+  - title: 🏠 Ev & Dekor
+    links:
+      - { icon: '🕯️', label: 'El Yapımı Mumlar',   action_type: filter, action_value: mum }
+      - { icon: '🌸', label: 'Süsleme Ürünleri',   action_type: filter, action_value: susleme }
+      - { icon: '🫙', label: 'Süslü Şişe & Dekor', action_type: filter, action_value: sisedeko }
+
+  - title: 🖨️ 3D Baskı
+    links:
+      - { icon: '🖨️', label: '3D Baskı Ürünleri', action_type: scroll, action_value: printer-section }
+      - { icon: '⚙️', label: 'Tüm 3D Ürünler',    action_type: filter, action_value: '3d' }
+
+  - title: 🎉 Özel Gün Konseptleri
+    links:
+      - { icon: '💒', label: 'Düğün Konsepti',  action_type: event, action_value: dugun }
+      - { icon: '💍', label: 'Nişan Konsepti',  action_type: event, action_value: nishan }
+      - { icon: '🎂', label: 'Doğum Günü',      action_type: event, action_value: dogumgunu }
+      - { icon: '👶', label: 'Baby Shower',     action_type: event, action_value: babyshower }
+      - { icon: '🎓', label: 'Mezuniyet',       action_type: event, action_value: mezuniyet }
+
+whatsapp:
+  label: WhatsApp İletişim
+  enabled: true

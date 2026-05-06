@@ -1,0 +1,20 @@
+tag: ✦ Hikayemiz
+title_plain: Sevgiyle yapılan her şeyin
+title_emphasis: farkı vardır.
+
+paragraphs:
+  - text: Küçük bir atölyeden doğan büyük bir tutku. Her ürünümüz sabırla, özenle ve gerçek el emeğiyle hazırlanır.
+  - text: Takıdan muma, özel gün konseptinden 3D baskıya — her kategoride aynı özen, aynı sevgi.
+
+stats:
+  - { value: '500+',  label: Mutlu Müşteri }
+  - { value: '3 Yıl', label: Deneyim }
+
+features:
+  - { icon: '💎', text: '%100 El Yapımı, Seri Üretim Yok' }
+  - { icon: '🎨', text: 'Özel Renk & Kişiselleştirme' }
+  - { icon: '🎁', text: 'Özenli Hediye Paketleme' }
+  - { icon: '🚀', text: 'Hızlı Kargo, Güvenli Teslimat' }
+  - { icon: '🖨️', text: 'Profesyonel 3D Baskı Hizmeti' }
+
+cta_label: "📱 WhatsApp'tan Sipariş / Soru"

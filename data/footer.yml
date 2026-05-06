@@ -1,0 +1,34 @@
+brand_description: El emeği, özen ve yaratıcılıkla üretilmiş ürünler. Her parça bir hikâye anlatır.
+
+socials:
+  - { title: Instagram, icon: '📸', url: 'https://instagram.com/' }
+  - { title: WhatsApp,  icon: '📱', url: 'https://wa.me/905330944969' }
+  - { title: TikTok,    icon: '🎵', url: 'https://tiktok.com/' }
+
+columns:
+  - heading: Takı
+    links:
+      - { label: 'Miyuki Bileklik', action_type: filter, action_value: bileklik }
+      - { label: 'Miyuki Kolye',    action_type: filter, action_value: kolye }
+      - { label: 'Küpe',            action_type: filter, action_value: kupe }
+      - { label: 'Yüzük',           action_type: filter, action_value: yuzuk }
+      - { label: 'Anahtarlık',      action_type: filter, action_value: anahtarlik }
+
+  - heading: Özel Günler
+    links:
+      - { label: 'Nişan Konsepti', action_type: event, action_value: nishan }
+      - { label: 'Düğün Konsepti', action_type: event, action_value: dugun }
+      - { label: 'Doğum Günü',     action_type: event, action_value: dogumgunu }
+      - { label: 'Baby Shower',    action_type: event, action_value: babyshower }
+      - { label: 'Mezuniyet',      action_type: event, action_value: mezuniyet }
+
+  - heading: Bilgi
+    links:
+      - { label: 'Hakkımızda',    action_type: scroll,   action_value: about }
+      - { label: '3D Baskı',      action_type: filter,   action_value: '3d' }
+      - { label: 'Kargo & İade',  action_type: none,     action_value: '' }
+      - { label: 'Özel Sipariş',  action_type: none,     action_value: '' }
+      - { label: 'İletişim',      action_type: whatsapp, action_value: '' }
+
+bottom_left: '© 2025 Şelale Design Studio'
+bottom_right: Tüm hakları saklıdır

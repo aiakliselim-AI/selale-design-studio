@@ -1,0 +1,28 @@
+tag_top: ✦ 3D Baskı
+title_top_plain: Hayal ettiğinizi
+title_top_emphasis: basıyoruz
+
+visual_icon: 🖨️
+samples:
+  - { icon: '🔑', text: 'Anahtarlık' }
+  - { icon: '⚙️', text: 'Araba Parçası' }
+  - { icon: '🧸', text: 'Oyuncak' }
+  - { icon: '🔧', text: 'Alet' }
+  - { icon: '🏠', text: 'Eşya Parçası' }
+  - { icon: '🎮', text: 'Aksesuvar' }
+
+tag_bottom: ✦ 3D Baskı Kategorileri
+title_bottom_plain: Her fikir
+title_bottom_emphasis: gerçek olur
+description: >
+  Kişiselleştirilmiş anahtarlıktan araç aksesuvara, oyuncaktan ev eşyası parçasına
+  — üç boyutlu yazıcımızla üretiyoruz.
+
+subcategories:
+  - { icon: '🔑', title: 'Anahtarlık',      subtitle: 'İsme özel, 3D baskı',   filter: '3d-anahtarlik' }
+  - { icon: '🧸', title: 'Oyuncak & Figür', subtitle: 'Kişiselleştirilebilir', filter: '3d-oyuncak' }
+  - { icon: '🔧', title: 'Alet & Parça',    subtitle: 'Araba, ev, elektronik', filter: '3d-alet' }
+  - { icon: '🏺', title: 'Dekoratif',       subtitle: 'Ev & masa dekoru',      filter: '3d-deko' }
+
+cta_label: Tüm 3D Ürünleri Gör
+cta_filter: '3d'

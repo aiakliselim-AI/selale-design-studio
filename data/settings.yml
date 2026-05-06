@@ -1,0 +1,24 @@
+brand_name: Şelale
+brand_subname: Design Studio
+tagline: Kişiye Özel Tasarım
+meta_description: Miyuki takılar, el yapımı mumlar, özel gün konseptleri ve 3D baskı — Şelale Design Studio el emeği ürünleri.
+
+whatsapp:
+  number: '905330944969'
+  display: '0533 094 49 69'
+
+socials:
+  - { platform: Instagram, icon: '📸', url: 'https://instagram.com/',  enabled: true }
+  - { platform: TikTok,    icon: '🎵', url: 'https://tiktok.com/',     enabled: true }
+
+marquee:
+  - text: Miyuki Takılar
+  - text: El Yapımı Mum
+  - text: Nişan Konsepti
+  - text: Düğün Süsü
+  - text: 3D Baskı
+  - text: Doğum Günü
+  - text: Özel Sipariş
+  - text: Hediyelik
+
+copyright: '© 2025 Şelale Design Studio'
