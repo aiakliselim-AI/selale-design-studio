@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project shape
 
-Single-page static site for **Şelale Design Studio**, a Turkish handmade-goods storefront. Deploys as static files on **Netlify** (the `_headers` file is Netlify's security-header convention). There is no build system, package manager, test suite, or framework — just HTML/CSS/JS served as-is. Pushes to `main` trigger a deploy.
+Single-page static site for **Şelale Design Studio**, a Turkish handmade-goods storefront. Deploys as static files on **Cloudflare Pages** (the `_headers` file is supported by Cloudflare Pages with the same syntax as Netlify's). There is no build system, package manager, test suite, or framework — just HTML/CSS/JS served as-is. Pushes to `main` trigger a deploy.
 
 To preview: open `index.html` in a browser, or serve the repo root with any static file server. There are no commands to run, lint, or test.
 
@@ -16,9 +16,11 @@ UI strings and code comments are in Turkish. Preserve Turkish when editing user-
 - **`admin/`** is a [Sveltia CMS](https://github.com/sveltia/sveltia-cms) panel loaded from unpkg. It has its own, more permissive CSP (in both `_headers` under `/admin/*` and `admin/index.html`'s meta tag). `admin/config.yml` defines a `products` collection that writes markdown files (YAML frontmatter) into a `products/` folder, with media in `images/products/`.
 - **CMS auth** uses a Cloudflare Worker at `https://sveltia-cms-auth.aiakliselim.workers.dev` (OAuth proxy to GitHub). The CMS commits directly to `aiakliselim-AI/selale-design-studio` on `main`. The Worker source lives outside this repo.
 
-### Critical wiring gap
+### Product data flow
 
-The live site does **not** read from the CMS. Products are a hardcoded `const products = [...]` array around `index.html:896`, and `renderProducts(products)` runs on load. The Sveltia CMS at `/admin/` writes markdown to `products/`, but nothing reads that folder. Editing a product via the CMS will NOT change the site until a fetch/render bridge is added. If asked to "edit a product," edit the JS array unless the user explicitly wants to wire up the CMS pipeline.
+Products live in `products/<slug>.md` (Sveltia CMS frontmatter — schema in `admin/config.yml`). On push to `main`, `.github/workflows/build-products-manifest.yml` runs `scripts/build-products-manifest.mjs` to compile `products/*.md` into `data/products.json` and commits the result with `[skip ci]` so the action doesn't loop. The live site's `loadProducts()` (around `index.html:1421`) fetches that JSON on load and feeds the result into `renderProducts()`.
+
+When asked to "edit a product," edit the markdown in `products/` (or use Sveltia at `/admin/`). **Don't hand-edit `data/products.json`** — the manifest action regenerates it on every push.
 
 ### Key client-side concerns
 
