@@ -38,6 +38,10 @@ export default {
     const response = await env.ASSETS.fetch(request);
     const headers = new Headers(response.headers);
 
+    // Cloudflare Pages / `_headers` upstream'den gelen tum CSP header'larini sifirla;
+    // tarayiciya birden fazla CSP gitmesin (en kisitlayici olan kazanir, unpkg.com bloklanir).
+    headers.delete("Content-Security-Policy");
+    headers.delete("Content-Security-Policy-Report-Only");
     headers.set("Content-Security-Policy", isAdmin ? ADMIN_CSP : PUBLIC_CSP);
     headers.set("X-Frame-Options", "DENY");
     headers.set("X-Content-Type-Options", "nosniff");
