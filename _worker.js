@@ -12,7 +12,7 @@ const ADMIN_CSP = [
   "style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https://api.github.com https://*.githubusercontent.com https://unpkg.com https://*.workers.dev https://github.com https://cloudflareinsights.com",
+  "connect-src 'self' https://api.github.com https://*.githubusercontent.com https://unpkg.com https://*.workers.dev https://github.com https://www.githubstatus.com https://cloudflareinsights.com",
   "frame-src https://github.com",
 ].join("; ");
 

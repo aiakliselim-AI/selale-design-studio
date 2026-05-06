@@ -8,7 +8,6 @@ backend:
 
 site_url: https://selale-design-studio.com
 display_url: https://selale-design-studio.com
-locale: tr
 
 # Varsayılan medya klasörleri — koleksiyon bazında override edilir
 media_folder: images
@@ -35,7 +34,7 @@ collections:
             widget: list
             hint: Bölüm başlıklarının üzerinde, en üstte görünen linkler (Ana Sayfa, Tüm Ürünler vb.)
             fields:
-              - { label: Emoji, name: icon, widget: string }
+              - { label: Emoji, name: icon, widget: string, required: false, hint: '(opsiyonel — kullanılmaz)' }
               - { label: Yazı, name: label, widget: string }
               - label: Hedef Tipi
                 name: action_type
@@ -55,7 +54,7 @@ collections:
                 name: links
                 widget: list
                 fields:
-                  - { label: Emoji, name: icon, widget: string }
+                  - { label: Emoji, name: icon, widget: string, required: false, hint: '(opsiyonel — kullanılmaz)' }
                   - { label: Yazı, name: label, widget: string }
                   - label: Hedef Tipi
                     name: action_type
@@ -147,14 +146,14 @@ collections:
             widget: list
             max: 4
             fields:
-              - { label: Emoji, name: icon, widget: string }
+              - { label: Emoji, name: icon, widget: string, required: false, hint: '(opsiyonel — kullanılmaz)' }
               - { label: 'Ürün Adı', name: name, widget: string }
               - { label: Fiyat, name: price, widget: string, hint: 'Örn: ₺190 veya ₺680''den' }
           - label: Rozet (sağ alt köşe)
             name: badge
             widget: object
             fields:
-              - { label: Üst Emoji, name: top_emoji, widget: string, default: '💛' }
+              - { label: Üst Emoji, name: top_emoji, widget: string, required: false, default: '', hint: '(opsiyonel — kullanılmaz)' }
               - { label: 'Üst Yazı', name: top_text, widget: string, default: '%100' }
               - { label: 'Alt Yazı', name: bottom_text, widget: string, default: 'El Yapımı' }
               - { label: 'Görünür mü?', name: enabled, widget: boolean, default: true }
@@ -214,7 +213,7 @@ collections:
     fields:
       - { label: 'Kart Başlığı', name: title, widget: string, hint: 'Örn: Miyuki Takılar' }
       - { label: 'Alt Açıklama', name: subtitle, widget: string, hint: 'Örn: Bileklik · Kolye · Küpe · Yüzük' }
-      - { label: 'Emoji İkon', name: icon, widget: string, hint: 'Örn: 📿 🕯️ 💍' }
+      - { label: 'Emoji İkon', name: icon, widget: string, required: false, hint: '(opsiyonel — kullanılmaz)' }
       - label: 'Arka Plan Stili'
         name: bg
         widget: select
@@ -262,7 +261,6 @@ collections:
       - { label: 'Fiyat', name: price, widget: string, hint: 'Örn: ₺190' }
       - { label: 'Eski Fiyat (indirim için)', name: oldPrice, widget: string, required: false, hint: 'Boş bırakabilirsiniz' }
       - { label: 'Açıklama', name: desc, widget: text }
-      - { label: 'Emoji İkon (görsel yoksa)', name: icon, widget: string, hint: 'Örn: 📿 🕯️ 💎 — image yüklenmezse fallback olarak gösterilir' }
       - label: 'Kategoriler'
         name: cat
         widget: select
