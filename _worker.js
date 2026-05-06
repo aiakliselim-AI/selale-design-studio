@@ -6,6 +6,8 @@
 const ADMIN_CSP = [
   "default-src 'self' https://unpkg.com https://*.githubusercontent.com https://api.github.com https://*.workers.dev https://github.com",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://static.cloudflareinsights.com",
+  "script-src-elem 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com",
+  "worker-src 'self' blob:",
   "style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
@@ -16,6 +18,7 @@ const ADMIN_CSP = [
 const PUBLIC_CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com",
+  "script-src-elem 'self' 'unsafe-inline' https://static.cloudflareinsights.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https:",
