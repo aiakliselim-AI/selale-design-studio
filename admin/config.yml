@@ -255,8 +255,9 @@ collections:
     media_folder: '/images/products'
     public_folder: '/images/products'
     summary: '{{name}} — {{price}}'
-    sortable_fields: ['name', 'price', 'order']
+    sortable_fields: ['id', 'name', 'price', 'order']
     fields:
+      - { label: 'ID (eşsiz tam sayı, 1-9999)', name: id, widget: number, value_type: int, min: 1, max: 9999, hint: 'Her ürün için eşsiz. Favoriler localStorage''de bu ID ile saklanır — mevcut bir ürünün ID''sini değiştirmeyin.' }
       - { label: 'Ürün Adı', name: name, widget: string }
       - { label: 'Fiyat', name: price, widget: string, hint: 'Örn: ₺190' }
       - { label: 'Eski Fiyat (indirim için)', name: oldPrice, widget: string, required: false, hint: 'Boş bırakabilirsiniz' }
@@ -302,6 +303,8 @@ collections:
           - { label: 'Gümüş', value: gumus }
           - { label: 'Pastel', value: pastel }
           - { label: 'Mercan', value: mercan }
+          - { label: 'Bej', value: bej }
+          - { label: 'Şeffaf', value: seffaf }
       - label: 'Arka Plan Stili (kart)'
         name: bg
         widget: select

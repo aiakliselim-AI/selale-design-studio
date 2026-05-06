@@ -897,36 +897,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 let WA_NUMBER = '905330944969';
 
 /* ════ ÜRÜN VERİLERİ ════ */
-const products = [
-  /* MİYUKİ BİLEKLİK */
-  {id:1,  name:'Pastel Miyuki Bileklik',      desc:'El yapımı pastel tonlarda Miyuki boncuk bileklik. İstenen renkte yapılır.',             price:'₺190', oldPrice:'₺240', icon:'📿', bg:'p1', badge:'Çok Satan',  cat:['miyuki','bileklik'],              colors:['pembe','mavi','sari','yesil','mor','pastel'], isNew:false, image:''},
-  {id:2,  name:'Çift Kişilik Bileklik Set',   desc:'Sevgililer için uyumlu renk Miyuki bileklik seti. İsme özel hazırlanır.',               price:'₺320', oldPrice:'',     icon:'💞', bg:'p2', badge:'Yeni',       cat:['miyuki','bileklik'],              colors:['kirmizi','pembe','mavi','siyah','beyaz'], isNew:true,  image:''},
-  {id:3,  name:'Gökkuşağı Bileklik',          desc:'Renkli Miyuki boncuklarla gökkuşağı desenli bileklik.',                                 price:'₺210', oldPrice:'',     icon:'🌈', bg:'p3', badge:'',           cat:['miyuki','bileklik'],              colors:['kirmizi','turuncu','sari','yesil','mavi','mor','pembe'], isNew:false, image:''},
-  /* MİYUKİ KOLYE */
-  {id:4,  name:'İnce Miyuki Kolye',           desc:'İnce zincir üzerine el yapımı Miyuki boncuk kolye. Kişiselleştirilebilir.',              price:'₺240', oldPrice:'',     icon:'💎', bg:'p4', badge:'',           cat:['miyuki','kolye'],                 colors:['altin','gumus','beyaz','siyah','mavi','pembe'], isNew:false, image:''},
-  {id:5,  name:'Çiçek Desenli Kolye',         desc:'Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.',                           price:'₺270', oldPrice:'₺320', icon:'🌸', bg:'p5', badge:'Popüler',    cat:['miyuki','kolye'],                 colors:['pembe','beyaz','sari','mor','yesil'], isNew:false, image:''},
-  /* MİYUKİ KÜPE */
-  {id:6,  name:'Miyuki Sallantı Küpe',        desc:'El yapımı Miyuki boncuklu küpe. Hafif ve şık, her kıyafete uyar.',                      price:'₺160', oldPrice:'',     icon:'✨', bg:'p6', badge:'Yeni',       cat:['miyuki','kupe'],                  colors:['altin','gumus','mavi','pembe','siyah'], isNew:true,  image:''},
-  /* MİYUKİ YÜZÜK */
-  {id:7,  name:'Miyuki Mercan Yüzük',         desc:'El yapımı mercan renkli Miyuki boncuk yüzük. Özel beden seçeneği.',                     price:'₺140', oldPrice:'',     icon:'💍', bg:'p7', badge:'Yeni',       cat:['miyuki','yuzuk'],                 colors:['kirmizi','mercan','turuncu','pembe'], isNew:true,  image:''},
-  /* MİYUKİ ANAHTARLIK */
-  {id:8,  name:'Miyuki İsim Anahtarlık',      desc:'İsme özel Miyuki boncuk anahtarlık. Farklı renk seçenekleri.',                          price:'₺75',  oldPrice:'₺95',  icon:'🔑', bg:'p8', badge:'',           cat:['miyuki','anahtarlik'],            colors:['kirmizi','mavi','yesil','sari','pembe','siyah','beyaz','mor'], isNew:false, image:''},
-  /* MUMLAR */
-  {id:9,  name:'Çiçek Şekilli Mum',           desc:'El yapımı çiçek formunda dekoratif mum. Masa süsü.',                                    price:'₺220', oldPrice:'',     icon:'🌺', bg:'p1', badge:'Yeni',       cat:['mum'],                            colors:['pembe','beyaz','kirmizi','sari'], isNew:true,  image:''},
-  {id:10, name:'Taş Dokulu Mum',              desc:'Taş görünümlü el yapımı dekoratif mum. Çeşit renk seçeneği.',                           price:'₺190', oldPrice:'₺240', icon:'🪨', bg:'p2', badge:'Çok Satan',  cat:['mum'],                            colors:['gri','bej','beyaz','siyah','kahverengi'], isNew:false, image:''},
-  {id:11, name:'Kabartmalı Mum Seti (3\'lü)', desc:'3\'lü kabartmalı desen mum seti. Hediye paketinde teslim.',                             price:'₺350', oldPrice:'',     icon:'🕯️', bg:'p3', badge:'',           cat:['mum'],                            colors:['beyaz','bej','pembe'], isNew:false, image:''},
-  {id:12, name:'Koku Mumu',                   desc:'Lavanta · Vanilya · Gül · Sandal ağacı kokusu seçenekli el yapımı mum.',                price:'₺175', oldPrice:'',     icon:'🌿', bg:'p4', badge:'',           cat:['mum'],                            colors:['mor','beyaz','sari','yesil'], isNew:false, image:''},
-  /* ŞİŞE & DEKOR */
-  {id:13, name:'Süslü Cam Şişe',              desc:'Kurdele, boncuk ve çiçeklerle süslenmiş dekoratif cam şişe. Masa hediyesi.',             price:'₺125', oldPrice:'',     icon:'🫙', bg:'p5', badge:'Yeni',       cat:['sisedeko'],                       colors:['seffaf','beyaz','pembe','altin'], isNew:true,  image:''},
-  {id:14, name:'Parfüm Dekor Şişesi',         desc:'İsme özel süslemeli parfüm şişesi. Kişiye özel mesaj eklenebilir.',                     price:'₺340', oldPrice:'',     icon:'🌷', bg:'p6', badge:'',           cat:['sisedeko'],                       colors:['altin','gumus','pembe','beyaz'], isNew:false, image:''},
-  {id:15, name:'Karma Dekor Seti',            desc:'Mum + süslü şişe + Miyuki bileklik + hediye kutusu. Komple özel gün seti.',              price:'₺580', oldPrice:'₺720', icon:'✨', bg:'p7', badge:'Popüler',    cat:['sisedeko','mum','miyuki'],        colors:['pembe','beyaz','altin','bej'], isNew:false, image:''},
-  /* 3D BASKI */
-  {id:16, name:'Özel 3D Anahtarlık',          desc:'İsim, logo veya özel tasarım 3D baskı anahtarlık. Dayanıklı PLA/PETG malzeme.',         price:'₺60',  oldPrice:'',     icon:'🔑', bg:'p8', badge:'',           cat:['3d','anahtarlik','3d-anahtarlik'],colors:['kirmizi','mavi','yesil','sari','siyah','beyaz','turuncu','mor','pembe'], isNew:false, image:''},
-  {id:17, name:'3D Figür & Oyuncak',          desc:'İstediğiniz karakter veya figür 3D baskı. Oyuncak ve dekoratif amaçlı.',                price:'₺85',  oldPrice:'',     icon:'🧸', bg:'p1', badge:'Yeni',       cat:['3d','3d-oyuncak'],                colors:['kirmizi','mavi','yesil','sari','siyah','beyaz','turuncu','mor','pembe'], isNew:true,  image:''},
-  {id:18, name:'3D Araba Aksesuar Parçası',   desc:'Araba içi tutucu, klips, kapak vb. yedek veya özel parçalar. Ölçüye göre üretilir.',    price:'₺95',  oldPrice:'',     icon:'⚙️', bg:'p2', badge:'',           cat:['3d','3d-alet'],                   colors:['siyah','beyaz','gri'], isNew:false, image:''},
-  {id:19, name:'3D Dekoratif Obje',           desc:'Ev & masa dekoru için 3D baskı vazolar, çerçeveler, süs nesneleri.',                    price:'₺110', oldPrice:'',     icon:'🏺', bg:'p3', badge:'',           cat:['3d','3d-deko'],                   colors:['beyaz','siyah','altin','gumus','pembe'], isNew:false, image:''},
-  {id:20, name:'3D Faydalı Alet',             desc:'Kapı takozundan telefon standına — hayatı kolaylaştıran 3D baskı çözümler.',            price:'₺70',  oldPrice:'',     icon:'🔧', bg:'p4', badge:'',           cat:['3d','3d-alet'],                   colors:['siyah','beyaz','gri'], isNew:false, image:''},
-];
+/* Ürünler products/*.md dosyalarından üretilen data/products.json'dan yüklenir.
+   Detaylar: scripts/build-products-manifest.mjs ve .github/workflows/build-products-manifest.yml */
+let products = [];
 
 /* ════ FAVORİLER ════ */
 let favorites = [];
@@ -1443,8 +1416,25 @@ function toggleAI(){
 }
 
 /* ════ BAŞLAT ════ */
-renderProducts(products);
 updateFavCounts();
+
+/* ════ ÜRÜN MANİFESTİ — data/products.json'dan yükle ════ */
+async function loadProducts(){
+  try{
+    const res = await fetch('data/products.json', { cache: 'no-cache' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(!Array.isArray(data)) throw new Error('manifest dizi değil');
+    // Güvenlik: id'leri tam sayı ve 1-9999 aralığında olanları kabul et
+    products = data.filter(p => p && Number.isInteger(p.id) && p.id > 0 && p.id < 10000);
+    renderProducts(products);
+  }catch(e){
+    console.warn('Ürün manifesti yüklenemedi:', e);
+    const grid = document.getElementById('productGrid');
+    if(grid) grid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Ürünler şu anda yüklenemedi. Lütfen sayfayı yenileyin.</p>';
+  }
+}
+loadProducts();
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){
