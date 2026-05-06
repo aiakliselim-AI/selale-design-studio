@@ -402,6 +402,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
     <button class="drawer-close" onclick="closeDrawer()">✕</button>
   </div>
 
+  <div id="drawerDynamic">
   <!-- Ana -->
   <button class="drawer-link" onclick="goTo('hero-anchor');closeDrawer()"><span class="dl-icon">🏠</span> Ana Sayfa</button>
   <button class="drawer-link" onclick="goTo('products');filterProducts('hepsi',null);closeDrawer()"><span class="dl-icon">🛍️</span> Tüm Ürünler</button>
@@ -432,6 +433,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
   <button class="drawer-link" onclick="goTo('events-section');setEventTab('dogumgunu');closeDrawer()"><span class="dl-icon">🎂</span> Doğum Günü</button>
   <button class="drawer-link" onclick="goTo('events-section');setEventTab('babyshower');closeDrawer()"><span class="dl-icon">👶</span> Baby Shower</button>
   <button class="drawer-link" onclick="goTo('events-section');setEventTab('mezuniyet');closeDrawer()"><span class="dl-icon">🎓</span> Mezuniyet</button>
+  </div>
 
   <div class="drawer-divider"></div>
   <button class="drawer-link" onclick="openFavPage();closeDrawer()">
@@ -870,6 +872,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 <!-- TOAST -->
 <div class="toast" id="toast"><span id="toastIcon">❤️</span><span id="toastMsg">Favorilere eklendi!</span></div>
 
+<script src="assets/js-yaml.min.js"></script>
+
 <!-- AI ASİSTAN -->
 <button class="ai-fab" id="aiFab" onclick="toggleAI()" title="Yardımcı Asistan">💬</button>
 <div class="ai-panel" id="aiPanel">
@@ -890,7 +894,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 
 <script>
 /* ════ AYARLAR ════ */
-const WA_NUMBER = '905330944969';
+let WA_NUMBER = '905330944969';
 
 /* ════ ÜRÜN VERİLERİ ════ */
 const products = [
@@ -1270,12 +1274,16 @@ function aiConfirmNo(btn){
 
 /* Hızlı seçim chip'leri */
 function aiQuickChips(){
-  return `<div class="ai-quick">
-    <button class="ai-chip" onclick="aiQuick('Miyuki bileklik')">Miyuki bileklik</button>
-    <button class="ai-chip" onclick="aiQuick('Mumlar')">Mumlar</button>
-    <button class="ai-chip" onclick="aiQuick('3D baskı')">3D baskı</button>
-    <button class="ai-chip" onclick="aiQuick('Yeni ürünler')">Yeni ürünler</button>
-  </div>`;
+  const cfg = window.AI_CONFIG;
+  const chips = (cfg && Array.isArray(cfg.quick_chips) && cfg.quick_chips.length)
+    ? cfg.quick_chips.map(c=>c && c.text).filter(Boolean)
+    : ['Miyuki bileklik','Mumlar','3D baskı','Yeni ürünler'];
+  const buttons = chips.map(c=>{
+    const safe = aiEscape(c);
+    const onclickArg = String(c).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    return `<button class="ai-chip" onclick="aiQuick('${onclickArg}')">${safe}</button>`;
+  }).join('');
+  return `<div class="ai-quick">${buttons}</div>`;
 }
 function aiQuick(text){
   document.getElementById('aiInput').value = text;
@@ -1355,7 +1363,8 @@ function aiHandle(text){
   // Eşleşme yoksa
   if(!matches.length){
     aiAfter(600, ()=>{
-      aiBotMsg(`Üzgünüm, "${aiEscape(text)}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?` + aiQuickChips());
+      const nf = (window.AI_CONFIG && AI_CONFIG.not_found) || 'Üzgünüm, "{q}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?';
+      aiBotMsg(nf.replace('{q}', aiEscape(text)) + aiQuickChips());
     });
     return;
   }
@@ -1426,7 +1435,8 @@ function toggleAI(){
   if(isOpen && !panel.dataset.greeted){
     panel.dataset.greeted = '1';
     aiAfter(400, ()=>{
-      aiBotMsg('Merhaba! 🌸 Ben Şelale\'nin sanal asistanıyım. Ne arıyorsunuz?' + aiQuickChips());
+      const greet = (window.AI_CONFIG && AI_CONFIG.greeting) || 'Merhaba! 🌸 Ben Şelale\'nin sanal asistanıyım. Ne arıyorsunuz?';
+      aiBotMsg(greet + aiQuickChips());
     });
   }
   if(isOpen) setTimeout(()=>document.getElementById('aiInput').focus(), 350);
@@ -1435,6 +1445,301 @@ function toggleAI(){
 /* ════ BAŞLAT ════ */
 renderProducts(products);
 updateFavCounts();
+
+/* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
+async function fetchYaml(path){
+  try{
+    const res = await fetch(path, { cache: 'no-cache' });
+    if(!res.ok) return null;
+    const text = await res.text();
+    if(!window.jsyaml) return null;
+    return jsyaml.load(text);
+  }catch(e){
+    console.warn('YAML yüklenemedi:', path, e);
+    return null;
+  }
+}
+
+function attrEsc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
+    .replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function jsArg(s){
+  return String(s == null ? '' : s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+}
+
+function actionFor(l){
+  const v = jsArg(l && l.action_value);
+  switch(l && l.action_type){
+    case 'scroll':   return `goTo('${v}')`;
+    case 'filter':   return `goTo('products');filterProducts('${v}',null)`;
+    case 'event':    return `goTo('events-section');setEventTab('${v}')`;
+    case 'page':     return v === 'favoriler' ? `openFavPage()` : '';
+    default:         return '';
+  }
+}
+
+function renderHero(d){
+  if(!d) return;
+  const tag = document.querySelector('.hero-tag');
+  if(tag && d.tag) tag.textContent = d.tag;
+  const h1 = document.querySelector('.hero h1');
+  if(h1 && (d.title_top || d.title_emphasis)){
+    h1.innerHTML = `${aiEscape(d.title_top||'')}<br><em>${aiEscape(d.title_emphasis||'')}</em>`;
+  }
+  const p = document.querySelector('.hero p');
+  if(p && d.description) p.textContent = String(d.description).trim();
+  const btns = document.querySelectorAll('.hero-btns button');
+  if(btns[0] && d.btn_primary){
+    btns[0].textContent = d.btn_primary.label || btns[0].textContent;
+    if(d.btn_primary.target) btns[0].setAttribute('onclick', `goTo('${jsArg(d.btn_primary.target)}')`);
+  }
+  if(btns[1] && d.btn_secondary){
+    btns[1].textContent = d.btn_secondary.label || btns[1].textContent;
+    if(d.btn_secondary.target) btns[1].setAttribute('onclick', `goTo('${jsArg(d.btn_secondary.target)}')`);
+  }
+  const canvas = document.querySelector('.hero-canvas');
+  if(canvas && Array.isArray(d.mini_cards)){
+    canvas.innerHTML = d.mini_cards.map(c=>
+      `<div class="hero-mini-card"><span class="icon">${aiEscape(c.icon||'')}</span><span class="name">${aiEscape(c.name||'')}</span><span class="price">${aiEscape(c.price||'')}</span></div>`
+    ).join('');
+  }
+  const badge = document.querySelector('.hero-badge');
+  if(badge && d.badge){
+    if(d.badge.enabled === false){ badge.style.display = 'none'; }
+    else { badge.style.display = ''; badge.innerHTML = `<strong>${aiEscape(d.badge.top_emoji||'')}</strong>${aiEscape(d.badge.top_text||'')}<br>${aiEscape(d.badge.bottom_text||'')}`; }
+  }
+}
+
+function renderAbout(d){
+  if(!d) return;
+  const tag = document.querySelector('.about-text .tag');
+  if(tag && d.tag) tag.textContent = d.tag;
+  const h2 = document.querySelector('.about-text h2');
+  if(h2 && (d.title_plain || d.title_emphasis)){
+    h2.innerHTML = `${aiEscape(d.title_plain||'')} <em>${aiEscape(d.title_emphasis||'')}</em>`;
+  }
+  const aboutText = document.querySelector('.about-text');
+  if(aboutText && Array.isArray(d.paragraphs)){
+    aboutText.querySelectorAll(':scope > p').forEach(p=>p.remove());
+    const featuresEl = aboutText.querySelector('.about-features');
+    if(featuresEl){
+      d.paragraphs.forEach(par=>{
+        const el = document.createElement('p');
+        el.textContent = (par && par.text) || '';
+        aboutText.insertBefore(el, featuresEl);
+      });
+    }
+  }
+  const stats = document.querySelectorAll('.about-stat');
+  if(Array.isArray(d.stats)){
+    stats.forEach((s, i)=>{
+      if(d.stats[i]) s.innerHTML = `<strong>${aiEscape(d.stats[i].value||'')}</strong><span>${aiEscape(d.stats[i].label||'')}</span>`;
+    });
+  }
+  const featuresEl = document.querySelector('.about-features');
+  if(featuresEl && Array.isArray(d.features)){
+    featuresEl.innerHTML = d.features.map(f=>
+      `<div class="about-feature"><span>${aiEscape(f.icon||'')}</span> ${aiEscape(f.text||'')}</div>`
+    ).join('');
+  }
+  const cta = document.querySelector('.about-text .btn-wa-order');
+  if(cta && d.cta_label) cta.textContent = d.cta_label;
+}
+
+function renderDrawer(d){
+  if(!d) return;
+  const mount = document.getElementById('drawerDynamic');
+  if(!mount) return;
+  const parts = [];
+  if(Array.isArray(d.top_links)){
+    d.top_links.forEach(l=>{
+      const act = actionFor(l);
+      const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
+      parts.push(`<button class="drawer-link" onclick="${onclick}"><span class="dl-icon">${aiEscape(l.icon||'')}</span> ${aiEscape(l.label||'')}</button>`);
+    });
+  }
+  if(Array.isArray(d.sections)){
+    d.sections.forEach(sec=>{
+      parts.push(`<div class="drawer-section-label">${aiEscape(sec.title||'')}</div>`);
+      if(Array.isArray(sec.links)){
+        sec.links.forEach(l=>{
+          const act = actionFor(l);
+          const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
+          parts.push(`<button class="drawer-link" onclick="${onclick}"><span class="dl-icon">${aiEscape(l.icon||'')}</span> ${aiEscape(l.label||'')}</button>`);
+        });
+      }
+    });
+  }
+  mount.innerHTML = parts.join('\n');
+  if(d.whatsapp){
+    const wa = document.querySelector('.drawer-wa');
+    if(wa){
+      if(d.whatsapp.enabled === false) wa.style.display = 'none';
+      else if(d.whatsapp.label){
+        wa.innerHTML = `<span style="font-size:1.2rem">📱</span> ${aiEscape(d.whatsapp.label)}`;
+      }
+    }
+  }
+}
+
+function renderPrinter(d){
+  if(!d) return;
+  const sec = document.querySelector('.printer-section');
+  if(!sec) return;
+  const tags = sec.querySelectorAll('.tag');
+  if(tags[0] && d.tag_top) tags[0].textContent = d.tag_top;
+  if(tags[1] && d.tag_bottom) tags[1].textContent = d.tag_bottom;
+  const h2s = sec.querySelectorAll('h2');
+  if(h2s[0] && (d.title_top_plain || d.title_top_emphasis)){
+    h2s[0].innerHTML = `${aiEscape(d.title_top_plain||'')} <em>${aiEscape(d.title_top_emphasis||'')}</em>`;
+  }
+  if(h2s[1] && (d.title_bottom_plain || d.title_bottom_emphasis)){
+    h2s[1].innerHTML = `${aiEscape(d.title_bottom_plain||'')} <em>${aiEscape(d.title_bottom_emphasis||'')}</em>`;
+  }
+  const icon = sec.querySelector('.printer-icon');
+  if(icon && d.visual_icon) icon.textContent = d.visual_icon;
+  const samples = sec.querySelector('.printer-samples');
+  if(samples && Array.isArray(d.samples)){
+    samples.innerHTML = d.samples.map(s=>`<div class="printer-sample">${aiEscape(s.icon||'')} ${aiEscape(s.text||'')}</div>`).join('');
+  }
+  const desc = sec.querySelector('.printer-text p');
+  if(desc && d.description) desc.textContent = String(d.description).trim();
+  const cats = sec.querySelector('.printer-cats');
+  if(cats && Array.isArray(d.subcategories)){
+    cats.innerHTML = d.subcategories.map(s=>
+      `<div class="printer-cat" onclick="goTo('products');filterProducts('${jsArg(s.filter||'')}',null)"><span class="pci">${aiEscape(s.icon||'')}</span><div class="printer-cat-text"><h4>${aiEscape(s.title||'')}</h4><p>${aiEscape(s.subtitle||'')}</p></div></div>`
+    ).join('');
+  }
+  const cta = sec.querySelector('.printer-text .btn-primary');
+  if(cta){
+    if(d.cta_label) cta.textContent = d.cta_label;
+    if(d.cta_filter) cta.setAttribute('onclick', `goTo('products');filterProducts('${jsArg(d.cta_filter)}',null)`);
+  }
+}
+
+function renderFooter(d){
+  if(!d) return;
+  const brand = document.querySelector('.footer-brand p');
+  if(brand && d.brand_description) brand.textContent = d.brand_description;
+  const socials = document.querySelector('.footer-socials');
+  if(socials && Array.isArray(d.socials)){
+    socials.innerHTML = d.socials.map(s=>{
+      const title = aiEscape(s.title||'');
+      const icon = aiEscape(s.icon||'');
+      if(s.url){
+        const url = attrEsc(s.url);
+        return `<a class="social-btn" title="${title}" href="${url}" target="_blank" rel="noopener noreferrer">${icon}</a>`;
+      }
+      return `<button class="social-btn" title="${title}">${icon}</button>`;
+    }).join('');
+  }
+  const grid = document.querySelector('.footer-grid');
+  if(grid && Array.isArray(d.columns)){
+    grid.querySelectorAll('.footer-col').forEach(c=>c.remove());
+    d.columns.forEach(col=>{
+      const links = (col.links || []).map(l=>{
+        const lbl = aiEscape(l.label||'');
+        switch(l.action_type){
+          case 'scroll': return `<li><a onclick="goTo('${jsArg(l.action_value||'')}')">${lbl}</a></li>`;
+          case 'filter': return `<li><a onclick="goTo('products');filterProducts('${jsArg(l.action_value||'')}',null)">${lbl}</a></li>`;
+          case 'event':  return `<li><a onclick="goTo('events-section');setEventTab('${jsArg(l.action_value||'')}')">${lbl}</a></li>`;
+          case 'url':    return `<li><a href="${attrEsc(l.action_value||'#')}" target="_blank" rel="noopener noreferrer">${lbl}</a></li>`;
+          case 'whatsapp': return `<li><a href="https://wa.me/${attrEsc(WA_NUMBER)}" target="_blank" rel="noopener noreferrer">${lbl}</a></li>`;
+          case 'none':   return `<li><a>${lbl}</a></li>`;
+          default:       return `<li><a>${lbl}</a></li>`;
+        }
+      }).join('');
+      grid.insertAdjacentHTML('beforeend', `<div class="footer-col"><h4>${aiEscape(col.heading||'')}</h4><ul>${links}</ul></div>`);
+    });
+  }
+  const bottoms = document.querySelectorAll('.footer-bottom span');
+  if(bottoms[0] && d.bottom_left)  bottoms[0].textContent = d.bottom_left;
+  if(bottoms[1] && d.bottom_right) bottoms[1].textContent = d.bottom_right;
+}
+
+function renderMarquee(items){
+  const inner = document.querySelector('.marquee-inner');
+  if(!inner || !Array.isArray(items)) return;
+  const html = items.map(i=>`<span>${aiEscape((i && i.text) || '')}</span>`).join('');
+  inner.innerHTML = html + html;
+}
+
+function applyWANumber(num){
+  if(!num) return;
+  WA_NUMBER = String(num);
+  document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
+    a.href = `https://wa.me/${WA_NUMBER}`;
+  });
+}
+
+function applySettings(s){
+  if(!s) return;
+  if(s.tagline) document.title = `Şelale Design Studio — ${s.tagline}`;
+  const meta = document.querySelector('meta[name="description"]');
+  if(meta && s.meta_description) meta.setAttribute('content', s.meta_description);
+  if(s.brand_name && s.brand_subname){
+    document.querySelectorAll('.logo, .drawer-logo').forEach(el=>{
+      el.innerHTML = `${aiEscape(s.brand_name)} <span>${aiEscape(s.brand_subname)}</span>`;
+    });
+  }
+  if(Array.isArray(s.marquee)) renderMarquee(s.marquee);
+  if(s.copyright){
+    const fb = document.querySelector('.footer-bottom span');
+    if(fb) fb.textContent = s.copyright;
+  }
+  if(s.whatsapp && s.whatsapp.number) applyWANumber(s.whatsapp.number);
+}
+
+function renderAI(d){
+  if(!d) return;
+  window.AI_CONFIG = d;
+  const fab = document.getElementById('aiFab');
+  const panel = document.getElementById('aiPanel');
+  if(d.enabled === false){
+    if(fab) fab.style.display = 'none';
+    if(panel) panel.style.display = 'none';
+    return;
+  }
+  const head = document.querySelector('.ai-head');
+  if(head){
+    if(d.avatar){ const a = head.querySelector('.ai-avatar'); if(a) a.textContent = d.avatar; }
+    if(d.name){ const h = head.querySelector('h4'); if(h) h.textContent = d.name; }
+    if(d.status){ const p = head.querySelector('p'); if(p) p.textContent = d.status; }
+  }
+  if(d.input_placeholder){
+    const inp = document.getElementById('aiInput');
+    if(inp) inp.placeholder = d.input_placeholder;
+  }
+}
+
+async function loadCMSData(){
+  if(!window.jsyaml){
+    console.warn('js-yaml yüklenemedi, CMS metin verisi atlandı.');
+    return;
+  }
+  const [settings, drawer, hero, about, printer, footer, ai] = await Promise.all([
+    fetchYaml('data/settings.yml'),
+    fetchYaml('data/drawer.yml'),
+    fetchYaml('data/hero.yml'),
+    fetchYaml('data/about.yml'),
+    fetchYaml('data/printer.yml'),
+    fetchYaml('data/footer.yml'),
+    fetchYaml('data/ai.yml'),
+  ]);
+  applySettings(settings);
+  renderDrawer(drawer);
+  renderHero(hero);
+  renderAbout(about);
+  renderPrinter(printer);
+  renderFooter(footer);
+  renderAI(ai);
+  applyWANumber(WA_NUMBER);
+}
+
+loadCMSData();
 </script>
 </body>
 </html>
