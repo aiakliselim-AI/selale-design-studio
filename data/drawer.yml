@@ -11,10 +11,7 @@ top_links:
     label: Favorilerim
     action_type: page
     action_value: favoriler
-  - icon: ✅
-    label: deneme
-    action_type: page
-    action_value: miyuki bileklik
+
 sections:
   - title: 📿 Miyuki Takı & Aksesuar
     links:
