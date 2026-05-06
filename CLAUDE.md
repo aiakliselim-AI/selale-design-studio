@@ -10,6 +10,12 @@ To preview: open `index.html` in a browser, or serve the repo root with any stat
 
 UI strings and code comments are in Turkish. Preserve Turkish when editing user-visible text.
 
+## In-progress: tasarım sadeleştirme
+
+**Aşama 1 (başladı, 2026-05-06):** Emoji site'nin hiçbir yerinde kullanılmayacak. Bu aşamada yalnızca **CMS schema** (`admin/config.yml`) güncellendi: ürünler koleksiyonunun "Emoji İkon" alanı tamamen kaldırıldı; çekmece menüsü, hero ve kategori kartlarında emoji alanları `required: false` + hint `(opsiyonel — kullanılmaz)` ile pasifleştirildi. Mevcut data dosyalarındaki (`products/*.md`, `data/*.yml`) emoji değerlerine ve `index.html` UI'sındaki emoji renderlarına **dokunulmadı** — bu Aşama 2'nin işi.
+
+**Aşama 2 (sıradaki):** CSS yenileme + Swarovski paleti. UI'dan emoji renderlarının kaldırılması, ürün kartlarının placeholder/görsel davranışı, renk paleti revizyonu. Şu an 20 ürünün **hiçbirinde** `image` alanı dolu değil — UI emoji fallback'i kaldırılmadan önce ya gerçek görseller yüklenmeli ya da bir placeholder bileşeni tasarlanmalı.
+
 ## Architecture
 
 - **`index.html`** is the entire public site (~1440 lines). All CSS lives in one `<style>` block and all JS in one `<script>` block at the bottom — there are no external script files. The site CSP lives in **two** places: the `PUBLIC_CSP` constant in `_worker.js` (HTTP header) and the `<meta http-equiv="Content-Security-Policy">` tag in `index.html` (browser-enforced alongside the HTTP CSP — both must allow a source for it to load). Both sit at `script-src 'self' 'unsafe-inline'`, so adding any remote script requires updating **both** locations.
