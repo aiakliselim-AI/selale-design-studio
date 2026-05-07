@@ -22,11 +22,12 @@ UI strings and code comments are in Turkish. Preserve Turkish when editing user-
 - Kategori kartları düz gri foto-hazır görünüme dönüştürüldü.
 - İlgili commit'ler: `3545e1b`, `209e5e9`, `3c8f445`.
 
-**Aşama 3 — SIRADAKİ: Fotoğraf + Placeholder.**
-- 20 ürünün hiçbirinde fotoğraf yok.
-- Fotoğraf gelene kadar placeholder gösterilecek.
-- Placeholder: açık gri kutu, ortada kamera ikonu.
-- Gerçek fotoğraflar Sveltia panelinden yüklenecek.
+**Aşama 3 — TAMAMLANDI (2026-05-07): Fotoğraf + Placeholder.**
+- 20 ürünün hiçbirinde `image` alanı yok, hepsi placeholder gösteriyor.
+- Açık gri (`#f5f5f5`) kutu, ortasında SVG kamera ikonu.
+- `imgFallback` fonksiyonu eklendi (görsel yüklenemezse placeholder'a düşer).
+- Sveltia panelinden fotoğraf yüklenince otomatik olarak gerçek fotoğraf gösterilecek.
+- Commit: `d27aee2`.
 
 **Aşama 4 — BEKLEMEDE: CMS tam bağlantısı.**
 - `data/products.json` fetch ile çekiliyor (mevcut ✅).
