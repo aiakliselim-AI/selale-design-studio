@@ -1,86 +1,112 @@
 top_links:
-  - icon: 🏠
-    label: Ana Sayfa
+  - label: Ana Sayfa
     action_type: scroll
     action_value: hero-anchor
-  - icon: 🛍️
-    label: Tüm Ürünler
+  - label: Tüm Ürünler
     action_type: filter
     action_value: hepsi
-  - icon: ❤️
-    label: Favorilerim
+  - label: Favorilerim
     action_type: page
     action_value: favoriler
 
-sections:
-  - title: 📿 Miyuki Takı & Aksesuar
-    links:
-      - icon: 📿
-        label: Miyuki Bileklik
+categories_label: Kategoriler
+
+categories:
+  - label: Miyuki Takılar
+    expandable: true
+    children:
+      - label: Bileklik
         action_type: filter
         action_value: bileklik
-      - icon: 💎
-        label: Miyuki Kolye
+      - label: Kolye
         action_type: filter
         action_value: kolye
-      - icon: ✨
-        label: Miyuki Küpe
+      - label: Küpe
         action_type: filter
         action_value: kupe
-      - icon: 💍
-        label: Miyuki Yüzük
+      - label: Yüzük
         action_type: filter
         action_value: yuzuk
-      - icon: 🔑
-        label: Miyuki Anahtarlık
+      - label: Anahtarlık
+        expandable: true
+        children:
+          - label: Hayvan
+            action_type: filter
+            action_value: anahtarlik-hayvan
+          - label: Karakter
+            action_type: filter
+            action_value: anahtarlik-karakter
+          - label: Spor Takımı
+            action_type: filter
+            action_value: anahtarlik-spor
+          - label: Araç
+            action_type: filter
+            action_value: anahtarlik-arac
+          - label: İsimli
+            action_type: filter
+            action_value: anahtarlik-isimli
+
+  - label: El Yapımı Mumlar
+    expandable: true
+    children:
+      - label: Şekilli Mumlar
         action_type: filter
-        action_value: anahtarlik
-  - title: 🏠 Ev & Dekor
-    links:
-      - icon: 🕯️
-        label: El Yapımı Mumlar
+        action_value: mum-sekilli
+      - label: Kokulu Mumlar
         action_type: filter
-        action_value: mum
-      - icon: 🌸
-        label: Süsleme Ürünleri
+        action_value: mum-kokulu
+      - label: Mum Setleri
         action_type: filter
-        action_value: susleme
-      - icon: 🫙
-        label: Süslü Şişe & Dekor
+        action_value: mum-set
+      - label: Dekoratif / Özel
         action_type: filter
-        action_value: sisedeko
-  - title: 🖨️ 3D Baskı
-    links:
-      - icon: 🖨️
-        label: 3D Baskı Ürünleri
-        action_type: scroll
-        action_value: printer-section
-      - icon: ⚙️
-        label: Tüm 3D Ürünler
+        action_value: mum-dekoratif
+
+  - label: Koku & Parfüm
+    expandable: true
+    children:
+      - label: Çiçekli Kart Sunum
         action_type: filter
-        action_value: 3d
-  - title: 🎉 Özel Gün Konseptleri
-    links:
-      - icon: 💒
-        label: Düğün Konsepti
-        action_type: event
-        action_value: dugun
-      - icon: 💍
-        label: Nişan Konsepti
+        action_value: koku-cicekli
+      - label: Tek Şişe Süsleme
+        action_type: filter
+        action_value: koku-sise
+
+  - label: Şeffaf Çanta Setleri
+    badge: YENİ
+    action_type: filter
+    action_value: seffaf-canta
+
+  - label: Özel Gün Konseptleri
+    expandable: true
+    children:
+      - label: Nişan
         action_type: event
         action_value: nishan
-      - icon: 🎂
-        label: Doğum Günü
+      - label: Düğün
+        action_type: event
+        action_value: dugun
+      - label: Doğum Günü
         action_type: event
         action_value: dogumgunu
-      - icon: 👶
-        label: Baby Shower
+      - label: Baby Shower
         action_type: event
         action_value: babyshower
-      - icon: 🎓
-        label: Mezuniyet
+      - label: Mezuniyet
         action_type: event
         action_value: mezuniyet
+
+  - label: 3D Baskı Ürünler
+    action_type: scroll
+    action_value: printer-section
+
+bottom_links:
+  - label: Hakkımızda
+    action_type: scroll
+    action_value: about
+
 whatsapp:
-  label: WhatsApp İletişim
+  label: WhatsApp Sipariş
   enabled: true
+  style: outlined
+  show_phone: false

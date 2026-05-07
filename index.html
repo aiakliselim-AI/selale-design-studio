@@ -42,6 +42,11 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark);ov
 .drawer-footer{padding:1.2rem 1.6rem 1.6rem;border-top:1px solid rgba(200,149,108,.2);margin-top:.5rem;}
 .drawer-wa{display:flex;align-items:center;gap:.8rem;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:.9rem 1.2rem;width:100%;cursor:pointer;font-size:.88rem;font-weight:500;font-family:'Inter',sans-serif;transition:opacity .2s;text-decoration:none;}
 .drawer-wa:hover{opacity:.88;}
+.drawer-children{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.drawer-children.open{max-height:800px;}
+.drawer-badge{background:#c8956c;color:#fff;font-size:.65rem;padding:.2rem .5rem;border-radius:50px;margin-left:auto;}
+.drawer-wa.outlined{background:transparent;border:1.5px solid #2c2118;color:#2c2118;}
+.drawer-wa.outlined:hover{background:#2c2118;color:#fff;}
 
 /* ═══ NAV ═══ */
 nav{position:fixed;top:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 4%;background:rgba(250,246,240,.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,149,108,.15);transition:box-shadow .3s;}
@@ -1537,6 +1542,7 @@ function renderDrawer(d){
   const mount = document.getElementById('drawerDynamic');
   if(!mount) return;
   const parts = [];
+
   if(Array.isArray(d.top_links)){
     d.top_links.forEach(l=>{
       const act = actionFor(l);
@@ -1544,28 +1550,72 @@ function renderDrawer(d){
       parts.push(`<button class="drawer-link" onclick="${onclick}">${aiEscape(l.label||'')}</button>`);
     });
   }
-  if(Array.isArray(d.sections)){
-    d.sections.forEach(sec=>{
-      parts.push(`<div class="drawer-section-label">${aiEscape((sec.title||'').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{200D}️]+/gu,'').trim())}</div>`);
-      if(Array.isArray(sec.links)){
-        sec.links.forEach(l=>{
-          const act = actionFor(l);
-          const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
-          parts.push(`<button class="drawer-link" onclick="${onclick}">${aiEscape(l.label||'')}</button>`);
-        });
-      }
+
+  if(d.categories_label){
+    parts.push(`<div class="drawer-section-label">${aiEscape(d.categories_label)}</div>`);
+  }
+
+  if(Array.isArray(d.categories)){
+    d.categories.forEach((cat, i)=>{
+      parts.push(renderDrawerItem(cat, 1, `cat-${i}`));
     });
   }
+
+  if(Array.isArray(d.bottom_links) && d.bottom_links.length){
+    if(parts.length) parts.push('<div class="drawer-divider"></div>');
+    d.bottom_links.forEach(l=>{
+      const act = actionFor(l);
+      const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
+      parts.push(`<button class="drawer-link" onclick="${onclick}">${aiEscape(l.label||'')}</button>`);
+    });
+  }
+
   mount.innerHTML = parts.join('\n');
+
   if(d.whatsapp){
     const wa = document.querySelector('.drawer-wa');
     if(wa){
-      if(d.whatsapp.enabled === false) wa.style.display = 'none';
-      else if(d.whatsapp.label){
-        wa.innerHTML = `<span style="font-size:1.2rem">📱</span> ${aiEscape(d.whatsapp.label)}`;
+      if(d.whatsapp.enabled === false){
+        wa.style.display = 'none';
+      } else {
+        wa.style.display = '';
+        if(d.whatsapp.style === 'outlined') wa.classList.add('outlined');
+        else wa.classList.remove('outlined');
+        const lbl = d.whatsapp.label || 'WhatsApp Sipariş';
+        const phone = (d.whatsapp.show_phone && WA_NUMBER)
+          ? ` <span class="wa-phone">${aiEscape(WA_NUMBER)}</span>` : '';
+        wa.innerHTML = `<span style="font-size:1.2rem">📱</span> ${aiEscape(lbl)}${phone}`;
       }
     }
   }
+}
+
+function renderDrawerItem(item, depth, key){
+  const padLeft = 1.6 + (depth-1)*1.0;
+  const indent = depth > 1 ? ` style="padding-left:${padLeft}rem"` : '';
+  const badge = item.badge
+    ? ` <span class="drawer-badge">${aiEscape(item.badge)}</span>` : '';
+  const safeKey = String(key).replace(/[^a-z0-9-]/gi,'');
+
+  if(item.expandable && Array.isArray(item.children) && item.children.length){
+    const children = item.children
+      .map((c, i) => renderDrawerItem(c, depth+1, `${safeKey}-${i}`)).join('');
+    return `<button class="drawer-link" onclick="toggleDrawerGroup('${safeKey}')"${indent}>${aiEscape(item.label||'')}${badge}<span class="dl-arrow" data-group="${safeKey}">▾</span></button>
+<div class="drawer-children" id="drawer-children-${safeKey}">${children}</div>`;
+  }
+
+  const act = actionFor(item);
+  const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
+  return `<button class="drawer-link" onclick="${onclick}"${indent}>${aiEscape(item.label||'')}${badge}</button>`;
+}
+
+function toggleDrawerGroup(key){
+  const safeKey = String(key).replace(/[^a-z0-9-]/gi,'');
+  const el = document.getElementById('drawer-children-' + safeKey);
+  if(!el) return;
+  el.classList.toggle('open');
+  const arrow = document.querySelector('[data-group="' + safeKey + '"]');
+  if(arrow) arrow.textContent = el.classList.contains('open') ? '▴' : '▾';
 }
 
 function renderPrinter(d){
