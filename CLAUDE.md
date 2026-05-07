@@ -10,11 +10,28 @@ To preview: open `index.html` in a browser, or serve the repo root with any stat
 
 UI strings and code comments are in Turkish. Preserve Turkish when editing user-visible text.
 
-## In-progress: tasarım sadeleştirme
+## Tasarım sadeleştirme yol haritası
 
-**Aşama 1 (başladı, 2026-05-06):** Emoji site'nin hiçbir yerinde kullanılmayacak. Bu aşamada yalnızca **CMS schema** (`admin/config.yml`) güncellendi: ürünler koleksiyonunun "Emoji İkon" alanı tamamen kaldırıldı; çekmece menüsü, hero ve kategori kartlarında emoji alanları `required: false` + hint `(opsiyonel — kullanılmaz)` ile pasifleştirildi. Mevcut data dosyalarındaki (`products/*.md`, `data/*.yml`) emoji değerlerine ve `index.html` UI'sındaki emoji renderlarına **dokunulmadı** — bu Aşama 2'nin işi.
+**Aşama 1 — TAMAMLANDI (2026-05-06):** CMS schema, emoji kaldırma, test temizlik.
+- `admin/config.yml`: ürünler koleksiyonundaki "Emoji İkon" alanı tamamen kaldırıldı; çekmece menüsü, hero ve kategori kartlarında emoji alanları `required: false` + hint `(opsiyonel — kullanılmaz)` ile pasifleştirildi.
+- Test verisi temizliği yapıldı.
 
-**Aşama 2 (sıradaki):** CSS yenileme + Swarovski paleti. UI'dan emoji renderlarının kaldırılması, ürün kartlarının placeholder/görsel davranışı, renk paleti revizyonu. Şu an 20 ürünün **hiçbirinde** `image` alanı dolu değil — UI emoji fallback'i kaldırılmadan önce ya gerçek görseller yüklenmeli ya da bir placeholder bileşeni tasarlanmalı.
+**Aşama 2 — TAMAMLANDI (2026-05-07):** Swarovski CSS paleti, drawer emojisiz, kategori kartları düz gri.
+- `index.html` `<style>` bloğuna minimalist Swarovski paleti uygulandı.
+- Drawer (çekmece menüsü) emojisiz hâle getirildi.
+- Kategori kartları düz gri foto-hazır görünüme dönüştürüldü.
+- İlgili commit'ler: `3545e1b`, `209e5e9`, `3c8f445`.
+
+**Aşama 3 — SIRADAKİ: Fotoğraf + Placeholder.**
+- 20 ürünün hiçbirinde fotoğraf yok.
+- Fotoğraf gelene kadar placeholder gösterilecek.
+- Placeholder: açık gri kutu, ortada kamera ikonu.
+- Gerçek fotoğraflar Sveltia panelinden yüklenecek.
+
+**Aşama 4 — BEKLEMEDE: CMS tam bağlantısı.**
+- `data/products.json` fetch ile çekiliyor (mevcut ✅).
+- Eksik: hero, site ayarları, çekmece, yorumlar, hakkımızda bölümleri hâlâ `index.html`'de hardcoded.
+- Bu bölümler de CMS'ten okunacak şekilde yazılacak.
 
 ## Architecture
 
