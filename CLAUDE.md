@@ -10,29 +10,15 @@ To preview: open `index.html` in a browser, or serve the repo root with any stat
 
 UI strings and code comments are in Turkish. Preserve Turkish when editing user-visible text.
 
-## Tasarım sadeleştirme yol haritası
+## Yol haritası
 
-**Aşama 1 — TAMAMLANDI (2026-05-06):** CMS schema, emoji kaldırma, test temizlik.
-- `admin/config.yml`: ürünler koleksiyonundaki "Emoji İkon" alanı tamamen kaldırıldı; çekmece menüsü, hero ve kategori kartlarında emoji alanları `required: false` + hint `(opsiyonel — kullanılmaz)` ile pasifleştirildi.
-- Test verisi temizliği yapıldı.
+Tamamlanan aşamalar (1, 2, 3) ve devam eden iş (Aşama 4 alt adımları) **`plan.md`** (master plan v3) içinde. Yeni oturumda her iki dosya da okunmalı.
 
-**Aşama 2 — TAMAMLANDI (2026-05-07):** Swarovski CSS paleti, drawer emojisiz, kategori kartları düz gri.
-- `index.html` `<style>` bloğuna minimalist Swarovski paleti uygulandı.
-- Drawer (çekmece menüsü) emojisiz hâle getirildi.
-- Kategori kartları düz gri foto-hazır görünüme dönüştürüldü.
-- İlgili commit'ler: `3545e1b`, `209e5e9`, `3c8f445`.
-
-**Aşama 3 — TAMAMLANDI (2026-05-07): Fotoğraf + Placeholder.**
-- 20 ürünün hiçbirinde `image` alanı yok, hepsi placeholder gösteriyor.
-- Açık gri (`#f5f5f5`) kutu, ortasında SVG kamera ikonu.
-- `imgFallback` fonksiyonu eklendi (görsel yüklenemezse placeholder'a düşer).
-- Sveltia panelinden fotoğraf yüklenince otomatik olarak gerçek fotoğraf gösterilecek.
-- Commit: `d27aee2`.
-
-**Aşama 4 — BEKLEMEDE: CMS tam bağlantısı.**
-- `data/products.json` fetch ile çekiliyor (mevcut ✅).
-- Eksik: hero, site ayarları, çekmece, yorumlar, hakkımızda bölümleri hâlâ `index.html`'de hardcoded.
-- Bu bölümler de CMS'ten okunacak şekilde yazılacak.
+**Hızlı durum:**
+- Aşama 1, 2, 3 tamam (sadeleştirme + placeholder).
+- Aşama 4 alt-tamam — `loadCMSData()` zaten settings, drawer, hero, about, footer, printer, ai çekiyor.
+- Kalan iş: kategori kartları, yorumlar, özel günler henüz hardcoded; manifest workflow'ları eksik; Şeffaf Çanta sistemi yok; drawer hiyerarşisi güncellenecek.
+- Detaylı sıralı plan: `plan.md` Bölüm 9 ("Çalışma sırası").
 
 ## Architecture
 
