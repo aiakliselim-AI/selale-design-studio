@@ -9,6 +9,7 @@
 <meta name="robots" content="index, follow">
 <meta name="description" content="Şelale Design Studio — El emeği Miyuki bileklik, mum, 3D baskı ve kişiye özel hediyeler.">
 <title>Şelale Design Studio — Kişiye Özel Tasarım</title>
+<script>(function(){try{var t=localStorage.getItem('selaleTheme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -17,6 +18,15 @@
   --sage:#a8b89a;--rose:#d4857a;--wa:#25d366;
   --gold:#c8956c;--lavender:#c4b8d4;--mint:#a8c8b8;
   --ig1:#f09433;--ig2:#e6683c;--ig3:#dc2743;--ig4:#cc2366;--ig5:#bc1888;
+  /* Adim 5.1 — yeni tema sistemi */
+  --bg:#ffffff;--text:#1a1a1a;--line:#e8e8e8;--neutral-muted:#888888;
+}
+[data-theme="dark"]{
+  /* Adim 5.1 — koyu tema */
+  --bg:#0f0f0f;--text:#ffffff;--line:#2a2a2a;--neutral-muted:#888888;
+  /* Eski degiskenler icin koyu tema haritalandirmasi (gecici, 5.5'te temizlenecek) */
+  --cream:#0f0f0f;--warm:#1a1a1a;--dark:#ffffff;--muted:#888888;
+  --blush:#2a2a2a;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -462,6 +472,9 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
     <button class="nav-icon-btn" onclick="openFavPage()" title="Favorilerim">
       ❤️<span class="nav-badge" id="navFavCount">0</span>
     </button>
+    <button class="nav-icon-btn" id="themeToggle" onclick="toggleTheme()" title="Tema değiştir" aria-label="Tema değiştir">
+      <span id="themeIcon">🌙</span>
+    </button>
     <a class="btn-wa-nav" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
       📱 <span class="btn-wa-text">WhatsApp</span>
     </a>
@@ -890,6 +903,22 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 <script>
 /* ════ AYARLAR ════ */
 let WA_NUMBER = '905330944969';
+
+/* ════ TEMA TOGGLE (Adım 5.1) ════ */
+function toggleTheme(){
+  const root = document.documentElement;
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  if(next === 'dark') root.setAttribute('data-theme', 'dark');
+  else root.removeAttribute('data-theme');
+  try{ localStorage.setItem('selaleTheme', next); }catch(e){}
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  const icon = document.getElementById('themeIcon');
+  if(!icon) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  icon.textContent = isDark ? '☀' : '🌙';
+}
 
 /* ════ ÜRÜN VERİLERİ ════ */
 /* Ürünler products/*.md dosyalarından üretilen data/products.json'dan yüklenir.
@@ -1801,6 +1830,7 @@ async function loadCMSData(){
 }
 
 loadCMSData();
+updateThemeIcon();
 </script>
 </body>
 </html>
