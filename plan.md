@@ -5,8 +5,9 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-07. Claude Code repo analizi sonrası
-> "Aşama 4 zaten kısmen yapılmış" tespiti üzerine revize edildi.
+> **Son güncelleme:** 2026-05-07. Adım A (drawer hiyerarşi) tamamlandı;
+> Aşama 5 (tasarım yenilemesi) öne alındı ve 5 alt adıma bölündü;
+> Aşama 6 → Aşama 5'e dahil edildi.
 
 ---
 
@@ -47,7 +48,7 @@ Claude Code repo analizinde `index.html` `loadCMSData()` fonksiyonunun zaten par
 Bu aşama "her şey hardcoded'dan CMS'e geçecek" değil — **çoğu geçmiş.**
 Eksikleri kapatma + yeni özellikler ekleme aşamasıdır.
 
-### 4.1 Drawer hiyerarşi güncellemesi (yarı tamam, devam)
+### 4.1 Drawer hiyerarşi güncellemesi ✅ TAMAMLANDI (commit `643fc75`, 2026-05-07)
 
 **Mevcut durum:** `data/drawer.yml` + `renderDrawer()` çalışıyor ama:
 - Eski hiyerarşide (kategoriler farklı sıralanmış)
@@ -268,67 +269,127 @@ EN ALT (sabit)
 
 ---
 
-## 7. AŞAMA 5 — TASARIM REVİZESİ (Aşama 4 BİTTİKTEN sonra)
+## 7. AŞAMA 5 — TASARIM YENİLEMESİ (ÖNCELİKLİ — Adım B'den ÖNCE yapılır)
 
-Referans: https://www.monicavinader.com/es/
+**Sıra değişikliği:** Bu aşama plan.md'de Aşama 4'ün kalan adımlarından (B, C, D, E…) ÖNCE yapılacak. Sebep: kullanıcı görsel motivasyon istiyor; CMS göçleri sonra. Adım A (drawer hiyerarşi) zaten tamamlandı.
 
-**Aşama 5, Aşama 2'nin (Swarovski palet) üzerine yazar.** Yani Aşama 2 geçici sadeleştirme idi; Aşama 5 final tasarım. Playfair → Cormorant gibi geçişler net olacak.
+**Referans:** [monicavinader.com](https://www.monicavinader.com/), [wolfandbadger.com](https://www.wolfandbadger.com/) — saf siyah-beyaz, minimal, lüks butik.
 
-### Renk paleti — 2 renk
+### Renk paleti
 
-- Beyaz `#ffffff` (ana zemin)
-- Siyah `#1a1a1a` (yazılar, butonlar, vurgu)
-- Detay için sadece gri tonlar: `#888`, `#ccc`, `#f5f5f5`, `#ebebeb`
-- Mevcut karamel/krem palet **emekliye ayrılır**
+- **Açık tema (default):** zemin `#ffffff`, yazı `#1a1a1a`, ince çizgi `#e8e8e8`, muted `#888888`
+- **Koyu tema:** zemin `#0f0f0f`, yazı `#ffffff`, ince çizgi `#2a2a2a`, muted `#888888`
+- Vurgu rengi YOK (saf nötr). Karamel `#c8956c`, blush `#e8c4a8`, krem `#faf6f0`, sage `#a8b89a`, rose `#d4857a` → KALDIRILACAK
+- Logo "Şelale Design Studio": Playfair Display italik serif font, renk siyah/beyaz (font vurgu, renk vurgu değil)
 
-### Tipografi
+### Tema sistemi
 
-- Başlıklar: serif (Cormorant Garamond veya benzeri şık serif). Mevcut Playfair kaldırılır.
-- Gövde: sans-serif (Inter — Aşama 2'de zaten eklendi)
-- Geniş `letter-spacing` (1.5–3px)
-- Büyük harf başlıklar (`text-transform: uppercase`)
+- Default: HER ZAMAN açık tema ile başlar
+- Toggle: üst nav sağda ☀/🌙 ikonu (tek tık)
+- Tercih `localStorage`'a kaydedilir, geri ziyarette hatırlanır
+- Sistem temasını ALGILAMA (kullanıcı tercih ettiyse onu kullan)
+- CSS: `:root` altında açık tema variable'lar, `[data-theme="dark"]` altında koyu tema değerleri
 
-### Layout
+### Üst nav (yazılı linkler kaldırıldı, sadece ikonlar)
 
-- Köşeler keskin (`border-radius: 0`)
-- İnce çizgiler (`1px solid #ebebeb`)
-- Bol beyaz alan
-- Hiç gradient, gölge, blur YOK
-- Hover dışında animasyon YOK (Aşama 2 zaten azaltmıştı, Aşama 5 minimuma indirir)
+- Sol: ☰ hamburger ikon (sadece ikon, "MENU" yazısı YOK)
+- Orta: "Şelale Design Studio" italik serif logo
+- Sağ: ❤️ favori sayacı + ☀/🌙 tema toggle
+- WhatsApp butonu üstten kaldırılacak
 
-### Bileşenler
+### Drawer (3-seviyeli yapı korunacak — `data/drawer.yml` dokunulmayacak)
 
-- **Hero:** yarı yarıya split — sol yazılar + sağ büyük foto/placeholder
-- **Kategori kartları:** 4 dikey kart, foto + altında küçük letter-spaced başlık
-- **Ürün kartları:** kare foto + altında isim + fiyat (sola yaslı, sade)
-- **Butonlar:** keskin, dolu siyah veya outline, büyük harf yazı
-- **Marquee:** kalır ama yeni renge uyumlu (siyah zemin / beyaz yazı VEYA tam tersi)
+- Drawer içindeki tüm ikonlar gizlenecek (`display: none`)
+- Sadece düz metin isimler gösterilecek
+- En altta WhatsApp butonu KALIR ama outlined (çerçeveli, içi boş, siyah ince çizgi) yapılacak
+- Drawer içinde tema toggle YOK (sadece üst nav'da)
 
----
+### Floating ikonlar
 
-## 8. AŞAMA 6 — GÖRSEL RÖTUŞ (Aşama 5'ten sonra, EN SON)
+- Sol alt: WhatsApp outline SVG amblem (içi boş, ince çizgi, daire YOK, transparent zemin) — `currentColor` kullanır
+- Sağ alt: Mesaj balonu outline SVG (içi boş, ince çizgi, 3 nokta içeride) — `currentColor` kullanır
+- Hover: `scale(1.1)`, `0.2s` transition
+- Eski emoji 📱 ve 💬 kaldırılacak
 
-- **6A:** WhatsApp ikonu emoji yerine SVG (şeffaf zemin, telefon numarası YOK)
-- **6B:** AI Asistan ikonu yenileme
-- **6C:** Çift WhatsApp butonu temizliği — alt-sol köşedeki sabit yüzen WhatsApp butonu kaldırılır; sadece nav bar'daki kalır
-- **6D:** `_worker.js` çalışıyor mu doğrulaması — HTTP yanıt başlıklarında CSP header'ı bekleniyor ama görünmüyor. Cloudflare Pages dashboard'unda "Functions / Advanced Mode" ayarının kapalı olabileceği veya `.assetsignore` eksikliği muhtemel. Dashboard kontrolü gerekiyor.
+### Hero + Kategori + Ürün kartları
+
+- Hero gradient/blob arka plan kaldırılır
+- Hero mini-card'lar ve dönen badge kaldırılır
+- Hero sağ tarafına placeholder fotoğraf alanı (gerçek foto gelene kadar kamera outline ikon)
+- Kategori kart gradient'leri (`.c1`-`.c8`) kaldırılır → düz tema uyumlu açık gri zemin
+- Kategori kart büyük emoji'leri kaldırılır → küçük foto alanı
+- Ürün kart gradient'leri (`.p1`-`.p8`) kaldırılır → düz tema uyumlu zemin
+- Border-radius'lar 22px → 8-12px (lüks, minimal)
+- Buton stilleri: birincil = siyah dolgu beyaz yazı (koyu temada beyaz dolgu siyah yazı). İkincil = transparent + 1px border
+
+### Modal galeri (yeni özellik — yöneticiden çoklu foto eklenebilir)
+
+- Mevcut modal yenilenir: sol tarafa BÜYÜK resim alanı (300x300+ minimum), sağ tarafa bilgi (isim, açıklama, fiyat)
+- Çoklu fotoğraf desteği: ana resim + altta thumbnail strip
+- Resim üzerine tıklayınca tam ekran lightbox (ok tuşları ile galeri gezinme, ESC ile kapatma)
+- Resim yokken kamera outline ikon placeholder
+- `admin/config.yml`: tek `image` alanı yerine `images` liste alanı (geriye uyumlu — eski tek `image` alanı varsa onu da okur, yöneticiden eski ürünler bozulmadan yeni çoklu foto formatına geçilebilir)
+- `products/*.md` şeması: `image` (eski) VEYA `images` (yeni) alanı
+
+### AI panel + Footer + Son temizlik
+
+- AI asistan paneli renkleri tema uyumlu (gradient/karamel kalkar)
+- Modal renkleri tema uyumlu
+- Footer: koyu zemin tema uyumlu (`#1a1a1a` / `#0f0f0f`)
+- Newsletter gradient kalkar
+- Toast renkleri tema uyumlu
+- Reviews/yorumlar warm krem zemin kalkar
+- About bölümü büyük emoji blob kalkar → placeholder foto alanı
+- Tüm kalan karamel/krem hex'ler CSS variable'a çevrilir
+
+### Çalışma şekli — 5 alt adım, her adımda ayrı commit + onay bekle
+
+- **Adım 5.1:** Renk paleti + tema toggle altyapısı (CSS variable'lar, ☀/🌙 toggle, `localStorage`)
+- **Adım 5.2:** Üst nav + drawer ikon kaldırma + floating SVG ikonlar (üst WhatsApp kalkar, drawer ikonları gizlenir, alt floating SVG outline'a döner)
+- **Adım 5.3:** Hero + kategoriler + ürün kartları (gradient kaldır, minimal görünüm, placeholder foto alanları)
+- **Adım 5.4:** Modal galeri (büyük resim, çoklu foto, lightbox, `admin/config.yml` `images` array desteği, `products/*.md` geriye uyumluluk)
+- **Adım 5.5:** AI panel + footer + son temizlik + plan.md işaretle
+
+Her adım sonunda commit + push, sonra DUR ve kullanıcıya **"Adım 5.X tamamlandı, push edildi. Canlı sitede test edip devam etmemi söyler misiniz?"** diye sor. Kullanıcı onayı olmadan bir sonraki adıma geçme.
+
+### Korunacak (yönetici paneli bozulmasın)
+
+- ✅ Sveltia panelinde ürün ekle/sil/düzenle çalışmaya devam etsin
+- ✅ `data/drawer.yml` yapısı korunsun (sadece `index.html`'de ikon span'ları gizlenecek)
+- ✅ `admin/config.yml` yeni `images` array desteği eklensin (eski `image` tek alan geriye uyumlu okunacak)
+- ✅ `loadCMSData()` ve `loadProducts()` fonksiyonları bozulmasın
+- ✅ `atelyeFavs` localStorage validation korunsun (integer array, `id < 10000`)
+- ✅ `aiEscape()` XSS koruması her dinamik string'de korunsun
+- ✅ Yeni kategori/renk eklendiğinde `admin/config.yml` + `index.html` filter butonları + `AI_COLORS` senkron tutulsun
+
+### Dokunulmayacak
+
+- ❌ `_worker.js` (CSP, header'lar)
+- ❌ `_headers`
+- ❌ `admin/index.html` (Sveltia loader, CSP)
+- ❌ Cloudflare Worker (`sveltia-cms-auth.aiakliselim.workers.dev`)
+- ❌ GitHub OAuth ayarları
+- ❌ Cloudflare Pages deployment ayarları
+- ❌ DNS / Domain ayarları
+- ❌ `data/drawer.yml` yapısı
+- ❌ `data/products.json` (workflow regenerates)
 
 ---
 
 ## 9. ÇALIŞMA SIRASI (CLAUDE CODE'A VERİLECEK)
 
-### Şu an sırada:
+### Sıralı yol haritası:
 
-**Adım A — Drawer hiyerarşi güncellemesi (§ 4.1)**
-- En küçük, en az riskli iş
-- `data/drawer.yml` yeni hiyerarşiye yazılacak
-- `renderDrawer()` 3-seviye desteği için güncellenecek
-- Favorilerim yeri değişecek
+**Adım A — Drawer hiyerarşi güncellemesi (§ 4.1)** ✅ TAMAMLANDI (commit `643fc75`, 2026-05-07)
 
-**Adım B — "Süslü Şişe & Dekor" göçü (§ 4.8)**
+🎨 **AŞAMA 5 — TASARIM YENİLEMESİ (§ 7) — SIRADAKİ**
+- 5 alt adım: 5.1 → 5.5
+- Her adım sonunda ayrı commit + push + onay bekleme
+- Adım B'den ÖNCE bitirilecek
+
+**Adım B — "Süslü Şişe & Dekor" göçü (§ 4.8)** — Aşama 5 BİTTİKTEN sonra
 - 3 ürünün etiketi düzeltilir
 - `sisedeko` her yerden silinir
-- Adım A ile birleşik commit olabilir
 
 **Adım C — Manifest workflow altyapısı (§ 4.2, 4.4, 4.5 için ÖN GEREKLİLİK)**
 - `scripts/build-categories-manifest.mjs`
@@ -366,12 +427,6 @@ Referans: https://www.monicavinader.com/es/
 **Adım L — AI asistan sözlüğü (§ 4.11)**
 
 **Adım M — Newsletter kaldırma (§ 4.12)**
-
-### Sonra:
-
-**Aşama 5** (tasarım revizesi)
-
-**Aşama 6** (görsel rötuş)
 
 ---
 
