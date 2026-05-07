@@ -912,9 +912,12 @@ function saveFavs(){ try{localStorage.setItem('atelyeFavs',JSON.stringify(favori
 function isFaved(id){ return favorites.includes(id); }
 function updateFavCounts(){
   const c = favorites.length;
-  document.getElementById('navFavCount').textContent    = c;
-  document.getElementById('drawerFavCount').textContent = c;
-  document.getElementById('favCount').textContent       = c > 0 ? `(${c})` : '';
+  const navEl = document.getElementById('navFavCount');
+  const drawerEl = document.getElementById('drawerFavCount');
+  const favEl = document.getElementById('favCount');
+  if(navEl) navEl.textContent = c;
+  if(drawerEl) drawerEl.textContent = c;
+  if(favEl) favEl.textContent = c > 0 ? `(${c})` : '';
 }
 function toggleFav(id){
   if(isFaved(id)){ favorites = favorites.filter(f=>f!==id); showToast('🤍','Favorilerden çıkarıldı'); }
@@ -1459,14 +1462,35 @@ function jsArg(s){
 }
 
 function actionFor(l){
-  const v = jsArg(l && l.action_value);
-  switch(l && l.action_type){
+  if(!l) return '';
+  if(l.action && typeof l.action === 'object'){
+    const a = l.action;
+    const t = jsArg(a.target || a.tab || '');
+    switch(a.type){
+      case 'scroll':    return `goTo('${t}')`;
+      case 'filter':    return `goTo('products');filterProducts('${t}',null)`;
+      case 'event':     return `goTo('events-section');setEventTab('${t}')`;
+      case 'favorites': return `openFavPage()`;
+      default:          return '';
+    }
+  }
+  const v = jsArg(l.action_value);
+  switch(l.action_type){
     case 'scroll':   return `goTo('${v}')`;
     case 'filter':   return `goTo('products');filterProducts('${v}',null)`;
     case 'event':    return `goTo('events-section');setEventTab('${v}')`;
     case 'page':     return v === 'favoriler' ? `openFavPage()` : '';
     default:         return '';
   }
+}
+
+function sortByOrder(arr){
+  if(!Array.isArray(arr)) return [];
+  return arr.slice().sort((a,b) => {
+    const oa = (typeof a.order === 'number') ? a.order : Number.MAX_SAFE_INTEGER;
+    const ob = (typeof b.order === 'number') ? b.order : Number.MAX_SAFE_INTEGER;
+    return oa - ob;
+  });
 }
 
 function renderHero(d){
@@ -1544,10 +1568,8 @@ function renderDrawer(d){
   const parts = [];
 
   if(Array.isArray(d.top_links)){
-    d.top_links.forEach(l=>{
-      const act = actionFor(l);
-      const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
-      parts.push(`<button class="drawer-link" onclick="${onclick}">${aiEscape(l.label||'')}</button>`);
+    sortByOrder(d.top_links).forEach((l, i)=>{
+      parts.push(renderDrawerItem(l, 1, `top-${i}`));
     });
   }
 
@@ -1556,21 +1578,20 @@ function renderDrawer(d){
   }
 
   if(Array.isArray(d.categories)){
-    d.categories.forEach((cat, i)=>{
+    sortByOrder(d.categories).forEach((cat, i)=>{
       parts.push(renderDrawerItem(cat, 1, `cat-${i}`));
     });
   }
 
   if(Array.isArray(d.bottom_links) && d.bottom_links.length){
     if(parts.length) parts.push('<div class="drawer-divider"></div>');
-    d.bottom_links.forEach(l=>{
-      const act = actionFor(l);
-      const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
-      parts.push(`<button class="drawer-link" onclick="${onclick}">${aiEscape(l.label||'')}</button>`);
+    sortByOrder(d.bottom_links).forEach((l, i)=>{
+      parts.push(renderDrawerItem(l, 1, `bot-${i}`));
     });
   }
 
   mount.innerHTML = parts.join('\n');
+  if(typeof updateFavCounts === 'function'){ try{ updateFavCounts(); }catch(e){} }
 
   if(d.whatsapp){
     const wa = document.querySelector('.drawer-wa');
@@ -1581,32 +1602,39 @@ function renderDrawer(d){
         wa.style.display = '';
         if(d.whatsapp.style === 'outlined') wa.classList.add('outlined');
         else wa.classList.remove('outlined');
-        const lbl = d.whatsapp.label || 'WhatsApp Sipariş';
+        const txt = d.whatsapp.text || d.whatsapp.label || 'WhatsApp Sipariş';
+        const ic  = d.whatsapp.icon || '📱';
         const phone = (d.whatsapp.show_phone && WA_NUMBER)
           ? ` <span class="wa-phone">${aiEscape(WA_NUMBER)}</span>` : '';
-        wa.innerHTML = `<span style="font-size:1.2rem">📱</span> ${aiEscape(lbl)}${phone}`;
+        wa.innerHTML = `<span style="font-size:1.2rem">${aiEscape(ic)}</span> ${aiEscape(txt)}${phone}`;
       }
     }
   }
 }
 
 function renderDrawerItem(item, depth, key){
+  if(!item) return '';
   const padLeft = 1.6 + (depth-1)*1.0;
   const indent = depth > 1 ? ` style="padding-left:${padLeft}rem"` : '';
+  const safeKey = String(key).replace(/[^a-z0-9-]/gi,'') || 'k';
+
+  const iconHtml = item.icon
+    ? `<span class="dl-icon">${aiEscape(item.icon)}</span>` : '';
   const badge = item.badge
     ? ` <span class="drawer-badge">${aiEscape(item.badge)}</span>` : '';
-  const safeKey = String(key).replace(/[^a-z0-9-]/gi,'');
+  const favBadge = item.show_badge
+    ? ` <span class="dl-badge" id="drawerFavCount">0</span>` : '';
 
   if(item.expandable && Array.isArray(item.children) && item.children.length){
-    const children = item.children
+    const children = sortByOrder(item.children)
       .map((c, i) => renderDrawerItem(c, depth+1, `${safeKey}-${i}`)).join('');
-    return `<button class="drawer-link" onclick="toggleDrawerGroup('${safeKey}')"${indent}>${aiEscape(item.label||'')}${badge}<span class="dl-arrow" data-group="${safeKey}">▾</span></button>
+    return `<button class="drawer-link" onclick="toggleDrawerGroup('${safeKey}')"${indent}>${iconHtml}${aiEscape(item.label||'')}${badge}<span class="dl-arrow" data-group="${safeKey}">▾</span></button>
 <div class="drawer-children" id="drawer-children-${safeKey}">${children}</div>`;
   }
 
   const act = actionFor(item);
   const onclick = act ? `${act};closeDrawer()` : 'closeDrawer()';
-  return `<button class="drawer-link" onclick="${onclick}"${indent}>${aiEscape(item.label||'')}${badge}</button>`;
+  return `<button class="drawer-link" onclick="${onclick}"${indent}>${iconHtml}${aiEscape(item.label||'')}${badge}${favBadge}</button>`;
 }
 
 function toggleDrawerGroup(key){

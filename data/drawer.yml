@@ -1,112 +1,157 @@
 top_links:
   - label: Ana Sayfa
-    action_type: scroll
-    action_value: hero-anchor
+    icon: 🏠
+    action:
+      type: scroll
+      target: hero-anchor
+    order: 1
+
   - label: Tüm Ürünler
-    action_type: filter
-    action_value: hepsi
+    icon: 🛍️
+    action:
+      type: filter
+      target: hepsi
+    order: 2
+
   - label: Favorilerim
-    action_type: page
-    action_value: favoriler
+    icon: ❤️
+    action:
+      type: favorites
+    show_badge: true
+    order: 3
 
 categories_label: Kategoriler
 
 categories:
   - label: Miyuki Takılar
+    icon: 📿
     expandable: true
+    order: 1
     children:
       - label: Bileklik
-        action_type: filter
-        action_value: bileklik
+        icon: 📿
+        action: { type: filter, target: bileklik }
+        order: 1
       - label: Kolye
-        action_type: filter
-        action_value: kolye
+        icon: 💎
+        action: { type: filter, target: kolye }
+        order: 2
       - label: Küpe
-        action_type: filter
-        action_value: kupe
+        icon: ✨
+        action: { type: filter, target: kupe }
+        order: 3
       - label: Yüzük
-        action_type: filter
-        action_value: yuzuk
+        icon: 💍
+        action: { type: filter, target: yuzuk }
+        order: 4
       - label: Anahtarlık
+        icon: 🔑
         expandable: true
+        order: 5
         children:
           - label: Hayvan
-            action_type: filter
-            action_value: anahtarlik-hayvan
+            icon: 🐾
+            action: { type: filter, target: anahtarlik-hayvan }
+            order: 1
           - label: Karakter
-            action_type: filter
-            action_value: anahtarlik-karakter
+            icon: 🦸
+            action: { type: filter, target: anahtarlik-karakter }
+            order: 2
           - label: Spor Takımı
-            action_type: filter
-            action_value: anahtarlik-spor
+            icon: ⚽
+            action: { type: filter, target: anahtarlik-spor }
+            order: 3
           - label: Araç
-            action_type: filter
-            action_value: anahtarlik-arac
+            icon: 🚗
+            action: { type: filter, target: anahtarlik-arac }
+            order: 4
           - label: İsimli
-            action_type: filter
-            action_value: anahtarlik-isimli
+            icon: 🔤
+            action: { type: filter, target: anahtarlik-isimli }
+            order: 5
 
   - label: El Yapımı Mumlar
+    icon: 🕯️
     expandable: true
+    order: 2
     children:
       - label: Şekilli Mumlar
-        action_type: filter
-        action_value: mum-sekilli
+        icon: 🌸
+        action: { type: filter, target: mum-sekilli }
+        order: 1
       - label: Kokulu Mumlar
-        action_type: filter
-        action_value: mum-kokulu
+        icon: 🌿
+        action: { type: filter, target: mum-kokulu }
+        order: 2
       - label: Mum Setleri
-        action_type: filter
-        action_value: mum-set
+        icon: 🎁
+        action: { type: filter, target: mum-set }
+        order: 3
       - label: Dekoratif / Özel
-        action_type: filter
-        action_value: mum-dekoratif
+        icon: ✨
+        action: { type: filter, target: mum-dekoratif }
+        order: 4
 
   - label: Koku & Parfüm
+    icon: 🌷
     expandable: true
+    order: 3
     children:
       - label: Çiçekli Kart Sunum
-        action_type: filter
-        action_value: koku-cicekli
+        icon: 💐
+        action: { type: filter, target: koku-cicekli }
+        order: 1
       - label: Tek Şişe Süsleme
-        action_type: filter
-        action_value: koku-sise
+        icon: 🌸
+        action: { type: filter, target: koku-sise }
+        order: 2
 
   - label: Şeffaf Çanta Setleri
+    icon: 🛍️
     badge: YENİ
-    action_type: filter
-    action_value: seffaf-canta
+    action: { type: filter, target: seffaf-canta }
+    order: 4
 
   - label: Özel Gün Konseptleri
+    icon: 🎉
     expandable: true
+    order: 5
     children:
       - label: Nişan
-        action_type: event
-        action_value: nishan
+        icon: 💍
+        action: { type: event, tab: nishan }
+        order: 1
       - label: Düğün
-        action_type: event
-        action_value: dugun
+        icon: 💒
+        action: { type: event, tab: dugun }
+        order: 2
       - label: Doğum Günü
-        action_type: event
-        action_value: dogumgunu
+        icon: 🎂
+        action: { type: event, tab: dogumgunu }
+        order: 3
       - label: Baby Shower
-        action_type: event
-        action_value: babyshower
+        icon: 👶
+        action: { type: event, tab: babyshower }
+        order: 4
       - label: Mezuniyet
-        action_type: event
-        action_value: mezuniyet
+        icon: 🎓
+        action: { type: event, tab: mezuniyet }
+        order: 5
 
   - label: 3D Baskı Ürünler
-    action_type: scroll
-    action_value: printer-section
+    icon: 🖨️
+    action: { type: scroll, target: printer-section }
+    order: 6
 
 bottom_links:
   - label: Hakkımızda
-    action_type: scroll
-    action_value: about
+    icon: 🌿
+    action: { type: scroll, target: about }
+    order: 1
 
 whatsapp:
-  label: WhatsApp Sipariş
-  enabled: true
+  text: WhatsApp'tan Sipariş
+  icon: 📱
   style: outlined
   show_phone: false
+  enabled: true
