@@ -296,7 +296,7 @@
     "bg": "p5",
     "badge": "Yeni",
     "cat": [
-      "sisedeko"
+      "canta-icerik"
     ],
     "colors": [
       "seffaf",
@@ -318,7 +318,7 @@
     "bg": "p6",
     "badge": "",
     "cat": [
-      "sisedeko"
+      "canta-icerik"
     ],
     "colors": [
       "altin",
@@ -340,7 +340,7 @@
     "bg": "p7",
     "badge": "Popüler",
     "cat": [
-      "sisedeko",
+      "seffaf-canta",
       "mum",
       "miyuki"
     ],
