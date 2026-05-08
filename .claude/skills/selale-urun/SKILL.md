@@ -37,7 +37,7 @@ Yeni bir kategori eklerken aşağıdaki üç yer aynı anda güncellenmelidir:
 2. **Filtre butonları** — Sayfa içindeki `filter-btn` butonları ve drawer/footer içindeki `filterProducts(...)` çağrıları (yaklaşık satır 407–426, 458–459, 521–556, 715–732, 812–816). Mevcut bir kategoriyi tara, aynı kalıbı izle.
 3. **`admin/config.yml`** — `cat` alanı altındaki `select` widget'ının `options` listesi (satır 36–51).
 
-Mevcut kategori slug'ları: `miyuki`, `bileklik`, `kolye`, `kupe`, `yuzuk`, `anahtarlik`, `mum`, `sisedeko`, `3d`, `3d-anahtarlik`, `3d-oyuncak`, `3d-alet`, `3d-deko`. Slug Türkçe karakter İÇERMEZ (`küpe` → `kupe`).
+Mevcut kategori slug'ları: `miyuki`, `bileklik`, `kolye`, `kupe`, `yuzuk`, `anahtarlik`, `mum`, `seffaf-canta`, `canta-icerik`, `3d`, `3d-anahtarlik`, `3d-oyuncak`, `3d-alet`, `3d-deko`. Slug Türkçe karakter İÇERMEZ (`küpe` → `kupe`).
 
 ### Renkler
 Yeni renk eklerken dört yer:

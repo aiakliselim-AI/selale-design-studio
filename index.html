@@ -487,7 +487,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   <div class="drawer-section-label">Ev & Dekor</div>
   <button class="drawer-link" onclick="goTo('products');filterProducts('mum',null);closeDrawer()">El Yapımı Mumlar</button>
   <button class="drawer-link" onclick="goTo('products');filterProducts('susleme',null);closeDrawer()">Süsleme Ürünleri</button>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('sisedeko',null);closeDrawer()">Süslü Şişe & Dekor</button>
 
   <!-- 3D -->
   <div class="drawer-section-label">3D Baskı</div>
@@ -624,11 +623,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       <div class="cat-overlay"><span>Görüntüle</span></div>
       <div class="cat-info"><h3>Doğum Günü</h3><p>Pasta · Masa · Balon Süsü</p></div>
     </div>
-    <div class="cat-card reveal" onclick="goTo('products');filterProducts('sisedeko',null)">
-      <div class="cat-bg c6"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>Süslü Şişe & Dekor</h3><p>Kurdele · Boncuk · Cam</p></div>
-    </div>
     <div class="cat-card reveal" onclick="goTo('printer-section')">
       <div class="cat-bg c7"></div>
       <div class="cat-overlay"><span>Görüntüle</span></div>
@@ -665,7 +659,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <button class="filter-btn" onclick="filterProducts('yuzuk',this)">💍 Yüzük</button>
     <button class="filter-btn" onclick="filterProducts('anahtarlik',this)">🔑 Anahtarlık</button>
     <button class="filter-btn" onclick="filterProducts('mum',this)">🕯️ Mumlar</button>
-    <button class="filter-btn" onclick="filterProducts('sisedeko',this)">🫙 Şişe & Dekor</button>
     <button class="filter-btn" onclick="filterProducts('3d',this)">🖨️ 3D Baskı</button>
     <button class="filter-btn" onclick="filterProducts('yeni',this)">🆕 Yeni</button>
   </div>
@@ -1294,15 +1287,17 @@ const AI_CATS = {
   kupe:        ['kupe','kupeler','earring','sallanti'],
   yuzuk:       ['yuzuk','yuzukler','ring','alyans'],
   anahtarlik:  ['anahtarlik','anahtarliklar','keychain'],
-  mum:         ['mum','mumlar','candle','kokulu mum','koku mumu'],
-  sisedeko:    ['sise','sisedeko','dekor','dekorasyon','parfum','vazo'],
-  '3d':        ['3d','3 d','baski','baskı','print','figur','figür','oyuncak','aksesuar']
+  mum:           ['mum','mumlar','candle','kokulu mum','koku mumu'],
+  'seffaf-canta':['seffaf canta','şeffaf çanta','seffafcanta','hediye seti','gift bag','hediye paketi'],
+  'canta-icerik':['canta icerik','çanta içerik','canta icerigi','şişe','sise','dekor','dekorasyon','parfum','parfüm','vazo','kuru cicek','kuru çiçek','etiket','koku','kolonya'],
+  '3d':          ['3d','3 d','baski','baskı','print','figur','figür','oyuncak','aksesuar']
 };
 
 /* Site bölümlerinin id'leri */
 const AI_SECTIONS = {
   miyuki:'products', bileklik:'products', kolye:'products', kupe:'products',
-  yuzuk:'products', anahtarlik:'products', mum:'products', sisedeko:'products',
+  yuzuk:'products', anahtarlik:'products', mum:'products',
+  'seffaf-canta':'products', 'canta-icerik':'products',
   '3d':'printer-section'
 };
 
@@ -1396,7 +1391,8 @@ const AI_COLOR_LABEL = {
 };
 const AI_CAT_LABEL = {
   miyuki:'Miyuki ürünleri',bileklik:'bileklik',kolye:'kolye',kupe:'küpe',
-  yuzuk:'yüzük',anahtarlik:'anahtarlık',mum:'mum',sisedeko:'şişe & dekor',
+  yuzuk:'yüzük',anahtarlik:'anahtarlık',mum:'mum',
+  'seffaf-canta':'şeffaf çanta hediye seti','canta-icerik':'çanta içerik kalemleri',
   '3d':'3D baskı ürünleri'
 };
 

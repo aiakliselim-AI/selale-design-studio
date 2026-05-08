@@ -9,7 +9,7 @@ icon: 🌷
 bg: p6
 badge: ""
 cat:
-  - sisedeko
+  - canta-icerik
 colors:
   - altin
   - gumus

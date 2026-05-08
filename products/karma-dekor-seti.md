@@ -9,7 +9,7 @@ icon: ✨
 bg: p7
 badge: Popüler
 cat:
-  - sisedeko
+  - seffaf-canta
   - mum
   - miyuki
 colors:

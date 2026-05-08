@@ -285,7 +285,8 @@ collections:
           - { label: 'Yüzük', value: yuzuk }
           - { label: 'Anahtarlık', value: anahtarlik }
           - { label: 'Mum', value: mum }
-          - { label: 'Şişe & Dekor', value: sisedeko }
+          - { label: 'Şeffaf Çanta', value: seffaf-canta }
+          - { label: 'Çanta İçeriği', value: canta-icerik }
           - { label: '3D Baskı (genel)', value: '3d' }
           - { label: '3D Anahtarlık', value: '3d-anahtarlik' }
           - { label: '3D Oyuncak', value: '3d-oyuncak' }

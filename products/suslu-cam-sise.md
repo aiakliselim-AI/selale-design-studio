@@ -9,7 +9,7 @@ icon: 🫙
 bg: p5
 badge: Yeni
 cat:
-  - sisedeko
+  - canta-icerik
 colors:
   - seffaf
   - beyaz
