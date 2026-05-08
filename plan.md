@@ -48,6 +48,34 @@ Claude Code repo analizinde `index.html` `loadCMSData()` fonksiyonunun zaten par
 `renderDrawer()` 3-seviye accordion desteği. Favorilerim "Tüm Ürünler"in
 altına alındı. Commit: `643fc75`.
 
+✅ **Aşama 5.1 — 2026-05-08:** Renk paleti + Cormorant Garamond font.
+Commit: `1d6e171`.
+
+✅ **Aşama 5.2 — 2026-05-08:** Sağdan drawer + 2-satır nav + floating temizlik.
+Commit: `9f17cb1`, `56c00d8`.
+
+✅ **Aşama 5.3 — 2026-05-08:** Site içi arama + AI asistan entegrasyonu +
+asistan otomatik küçültme fix. Commit: `060920e`, `947c997`.
+
+✅ **Aşama 5.4 — 2026-05-08:** Hero 21:9 cinematic banner + YouTube video
+desteği + foto/gradient fallback. `admin/config.yml`: `background_mode` +
+`video_youtube_url` eklendi. Commit: `964d458`.
+
+✅ **Aşama 5.5 — 2026-05-08:** Modal galeri + çoklu foto desteği.
+`admin/config.yml`: `images` list widget eklendi (geriye uyumlu).
+Commit: `ae2c9c4`.
+
+✅ **Aşama 5.6 — 2026-05-08:** Şeffaf çanta tam siyah banner + 5 dikey
+etkinlik kartı (01-05 italik numara) + border-radius keskinleştirme.
+Commit: `bdab43a`.
+
+✅ **Aşama 5.7 — 2026-05-08:** Hakkımızda sade + Instagram grid + footer
+`#1a1a1a` 4 sütun + newsletter kaldırıldı. Commit: `0e5d792`.
+
+✅ **Adım B — 2026-05-08:** `sisedeko` → `seffaf-canta` + `canta-icerik`
+göçü. 3 ürün dosyası migrate edildi. `admin/config.yml`'den `sisedeko`
+seçeneği kaldırıldı. Commit: `ac6d0dd`.
+
 ---
 
 ## 3. AŞAMA 4 — CMS BOŞLUKLARINI KAPAT + YENİ İÇERİK TİPLERİ
@@ -438,16 +466,16 @@ EN ALT (sabit)
 
 **Adım A — Drawer hiyerarşi güncellemesi (§ 4.1)** ✅ TAMAMLANDI (commit `643fc75`, 2026-05-07)
 
-🎨 **AŞAMA 5 — TASARIM YENİLEMESİ (§ 7) — SIRADAKİ**
-- 5 alt adım: 5.1 → 5.5
-- Her adım sonunda ayrı commit + push + onay bekleme
-- Adım B'den ÖNCE bitirilecek
+🎨 **AŞAMA 5 — TASARIM YENİLEMESİ (§ 7) — ✅ TAMAMLANDI**
+- 7 alt adım (5.1 → 5.7) bitti
+- Commit'ler: `1d6e171`, `9f17cb1`, `56c00d8`, `060920e`, `947c997`,
+  `964d458`, `ae2c9c4`, `bdab43a`, `0e5d792`
 
-**Adım B — "Süslü Şişe & Dekor" göçü (§ 4.8)** — Aşama 5 BİTTİKTEN sonra
-- 3 ürünün etiketi düzeltilir
-- `sisedeko` her yerden silinir
+**Adım B ✅ TAMAMLANDI (commit `ac6d0dd`) — "Süslü Şişe & Dekor" göçü (§ 4.8)**
+- 3 ürünün etiketi `seffaf-canta` / `canta-icerik`'e taşındı
+- `admin/config.yml`'den `sisedeko` seçeneği kaldırıldı
 
-**Adım C — Manifest workflow altyapısı (§ 4.2, 4.4, 4.5 için ÖN GEREKLİLİK)**
+🎯 **Adım C — Manifest workflow altyapısı (§ 4.2, 4.4, 4.5 için ÖN GEREKLİLİK) — SIRADAKİ**
 - `scripts/build-categories-manifest.mjs`
 - `scripts/build-events-manifest.mjs`
 - `scripts/build-reviews-manifest.mjs`
