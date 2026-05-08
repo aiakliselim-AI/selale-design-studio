@@ -239,61 +239,66 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .printer-cat-text h4{font-size:.85rem;font-weight:500;color:var(--dark);}
 .printer-cat-text p{font-size:.72rem;color:var(--muted);}
 
-/* ═══ ABOUT ═══ */
-.about{padding:6rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
-.about-main{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,var(--warm),var(--blush));border-radius:35% 65% 60% 40%/40% 35% 65% 60%;display:flex;align-items:center;justify-content:center;font-size:7rem;box-shadow:25px 25px 60px rgba(200,149,108,.2);}
-.about-visual{position:relative;}
-.about-stat{position:absolute;background:#fff;border-radius:4px;padding:1rem 1.4rem;box-shadow:0 15px 40px rgba(0,0,0,.08);text-align:center;}
-.about-stat:nth-child(2){top:10%;right:-8%;}
-.about-stat:nth-child(3){bottom:15%;left:-8%;}
-.about-stat strong{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--caramel);display:block;}
-.about-stat span{font-size:.72rem;color:var(--muted);letter-spacing:1px;}
-.about-text .tag{display:inline-block;color:var(--caramel);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;}
-.about-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;color:var(--dark);margin-bottom:1.5rem;}
-.about-text h2 em{color:var(--caramel);font-style:italic;}
-.about-text p{color:var(--muted);line-height:1.9;margin-bottom:1rem;font-size:.9rem;}
+/* ═══ ABOUT (5.7 — düz görsel, 3 istatistik) ═══ */
+.about{padding:6rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-visual{display:flex;flex-direction:column;gap:1.5rem;}
+.about-main{width:100%;aspect-ratio:4/5;background:var(--placeholder);border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.about-main .product-placeholder svg{width:30%;max-width:96px;color:#c4c4c4;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.about-stat{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.1rem 1rem;text-align:center;}
+.about-stat strong{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--text);display:block;line-height:1.1;}
+.about-stat span{font-size:.65rem;color:var(--neutral-muted);letter-spacing:1.5px;text-transform:uppercase;}
+.about-text .tag{display:inline-block;color:var(--neutral-muted);font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;}
+.about-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;color:var(--text);margin-bottom:1.4rem;font-weight:500;}
+.about-text h2 em{font-style:italic;}
+.about-text p{color:var(--neutral-muted);line-height:1.85;margin-bottom:1rem;font-size:.9rem;}
 .about-features{display:flex;flex-direction:column;gap:.7rem;margin:1.5rem 0;}
-.about-feature{display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--dark);}
-.about-feature span:first-child{width:30px;height:30px;background:var(--warm);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
-.btn-wa-order{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:.9rem 1.5rem;font-size:.9rem;font-weight:500;cursor:pointer;width:100%;margin-top:1.5rem;font-family:'Inter',sans-serif;transition:opacity .2s,transform .2s;text-decoration:none;}
+.about-feature{display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--text);}
+.about-feature span:first-child{width:28px;height:28px;background:var(--warm);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.btn-wa-order{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--wa);color:#fff;border:none;border-radius:4px;padding:.9rem 1.5rem;font-size:.85rem;font-weight:500;letter-spacing:1.2px;cursor:pointer;width:100%;margin-top:1.5rem;font-family:'Inter',sans-serif;transition:opacity .2s,transform .2s;text-decoration:none;}
 .btn-wa-order:hover{opacity:.88;transform:translateY(-2px);}
 
-/* ═══ REVIEWS ═══ */
-.testimonials{padding:7rem 5%;background:var(--warm);}
+/* ═══ REVIEWS (5.7 — açık gri zemin, italik serif) ═══ */
+.testimonials{padding:7rem 5%;background:#fafafa;}
 .review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
-.review-card{background:#fff;border-radius:4px;padding:1.8rem;border:1px solid var(--line);transition:transform .3s,box-shadow .3s;}
-.review-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(44,33,24,.08);}
-.review-stars{color:var(--caramel);font-size:.95rem;margin-bottom:.9rem;}
-.review-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem;}
+.review-card{background:#fff;border-radius:4px;padding:2rem 1.8rem;border:1px solid var(--line);transition:transform .3s,box-shadow .3s;}
+.review-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(0,0,0,.06);}
+.review-stars{color:var(--text);font-size:.95rem;margin-bottom:1rem;letter-spacing:2px;}
+.review-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text);line-height:1.7;margin-bottom:1.4rem;}
 .review-author{display:flex;align-items:center;gap:.8rem;}
-.review-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--warm);flex-shrink:0;}
-.review-name{font-size:.85rem;font-weight:500;}
-.review-date{font-size:.72rem;color:var(--muted);}
+.review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem;background:var(--placeholder);flex-shrink:0;}
+.review-name{font-size:.85rem;font-weight:500;color:var(--text);}
+.review-date{font-size:.7rem;color:var(--neutral-muted);letter-spacing:.5px;}
 
-/* ═══ NEWSLETTER ═══ */
-.newsletter{padding:7rem 5%;text-align:center;background:linear-gradient(135deg,var(--dark),#4a3020);position:relative;overflow:hidden;}
-.newsletter::before{content:'✦';position:absolute;font-size:20rem;color:rgba(255,255,255,.018);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.newsletter h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:#fff;margin-bottom:.8rem;}
-.newsletter h2 em{color:var(--blush);}
-.newsletter p{color:rgba(255,255,255,.5);margin-bottom:1.8rem;font-size:.88rem;}
-.newsletter-form{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;}
-.newsletter-form input{border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#fff;border-radius:50px;padding:.85rem 1.8rem;font-size:.88rem;min-width:260px;outline:none;font-family:'Inter',sans-serif;transition:border-color .25s;}
-.newsletter-form input::placeholder{color:rgba(255,255,255,.35);}
-.newsletter-form input:focus{border-color:var(--blush);}
+/* ═══ INSTAGRAM (5.7 — 6 kare placeholder) ═══ */
+.insta-section{padding:7rem 5%;text-align:center;background:#fff;}
+.insta-section .section-title{margin-bottom:2.5rem;}
+.insta-handle{display:inline-block;color:var(--text);font-size:.85rem;letter-spacing:1.5px;margin-top:.6rem;text-decoration:none;font-weight:500;border-bottom:1px solid var(--text);padding-bottom:2px;transition:opacity .2s;}
+.insta-handle:hover{opacity:.6;}
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-bottom:2.5rem;}
+.insta-tile{aspect-ratio:1;background:var(--placeholder);border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;transition:transform .25s;}
+.insta-tile:hover{transform:translateY(-3px);}
+.insta-tile .product-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--placeholder);}
+.insta-tile .product-placeholder svg{width:32%;max-width:48px;color:#c4c4c4;}
+.insta-tile .insta-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;transition:opacity .25s;}
+.insta-tile:hover .insta-overlay{opacity:1;}
+.btn-insta{display:inline-flex;align-items:center;gap:.6rem;background:transparent;color:var(--text);border:1.5px solid var(--text);border-radius:4px;padding:.85rem 2rem;font-size:.78rem;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;font-family:'Inter',sans-serif;font-weight:500;text-decoration:none;}
+.btn-insta:hover{background:var(--text);color:#fff;}
 
-/* ═══ FOOTER ═══ */
-footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
-.footer-brand .logo{display:block;margin-bottom:1rem;font-size:1.3rem;}
-.footer-brand p{font-size:.85rem;line-height:1.8;max-width:240px;}
-.footer-socials{display:flex;gap:.7rem;margin-top:1.5rem;}
-.social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.88rem;cursor:pointer;transition:all .25s;background:transparent;color:rgba(255,255,255,.55);}
-.social-btn:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
-.footer-col h4{color:#fff;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem;}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
-.footer-col a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.85rem;transition:color .25s;cursor:pointer;}
-.footer-col a:hover{color:var(--blush);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;flex-wrap:wrap;gap:.8rem;}
+/* ═══ FOOTER (5.7 — sade siyah, 4 sütun) ═══ */
+footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem;}
+.footer-brand .logo{display:block;margin-bottom:1rem;font-size:1.3rem;color:#fff;}
+.footer-brand .logo span{color:#fff;}
+.footer-brand p{font-size:.85rem;line-height:1.8;max-width:260px;color:rgba(255,255,255,.5);}
+.footer-socials{display:flex;gap:.6rem;margin-top:1.5rem;}
+.social-btn{width:38px;height:38px;border-radius:4px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;transition:background .2s,border-color .2s,color .2s;background:transparent;color:rgba(255,255,255,.55);text-decoration:none;}
+.social-btn:hover{background:#fff;border-color:#fff;color:#1a1a1a;}
+.footer-col h4{color:#fff;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.1rem;font-weight:500;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.85rem;transition:color .25s;cursor:pointer;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;flex-wrap:wrap;gap:.8rem;letter-spacing:.5px;color:rgba(255,255,255,.4);}
 
 /* ═══ MODAL (5.5 — galeri) ═══ */
 .modal-overlay{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:1rem;}
@@ -383,9 +388,10 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
   .hero-visual{margin-top:2.5rem;}
   .nav-links{display:none;}
   .about{grid-template-columns:1fr;gap:3rem;}
-  .about-stat:nth-child(2){right:0;}
-  .about-stat:nth-child(3){left:0;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:860px){
+  .insta-grid{grid-template-columns:repeat(3,1fr);}
 }
 @media(max-width:600px){
   .cat-grid{grid-template-columns:repeat(2,1fr);}
@@ -766,12 +772,17 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
   </div>
 </section>
 
-<!-- HAKKIMIZDA -->
+<!-- HAKKIMIZDA (5.7 — düz görsel + 3 istatistik) -->
 <section class="about" id="about">
   <div class="about-visual reveal">
-    <div class="about-main">✋</div>
-    <div class="about-stat"><strong>500+</strong><span>Mutlu Müşteri</span></div>
-    <div class="about-stat"><strong>3 Yıl</strong><span>Deneyim</span></div>
+    <div class="about-main">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+    </div>
+    <div class="about-stats">
+      <div class="about-stat"><strong>500+</strong><span>Mutlu Müşteri</span></div>
+      <div class="about-stat"><strong>3 Yıl</strong><span>Deneyim</span></div>
+      <div class="about-stat"><strong>%100</strong><span>El Yapımı</span></div>
+    </div>
   </div>
   <div class="about-text reveal">
     <div class="tag">✦ Hikayemiz</div>
@@ -816,14 +827,40 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<section class="newsletter">
-  <h2>Yeni ürünleri <em>ilk siz</em> görün</h2>
-  <p>Özel indirimler ve yeni konseptler için bültenimize katılın.</p>
-  <div class="newsletter-form">
-    <input type="email" id="nlInput" placeholder="E-posta adresiniz">
-    <button class="btn-primary" onclick="subscribeNewsletter()">Abone Ol</button>
+<!-- INSTAGRAM (5.7 — 6 kare placeholder; gerçek embed sonra) -->
+<section class="insta-section reveal" id="instagram">
+  <div class="section-title">
+    <div class="tag">✦ Instagram</div>
+    <h2>Atölyemizden <em>kareler</em></h2>
+    <a class="insta-handle" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer">@selale_miyuki</a>
   </div>
+  <div class="insta-grid">
+    <a class="insta-tile" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da gör">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <span class="insta-overlay">↗</span>
+    </a>
+    <a class="insta-tile" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da gör">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <span class="insta-overlay">↗</span>
+    </a>
+    <a class="insta-tile" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da gör">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <span class="insta-overlay">↗</span>
+    </a>
+    <a class="insta-tile" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da gör">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <span class="insta-overlay">↗</span>
+    </a>
+    <a class="insta-tile" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da gör">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <span class="insta-overlay">↗</span>
+    </a>
+    <a class="insta-tile" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da gör">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <span class="insta-overlay">↗</span>
+    </a>
+  </div>
+  <a class="btn-insta" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer">Instagram'da Takip Et</a>
 </section>
 
 <!-- FOOTER -->
@@ -1199,16 +1236,6 @@ function showToast(icon,msg){
   document.getElementById('toastIcon').textContent=icon;
   document.getElementById('toastMsg').textContent=msg;
   t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800);
-}
-
-/* ════ NEWSLETTER ════ */
-function subscribeNewsletter(){
-  const input=document.getElementById('nlInput');
-  if(input.value.includes('@')){
-    input.value='✓ Abone oldunuz, teşekkürler!';
-    input.style.borderColor='var(--sage)';
-    setTimeout(()=>{input.value='';input.style.borderColor='';},3000);
-  }
 }
 
 /* ════ NAV SCROLL ════ */
