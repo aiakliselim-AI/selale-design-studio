@@ -5,9 +5,10 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-07. Adım A (drawer hiyerarşi) tamamlandı;
-> Aşama 5 (tasarım yenilemesi) öne alındı ve 5 alt adıma bölündü;
-> Aşama 6 → Aşama 5'e dahil edildi.
+> **Son güncelleme:** 2026-05-08. Adım A (drawer hiyerarşi) tamamlandı;
+> Aşama 5 (tasarım yenilemesi) öne alındı, 5 alt adıma bölündü,
+> kapsamı genişletildi (modal galeri + video desteği eklendi);
+> Aşama 6 → Aşama 5'e dahil edildi (6D ayrı iş olarak Aşama 7'ye taşındı).
 
 ---
 
@@ -40,6 +41,11 @@ Claude Code repo analizinde `index.html` `loadCMSData()` fonksiyonunun zaten par
 - `data/footer.yml` + `renderFooter()` ✅
 - `data/printer.yml` (3D baskı) ✅
 - `data/ai.yml` (AI asistan) ✅
+
+✅ **Aşama 4 Adım A — 2026-05-08:** 3-seviyeli drawer hiyerarşisi.
+`data/drawer.yml` yeniden yazıldı (`top_links`, `categories`, `bottom_links`).
+`renderDrawer()` 3-seviye accordion desteği. Favorilerim "Tüm Ürünler"in
+altına alındı. Commit: `643fc75`.
 
 ---
 
@@ -322,14 +328,17 @@ EN ALT (sabit)
 - Border-radius'lar 22px → 8-12px (lüks, minimal)
 - Buton stilleri: birincil = siyah dolgu beyaz yazı (koyu temada beyaz dolgu siyah yazı). İkincil = transparent + 1px border
 
-### Modal galeri (yeni özellik — yöneticiden çoklu foto eklenebilir)
+### Modal galeri (yeni özellik — yöneticiden çoklu foto + video eklenebilir)
 
-- Mevcut modal yenilenir: sol tarafa BÜYÜK resim alanı (300x300+ minimum), sağ tarafa bilgi (isim, açıklama, fiyat)
-- Çoklu fotoğraf desteği: ana resim + altta thumbnail strip
+- Mevcut modal yenilenir: sol tarafa BÜYÜK medya alanı (300x300+ minimum), sağ tarafa bilgi (isim, açıklama, fiyat)
+- Çoklu fotoğraf + video desteği: ana medya + altta thumbnail strip (foto/video karışık olabilir)
+- Video desteği: `mp4` / `webm` formatları, autoplay yok, kullanıcı kontrol eder (`controls` attr), `playsinline` mobil için, `preload="metadata"`
+- Video thumbnail: ilk frame veya manuel poster (yöneticiden `poster` alanı)
 - Resim üzerine tıklayınca tam ekran lightbox (ok tuşları ile galeri gezinme, ESC ile kapatma)
-- Resim yokken kamera outline ikon placeholder
-- `admin/config.yml`: tek `image` alanı yerine `images` liste alanı (geriye uyumlu — eski tek `image` alanı varsa onu da okur, yöneticiden eski ürünler bozulmadan yeni çoklu foto formatına geçilebilir)
-- `products/*.md` şeması: `image` (eski) VEYA `images` (yeni) alanı
+- Video lightbox'ta tam ekran oynatma desteği
+- Medya yokken kamera outline ikon placeholder
+- `admin/config.yml`: tek `image` alanı yerine `media` liste alanı — her madde `{ type: image|video, src, poster? }` (geriye uyumlu — eski tek `image` alanı varsa onu da okur, yöneticiden eski ürünler bozulmadan yeni çoklu medya formatına geçilebilir)
+- `products/*.md` şeması: `image` (eski) VEYA `media` (yeni) alanı
 
 ### AI panel + Footer + Son temizlik
 
@@ -347,7 +356,7 @@ EN ALT (sabit)
 - **Adım 5.1:** Renk paleti + tema toggle altyapısı (CSS variable'lar, ☀/🌙 toggle, `localStorage`)
 - **Adım 5.2:** Üst nav + drawer ikon kaldırma + floating SVG ikonlar (üst WhatsApp kalkar, drawer ikonları gizlenir, alt floating SVG outline'a döner)
 - **Adım 5.3:** Hero + kategoriler + ürün kartları (gradient kaldır, minimal görünüm, placeholder foto alanları)
-- **Adım 5.4:** Modal galeri (büyük resim, çoklu foto, lightbox, `admin/config.yml` `images` array desteği, `products/*.md` geriye uyumluluk)
+- **Adım 5.4:** Modal galeri (büyük medya, çoklu foto + video, lightbox, `admin/config.yml` `media` array desteği, `products/*.md` geriye uyumluluk)
 - **Adım 5.5:** AI panel + footer + son temizlik + plan.md işaretle
 
 Her adım sonunda commit + push, sonra DUR ve kullanıcıya **"Adım 5.X tamamlandı, push edildi. Canlı sitede test edip devam etmemi söyler misiniz?"** diye sor. Kullanıcı onayı olmadan bir sonraki adıma geçme.
@@ -430,6 +439,17 @@ Her adım sonunda commit + push, sonra DUR ve kullanıcıya **"Adım 5.X tamamla
 
 ---
 
+## 8. AŞAMA 6 — Aşama 5'e entegre edildi
+
+Eski Aşama 6 (görsel rötuş) Adım 5.2'de yapıldı:
+
+- **6A WhatsApp SVG amblem** → 5.2'de yapıldı ✅
+- **6B AI Asistan ikonu (mesaj balonu outline)** → 5.2'de yapıldı ✅
+- **6C Çift WhatsApp temizliği (üst nav'dan kaldırıldı)** → 5.2'de yapıldı ✅
+- **6D `_worker.js` doğrulaması** → ayrı iş, **Aşama 7** olarak ileride yapılacak (CSP / header sanity check; Aşama 5 bittikten sonra)
+
+---
+
 ## 10. ÖNEMLİ TEKNİK NOTLAR (CLAUDE CODE'A)
 
 - `data/drawer.yml` (json değil **yml**!)
@@ -447,7 +467,7 @@ Her adım sonunda commit + push, sonra DUR ve kullanıcıya **"Adım 5.X tamamla
 
 Kullanıcı yeni oturumda Claude Code'a şu prompt'u verecek:
 
-> "Plan.md ve CLAUDE.md'yi okudun. Bölüm 9'daki sırayla başlayalım — Adım A (Drawer hiyerarşi güncellemesi). data/drawer.yml'i § 5.1'deki hiyerarşiye göre yeniden yaz, renderDrawer() fonksiyonunu 3-seviye render edecek şekilde güncelle, Favorilerim yerini değiştir. Sadece bu adım — başka dosyaya dokunma. Bitince commit et ve göster, push'u ben söyleyeceğim."
+> "Plan.md ve CLAUDE.md'yi okudun. Aşama 5.1 ile başlayalım — Renk paleti + tema toggle altyapısı. index.html'in :root CSS variable bloğunu yeniden yaz, [data-theme='dark'] selector ekle, sabit hex'leri variable'a çevir, üst nav'a ☀/🌙 toggle butonu ekle, toggleTheme() JS fonksiyonu yaz, localStorage 'selale-theme' key'e kaydet. Sadece bu adım — başka dosyaya dokunma. Bitince commit et 'feat(theme): saf siyah-beyaz tema + açık/koyu toggle' mesajıyla, push'u ben söyleyeceğim."
 
 Bu yaklaşım:
 - ✅ Küçük, kontrollü adımlar
