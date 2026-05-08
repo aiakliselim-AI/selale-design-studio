@@ -5,6 +5,15 @@ description: >
   Miyuki takılar, el yapımı mumlar, özel gün konseptleri, hediyelikler ve 3D baskılar
   — hepsinde yalnızca özen ve el emeği.
 
+# Aşama 5.4 — Hero arka plan modu
+# background_mode: gradient | foto | video
+# - gradient: nötr gri gradient (default fallback)
+# - foto:    background_image dolu olmalı (örn: /images/hero/banner.jpg)
+# - video:   video_youtube_url dolu olmalı (YouTube/Unlisted link)
+background_mode: gradient
+background_image: ''
+video_youtube_url: ''
+
 btn_primary:
   label: Koleksiyonu Keşfet
   target: categories

@@ -129,6 +129,17 @@ collections:
           - { label: 'Başlık - Üst Satır', name: title_top, widget: string, default: 'Her el emeğinde', hint: 'Büyük başlığın ilk satırı' }
           - { label: 'Başlık - Vurgu (italik)', name: title_emphasis, widget: string, default: 'bir sevgi var.', hint: 'Karamel renkli italik kısım' }
           - { label: Açıklama, name: description, widget: text }
+          - label: 'Arka Plan Modu'
+            name: background_mode
+            widget: select
+            default: gradient
+            options:
+              - { label: 'Gradient (nötr gri)', value: gradient }
+              - { label: 'Fotoğraf', value: foto }
+              - { label: 'YouTube Video', value: video }
+            hint: 'Hero arka planını seçin. Foto modu için aşağıya görsel yükleyin; Video modu için YouTube linki girin.'
+          - { label: 'Arka Plan Fotoğrafı', name: background_image, widget: image, required: false, hint: 'Sadece "Fotoğraf" modu için. Genişlik ≥ 1920px önerilir, 21:9 oranı en iyi.' }
+          - { label: 'YouTube Video URL', name: video_youtube_url, widget: string, required: false, hint: 'Sadece "Video" modu için. Örn: https://www.youtube.com/watch?v=XXXXXXXXXXX (Unlisted önerilir).' }
           - label: Birincil Buton
             name: btn_primary
             widget: object
