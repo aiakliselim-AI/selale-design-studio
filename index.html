@@ -352,7 +352,7 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 .ai-fab.hidden{display:none;}
 .ai-fab svg{width:100%;height:100%;}
 
-.ai-panel{position:fixed;bottom:25px;right:25px;width:360px;max-width:calc(100vw - 30px);height:520px;max-height:calc(100vh - 50px);background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(44,33,24,.25);z-index:700;display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);transform-origin:bottom right;}
+.ai-panel{position:fixed;top:115px;right:25px;width:380px;max-width:calc(100vw - 30px);height:520px;max-height:calc(100vh - 140px);background:#fff;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.15);z-index:700;display:flex;flex-direction:column;overflow:hidden;transform:translateY(-10px) scale(.97);opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.4,0,.2,1);transform-origin:top right;}
 .ai-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
 .ai-head{background:#1a1a1a;color:#fff;padding:1rem 1.2rem;display:flex;align-items:center;gap:.7rem;}
 .ai-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
@@ -1272,7 +1272,7 @@ function aiQuickChips(){
   const cfg = window.AI_CONFIG;
   const chips = (cfg && Array.isArray(cfg.quick_chips) && cfg.quick_chips.length)
     ? cfg.quick_chips.map(c=>c && c.text).filter(Boolean)
-    : ['Miyuki bileklik','Mumlar','3D baskı','Yeni ürünler'];
+    : ['Pembe bileklik','Kokulu mum','Hediye seti','Yeni ürünler'];
   const buttons = chips.map(c=>{
     const safe = aiEscape(c);
     const onclickArg = String(c).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
@@ -1421,20 +1421,40 @@ function aiSend(){
   aiHandle(text);
 }
 
-/* Paneli aç/kapat */
+/* Paneli aç/kapat (Adım 5.3 — nav arama input'undan açılır, ESC + outside click ile kapanır) */
+function openAIPanel(prefill){
+  const panel = document.getElementById('aiPanel');
+  if(!panel) return;
+  const wasOpen = panel.classList.contains('open');
+  if(!wasOpen){
+    panel.classList.add('open');
+    const fab = document.getElementById('aiFab');
+    if(fab) fab.classList.add('hidden');
+    if(!panel.dataset.greeted){
+      panel.dataset.greeted = '1';
+      aiAfter(400, ()=>{
+        const greet = (window.AI_CONFIG && AI_CONFIG.greeting) || 'Merhaba! 🌸 Ben Şelale\'nin sanal asistanıyım. Ne arıyorsunuz?';
+        aiBotMsg(greet + aiQuickChips());
+      });
+    }
+  }
+  const aiInput = document.getElementById('aiInput');
+  if(aiInput){
+    if(typeof prefill === 'string' && prefill.length){ aiInput.value = prefill; }
+    setTimeout(()=>aiInput.focus(), wasOpen ? 0 : 320);
+  }
+}
+function closeAIPanel(){
+  const panel = document.getElementById('aiPanel');
+  if(!panel || !panel.classList.contains('open')) return;
+  panel.classList.remove('open');
+  const fab = document.getElementById('aiFab');
+  if(fab) fab.classList.remove('hidden');
+}
 function toggleAI(){
   const panel = document.getElementById('aiPanel');
-  const fab   = document.getElementById('aiFab');
-  const isOpen = panel.classList.toggle('open');
-  if(fab) fab.classList.toggle('hidden', isOpen);
-  if(isOpen && !panel.dataset.greeted){
-    panel.dataset.greeted = '1';
-    aiAfter(400, ()=>{
-      const greet = (window.AI_CONFIG && AI_CONFIG.greeting) || 'Merhaba! 🌸 Ben Şelale\'nin sanal asistanıyım. Ne arıyorsunuz?';
-      aiBotMsg(greet + aiQuickChips());
-    });
-  }
-  if(isOpen) setTimeout(()=>document.getElementById('aiInput').focus(), 350);
+  if(panel && panel.classList.contains('open')) closeAIPanel();
+  else openAIPanel();
 }
 
 /* ════ BAŞLAT ════ */
@@ -1822,6 +1842,44 @@ async function loadCMSData(){
 }
 
 loadCMSData();
+
+/* ════ NAV ARAMA → AI PANEL (Adım 5.3) ════ */
+(function wireNavSearch(){
+  const navSearch = document.getElementById('navSearchInput');
+  if(navSearch){
+    navSearch.addEventListener('focus', ()=>openAIPanel());
+    navSearch.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        const v = navSearch.value.trim();
+        if(!v){ openAIPanel(); return; }
+        openAIPanel(v);
+        setTimeout(()=>{
+          aiSend();
+          navSearch.value = '';
+        }, 60);
+      } else if(e.key === 'Escape'){
+        closeAIPanel();
+        navSearch.blur();
+      }
+    });
+  }
+  // ESC kapatma — global
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      const panel = document.getElementById('aiPanel');
+      if(panel && panel.classList.contains('open')) closeAIPanel();
+    }
+  });
+  // Outside click kapatma
+  document.addEventListener('click', (e)=>{
+    const panel = document.getElementById('aiPanel');
+    if(!panel || !panel.classList.contains('open')) return;
+    if(e.target.closest('.ai-panel')) return;
+    if(e.target.closest('.nav-search')) return;
+    closeAIPanel();
+  });
+})();
 </script>
 </body>
 </html>
