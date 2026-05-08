@@ -88,7 +88,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .fav-empty .empty-icon{font-size:4rem;margin-bottom:1rem;}
 .fav-empty p{color:var(--muted);margin-bottom:1.5rem;}
 .fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;}
-.fav-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(200,149,108,.12);transition:transform .3s,box-shadow .3s;}
+.fav-card{background:#fff;border-radius:4px;overflow:hidden;border:1px solid var(--line);transition:transform .3s,box-shadow .3s;}
 .fav-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(44,33,24,.1);}
 .fav-img{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;}
 .fav-remove{position:absolute;top:.7rem;right:.7rem;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;z-index:2;}
@@ -142,9 +142,9 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .hero-badge strong{font-size:1.1rem;display:block;letter-spacing:0;}
 
 /* ═══ MARQUEE ═══ */
-.marquee-bar{background:var(--dark);color:var(--blush);padding:.8rem 0;overflow:hidden;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;}
+.marquee-bar{background:#1a1a1a;color:#ffffff;padding:.8rem 0;overflow:hidden;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;}
 .marquee-inner{display:flex;gap:3rem;animation:marquee 20s linear infinite;white-space:nowrap;}
-.marquee-inner span::before{content:'✦ ';color:var(--caramel);}
+.marquee-inner span::before{content:'✦ ';color:rgba(255,255,255,.45);}
 
 /* ═══ SECTION TITLE ═══ */
 .section-title{text-align:center;margin-bottom:3rem;}
@@ -155,13 +155,14 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 /* ═══ CATEGORIES ═══ */
 .categories{padding:7rem 5%;background:var(--warm);}
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1.2rem;}
-.cat-card{border-radius:22px;overflow:hidden;aspect-ratio:3/4;position:relative;cursor:pointer;transition:transform .35s,box-shadow .3s;display:flex;align-items:flex-end;}
+.cat-card{border-radius:4px;overflow:hidden;aspect-ratio:3/4;position:relative;cursor:pointer;transition:transform .35s,box-shadow .3s;display:flex;align-items:flex-end;}
 .cat-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(44,33,24,.14);}
 .cat-card:hover .cat-overlay{opacity:1;}
-.cat-bg{position:absolute;inset:0;background:#f5f5f5;}
-.cat-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(44,33,24,.25);opacity:0;transition:opacity .3s;}
-.cat-overlay span{background:#fff;color:var(--caramel);border-radius:50px;padding:.45rem 1.3rem;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;}
-.cat-info{position:relative;z-index:2;padding:1.2rem;width:100%;background:linear-gradient(transparent,rgba(44,33,24,.78));}
+.cat-bg{position:absolute;inset:0;background:var(--placeholder);display:flex;align-items:center;justify-content:center;}
+.cat-bg svg{width:38%;max-width:96px;height:auto;color:rgba(0,0,0,.18);}
+.cat-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .3s;}
+.cat-overlay span{background:#fff;color:var(--text);border-radius:4px;padding:.55rem 1.4rem;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;}
+.cat-info{position:relative;z-index:2;padding:1.2rem;width:100%;background:linear-gradient(transparent,rgba(0,0,0,.78));}
 .cat-info h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#fff;margin-bottom:.25rem;}
 .cat-info p{font-size:.72rem;color:rgba(255,255,255,.8);letter-spacing:.5px;}
 
@@ -171,67 +172,57 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .filter-btn{border:1.5px solid var(--blush);background:transparent;color:var(--muted);border-radius:50px;padding:.45rem 1.2rem;font-size:.78rem;letter-spacing:.8px;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif;}
 .filter-btn.active,.filter-btn:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.8rem;}
-.product-card{background:#fff;border-radius:22px;overflow:hidden;transition:transform .3s,box-shadow .3s;border:1px solid rgba(200,149,108,.12);position:relative;}
-.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(44,33,24,.12);}
+.product-card{background:#fff;border-radius:4px;overflow:hidden;transition:transform .3s,box-shadow .3s;border:1px solid var(--line);position:relative;cursor:pointer;}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.08);}
 .product-img{aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;}
 .product-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .product-placeholder{position:absolute;inset:0;background:#f5f5f5;display:flex;align-items:center;justify-content:center;}
 .product-placeholder svg{width:32%;max-width:80px;height:auto;color:#c4c4c4;}
-.p1{background:linear-gradient(135deg,#faeee4,#f0d4bc);}
-.p2{background:linear-gradient(135deg,#e8eed8,#d0dcc0);}
-.p3{background:linear-gradient(135deg,#fce4e4,#f0c8c4);}
-.p4{background:linear-gradient(135deg,#e8e4f4,#d4cce8);}
-.p5{background:linear-gradient(135deg,#fff4e0,#ffe4b4);}
-.p6{background:linear-gradient(135deg,#e4f0e8,#c8dcc8);}
-.p7{background:linear-gradient(135deg,#f4e8ec,#e0c0c8);}
-.p8{background:linear-gradient(135deg,#e8f4f8,#c0d8e8);}
-.product-badge{position:absolute;top:1rem;left:1rem;background:var(--caramel);color:#fff;font-size:.65rem;letter-spacing:.8px;text-transform:uppercase;padding:.28rem .75rem;border-radius:50px;z-index:2;}
-.product-badge.new{background:var(--sage);}
+/* .p1-.p8 gradient'leri 5.6'da kaldırıldı — placeholder zemin tek nötr ton */
+.p1,.p2,.p3,.p4,.p5,.p6,.p7,.p8{background:var(--placeholder);}
+.product-badge{position:absolute;top:1rem;left:1rem;background:#1a1a1a;color:#fff;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;padding:.32rem .75rem;border-radius:0;z-index:2;font-weight:500;}
+.product-badge.new{background:#1a1a1a;}
 .product-fav{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.92);border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transition:transform .2s,background .2s;box-shadow:0 2px 10px rgba(44,33,24,.12);z-index:2;}
 .product-fav:hover{transform:scale(1.15);}
 .product-fav.faved{background:#fde8e8;}
-.product-info{padding:1.2rem;}
-.product-info h3{font-family:'Cormorant Garamond',serif;font-size:.98rem;color:var(--dark);margin-bottom:.35rem;}
-.product-info p{font-size:.78rem;color:var(--muted);margin-bottom:.9rem;line-height:1.5;}
-.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
-.product-price{font-size:1rem;font-weight:500;color:var(--caramel);}
-.product-price small{font-size:.72rem;color:var(--muted);text-decoration:line-through;margin-left:.3rem;}
-.btn-detail{background:var(--dark);color:#fff;border:none;border-radius:50px;padding:.45rem 1.1rem;font-size:.76rem;cursor:pointer;transition:background .25s;font-family:'Inter',sans-serif;}
-.btn-detail:hover{background:var(--caramel);}
+.product-info{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.3rem;cursor:pointer;}
+.product-info .product-cat{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);font-weight:500;}
+.product-info h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);margin:0;font-weight:500;line-height:1.25;}
+.product-price{font-size:.95rem;font-weight:500;color:var(--text);margin-top:.2rem;font-family:'Inter',sans-serif;}
+.product-price small{font-size:.72rem;color:var(--neutral-muted);text-decoration:line-through;margin-left:.4rem;font-weight:400;}
 
-/* ═══ ÖZEL GÜN KONSEPT BÖLÜMÜ ═══ */
-.events-section{padding:7rem 5%;background:var(--dark);}
+/* ═══ ŞEFFAF ÇANTA BANNER (5.6) ═══ */
+.giftbag-banner{background:#1a1a1a;color:#fff;padding:6rem 5%;text-align:center;position:relative;}
+.giftbag-banner .gb-tag{display:inline-block;font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem;}
+.giftbag-banner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-style:italic;font-weight:500;line-height:1.15;margin-bottom:1rem;color:#fff;}
+.giftbag-banner h2 em{font-style:italic;color:#fff;}
+.giftbag-banner p{font-size:.92rem;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 2rem;line-height:1.7;}
+.btn-gb{display:inline-flex;align-items:center;gap:.6rem;background:transparent;color:#fff;border:1.5px solid #fff;border-radius:4px;padding:.95rem 2.4rem;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;font-family:'Inter',sans-serif;font-weight:500;text-decoration:none;}
+.btn-gb:hover{background:#fff;color:#1a1a1a;}
+
+/* ═══ ÖZEL GÜN KONSEPT BÖLÜMÜ (5.6 — 5 dikey kart) ═══ */
+.events-section{padding:7rem 5%;background:#1a1a1a;}
 .events-section .section-title h2{color:#fff;}
-.events-section .section-title .tag{color:var(--blush);}
-.events-section .section-title p{color:rgba(255,255,255,.5);margin-top:.5rem;font-size:.88rem;}
-.event-tabs{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-bottom:2.5rem;}
-.event-tab{border:1.5px solid rgba(200,149,108,.3);background:transparent;color:rgba(255,255,255,.6);border-radius:50px;padding:.5rem 1.3rem;font-size:.8rem;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;}
-.event-tab.active,.event-tab:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
-.event-content{display:none;}
-.event-content.active{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
-.event-visual{border-radius:28px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:7rem;position:relative;}
-.ev1{background:linear-gradient(160deg,#3a1a2a,#7a3060);}
-.ev2{background:linear-gradient(160deg,#1a2a3a,#306070);}
-.ev3{background:linear-gradient(160deg,#3a2a10,#806020);}
-.ev4{background:linear-gradient(160deg,#102a1a,#205040);}
-.ev5{background:linear-gradient(160deg,#2a1a3a,#604080);}
-.event-text{color:rgba(255,255,255,.85);}
-.event-text h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#fff;margin-bottom:1rem;line-height:1.2;}
-.event-text h3 em{color:var(--blush);font-style:italic;}
-.event-text p{font-size:.88rem;line-height:1.8;margin-bottom:1.5rem;color:rgba(255,255,255,.6);}
-.event-items{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem;}
-.event-item{display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:rgba(255,255,255,.75);}
-.event-item span:first-child{width:28px;height:28px;background:rgba(200,149,108,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
-.event-price{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
-.event-price .from{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;}
-.event-price .amount{font-size:1.8rem;color:var(--blush);font-family:'Cormorant Garamond',serif;}
-.btn-event{background:var(--caramel);color:#fff;border:none;border-radius:50px;padding:.8rem 2rem;font-size:.85rem;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:.5rem;}
-.btn-event:hover{background:#fff;color:var(--dark);transform:translateY(-2px);}
+.events-section .section-title .tag{color:rgba(255,255,255,.5);}
+.events-section .section-title p{color:rgba(255,255,255,.55);margin-top:.6rem;font-size:.88rem;max-width:600px;margin-left:auto;margin-right:auto;}
+.event-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;}
+.event-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;transition:background .25s,border-color .25s,transform .25s;color:rgba(255,255,255,.85);}
+.event-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);transform:translateY(-4px);}
+.event-card .ev-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.45);letter-spacing:1px;}
+.event-card .ev-visual{aspect-ratio:1;background:rgba(255,255,255,.05);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;margin:.2rem 0 .6rem;color:rgba(255,255,255,.85);}
+.event-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:#fff;line-height:1.2;}
+.event-card h3 em{font-style:italic;}
+.event-card p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6;flex:1;}
+.event-card .ev-price{display:flex;flex-direction:column;gap:.15rem;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.1);}
+.event-card .ev-price .from{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.event-card .ev-price .amount{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;}
+.btn-event{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:4px;padding:.7rem 1rem;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,color .2s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;font-weight:500;width:100%;margin-top:.4rem;}
+.btn-event:hover{background:#fff;color:#1a1a1a;border-color:#fff;}
 
 /* ═══ 3D BASKI ═══ */
 .printer-section{padding:7rem 5%;}
 .printer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
-.printer-visual{border-radius:28px;background:linear-gradient(145deg,#1a1a2a,#2a2a4a);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2.5rem;position:relative;overflow:hidden;}
+.printer-visual{border-radius:4px;background:linear-gradient(145deg,#1a1a2a,#2a2a4a);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2.5rem;position:relative;overflow:hidden;}
 .printer-visual::before{content:'';position:absolute;top:-30%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(100,120,200,.15) 0%,transparent 70%);border-radius:50%;}
 .printer-icon{font-size:5rem;}
 .printer-samples{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
@@ -242,7 +233,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .printer-text h2 em{color:var(--caramel);font-style:italic;}
 .printer-text p{color:var(--muted);line-height:1.8;font-size:.9rem;margin-bottom:1.5rem;}
 .printer-cats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:2rem;}
-.printer-cat{background:var(--warm);border-radius:16px;padding:1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:background .2s,transform .2s;border:1.5px solid transparent;}
+.printer-cat{background:var(--warm);border-radius:4px;padding:1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:background .2s,transform .2s;border:1.5px solid transparent;}
 .printer-cat:hover{background:var(--blush);transform:translateY(-2px);border-color:var(--caramel);}
 .printer-cat .pci{font-size:1.5rem;}
 .printer-cat-text h4{font-size:.85rem;font-weight:500;color:var(--dark);}
@@ -252,7 +243,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .about{padding:6rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
 .about-main{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,var(--warm),var(--blush));border-radius:35% 65% 60% 40%/40% 35% 65% 60%;display:flex;align-items:center;justify-content:center;font-size:7rem;box-shadow:25px 25px 60px rgba(200,149,108,.2);}
 .about-visual{position:relative;}
-.about-stat{position:absolute;background:#fff;border-radius:20px;padding:1rem 1.4rem;box-shadow:0 15px 40px rgba(44,33,24,.1);text-align:center;}
+.about-stat{position:absolute;background:#fff;border-radius:4px;padding:1rem 1.4rem;box-shadow:0 15px 40px rgba(0,0,0,.08);text-align:center;}
 .about-stat:nth-child(2){top:10%;right:-8%;}
 .about-stat:nth-child(3){bottom:15%;left:-8%;}
 .about-stat strong{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--caramel);display:block;}
@@ -270,7 +261,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 /* ═══ REVIEWS ═══ */
 .testimonials{padding:7rem 5%;background:var(--warm);}
 .review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
-.review-card{background:#fff;border-radius:22px;padding:1.8rem;border:1px solid rgba(200,149,108,.15);transition:transform .3s,box-shadow .3s;}
+.review-card{background:#fff;border-radius:4px;padding:1.8rem;border:1px solid var(--line);transition:transform .3s,box-shadow .3s;}
 .review-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(44,33,24,.08);}
 .review-stars{color:var(--caramel);font-size:.95rem;margin-bottom:.9rem;}
 .review-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem;}
@@ -376,8 +367,14 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 @media(max-width:1024px){
   .nav-links{gap:.8rem;}
   .nav-links a{font-size:.7rem;}
-  .event-content.active{grid-template-columns:1fr;}
+  .event-grid{grid-template-columns:repeat(3,1fr);}
   .printer-grid{grid-template-columns:1fr;}
+}
+@media(max-width:680px){
+  .event-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:480px){
+  .event-grid{grid-template-columns:1fr;}
 }
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;text-align:center;padding-top:6rem;}
@@ -639,6 +636,14 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
   </div>
 </section>
 
+<!-- ŞEFFAF ÇANTA BANNER (5.6 — Adım G'de iç sayfa eklenecek) -->
+<section class="giftbag-banner" id="giftbag-banner">
+  <div class="gb-tag">✦ Hediye Konsepti</div>
+  <h2><em>Şeffaf Çanta</em> Hediye Setleri</h2>
+  <p>Sevdiklerinize özel, içerisini birlikte tasarladığınız zarif şeffaf çantalar — koku, mum, miyuki bileklik ve daha fazlası.</p>
+  <a class="btn-gb" href="#" onclick="event.preventDefault();openWA('Şeffaf çanta hediye seti hakkında bilgi alabilir miyim?')">Keşfet →</a>
+</section>
+
 <!-- ÜRÜNLER -->
 <section class="products" id="products">
   <div class="section-title reveal">
@@ -668,101 +673,50 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
     <h2>Hangi <em>güne</em> hazırlanıyorsunuz?</h2>
     <p>Düğününüzden nişanınıza, doğum gününden baby shower'a — komple dekorasyon konseptleri hazırlıyoruz.</p>
   </div>
-  <div class="event-tabs">
-    <button class="event-tab active" data-tab="nishan" onclick="setEventTab('nishan')">💍 Nişan</button>
-    <button class="event-tab" data-tab="dugun" onclick="setEventTab('dugun')">💒 Düğün</button>
-    <button class="event-tab" data-tab="dogumgunu" onclick="setEventTab('dogumgunu')">🎂 Doğum Günü</button>
-    <button class="event-tab" data-tab="babyshower" onclick="setEventTab('babyshower')">👶 Baby Shower</button>
-    <button class="event-tab" data-tab="mezuniyet" onclick="setEventTab('mezuniyet')">🎓 Mezuniyet</button>
-  </div>
-
-  <!-- Nişan -->
-  <div class="event-content active" id="tab-nishan">
-    <div class="event-visual ev1">💍</div>
-    <div class="event-text">
+  <div class="event-grid">
+    <div class="event-card" id="event-card-nishan">
+      <div class="ev-num">01</div>
+      <div class="ev-visual">💍</div>
       <h3>Nişan Gecenizi<br><em>Unutulmaz Yapın</em></h3>
-      <p>Balon kemerleri, masa süsleri, arka plan dekorasyonu ve kişiye özel Miyuki hediye setleriyle nişan anlarınızı taçlandırıyoruz.</p>
-      <div class="event-items">
-        <div class="event-item"><span>🎈</span> Renk uyumlu balon kemeri & zinciri</div>
-        <div class="event-item"><span>🌸</span> Çiçek panosu & tül arka plan</div>
-        <div class="event-item"><span>🕯️</span> Masa üstü mum & çiçek aranjmanı</div>
-        <div class="event-item"><span>📿</span> Nişan çiftine özel Miyuki hediye seti</div>
-        <div class="event-item"><span>🫙</span> Kurdele & boncuk süslü cam şişe</div>
-      </div>
-      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺680</span></div>
-      <button class="btn-event" onclick="openWA('Nişan Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+      <p>Balon kemerleri, masa süsleri ve kişiye özel Miyuki hediye setleriyle nişan anılarınızı taçlandırıyoruz.</p>
+      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺680</span></div>
+      <button class="btn-event" onclick="openWA('Nişan Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
     </div>
-  </div>
 
-  <!-- Düğün -->
-  <div class="event-content" id="tab-dugun">
-    <div class="event-visual ev2">💒</div>
-    <div class="event-text">
+    <div class="event-card" id="event-card-dugun">
+      <div class="ev-num">02</div>
+      <div class="ev-visual">💒</div>
       <h3>Düğününüz için<br><em>Özel Tasarım</em></h3>
-      <p>Masa tabelaları, balon süsü, nikah şekeri konsepti ve el yapımı davetiye takıları ile düğününüzü kişiselleştiriyoruz.</p>
-      <div class="event-items">
-        <div class="event-item"><span>💌</span> El yapımı nikah şekeri konsepti</div>
-        <div class="event-item"><span>🎀</span> Masa üstü tablo & isim kartları</div>
-        <div class="event-item"><span>🕯️</span> Pillar mum & çiçek dekor seti</div>
-        <div class="event-item"><span>📿</span> Gelin & damat Miyuki bileklik hediyesi</div>
-        <div class="event-item"><span>🎈</span> Salon girişi balon süslemesi</div>
-      </div>
-      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺950</span></div>
-      <button class="btn-event" onclick="openWA('Düğün Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+      <p>Masa tabelaları, nikah şekeri konsepti ve el yapımı davetiye takılarıyla düğününüzü kişiselleştiriyoruz.</p>
+      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺950</span></div>
+      <button class="btn-event" onclick="openWA('Düğün Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
     </div>
-  </div>
 
-  <!-- Doğum Günü -->
-  <div class="event-content" id="tab-dogumgunu">
-    <div class="event-visual ev3">🎂</div>
-    <div class="event-text">
+    <div class="event-card" id="event-card-dogumgunu">
+      <div class="ev-num">03</div>
+      <div class="ev-visual">🎂</div>
       <h3>Doğum Günü<br><em>Sürprizi</em></h3>
-      <p>Pasta masası süsleri, balon panosu, isme özel konfeti ve özel tema seçenekleriyle doğum günlerini renklendiriyoruz.</p>
-      <div class="event-items">
-        <div class="event-item"><span>🎉</span> Tema uyumlu balon & konfeti seti</div>
-        <div class="event-item"><span>🎀</span> İsme özel pasta üstü süs</div>
-        <div class="event-item"><span>📸</span> Fotoğraf köşesi arka plan süsü</div>
-        <div class="event-item"><span>📿</span> Doğum günü Miyuki bileklik hediyesi</div>
-        <div class="event-item"><span>🎁</span> Özel hediye paketleme</div>
-      </div>
-      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺490</span></div>
-      <button class="btn-event" onclick="openWA('Doğum Günü Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+      <p>Balon panosu, isme özel konfeti ve özel tema seçenekleriyle doğum günlerini renklendiriyoruz.</p>
+      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺490</span></div>
+      <button class="btn-event" onclick="openWA('Doğum Günü Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
     </div>
-  </div>
 
-  <!-- Baby Shower -->
-  <div class="event-content" id="tab-babyshower">
-    <div class="event-visual ev4">👶</div>
-    <div class="event-text">
+    <div class="event-card" id="event-card-babyshower">
+      <div class="ev-num">04</div>
+      <div class="ev-visual">👶</div>
       <h3>Baby Shower için<br><em>Pastel Renkler</em></h3>
-      <p>Pembe ya da mavi temalı balon süsleri, bebek figürlü mumlar ve kişiselleştirilmiş hatıra setleriyle o özel günü hazırlıyoruz.</p>
-      <div class="event-items">
-        <div class="event-item"><span>🩷</span> Pembe / mavi / nötr tema balon seti</div>
-        <div class="event-item"><span>🍼</span> Bebek figürlü dekoratif mum</div>
-        <div class="event-item"><span>🎀</span> İsme özel hatıra mumu seti</div>
-        <div class="event-item"><span>🫙</span> Süslü şişe & boncuk dekor</div>
-        <div class="event-item"><span>📿</span> Anne için Miyuki hediye bileklik</div>
-      </div>
-      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺420</span></div>
-      <button class="btn-event" onclick="openWA('Baby Shower Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+      <p>Pembe ya da mavi temalı balon süsleri, bebek figürlü mumlar ve kişiselleştirilmiş hatıra setleri.</p>
+      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺420</span></div>
+      <button class="btn-event" onclick="openWA('Baby Shower Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
     </div>
-  </div>
 
-  <!-- Mezuniyet -->
-  <div class="event-content" id="tab-mezuniyet">
-    <div class="event-visual ev5">🎓</div>
-    <div class="event-text">
+    <div class="event-card" id="event-card-mezuniyet">
+      <div class="ev-num">05</div>
+      <div class="ev-visual">🎓</div>
       <h3>Mezuniyet<br><em>Kutlaması</em></h3>
-      <p>Kep & cüppe figürlü dekorlar, isme özel hatıra Miyuki setleri ve masa düzenlemeleriyle mezuniyeti anlamlı kılıyoruz.</p>
-      <div class="event-items">
-        <div class="event-item"><span>🎓</span> Kep figürlü balon & dekor seti</div>
-        <div class="event-item"><span>📸</span> Fotoğraf köşesi panosu</div>
-        <div class="event-item"><span>📿</span> İsme özel Miyuki hatıra bileklik</div>
-        <div class="event-item"><span>🕯️</span> Kutlama temalı mum seti</div>
-        <div class="event-item"><span>🎁</span> Özel hediye kutu & paketleme</div>
-      </div>
-      <div class="event-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺350</span></div>
-      <button class="btn-event" onclick="openWA('Mezuniyet Konsepti hakkında bilgi almak istiyorum.')">📱 WhatsApp'tan Soru Sor</button>
+      <p>Kep figürlü dekorlar, isme özel hatıra Miyuki setleri ve masa düzenlemeleriyle mezuniyeti anlamlı kılın.</p>
+      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺350</span></div>
+      <button class="btn-event" onclick="openWA('Mezuniyet Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
     </div>
   </div>
 </section>
@@ -1045,25 +999,26 @@ function imgContent(p){
 function renderProducts(list){
   const grid = document.getElementById('productGrid');
   if(!list.length){ grid.innerHTML='<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Bu kategoride ürün bulunamadı.</p>'; return; }
-  grid.innerHTML = list.map(p=>`
-    <div class="product-card">
+  grid.innerHTML = list.map(p=>{
+    const catRaw = Array.isArray(p.cat) ? p.cat[0] : p.cat;
+    const catLabel = catRaw ? String(catRaw).replace(/-/g,' ') : '';
+    return `
+    <div class="product-card" onclick="openModal(${p.id})">
       <div class="product-img ${aiEscape(p.bg)}">
         ${imgContent(p)}
         ${p.badge ? `<div class="product-badge ${p.isNew?'new':''}">${aiEscape(p.badge)}</div>` : ''}
         <button class="product-fav ${isFaved(p.id)?'faved':''}" data-id="${p.id}"
-          onclick="event.stopPropagation();toggleFav(${p.id})">
+          onclick="event.stopPropagation();toggleFav(${p.id})" aria-label="Favori">
           ${isFaved(p.id)?'❤️':'🤍'}
         </button>
       </div>
       <div class="product-info">
+        ${catLabel ? `<div class="product-cat">${aiEscape(catLabel)}</div>` : ''}
         <h3>${aiEscape(p.name)}</h3>
-        <p>${aiEscape(p.desc)}</p>
-        <div class="product-bottom">
-          <div class="product-price">${aiEscape(p.price)}${p.oldPrice?`<small>${aiEscape(p.oldPrice)}</small>`:''}</div>
-          <button class="btn-detail" onclick="openModal(${p.id})">İncele</button>
-        </div>
+        <div class="product-price">${aiEscape(p.price)}${p.oldPrice?`<small>${aiEscape(p.oldPrice)}</small>`:''}</div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function filterProducts(cat, btn){
@@ -1213,14 +1168,26 @@ function closeDrawer(){ document.getElementById('drawer').classList.remove('open
 function goTo(id){ setTimeout(()=>{ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); },100); }
 function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
 
-/* ════ EVENT TABS ════ */
+/* ════ EVENT TABS (5.6 — kart scroll + flash) ════ */
 function setEventTab(tab){
-  document.querySelectorAll('.event-tab').forEach(t=>{
-    t.classList.toggle('active', t.dataset.tab===tab);
-  });
-  document.querySelectorAll('.event-content').forEach(c=>{
-    c.classList.toggle('active', c.id==='tab-'+tab);
-  });
+  // Eski tab arayüzü 5.6'da 5 dikey karta dönüştü; bu fonksiyon ilgili karta scroll yapar.
+  // Drawer, footer ve hero CTA linkleri hâlâ setEventTab(slug) çağırıyor.
+  if(!tab) return;
+  const card = document.getElementById('event-card-' + tab);
+  if(!card) return;
+  // Geç scroll — outer goTo('events-section') çağrıldıysa onun smooth scroll'u önce başlasın
+  setTimeout(()=>{
+    card.scrollIntoView({behavior:'smooth', block:'center'});
+    card.style.transition = 'background .35s, border-color .35s';
+    const origBg = card.style.backgroundColor;
+    const origBorder = card.style.borderColor;
+    card.style.backgroundColor = 'rgba(255,255,255,.13)';
+    card.style.borderColor = 'rgba(255,255,255,.45)';
+    setTimeout(()=>{
+      card.style.backgroundColor = origBg;
+      card.style.borderColor = origBorder;
+    }, 1100);
+  }, 220);
 }
 
 /* ════ WA HELPER ════ */
