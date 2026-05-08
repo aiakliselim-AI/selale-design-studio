@@ -5,10 +5,11 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-08. Adım A (drawer hiyerarşi) tamamlandı;
-> Aşama 5 (tasarım yenilemesi) öne alındı, 5 alt adıma bölündü,
-> kapsamı genişletildi (modal galeri + video desteği eklendi);
-> Aşama 6 → Aşama 5'e dahil edildi (6D ayrı iş olarak Aşama 7'ye taşındı).
+> **Son güncelleme:** 2026-05-08. Aşama 5 tasarım kararları
+> revize edildi: tek tema (sadece açık, koyu tema iptal), Cormorant
+> Garamond font (Playfair Display kaldırıldı), sağdan açılan drawer,
+> üst nav'a site içi arama, hero'ya YouTube reklam videosu, modal
+> galeri çoklu foto desteği. Alt adımlar 5.1 → 5.7'ye genişletildi.
 
 ---
 
@@ -275,113 +276,159 @@ EN ALT (sabit)
 
 ---
 
-## 7. AŞAMA 5 — TASARIM YENİLEMESİ (ÖNCELİKLİ — Adım B'den ÖNCE yapılır)
+## 7. AŞAMA 5 — TASARIM YENİLEMESİ (Wolf & Badger / Monica Vinader esinli)
 
-**Sıra değişikliği:** Bu aşama plan.md'de Aşama 4'ün kalan adımlarından (B, C, D, E…) ÖNCE yapılacak. Sebep: kullanıcı görsel motivasyon istiyor; CMS göçleri sonra. Adım A (drawer hiyerarşi) zaten tamamlandı.
+**Sıra:** Adım A (drawer hiyerarşi) bitti. Bu aşama Adım B'den ÖNCE yapılır.
+**Referans:** monicavinader.com, wolfandbadger.com, bottegaveneta.com — saf siyah-beyaz, minimal, lüks butik.
 
-**Referans:** [monicavinader.com](https://www.monicavinader.com/), [wolfandbadger.com](https://www.wolfandbadger.com/) — saf siyah-beyaz, minimal, lüks butik.
+### Renk paleti (REVİZE — 2026-05-08)
 
-### Renk paleti
+- Zemin `#ffffff`, yazı `#1a1a1a`, ince çizgi `#e8e8e8`, muted `#888888`, placeholder `#f5f5f5`
+- **TEK TEMA: sadece açık tema. Koyu tema YOK. Toggle YOK.** (Eski plan iptal.)
+- Vurgu rengi YOK. Karamel `#c8956c`, blush `#e8c4a8`, krem `#faf6f0` KALDIRILACAK
+- Tüm sabit hex'ler `:root` CSS variable'ına çevrilecek
 
-- **Açık tema (default):** zemin `#ffffff`, yazı `#1a1a1a`, ince çizgi `#e8e8e8`, muted `#888888`
-- **Koyu tema:** zemin `#0f0f0f`, yazı `#ffffff`, ince çizgi `#2a2a2a`, muted `#888888`
-- Vurgu rengi YOK (saf nötr). Karamel `#c8956c`, blush `#e8c4a8`, krem `#faf6f0`, sage `#a8b89a`, rose `#d4857a` → KALDIRILACAK
-- Logo "Şelale Design Studio": Playfair Display italik serif font, renk siyah/beyaz (font vurgu, renk vurgu değil)
+### Font (REVİZE — 2026-05-08)
 
-### Tema sistemi
+- **Başlık:** Cormorant Garamond (Google Fonts) — italik serif, lüks butik tarzı
+- **Gövde:** Inter (Aşama 2'de eklendi, ağırlıklar 300/400/500)
+- **Playfair Display KALDIRILACAK** (eski plan iptal)
+- Logo, ürün adları, başlıklar = serif (Cormorant)
+- Etiketler, butonlar, gövde = sans-serif (Inter)
 
-- Default: HER ZAMAN açık tema ile başlar
-- Toggle: üst nav sağda ☀/🌙 ikonu (tek tık)
-- Tercih `localStorage`'a kaydedilir, geri ziyarette hatırlanır
-- Sistem temasını ALGILAMA (kullanıcı tercih ettiyse onu kullan)
-- CSS: `:root` altında açık tema variable'lar, `[data-theme="dark"]` altında koyu tema değerleri
+### Üst nav (yeni düzen)
 
-### Üst nav (yazılı linkler kaldırıldı, sadece ikonlar)
+- **Sol:** "Şelale Design Studio" italik serif logo
+- **Sağ üst (1. satır):** ❤️ favori sayacı + 📞 WhatsApp ikonu + ☰ menü
+- **Sağ alt (2. satır):** 🔍 site içi arama kutusu
+- Floating WhatsApp ve floating AI asistan ikonları KALDIRILACAK
+- Tema toggle YOK (tek tema)
 
-- Sol: ☰ hamburger ikon (sadece ikon, "MENU" yazısı YOK)
-- Orta: "Şelale Design Studio" italik serif logo
-- Sağ: ❤️ favori sayacı + ☀/🌙 tema toggle
-- WhatsApp butonu üstten kaldırılacak
+### Drawer (sağdan açılır — yön değişti)
 
-### Drawer (3-seviyeli yapı korunacak — `data/drawer.yml` dokunulmayacak)
+- Eskiden soldan açılıyordu, şimdi **SAĞDAN** açılır
+- 3-seviyeli yapı korunur (`data/drawer.yml` dokunulmaz)
+- Tüm ikonlar/emojiler `display:none` — sadece düz metin
+- Genişlik: 360px (mobilde 90vw)
+- En altta WhatsApp outline buton (çerçeveli, dolgu yok)
 
-- Drawer içindeki tüm ikonlar gizlenecek (`display: none`)
-- Sadece düz metin isimler gösterilecek
-- En altta WhatsApp butonu KALIR ama outlined (çerçeveli, içi boş, siyah ince çizgi) yapılacak
-- Drawer içinde tema toggle YOK (sadece üst nav'da)
+### Site içi arama (YENİ)
 
-### Floating ikonlar
+- Üst nav alt satırda arama kutusu
+- Yazıldığında MEVCUT AI asistan paneli açılır (yeni panel açma)
+- AI panel: konu chip'leri (pembe bileklik, kokulu mum, hediye seti vs.)
+- Mevcut `AI_CATS` ve `AI_COLORS` sözlüğüne entegre çalışır
+- ESC ve outside click ile kapanır
 
-- Sol alt: WhatsApp outline SVG amblem (içi boş, ince çizgi, daire YOK, transparent zemin) — `currentColor` kullanır
-- Sağ alt: Mesaj balonu outline SVG (içi boş, ince çizgi, 3 nokta içeride) — `currentColor` kullanır
-- Hover: `scale(1.1)`, `0.2s` transition
-- Eski emoji 📱 ve 💬 kaldırılacak
+### Hero (YouTube reklam videosu — YENİ)
 
-### Hero + Kategori + Ürün kartları
+- 21:9 cinematic banner, full-width
+- YouTube Unlisted embed: autoplay, muted, playsinline
+- Sağ alt: ses aç/kapa + duraklat butonları
+- Video yüklenmezse: fotoğraf veya gradient fallback
+- Alt orta: koleksiyon etiketi + 2 buton (Koleksiyon / Hediye Setleri)
+- Hero üzerinde "REKLAM FİLMİ" yazısı YOK
+- Marquee bant hero altında kalır
 
-- Hero gradient/blob arka plan kaldırılır
-- Hero mini-card'lar ve dönen badge kaldırılır
-- Hero sağ tarafına placeholder fotoğraf alanı (gerçek foto gelene kadar kamera outline ikon)
-- Kategori kart gradient'leri (`.c1`-`.c8`) kaldırılır → düz tema uyumlu açık gri zemin
-- Kategori kart büyük emoji'leri kaldırılır → küçük foto alanı
-- Ürün kart gradient'leri (`.p1`-`.p8`) kaldırılır → düz tema uyumlu zemin
-- Border-radius'lar 22px → 8-12px (lüks, minimal)
-- Buton stilleri: birincil = siyah dolgu beyaz yazı (koyu temada beyaz dolgu siyah yazı). İkincil = transparent + 1px border
+### Kategori kartları + Ürün kartları
 
-### Modal galeri (yeni özellik — yöneticiden çoklu foto + video eklenebilir)
+- Kategori: 4 dikey kart, aspect 3/4, düz `#f5f5f5` zemin, outline ikon (opacity 0.25)
+- Ürün: 4 sütun grid (mobil 2), kare placeholder + kamera ikonu
+- Ürün kart altı: kategori (uppercase) + isim (serif) + fiyat
+- Sol üst rozet: siyah dolgu beyaz yazı (ÇOK SATAN, YENİ)
+- Sağ üst: yuvarlak beyaz favori butonu
+- Border-radius 22px → 0-4px (keskin köşe)
+- Tüm `.c1-.c8` ve `.p1-.p8` gradient'leri KALDIRILACAK
 
-- Mevcut modal yenilenir: sol tarafa BÜYÜK medya alanı (300x300+ minimum), sağ tarafa bilgi (isim, açıklama, fiyat)
-- Çoklu fotoğraf + video desteği: ana medya + altta thumbnail strip (foto/video karışık olabilir)
-- Video desteği: `mp4` / `webm` formatları, autoplay yok, kullanıcı kontrol eder (`controls` attr), `playsinline` mobil için, `preload="metadata"`
-- Video thumbnail: ilk frame veya manuel poster (yöneticiden `poster` alanı)
-- Resim üzerine tıklayınca tam ekran lightbox (ok tuşları ile galeri gezinme, ESC ile kapatma)
-- Video lightbox'ta tam ekran oynatma desteği
-- Medya yokken kamera outline ikon placeholder
-- `admin/config.yml`: tek `image` alanı yerine `media` liste alanı — her madde `{ type: image|video, src, poster? }` (geriye uyumlu — eski tek `image` alanı varsa onu da okur, yöneticiden eski ürünler bozulmadan yeni çoklu medya formatına geçilebilir)
-- `products/*.md` şeması: `image` (eski) VEYA `media` (yeni) alanı
+### Modal galeri (çoklu foto — YENİ)
 
-### AI panel + Footer + Son temizlik
+- Sol büyük resim (aspect 1) + sağ ürün bilgisi
+- Alt thumbnail strip (3-10 foto)
+- Sol-sağ ok butonları, klavye: ESC, ←, →
+- 1 foto varsa thumb ve oklar gizlenir
+- `admin/config.yml`: `images` list widget eklenir, eski tek `image` alanı geriye uyumlu okunur
+- WhatsApp + Favori butonları altta
 
-- AI asistan paneli renkleri tema uyumlu (gradient/karamel kalkar)
-- Modal renkleri tema uyumlu
-- Footer: koyu zemin tema uyumlu (`#1a1a1a` / `#0f0f0f`)
-- Newsletter gradient kalkar
-- Toast renkleri tema uyumlu
-- Reviews/yorumlar warm krem zemin kalkar
-- About bölümü büyük emoji blob kalkar → placeholder foto alanı
-- Tüm kalan karamel/krem hex'ler CSS variable'a çevrilir
+### Diğer bölümler
 
-### Çalışma şekli — 5 alt adım, her adımda ayrı commit + onay bekle
+- **Şeffaf çanta banner:** tam genişlik siyah arka plan, beyaz italik başlık, "Keşfet" beyaz buton, hero ile ürünler arasına
+- **Özel günler:** 5 dikey kart, "01 → 05" italik numara üstte
+- **Hakkımızda:** 2 sütun, blob/emoji kalkar, placeholder foto, 3 istatistik
+- **Yorumlar:** 3 kart, açık gri zemin (`#fafafa`), italik serif metin
+- **Instagram grid:** 6 kare placeholder (gerçek embed sonra), @selale_miyuki link
+- **Footer:** siyah zemin (`#1a1a1a`), 4 sütun
+- **Newsletter KALDIRILIR** (§ 4.12 zaten diyor)
 
-- **Adım 5.1:** Renk paleti + tema toggle altyapısı (CSS variable'lar, ☀/🌙 toggle, `localStorage`)
-- **Adım 5.2:** Üst nav + drawer ikon kaldırma + floating SVG ikonlar (üst WhatsApp kalkar, drawer ikonları gizlenir, alt floating SVG outline'a döner)
-- **Adım 5.3:** Hero + kategoriler + ürün kartları (gradient kaldır, minimal görünüm, placeholder foto alanları)
-- **Adım 5.4:** Modal galeri (büyük medya, çoklu foto + video, lightbox, `admin/config.yml` `media` array desteği, `products/*.md` geriye uyumluluk)
-- **Adım 5.5:** AI panel + footer + son temizlik + plan.md işaretle
+### Alt adımlar (sırayla, her biri ayrı commit + push + onay bekleme)
 
-Her adım sonunda commit + push, sonra DUR ve kullanıcıya **"Adım 5.X tamamlandı, push edildi. Canlı sitede test edip devam etmemi söyler misiniz?"** diye sor. Kullanıcı onayı olmadan bir sonraki adıma geçme.
+- **5.1** Renk paleti + font + temel altyapı
+  - Cormorant Garamond import, `:root` yeniden yaz, Playfair kaldır
+  - Karamel/krem/blush → siyah/beyaz/gri (CSS variable)
+  - CMS etkisi: yok | Risk: orta
 
-### Korunacak (yönetici paneli bozulmasın)
+- **5.2** Üst nav + drawer ikonları + floating temizlik
+  - Üst nav 3 ikon + arama kutusu
+  - Drawer ikon span'ları gizlenir, SAĞDAN açılır
+  - Floating WhatsApp + AI ikonları HTML'den kaldırılır
+  - Drawer altı WhatsApp butonu outlined yapılır
+  - CMS etkisi: drawer.yml korunur (sadece render değişir) | Risk: düşük
+
+- **5.3** Site içi arama + AI asistan entegrasyonu
+  - Üst nav arama input → mevcut AI panel'e bağlanır
+  - AI panel sağ üstten açılır (380px), chip'ler eklenir
+  - ESC + outside click ile kapanır
+  - CMS etkisi: yok | Risk: orta
+
+- **5.4** Hero reklam videosu + foto fallback
+  - `data/hero.yml`'e: `background_mode` (gradient/foto/video), `background_image`, `video_youtube_url`
+  - `admin/config.yml` hero schema güncellenir
+  - `renderHero()` mode'a göre uygun gösterim
+  - CSP'ye YouTube domain eklenir: `_worker.js` PUBLIC_CSP + `index.html` meta CSP
+    - `frame-src https://www.youtube.com https://www.youtube-nocookie.com`
+  - CMS etkisi: hero.yml + admin/config.yml + 2 yerde CSP | Risk: orta-yüksek
+
+- **5.5** Modal galeri + çoklu foto
+  - `admin/config.yml`'de `images` list widget (geriye uyumlu)
+  - Modal HTML: grid sol resim + sağ bilgi + alt thumb
+  - Sol-sağ ok + klavye kısayolları
+  - `imgFallback` korunur (placeholder kamera)
+  - CMS etkisi: admin/config.yml + products schema | Risk: orta
+
+- **5.6** Hero altı bölümler (kategoriler, ürünler, banner, özel günler)
+  - Marquee siyah/beyaz, kategori gradient'leri kalkar
+  - Şeffaf çanta banner eklenir
+  - Özel günler 5 dikey kart
+  - Border-radius keskinleşir
+  - CMS etkisi: yok | Risk: orta
+
+- **5.7** Hakkımızda + yorumlar + Instagram + footer
+  - Hakkımızda 2 sütun + 3 istatistik
+  - Yorumlar açık gri zemin
+  - Instagram 6 kare placeholder
+  - Footer siyah 4 sütun
+  - Newsletter KALDIRILIR
+  - CMS etkisi: yok | Risk: düşük
+
+### Korunacak
 
 - ✅ Sveltia panelinde ürün ekle/sil/düzenle çalışmaya devam etsin
-- ✅ `data/drawer.yml` yapısı korunsun (sadece `index.html`'de ikon span'ları gizlenecek)
-- ✅ `admin/config.yml` yeni `images` array desteği eklensin (eski `image` tek alan geriye uyumlu okunacak)
-- ✅ `loadCMSData()` ve `loadProducts()` fonksiyonları bozulmasın
-- ✅ `atelyeFavs` localStorage validation korunsun (integer array, `id < 10000`)
-- ✅ `aiEscape()` XSS koruması her dinamik string'de korunsun
-- ✅ Yeni kategori/renk eklendiğinde `admin/config.yml` + `index.html` filter butonları + `AI_COLORS` senkron tutulsun
+- ✅ `data/drawer.yml` yapısı korunsun
+- ✅ `admin/config.yml`'e `images` array eklensin (eski `image` geriye uyumlu)
+- ✅ `loadCMSData()` ve `loadProducts()` bozulmasın
+- ✅ `atelyeFavs` localStorage validation korunsun
+- ✅ `aiEscape()` XSS koruması korunsun
 
-### Dokunulmayacak
+### Dokunulmayacak (Aşama 5.4 hariç — CSP'ye YouTube ekleme)
 
-- ❌ `_worker.js` (CSP, header'lar)
+- ❌ `_worker.js` (Aşama 5.4 dışında)
 - ❌ `_headers`
-- ❌ `admin/index.html` (Sveltia loader, CSP)
-- ❌ Cloudflare Worker (`sveltia-cms-auth.aiakliselim.workers.dev`)
+- ❌ `admin/index.html`
+- ❌ Cloudflare Worker
 - ❌ GitHub OAuth ayarları
-- ❌ Cloudflare Pages deployment ayarları
-- ❌ DNS / Domain ayarları
+- ❌ Cloudflare Pages deployment
+- ❌ DNS / Domain
 - ❌ `data/drawer.yml` yapısı
-- ❌ `data/products.json` (workflow regenerates)
+- ❌ `data/products.json`
 
 ---
 
@@ -436,17 +483,6 @@ Her adım sonunda commit + push, sonra DUR ve kullanıcıya **"Adım 5.X tamamla
 **Adım L — AI asistan sözlüğü (§ 4.11)**
 
 **Adım M — Newsletter kaldırma (§ 4.12)**
-
----
-
-## 8. AŞAMA 6 — Aşama 5'e entegre edildi
-
-Eski Aşama 6 (görsel rötuş) Adım 5.2'de yapıldı:
-
-- **6A WhatsApp SVG amblem** → 5.2'de yapıldı ✅
-- **6B AI Asistan ikonu (mesaj balonu outline)** → 5.2'de yapıldı ✅
-- **6C Çift WhatsApp temizliği (üst nav'dan kaldırıldı)** → 5.2'de yapıldı ✅
-- **6D `_worker.js` doğrulaması** → ayrı iş, **Aşama 7** olarak ileride yapılacak (CSP / header sanity check; Aşama 5 bittikten sonra)
 
 ---
 
