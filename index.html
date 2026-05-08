@@ -1287,6 +1287,8 @@ function aiConfirmNo(btn){
   btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);
   if(aiPending && aiPending.no){ const fn = aiPending.no; aiPending = null; fn(); }
   else { aiPending = null; aiAfter(500, ()=>aiBotMsg('Tamam 🌸 Başka bir şey arıyor musunuz?')); }
+  // Kullanıcı vazgeçti — paneli küçült (geçmiş korunur). Mesaj kullanıcıya görünsün diye gecikmeyle.
+  setTimeout(()=>{ if(typeof closeAIPanel === 'function') closeAIPanel(); }, 1600);
 }
 
 /* Hızlı seçim chip'leri */
@@ -1315,21 +1317,23 @@ function aiShowMatches(matches, intent){
   // 2. Filter butonlarındaki "active" durumunu kaldır
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
 
-  // 3. 3D ürünleri varsa printer-section'a, değilse products bölümüne kay
+  // 3. AI paneli otomatik küçült (eylem tamamlandı — sayfa görünür olsun)
+  closeAIPanel();
+
+  // 4. 3D ürünleri varsa printer-section'a, değilse products bölümüne kay
   const hasOnly3D = matches.length && matches.every(p=>{
     const c = Array.isArray(p.cat)?p.cat:[p.cat];
     return c.includes('3d');
   });
   const targetId = hasOnly3D ? 'printer-section' : 'products';
 
-  // 4. Asistan paneli açıksa biraz daralt değil — paneli olduğu yerde bırak
+  // 5. Smooth scroll — panel kapanma animasyonundan (.28s) sonra başlat
   setTimeout(()=>{
     const target = document.getElementById(targetId);
     if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-  }, 100);
+  }, 320);
 
-  // 5. Vurgulama: eşleşen ID'leri parlak yap, diğerleri zaten gizli (renderProducts liste verdi)
-  // Tüm liste yerine sadece eşleşmeleri gösterdik, ekstra vurgu için ilk 3'ü daha belirgin yap
+  // 6. Vurgulama: ilk 3 ürünü vurgula
   setTimeout(()=>{
     const cards = document.querySelectorAll('#productGrid .product-card');
     cards.forEach((c,i)=>{
@@ -1337,7 +1341,7 @@ function aiShowMatches(matches, intent){
     });
     // 3 saniye sonra vurguyu kaldır
     setTimeout(()=>cards.forEach(c=>c.classList.remove('ai-highlight')), 3000);
-  }, 700);
+  }, 900);
 }
 
 /* "Tüm ürünleri göster" — sıfırlama */
@@ -1465,6 +1469,11 @@ function openAIPanel(prefill){
     if(typeof prefill === 'string' && prefill.length){ aiInput.value = prefill; }
     setTimeout(()=>aiInput.focus(), wasOpen ? 0 : 320);
   }
+  // Açılınca son mesaj görünsün — geçmişin altına kaydır
+  setTimeout(()=>{
+    const body = document.getElementById('aiBody');
+    if(body) body.scrollTop = body.scrollHeight;
+  }, wasOpen ? 0 : 320);
 }
 function closeAIPanel(){
   const panel = document.getElementById('aiPanel');
