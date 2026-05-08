@@ -177,7 +177,6 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .product-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .product-placeholder{position:absolute;inset:0;background:#f5f5f5;display:flex;align-items:center;justify-content:center;}
 .product-placeholder svg{width:32%;max-width:80px;height:auto;color:#c4c4c4;}
-.modal-img .product-placeholder svg{width:42%;max-width:46px;}
 .p1{background:linear-gradient(135deg,#faeee4,#f0d4bc);}
 .p2{background:linear-gradient(135deg,#e8eed8,#d0dcc0);}
 .p3{background:linear-gradient(135deg,#fce4e4,#f0c8c4);}
@@ -305,21 +304,57 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 .footer-col a:hover{color:var(--blush);}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;flex-wrap:wrap;gap:.8rem;}
 
-/* ═══ MODAL ═══ */
-.modal-overlay{position:fixed;inset:0;z-index:700;background:rgba(44,33,24,.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:1rem;}
+/* ═══ MODAL (5.5 — galeri) ═══ */
+.modal-overlay{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:1rem;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:#fff;border-radius:28px;max-width:480px;width:100%;padding:2.2rem;transform:translateY(30px) scale(.96);transition:transform .35s;position:relative;max-height:90vh;overflow-y:auto;}
+.modal{background:#fff;border-radius:8px;max-width:1080px;width:100%;max-height:92vh;display:grid;grid-template-columns:1.1fr 1fr;gap:0;transform:translateY(30px) scale(.96);transition:transform .35s;position:relative;overflow:hidden;}
 .modal-overlay.open .modal{transform:none;}
-.modal-close{position:absolute;top:1.3rem;right:1.3rem;background:var(--warm);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
-.modal-product{display:flex;gap:1.2rem;margin:1.5rem 0;align-items:center;}
-.modal-img{width:105px;height:105px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;flex-shrink:0;overflow:hidden;position:relative;}
-.modal-details h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;margin-bottom:.3rem;}
-.modal-details p{font-size:.82rem;color:var(--muted);line-height:1.6;}
-.modal-price{font-size:1.3rem;color:var(--caramel);font-weight:500;margin-top:.5rem;}
-.modal-fav-row{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;}
-.modal-fav-btn{display:flex;align-items:center;gap:.5rem;background:var(--warm);border:none;border-radius:50px;padding:.55rem 1.2rem;cursor:pointer;font-size:.82rem;font-family:'Inter',sans-serif;color:var(--dark);transition:background .2s;}
-.modal-fav-btn:hover{background:var(--blush);}
-.modal-fav-btn.faved{background:#fde8e8;color:var(--rose);}
+.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.92);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;z-index:5;transition:background .2s;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.modal-close:hover{background:#fff;}
+.modal-gallery{display:flex;flex-direction:column;background:var(--placeholder);min-height:0;}
+.modal-stage{position:relative;flex:1;aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:zoom-in;background:var(--placeholder);}
+.modal-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.modal-stage .product-placeholder{position:absolute;inset:0;background:var(--placeholder);display:flex;align-items:center;justify-content:center;}
+.modal-stage .product-placeholder svg{width:30%;max-width:80px;color:#c4c4c4;}
+.modal-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;line-height:1;z-index:3;transition:background .2s,transform .15s;}
+.modal-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.05);}
+.modal-arrow.prev{left:.7rem;} .modal-arrow.next{right:.7rem;}
+.modal-thumbs{display:flex;gap:.4rem;padding:.6rem;background:#fff;border-top:1px solid var(--line);overflow-x:auto;flex-shrink:0;}
+.modal-thumb{flex:0 0 64px;height:64px;border-radius:4px;overflow:hidden;border:1.5px solid transparent;cursor:pointer;background:var(--placeholder);position:relative;padding:0;transition:border-color .2s,opacity .2s;opacity:.7;}
+.modal-thumb:hover{opacity:1;}
+.modal-thumb.active{border-color:var(--text);opacity:1;}
+.modal-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.modal-thumb .product-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--placeholder);}
+.modal-thumb .product-placeholder svg{width:42%;max-width:30px;color:#c4c4c4;}
+.modal-info{padding:2.4rem 2.2rem;display:flex;flex-direction:column;overflow-y:auto;}
+.modal-cat{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:.6rem;font-weight:500;}
+.modal-info h4{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--text);margin-bottom:.7rem;line-height:1.2;font-weight:500;}
+.modal-info p{font-size:.88rem;color:var(--neutral-muted);line-height:1.75;margin-bottom:1.5rem;}
+.modal-price{font-size:1.4rem;color:var(--text);font-weight:500;margin-bottom:1.6rem;font-family:'Cormorant Garamond',serif;}
+.modal-actions{display:flex;flex-direction:column;gap:.7rem;margin-top:auto;}
+.modal-fav-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;background:transparent;border:1.5px solid var(--text);color:var(--text);border-radius:4px;padding:.85rem 1.2rem;cursor:pointer;font-size:.78rem;font-family:'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:background .2s,color .2s;}
+.modal-fav-btn:hover{background:var(--text);color:var(--bg);}
+.modal-fav-btn.faved{background:#fde8e8;border-color:#fde8e8;color:var(--text);}
+
+/* ═══ LIGHTBOX (5.5 — tam ekran) ═══ */
+.lightbox{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox-img{max-width:92vw;max-height:88vh;object-fit:contain;display:block;}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:42px;height:42px;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.lightbox-close:hover{background:rgba(255,255,255,.22);}
+.lightbox-arrow{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:1.5rem;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.lightbox-arrow:hover{background:rgba(255,255,255,.22);}
+.lightbox-arrow.prev{left:1.5rem;} .lightbox-arrow.next{right:1.5rem;}
+.lightbox-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.78rem;letter-spacing:1.5px;font-family:'Inter',sans-serif;}
+
+@media(max-width:780px){
+  .modal{grid-template-columns:1fr;max-height:96vh;border-radius:6px;}
+  .modal-info{padding:1.5rem 1.3rem;}
+  .modal-stage{aspect-ratio:4/3;}
+  .modal-info h4{font-size:1.3rem;}
+  .lightbox-arrow{width:42px;height:42px;}
+  .lightbox-arrow.prev{left:.6rem;} .lightbox-arrow.next{right:.6rem;}
+}
 
 /* ═══ TOAST ═══ */
 .toast{position:fixed;bottom:2rem;right:2rem;z-index:2000;background:var(--dark);color:#fff;border-radius:16px;padding:.9rem 1.4rem;display:flex;align-items:center;gap:.7rem;box-shadow:0 15px 40px rgba(44,33,24,.25);transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);font-size:.88rem;pointer-events:none;}
@@ -887,25 +922,39 @@ footer{background:#0d0d0d;color:rgba(255,255,255,.55);padding:4rem 5% 2rem;}
 </footer>
 
 <!-- WA FLOAT -->
-<!-- MODAL -->
+<!-- MODAL (5.5 — sol galeri, sağ bilgi) -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeModalDirect()">✕</button>
-    <div class="modal-product">
-      <div class="modal-img" id="modalImg"></div>
-      <div class="modal-details">
-        <h4 id="modalName"></h4>
-        <p id="modalDesc"></p>
-        <div class="modal-price" id="modalPrice"></div>
+    <button class="modal-close" onclick="closeModalDirect()" aria-label="Kapat">✕</button>
+    <div class="modal-gallery">
+      <div class="modal-stage" id="modalStage" onclick="openLightbox()">
+        <button class="modal-arrow prev" id="modalPrev" onclick="event.stopPropagation();galleryStep(-1)" aria-label="Önceki">‹</button>
+        <button class="modal-arrow next" id="modalNext" onclick="event.stopPropagation();galleryStep(1)" aria-label="Sonraki">›</button>
+      </div>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <div class="modal-cat" id="modalCat"></div>
+      <h4 id="modalName"></h4>
+      <p id="modalDesc"></p>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-actions">
+        <button class="modal-fav-btn" id="modalFavBtn" onclick="toggleFavFromModal()">🤍 Favorilere Ekle</button>
+        <a class="btn-wa-order" id="modalWaBtn" href="#" target="_blank" rel="noopener noreferrer">
+          <span>📱</span> WhatsApp'tan Sipariş Ver
+        </a>
       </div>
     </div>
-    <div class="modal-fav-row">
-      <button class="modal-fav-btn" id="modalFavBtn" onclick="toggleFavFromModal()">🤍 Favorilere Ekle</button>
-    </div>
-    <a class="btn-wa-order" id="modalWaBtn" href="#" target="_blank" rel="noopener noreferrer">
-      <span>📱</span> WhatsApp'tan Sipariş Ver
-    </a>
   </div>
+</div>
+
+<!-- LIGHTBOX (5.5 — tam ekran) -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxDirect()" aria-label="Kapat">✕</button>
+  <button class="lightbox-arrow prev" id="lightboxPrev" onclick="event.stopPropagation();galleryStep(-1)" aria-label="Önceki">‹</button>
+  <button class="lightbox-arrow next" id="lightboxNext" onclick="event.stopPropagation();galleryStep(1)" aria-label="Sonraki">›</button>
+  <img class="lightbox-img" id="lightboxImg" alt="">
+  <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <!-- TOAST -->
@@ -1027,23 +1076,111 @@ function filterProducts(cat, btn){
   setTimeout(()=>document.getElementById('products').scrollIntoView({behavior:'smooth'}),50);
 }
 
-/* ════ MODAL ════ */
+/* ════ MODAL + GALERİ (5.5) ════ */
+let galleryImages = [];
+let galleryIndex = 0;
+
+/* Hem yeni `images` listesini (object {src} veya düz string) hem eski `image` string'ini destekler. */
+function getProductImages(p){
+  if(p && Array.isArray(p.images) && p.images.length){
+    const arr = p.images
+      .map(x => typeof x === 'string' ? x : (x && typeof x.src === 'string' ? x.src : ''))
+      .filter(s => typeof s === 'string' && s.length > 0);
+    if(arr.length) return arr;
+  }
+  if(p && typeof p.image === 'string' && p.image) return [p.image];
+  return [];
+}
+
+function renderGalleryStage(){
+  const stage = document.getElementById('modalStage');
+  const prevBtn = document.getElementById('modalPrev');
+  const nextBtn = document.getElementById('modalNext');
+  // ok butonlarını koru, diğer içerikleri temizle
+  Array.from(stage.children).forEach(c => { if(c !== prevBtn && c !== nextBtn) c.remove(); });
+  const src = galleryImages[galleryIndex];
+  if(src){
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = currentProduct ? currentProduct.name : '';
+    img.onerror = () => imgFallback(img);
+    stage.insertBefore(img, prevBtn);
+  } else {
+    const ph = document.createElement('div');
+    ph.className = 'product-placeholder';
+    ph.setAttribute('aria-hidden', 'true');
+    ph.innerHTML = PLACEHOLDER_SVG;
+    stage.insertBefore(ph, prevBtn);
+  }
+  const multi = galleryImages.length > 1;
+  prevBtn.style.display = multi ? '' : 'none';
+  nextBtn.style.display = multi ? '' : 'none';
+  // Lightbox imajı + sayaç
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCount = document.getElementById('lightboxCounter');
+  const lbPrev = document.getElementById('lightboxPrev');
+  const lbNext = document.getElementById('lightboxNext');
+  if(src){ lbImg.src = src; lbImg.alt = currentProduct ? currentProduct.name : ''; lbImg.style.display=''; }
+  else   { lbImg.removeAttribute('src'); lbImg.style.display='none'; }
+  lbCount.textContent = multi ? `${galleryIndex+1} / ${galleryImages.length}` : '';
+  if(lbPrev) lbPrev.style.display = multi ? '' : 'none';
+  if(lbNext) lbNext.style.display = multi ? '' : 'none';
+  // Aktif thumbnail
+  document.querySelectorAll('#modalThumbs .modal-thumb').forEach((t,i)=>{
+    t.classList.toggle('active', i === galleryIndex);
+  });
+}
+
+function renderGalleryThumbs(){
+  const wrap = document.getElementById('modalThumbs');
+  if(galleryImages.length <= 1){ wrap.innerHTML = ''; wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  wrap.innerHTML = galleryImages.map((src, i) =>
+    `<button type="button" class="modal-thumb${i===galleryIndex?' active':''}" data-i="${i}" onclick="galleryGo(${i})" aria-label="Foto ${i+1}">
+       <img src="${aiEscape(src)}" alt="" onerror="imgFallback(this)">
+     </button>`
+  ).join('');
+}
+
+function galleryGo(i){
+  if(!galleryImages.length) return;
+  const len = galleryImages.length;
+  galleryIndex = ((i % len) + len) % len;
+  renderGalleryStage();
+}
+function galleryStep(d){ galleryGo(galleryIndex + d); }
+
 function openModal(id){
-  currentProduct = products.find(p=>p.id===id); if(!currentProduct) return;
+  currentProduct = products.find(p => p.id === id); if(!currentProduct) return;
   document.getElementById('modalName').textContent  = currentProduct.name;
   document.getElementById('modalDesc').textContent  = currentProduct.desc;
   document.getElementById('modalPrice').textContent = currentProduct.price;
-  const imgEl = document.getElementById('modalImg');
-  imgEl.className = 'modal-img ' + currentProduct.bg;
-  imgEl.innerHTML = imgContent(currentProduct);
+  const catRaw = Array.isArray(currentProduct.cat) ? currentProduct.cat[0] : currentProduct.cat;
+  document.getElementById('modalCat').textContent = catRaw ? String(catRaw).replace(/-/g,' ') : '';
+  galleryImages = getProductImages(currentProduct);
+  galleryIndex = 0;
+  renderGalleryThumbs();
+  renderGalleryStage();
   const waMsg = encodeURIComponent(`Merhaba! "${currentProduct.name}" ürününü sipariş etmek istiyorum.`);
   document.getElementById('modalWaBtn').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
   updateModalFavBtn();
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(e){ if(e.target===document.getElementById('modalOverlay')) closeModalDirect(); }
-function closeModalDirect(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function closeModal(e){ if(e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
+function closeModalDirect(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  closeLightboxDirect();
+  document.body.style.overflow = '';
+}
+
+/* Lightbox */
+function openLightbox(){
+  if(!galleryImages.length) return;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e){ if(e.target === document.getElementById('lightbox')) closeLightboxDirect(); }
+function closeLightboxDirect(){ document.getElementById('lightbox').classList.remove('open'); }
 
 /* ════ FAV PAGE ════ */
 function renderFavPage(){
@@ -1986,11 +2123,22 @@ loadCMSData();
       }
     });
   }
-  // ESC kapatma — global
+  // ESC + ok tuşları — global (5.5: modal galeri + lightbox)
   document.addEventListener('keydown', (e)=>{
+    const lb = document.getElementById('lightbox');
+    const modal = document.getElementById('modalOverlay');
+    const lbOpen = lb && lb.classList.contains('open');
+    const modalOpen = modal && modal.classList.contains('open');
     if(e.key === 'Escape'){
+      if(lbOpen){ closeLightboxDirect(); return; }
+      if(modalOpen){ closeModalDirect(); return; }
       const panel = document.getElementById('aiPanel');
       if(panel && panel.classList.contains('open')) closeAIPanel();
+      return;
+    }
+    if((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && (lbOpen || modalOpen)){
+      e.preventDefault();
+      galleryStep(e.key === 'ArrowLeft' ? -1 : 1);
     }
   });
   // Outside click kapatma

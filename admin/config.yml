@@ -329,7 +329,14 @@ collections:
           - { label: 'P8', value: p8 }
       - { label: 'Rozet', name: badge, widget: string, required: false, hint: 'Yeni / Çok Satan / Popüler — boş bırakılabilir' }
       - { label: 'Yeni Ürün mü?', name: isNew, widget: boolean, default: false }
-      - { label: 'Ürün Fotoğrafı', name: image, widget: image, required: false }
+      - label: 'Ürün Fotoğrafları (çoklu)'
+        name: images
+        widget: list
+        required: false
+        hint: 'Birden fazla foto ekleyebilirsiniz. İlk foto kapak olarak kullanılır. Boş bırakırsanız aşağıdaki tek "Ürün Fotoğrafı" alanı kullanılır (eski ürünler için).'
+        fields:
+          - { label: 'Foto', name: src, widget: image }
+      - { label: 'Ürün Fotoğrafı (eski tek foto — yeni ürünlerde "Ürün Fotoğrafları"nı kullanın)', name: image, widget: image, required: false }
       - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int, hint: 'Küçük sayı önce gösterilir' }
 
   # ─────────────────────────────────────────────────────────
