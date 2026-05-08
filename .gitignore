@@ -56,3 +56,6 @@ temp/
 *.tmp
 *.bak
 *.old
+
+.dev.vars*
+!.dev.vars.example
