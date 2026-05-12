@@ -137,9 +137,19 @@ collections:
               - { label: 'Gradient (nötr gri)', value: gradient }
               - { label: 'Fotoğraf', value: foto }
               - { label: 'YouTube Video', value: video }
-            hint: 'Hero arka planını seçin. Foto modu için aşağıya görsel yükleyin; Video modu için YouTube linki girin.'
-          - { label: 'Arka Plan Fotoğrafı', name: background_image, widget: image, required: false, hint: 'Sadece "Fotoğraf" modu için. Genişlik ≥ 1920px önerilir, 21:9 oranı en iyi.' }
+            hint: 'Hero arka planını seçin. Foto modu için aşağıya görsel yükleyin; Video modu için YouTube linki girin. Geçersiz/eksik girdi olursa otomatik gradient''e döner.'
+          - { label: 'Arka Plan Fotoğrafı', name: background_image, widget: image, required: false, hint: 'Sadece "Fotoğraf" modu için. Genişlik ≥ 1920px ve 21:9 oran önerilir; 1-2 MB altı tutmaya çalışın. Yükleme images/ klasörüne düşer; URL kırıksa otomatik gradient gösterilir.' }
           - { label: 'YouTube Video URL', name: video_youtube_url, widget: string, required: false, hint: 'Sadece "Video" modu için. Örn: https://www.youtube.com/watch?v=XXXXXXXXXXX (Unlisted önerilir).' }
+          - label: 'Üst Karartma (Overlay) Yoğunluğu'
+            name: overlay_intensity
+            widget: select
+            default: medium
+            options:
+              - { label: 'Yok (overlay gizli)', value: none }
+              - { label: 'Hafif', value: light }
+              - { label: 'Orta (önerilen)', value: medium }
+              - { label: 'Güçlü (açık görsellerde)', value: strong }
+            hint: 'Foto/Video modunda hero metnin okunabilirliği için arka plan üzerine eklenen koyu katmanın yoğunluğu. Açık renkli fotoğraflarda "Güçlü", koyu fotoğraflarda "Hafif" iyidir.'
           - label: Birincil Buton
             name: btn_primary
             widget: object

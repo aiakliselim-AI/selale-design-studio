@@ -5,10 +5,11 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-12. Adım H tamamlandı — özel gün
-> kartlarından şeffaf çanta builder'a (preset bag + items ile)
-> tek tıkla yönlendirme. Önceki güncelleme 2026-05-08 (Aşama 5
-> tasarım kararları, sağdan drawer, hero YouTube vb.).
+> **Son güncelleme:** 2026-05-12. Adım H + Adım I tamamlandı —
+> özel günden şeffaf çanta builder'a preset yönlendirme; hero foto
+> modu polish (overlay yoğunluğu + onerror fallback). Önceki büyük
+> güncelleme 2026-05-08 (Aşama 5 tasarım kararları, sağdan drawer,
+> hero YouTube vb.).
 
 ---
 
@@ -105,11 +106,11 @@ Eksikleri kapatma + yeni özellikler ekleme aşamasıdır.
 - `index.html` hardcoded kart bloğu silinecek, `renderCategories()` eklenecek
 - `loadCMSData()` içine `data/categories.json` fetch'i eklenecek
 
-### 4.3 Hero arka plan foto seçeneği (yarı tamam, devam)
+### 4.3 Hero arka plan foto seçeneği ✅ TAMAMLANDI (Aşama 5.4 + Adım I, 2026-05-12)
 
-`data/hero.yml` + `renderHero()` çalışıyor ama "gradient / foto" mod seçeneği eksik.
-
-**Yapılacak:** `admin/config.yml` hero schema'sına `background_mode` (gradient/foto) ve `background_image` alanları eklenecek. `renderHero()` bu modu desteklemeli.
+- `admin/config.yml` hero schema: `background_mode` (gradient/foto/video), `background_image`, `video_youtube_url`, `overlay_intensity` (none/light/medium/strong) ✅
+- `renderHero()` → `applyHeroBackground()` 3 modu da destekliyor; kırık görselde `onerror` → gradient fallback ✅
+- `data/hero.yml` tüm alanları içeriyor; varsayılan `gradient` + `overlay_intensity: medium` ✅
 
 ### 4.4 Müşteri yorumları sistemi (YENİ — eksik)
 
@@ -505,7 +506,13 @@ EN ALT (sabit)
 - Yeni JS: `openGiftbagFromEvent(slug)` — `giftbagState`'i ön doldurup `#giftbag-builder`'a smooth-scroll yapar
 - Etkinlik manifesti yeniden üretildi (`data/events.json`)
 
-**Adım I — Hero arka plan foto (§ 4.3)**
+✅ **Adım I — 2026-05-12 — Hero arka plan foto (§ 4.3) TAMAMLANDI**
+- CMS/JS altyapısı zaten Aşama 5.4'te yapılmıştı (`background_mode`, `background_image`, `video_youtube_url`, `renderHero` 3 mod desteği)
+- Polish: `img.onerror` → kırık URL'de otomatik gradient fallback (`applyGradientFallback`)
+- Yeni CMS alanı: `overlay_intensity` (none/light/medium/strong) — foto/video modunda metnin okunabilirliği için arka plan koyu katman yoğunluğu
+- `.hero-shade.intensity-{none,light,strong}` CSS modifier'ları eklendi (medium = mevcut davranış)
+- `admin/config.yml` hero hint'leri netleştirildi (boyut, fallback davranışı)
+- `data/hero.yml` default `overlay_intensity: medium` ile güncellendi
 
 **Adım J — Ürün kategori genişletme (§ 4.9)**
 
