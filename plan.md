@@ -5,12 +5,12 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-12. Adım H–L tamamlandı —
-> özel günden şeffaf çanta builder'a preset yönlendirme; hero foto
-> modu polish (overlay yoğunluğu + onerror fallback); ürün
-> kategorileri genişletildi (koku, parfum, anahtarlık alt etiketleri)
-> + AI sözlüğü sync; favorilere göre dinamik WhatsApp mesajları;
-> AI asistan "anneler günü / sevgilim / şeffaf çanta seti" intent'leri.
+> **Son güncelleme:** 2026-05-12. **Bölüm 9'daki Adım A-M
+> dizisi tamamlandı.** H-L: özel günden şeffaf çanta builder'a
+> preset yönlendirme; hero foto modu polish; ürün kategorileri
+> + AI sözlüğü genişletildi; favorilere göre dinamik WhatsApp;
+> AI asistan "anneler günü / sevgilim / şeffaf çanta seti"
+> intent'leri. M: newsletter zaten 5.7'de silinmişti, doğrulandı.
 > Önceki büyük güncelleme 2026-05-08 (Aşama 5 tasarım kararları,
 > sağdan drawer, hero YouTube vb.).
 
@@ -198,9 +198,9 @@ Tıklayınca → Şeffaf Çanta akışına gider, **uygun filtre uygulanmış** 
 - `aiApplyGiftbagPreset(bagSlug, itemSlugs)` yeni ortak helper — `openGiftbagFromEvent` artık bunu kullanıyor (DRY)
 - `data/ai.yml` `quick_chips` yenilendi: "Anneler günü hediyesi", "Sevgilim için hediye", "Şeffaf çanta seti" eklendi
 
-### 4.12 Newsletter kaldırılır
+### 4.12 Newsletter kaldırılır ✅ TAMAMLANDI (Aşama 5.7 + Adım M doğrulaması, 2026-05-12)
 
-Mevcut e-posta abone kutusu kaldırılır. WhatsApp grubu henüz yok; ileride açılırsa link eklenecek.
+E-posta abone kutusu Aşama 5.7'de (commit `0e5d792`) sayfa yenilemesi sırasında zaten silinmişti. Adım M repoda iz kalıp kalmadığını doğruladı: HTML/CSS/JS/CMS schema/data — hiçbir yerde `newsletter` veya `abone` referansı yok. WhatsApp grubu açılırsa drawer/footer'a link eklenebilir.
 
 ---
 
@@ -538,7 +538,11 @@ EN ALT (sabit)
   — `openGiftbagFromEvent` artık bunu çağırıyor (DRY)
 - `data/ai.yml` quick_chips güncellendi: yeni intent örnekleri görünür
 
-**Adım M — Newsletter kaldırma (§ 4.12)**
+✅ **Adım M — 2026-05-12 — Newsletter kaldırma (§ 4.12) TAMAMLANDI**
+- E-posta abone kutusu Aşama 5.7'de (commit `0e5d792`) zaten kaldırılmıştı
+- Adım M, repo-wide arama ile newsletter / abone izlerinin kalmadığını doğruladı
+- Kod değişikliği gerekmedi; sadece plan.md güncellendi
+- WhatsApp grubu açılırsa drawer/footer'a link eklenebilir
 
 ---
 
