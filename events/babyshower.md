@@ -11,6 +11,11 @@ items: []
 price_label: Fiyat başlangıcı
 price_amount: ₺420
 wa_message: Baby Shower Konsepti hakkında bilgi almak istiyorum.
+gift_bag_preset: minimalist
+gift_bag_preset_items:
+  - mini-mum
+  - miyuki-bileklik
+  - etiket
 order: 4
 visible: true
 ---

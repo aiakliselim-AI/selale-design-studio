@@ -252,6 +252,11 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .event-card .ev-price .amount{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;}
 .btn-event{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:4px;padding:.7rem 1rem;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,color .2s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;font-weight:500;width:100%;margin-top:.4rem;}
 .btn-event:hover{background:#fff;color:#1a1a1a;border-color:#fff;}
+.ev-gb-cta{margin-top:.6rem;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.18);border-radius:4px;padding:.65rem .8rem;display:flex;align-items:center;gap:.55rem;cursor:pointer;color:rgba(255,255,255,.7);font-size:.72rem;line-height:1.45;text-align:left;font-family:'Inter',sans-serif;transition:background .2s,border-color .2s,color .2s;}
+.ev-gb-cta:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.4);color:#fff;}
+.ev-gb-cta .gb-cta-icon{font-size:1rem;flex-shrink:0;}
+.ev-gb-cta .gb-cta-text{flex:1;}
+.ev-gb-cta .gb-cta-arrow{font-family:'Cormorant Garamond',serif;font-style:italic;opacity:.7;}
 
 /* ═══ 3D BASKI ═══ */
 .printer-section{padding:7rem 5%;}
@@ -1667,12 +1672,14 @@ function renderReviews(list){
 loadReviews();
 
 /* ════ ETKİNLİK MANİFESTİ — data/events.json'dan yükle (Adım F) ════ */
+let eventsList = [];
 async function loadEvents(){
   try{
     const res = await fetch('data/events.json', { cache: 'no-cache' });
     if(!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     if(!Array.isArray(data)) throw new Error('manifest dizi değil');
+    eventsList = data;
     renderEvents(data);
   }catch(e){
     console.warn('Etkinlik manifesti yüklenemedi:', e);
@@ -1686,7 +1693,16 @@ function renderEvents(list){
   grid.innerHTML = visible.map((e, i) => {
     const num  = String(i+1).padStart(2, '0');
     const slug = aiEscape(e.slug || '');
+    const slugArg = jsArg(e.slug || '');
     const wa   = jsArg(e.wa_message || '');
+    const hasPreset = !!e.gift_bag_preset;
+    const gbCta = hasPreset
+      ? `<button type="button" class="ev-gb-cta" onclick="openGiftbagFromEvent('${slugArg}')" aria-label="Bu güne özel şeffaf çanta hediye paketi hazırla">
+          <span class="gb-cta-icon">🎁</span>
+          <span class="gb-cta-text">Bu güne özel <strong>hediye paketi</strong> hazırla</span>
+          <span class="gb-cta-arrow">→</span>
+        </button>`
+      : '';
     return `<div class="event-card" id="event-card-${slug}">
       <div class="ev-num">${num}</div>
       <div class="ev-visual">${aiEscape(e.visual_icon||'')}</div>
@@ -1694,8 +1710,21 @@ function renderEvents(list){
       <p>${aiEscape(e.description||'')}</p>
       <div class="ev-price"><span class="from">${aiEscape(e.price_label||'Fiyat başlangıcı')}</span><span class="amount">${aiEscape(e.price_amount||'')}</span></div>
       <button class="btn-event" onclick="openWA('${wa}')">WhatsApp'tan Sor</button>
+      ${gbCta}
     </div>`;
   }).join('');
+}
+// Etkinlik kartından şeffaf çanta builder'a yönlendirme — bag + items ön seçilir.
+function openGiftbagFromEvent(slug){
+  const ev = eventsList.find(e => e && e.slug === slug);
+  if(!ev || !ev.gift_bag_preset) return;
+  giftbagState.bag = ev.gift_bag_preset;
+  const items = Array.isArray(ev.gift_bag_preset_items) ? ev.gift_bag_preset_items : [];
+  giftbagState.items = new Set(items);
+  renderGiftBags();
+  renderGiftBagItems();
+  gbUpdateSummary();
+  goTo('giftbag-builder');
 }
 loadEvents();
 

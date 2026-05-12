@@ -11,6 +11,11 @@ items: []
 price_label: Fiyat başlangıcı
 price_amount: ₺350
 wa_message: Mezuniyet Konsepti hakkında bilgi almak istiyorum.
+gift_bag_preset: bordo-klasik
+gift_bag_preset_items:
+  - mini-parfum
+  - etiket
+  - kuru-cicek
 order: 5
 visible: true
 ---

@@ -11,6 +11,12 @@ items: []
 price_label: Fiyat başlangıcı
 price_amount: ₺680
 wa_message: Nişan Konsepti hakkında bilgi almak istiyorum.
+gift_bag_preset: kirmizi-romantik
+gift_bag_preset_items:
+  - koku-kolonya
+  - miyuki-bileklik
+  - etiket
+  - kuru-cicek
 order: 1
 visible: true
 ---

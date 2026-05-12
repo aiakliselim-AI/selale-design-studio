@@ -379,6 +379,25 @@ collections:
       - { label: 'Fiyat Etiketi', name: price_label, widget: string, default: 'Fiyat başlangıcı' }
       - { label: 'Fiyat Değeri', name: price_amount, widget: string, hint: 'Örn: ₺680' }
       - { label: 'WhatsApp Mesaj Metni', name: wa_message, widget: string, hint: 'Örn: Nişan Konsepti hakkında bilgi almak istiyorum.' }
+      - label: 'Şeffaf Çanta Önerisi (opsiyonel)'
+        name: gift_bag_preset
+        widget: relation
+        collection: gift_bags
+        value_field: slug
+        display_fields: [title]
+        search_fields: [title, slug]
+        required: false
+        hint: 'Bu konsepte uygun çantayı seçin. Müşteri "Hediye Paketi Hazırla" butonuna basınca çanta otomatik seçili gelir.'
+      - label: 'Şeffaf Çanta Önerilen İçerikler (opsiyonel)'
+        name: gift_bag_preset_items
+        widget: relation
+        collection: gift_bag_items
+        value_field: slug
+        display_fields: [title]
+        search_fields: [title, slug]
+        multiple: true
+        required: false
+        hint: 'Bu konsepte uygun içerik kalemleri (ön seçili). Müşteri istediği gibi ekleyip çıkarabilir.'
       - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int }
       - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
 

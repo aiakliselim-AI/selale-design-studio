@@ -11,6 +11,12 @@ items: []
 price_label: Fiyat başlangıcı
 price_amount: ₺950
 wa_message: Düğün Konsepti hakkında bilgi almak istiyorum.
+gift_bag_preset: bordo-klasik
+gift_bag_preset_items:
+  - mini-parfum
+  - miyuki-bileklik
+  - etiket
+  - kuru-cicek
 order: 2
 visible: true
 ---

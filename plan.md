@@ -5,11 +5,10 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-08. Aşama 5 tasarım kararları
-> revize edildi: tek tema (sadece açık, koyu tema iptal), Cormorant
-> Garamond font (Playfair Display kaldırıldı), sağdan açılan drawer,
-> üst nav'a site içi arama, hero'ya YouTube reklam videosu, modal
-> galeri çoklu foto desteği. Alt adımlar 5.1 → 5.7'ye genişletildi.
+> **Son güncelleme:** 2026-05-12. Adım H tamamlandı — özel gün
+> kartlarından şeffaf çanta builder'a (preset bag + items ile)
+> tek tıkla yönlendirme. Önceki güncelleme 2026-05-08 (Aşama 5
+> tasarım kararları, sağdan drawer, hero YouTube vb.).
 
 ---
 
@@ -499,8 +498,12 @@ EN ALT (sabit)
 - Yeni sayfa bölümü
 - WhatsApp mesaj akışı
 
-**Adım H — Özel gün → Şeffaf Çanta yönlendirme (§ 4.7)**
-- Adım F + G'ye bağlı
+✅ **Adım H — 2026-05-12 — Özel gün → Şeffaf Çanta yönlendirme (§ 4.7) TAMAMLANDI**
+- `admin/config.yml` events koleksiyonuna `gift_bag_preset` (relation→gift_bags) + `gift_bag_preset_items` (relation→gift_bag_items, multiple) eklendi
+- 5 event MD dosyasına uygun çanta+içerik önerileri yazıldı
+- `index.html` `renderEvents()` her karta "🎁 Bu güne özel hediye paketi hazırla →" banner ekler (sadece preset varsa)
+- Yeni JS: `openGiftbagFromEvent(slug)` — `giftbagState`'i ön doldurup `#giftbag-builder`'a smooth-scroll yapar
+- Etkinlik manifesti yeniden üretildi (`data/events.json`)
 
 **Adım I — Hero arka plan foto (§ 4.3)**
 
