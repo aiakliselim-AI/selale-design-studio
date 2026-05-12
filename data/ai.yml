@@ -7,9 +7,11 @@ input_placeholder: Ne arıyorsunuz?
 
 quick_chips:
   - text: Miyuki bileklik
-  - text: Mumlar
+  - text: Kokulu mum
+  - text: Anneler günü hediyesi
+  - text: Sevgilim için hediye
+  - text: Şeffaf çanta seti
   - text: 3D baskı
-  - text: Yeni ürünler
 
 not_found: 'Üzgünüm, "{q}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?'
 contact_reply: 'İletişim için WhatsApp: 0533 094 49 69 📱'

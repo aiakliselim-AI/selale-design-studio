@@ -5,11 +5,12 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-12. Adım H + I + J + K tamamlandı —
+> **Son güncelleme:** 2026-05-12. Adım H–L tamamlandı —
 > özel günden şeffaf çanta builder'a preset yönlendirme; hero foto
 > modu polish (overlay yoğunluğu + onerror fallback); ürün
 > kategorileri genişletildi (koku, parfum, anahtarlık alt etiketleri)
-> + AI sözlüğü sync; favorilere göre dinamik WhatsApp mesajları.
+> + AI sözlüğü sync; favorilere göre dinamik WhatsApp mesajları;
+> AI asistan "anneler günü / sevgilim / şeffaf çanta seti" intent'leri.
 > Önceki büyük güncelleme 2026-05-08 (Aşama 5 tasarım kararları,
 > sağdan drawer, hero YouTube vb.).
 
@@ -186,14 +187,16 @@ Tıklayınca → Şeffaf Çanta akışına gider, **uygun filtre uygulanmış** 
 - Trigger'lar: `saveFavs()`, `applyWANumber()`, `loadProducts()` sonu, başlangıçta `updateFavCounts()` yanı sıra
 - Ürün detay butonları (modal + fav-card) yeni metinle: "Merhaba! [Ürün adı] hakkında bilgi alabilir miyim?"
 
-### 4.11 AI asistan sözlüğü güncelleme
+### 4.11 AI asistan sözlüğü güncelleme ✅ TAMAMLANDI (Adım L, 2026-05-12)
 
-`AI_CATS` ve `AI_COLORS`'e yeni kategoriler ve komutlar eklenecek:
-- "anneler günü hediyesi"
-- "sevgilime ne alabilirim"
-- "şeffaf çanta seti"
-- "isimli anahtarlık"
-- "spor takımı anahtarlık"
+- `aiParseIntent` 3 yeni special ile genişletildi:
+  - `annelergunu` → bordo klasik + mini parfüm + miyuki bileklik + etiket + kuru çiçek preset
+  - `sevgili` → kırmızı romantik + mini parfüm + miyuki bileklik + etiket + kuru çiçek preset
+  - `giftbagset` → direkt `#giftbag-builder`'a yönlendirir
+- `aiHandle` özel cevap akışları: `aiAskConfirm` ile öneriyi gösterir, onay alınca `aiApplyGiftbagPreset()` çağırır ve panel kapanır
+- "isimli anahtarlık" ve "spor takımı anahtarlık" Adım J'de zaten `AI_CATS`'e eklenmişti (cat tarafı)
+- `aiApplyGiftbagPreset(bagSlug, itemSlugs)` yeni ortak helper — `openGiftbagFromEvent` artık bunu kullanıyor (DRY)
+- `data/ai.yml` `quick_chips` yenilendi: "Anneler günü hediyesi", "Sevgilim için hediye", "Şeffaf çanta seti" eklendi
 
 ### 4.12 Newsletter kaldırılır
 
@@ -527,7 +530,13 @@ EN ALT (sabit)
 - `applyWANumber` `.wa-dynamic` linklerini skip ediyor (yoksa `?text=`'i siliyordu)
 - Modal + fav-card mesajları "[Ürün adı] hakkında bilgi alabilir miyim?" şekline alındı
 
-**Adım L — AI asistan sözlüğü (§ 4.11)**
+✅ **Adım L — 2026-05-12 — AI asistan sözlüğü (§ 4.11) TAMAMLANDI**
+- 3 yeni AI special: `annelergunu`, `sevgili`, `giftbagset`
+- Her biri için `aiAskConfirm` akışı + onay → `aiApplyGiftbagPreset()`
+  ya da `giftbag-builder`'a smooth scroll
+- Yeni ortak helper: `aiApplyGiftbagPreset(bagSlug, itemSlugs)`
+  — `openGiftbagFromEvent` artık bunu çağırıyor (DRY)
+- `data/ai.yml` quick_chips güncellendi: yeni intent örnekleri görünür
 
 **Adım M — Newsletter kaldırma (§ 4.12)**
 

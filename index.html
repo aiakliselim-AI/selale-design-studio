@@ -1324,6 +1324,10 @@ function aiParseIntent(text){
   if(/pahali|pahalı|en cok|en pahali/.test(n))     found.specials.push('pahali');
   if(/hediye|gift/.test(n))                        found.specials.push('hediye');
   if(/iletisim|iletişim|whatsapp|wa|tel|numara/.test(n)) found.specials.push('iletisim');
+  // Adım L — özel gün / kişi odaklı intent'ler
+  if(/anneler gunu|annelergunu|anne hediye|anneye hediye|anneme ne|anne icin/.test(n)) found.specials.push('annelergunu');
+  if(/sevgili|sevgilim|sevgililer gunu|sevgilime ne|romantik|ask hediye|kalp hediye/.test(n)) found.specials.push('sevgili');
+  if(/seffaf canta seti|hediye paketi hazirla|hediye seti yap|canta seti hazirla|paket hazirla/.test(n)) found.specials.push('giftbagset');
 
   return found;
 }
@@ -1503,6 +1507,58 @@ function aiHandle(text){
   // İletişim isteği
   if(intent.specials.includes('iletisim')){
     aiAfter(500, ()=>aiBotMsg(`İletişim için WhatsApp: <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener noreferrer" style="color:var(--caramel);font-weight:500">0533 094 49 69</a> 📱`));
+    return;
+  }
+
+  // Adım L — sevgili/sevgilim için hediye önerisi
+  if(intent.specials.includes('sevgili')){
+    aiAfter(600, ()=>{
+      aiAskConfirm(
+        'Sevgiliniz için romantik bir öneri: <b>Kırmızı Romantik şeffaf çanta</b> + mini parfüm + Miyuki bileklik + kuru çiçek 💕<br>Hediye paketini birlikte hazırlayalım mı?',
+        ()=>{
+          aiAfter(400, ()=>{
+            aiBotMsg('Tamam, hediye paketi sayfasını açıyorum 🌸');
+            aiApplyGiftbagPreset('kirmizi-romantik', ['mini-parfum','miyuki-bileklik','etiket','kuru-cicek']);
+            if(typeof closeAIPanel === 'function') closeAIPanel();
+          });
+        },
+        ()=>{
+          aiAfter(400, ()=>aiBotMsg('Tamam, başka ne bakmak istersiniz?' + aiQuickChips()));
+        }
+      );
+    });
+    return;
+  }
+
+  // Adım L — anneler günü için öneri
+  if(intent.specials.includes('annelergunu')){
+    aiAfter(600, ()=>{
+      aiAskConfirm(
+        'Anneler günü için sevilen seçenekler: <b>Bordo Klasik şeffaf çanta</b> + mini parfüm + Miyuki bileklik + özel etiket 🌷<br>Hediye paketini hazırlamaya geçelim mi?',
+        ()=>{
+          aiAfter(400, ()=>{
+            aiBotMsg('Harika 🌸 Hediye paketi sayfasını açıyorum.');
+            aiApplyGiftbagPreset('bordo-klasik', ['mini-parfum','miyuki-bileklik','etiket','kuru-cicek']);
+            if(typeof closeAIPanel === 'function') closeAIPanel();
+          });
+        },
+        ()=>{
+          aiAfter(400, ()=>aiBotMsg('Tabii, başka neye bakalım?' + aiQuickChips()));
+        }
+      );
+    });
+    return;
+  }
+
+  // Adım L — direkt şeffaf çanta builder'a yönlendir
+  if(intent.specials.includes('giftbagset')){
+    aiAfter(500, ()=>{
+      aiBotMsg('Şeffaf çanta hediye paketi sayfasını açıyorum 🌸 Çantanızı ve içeriği seçebilirsiniz.');
+      setTimeout(()=>{
+        goTo('giftbag-builder');
+        if(typeof closeAIPanel === 'function') closeAIPanel();
+      }, 500);
+    });
     return;
   }
 
@@ -1753,17 +1809,21 @@ function renderEvents(list){
     </div>`;
   }).join('');
 }
+// Ortak helper — bag + items preset'i uygula, builder'a kaydır (Adım H + L).
+function aiApplyGiftbagPreset(bagSlug, itemSlugs){
+  if(!bagSlug) return;
+  giftbagState.bag = bagSlug;
+  giftbagState.items = new Set(Array.isArray(itemSlugs) ? itemSlugs : []);
+  if(typeof renderGiftBags === 'function') renderGiftBags();
+  if(typeof renderGiftBagItems === 'function') renderGiftBagItems();
+  if(typeof gbUpdateSummary === 'function') gbUpdateSummary();
+  goTo('giftbag-builder');
+}
 // Etkinlik kartından şeffaf çanta builder'a yönlendirme — bag + items ön seçilir.
 function openGiftbagFromEvent(slug){
   const ev = eventsList.find(e => e && e.slug === slug);
   if(!ev || !ev.gift_bag_preset) return;
-  giftbagState.bag = ev.gift_bag_preset;
-  const items = Array.isArray(ev.gift_bag_preset_items) ? ev.gift_bag_preset_items : [];
-  giftbagState.items = new Set(items);
-  renderGiftBags();
-  renderGiftBagItems();
-  gbUpdateSummary();
-  goTo('giftbag-builder');
+  aiApplyGiftbagPreset(ev.gift_bag_preset, ev.gift_bag_preset_items);
 }
 loadEvents();
 
