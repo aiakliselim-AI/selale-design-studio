@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Bordo Klasik",
+    "slug": "bordo-klasik",
+    "description": "Bordo şerit detaylı klasik şeffaf çanta. Sade ve şık duruşuyla her hediyeye yakışır.",
+    "price": "₺250",
+    "image": "",
+    "bg": "c3",
+    "order": 1,
+    "visible": true
+  },
+  {
+    "title": "Kırmızı Romantik",
+    "slug": "kirmizi-romantik",
+    "description": "Kırmızı kurdele ve kalp detaylı, sevgililer günü ve özel anlar için romantik şeffaf çanta.",
+    "price": "₺280",
+    "image": "",
+    "bg": "c4",
+    "order": 2,
+    "visible": true
+  },
+  {
+    "title": "Minimalist",
+    "slug": "minimalist",
+    "description": "Süslemesiz, sade şeffaf çanta. Çantayı içerik konuştursun diyenler için.",
+    "price": "₺220",
+    "image": "",
+    "bg": "c1",
+    "order": 3,
+    "visible": true
+  }
+]

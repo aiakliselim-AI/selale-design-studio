@@ -1,0 +1,50 @@
+name: build-gift-bags-manifest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gift-bags/**'
+      - 'gift-bag-items/**'
+      - 'scripts/build-gift-bags-manifest.mjs'
+      - '.github/workflows/build-gift-bags-manifest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-gift-bags-manifest
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install js-yaml
+        run: npm install --no-save --silent js-yaml@4
+
+      - name: Build manifest
+        run: node scripts/build-gift-bags-manifest.mjs
+
+      - name: Commit manifests if changed
+        # NOT: commit mesaji [skip ci] icermez — Cloudflare Pages [skip ci] gorunce
+        # deploy'u atliyor. Workflow kendini sonsuz tetiklemiyor cunku
+        # `on.push.paths` filtresi yalnizca gift-bags/**, gift-bag-items/**,
+        # scripts/** ve bu workflow dosyasinda degisiklik olunca calisiyor.
+        run: |
+          if [ -n "$(git status --porcelain data/gift-bags.json data/gift-bag-items.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/gift-bags.json data/gift-bag-items.json
+            git commit -m "data/gift-bags*.json: şeffaf çanta manifestleri güncellendi"
+            git push
+          else
+            echo "manifests are up to date"
+          fi

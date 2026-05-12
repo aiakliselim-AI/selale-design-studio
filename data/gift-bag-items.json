@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Koku / Kolonya",
+    "slug": "koku-kolonya",
+    "description": "Çantayı açar açmaz hissedilen hafif çiçek kokusu.",
+    "price": "+₺60",
+    "icon": "🌷",
+    "image": "",
+    "order": 1,
+    "visible": true
+  },
+  {
+    "title": "Mini Parfüm",
+    "slug": "mini-parfum",
+    "description": "5 ml taşınabilir mini parfüm şişesi, isteğe göre kokulu.",
+    "price": "+₺75",
+    "icon": "🌸",
+    "image": "",
+    "order": 2,
+    "visible": true
+  },
+  {
+    "title": "Mini Mum",
+    "slug": "mini-mum",
+    "description": "El yapımı mini soya mumu, hafif kokulu.",
+    "price": "+₺85",
+    "icon": "🕯️",
+    "image": "",
+    "order": 3,
+    "visible": true
+  },
+  {
+    "title": "Miyuki Bileklik",
+    "slug": "miyuki-bileklik",
+    "description": "Çanta içine renk uyumlu el yapımı Miyuki bileklik.",
+    "price": "+₺120",
+    "icon": "📿",
+    "image": "",
+    "order": 4,
+    "visible": true
+  },
+  {
+    "title": "İnci Çanta Süsü",
+    "slug": "inci-canta",
+    "description": "Mini inci dizili çanta saplı süs, çantanın iç görsel zarafetini artırır.",
+    "price": "+₺95",
+    "icon": "🤍",
+    "image": "",
+    "order": 5,
+    "visible": true
+  },
+  {
+    "title": "Özel Etiket",
+    "slug": "etiket",
+    "description": "Kişiye özel kısa mesaj yazılan zarif kraft etiket.",
+    "price": "+₺25",
+    "icon": "🏷️",
+    "image": "",
+    "order": 6,
+    "visible": true
+  },
+  {
+    "title": "Kuru Çiçek",
+    "slug": "kuru-cicek",
+    "description": "Kurutulmuş gül veya papatya buketi, çantanın doğal aksesuarı.",
+    "price": "+₺55",
+    "icon": "🌾",
+    "image": "",
+    "order": 7,
+    "visible": true
+  }
+]

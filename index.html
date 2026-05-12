@@ -200,6 +200,40 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .btn-gb{display:inline-flex;align-items:center;gap:.6rem;background:transparent;color:#fff;border:1.5px solid #fff;border-radius:4px;padding:.95rem 2.4rem;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;font-family:'Inter',sans-serif;font-weight:500;text-decoration:none;}
 .btn-gb:hover{background:#fff;color:#1a1a1a;}
 
+/* ═══ ŞEFFAF ÇANTA BUILDER (Adım G) ═══ */
+.giftbag-builder{padding:7rem 5%;background:#faf6f0;}
+.giftbag-builder .section-title{text-align:center;margin-bottom:3rem;}
+.gb-builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1180px;margin:0 auto;}
+.gb-col h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--text);margin-bottom:.4rem;}
+.gb-col .gb-step{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:1.2rem;display:block;}
+.gb-bag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;}
+.gb-bag-card{background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:1.2rem 1rem;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;display:flex;flex-direction:column;gap:.4rem;text-align:left;font:inherit;color:inherit;}
+.gb-bag-card:hover{border-color:#888;}
+.gb-bag-card.selected{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;}
+.gb-bag-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);font-weight:500;}
+.gb-bag-card .gb-bag-desc{font-size:.78rem;color:var(--neutral-muted);line-height:1.5;}
+.gb-bag-card .gb-bag-price{font-size:.88rem;font-weight:500;color:var(--text);margin-top:.3rem;font-family:'Inter',sans-serif;}
+.gb-items-list{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.gb-item{display:flex;align-items:flex-start;gap:.7rem;background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:.85rem 1rem;cursor:pointer;transition:border-color .2s,background .15s;font:inherit;text-align:left;color:inherit;}
+.gb-item:hover{border-color:#888;}
+.gb-item.selected{border-color:#1a1a1a;background:#fff;box-shadow:0 0 0 1px #1a1a1a inset;}
+.gb-item-icon{font-size:1.3rem;flex-shrink:0;line-height:1;margin-top:.1rem;}
+.gb-item-info{flex:1;min-width:0;}
+.gb-item-title{font-size:.85rem;font-weight:500;color:var(--text);}
+.gb-item-price{font-size:.72rem;color:var(--neutral-muted);margin-top:.15rem;font-family:'Inter',sans-serif;}
+.gb-item input[type="checkbox"]{display:none;}
+.gb-label-wrap{margin-top:1.5rem;}
+.gb-label-wrap label{display:block;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:.5rem;}
+.gb-label-input{width:100%;padding:.9rem 1rem;border:1.5px solid var(--line);border-radius:4px;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--text);background:#fff;transition:border-color .2s;}
+.gb-label-input:focus{outline:none;border-color:#1a1a1a;}
+.gb-summary{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--line);grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:1.2rem;text-align:center;}
+.gb-summary-text{font-size:.85rem;color:var(--neutral-muted);max-width:560px;line-height:1.7;}
+.gb-summary-text strong{color:var(--text);font-weight:500;}
+.btn-gb-send{display:inline-flex;align-items:center;gap:.7rem;background:#1a1a1a;color:#fff;border:none;border-radius:4px;padding:1.1rem 2.8rem;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .2s;font-family:'Inter',sans-serif;font-weight:500;}
+.btn-gb-send:hover:not(:disabled){background:#000;transform:translateY(-2px);}
+.btn-gb-send:disabled{background:#999;cursor:not-allowed;}
+@media(max-width:780px){.gb-builder-grid{grid-template-columns:1fr;gap:2.2rem;}.gb-items-list{grid-template-columns:1fr;}}
+
 /* ═══ ÖZEL GÜN KONSEPT BÖLÜMÜ (5.6 — 5 dikey kart) ═══ */
 .events-section{padding:7rem 5%;background:#1a1a1a;}
 .events-section .section-title h2{color:#fff;}
@@ -600,12 +634,40 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   <div class="cat-grid" id="catGrid"></div>
 </section>
 
-<!-- ŞEFFAF ÇANTA BANNER (5.6 — Adım G'de iç sayfa eklenecek) -->
+<!-- ŞEFFAF ÇANTA BANNER (5.6) -->
 <section class="giftbag-banner" id="giftbag-banner">
   <div class="gb-tag">✦ Hediye Konsepti</div>
   <h2><em>Şeffaf Çanta</em> Hediye Setleri</h2>
   <p>Sevdiklerinize özel, içerisini birlikte tasarladığınız zarif şeffaf çantalar — koku, mum, miyuki bileklik ve daha fazlası.</p>
-  <a class="btn-gb" href="#" onclick="event.preventDefault();openWA('Şeffaf çanta hediye seti hakkında bilgi alabilir miyim?')">Keşfet →</a>
+  <a class="btn-gb" href="#giftbag-builder" onclick="event.preventDefault();goTo('giftbag-builder')">Keşfet →</a>
+</section>
+
+<!-- ŞEFFAF ÇANTA BUILDER (Adım G — çanta + içerik + etiket → WhatsApp) -->
+<section class="giftbag-builder" id="giftbag-builder">
+  <div class="section-title reveal">
+    <div class="tag">✦ Hediye Setinizi Tasarlayın</div>
+    <h2>Çantanızı <em>siz seçin</em></h2>
+  </div>
+  <div class="gb-builder-grid">
+    <div class="gb-col">
+      <span class="gb-step">Adım 1</span>
+      <h3>Çantanızı Seçin</h3>
+      <div class="gb-bag-grid" id="gbBagGrid"></div>
+    </div>
+    <div class="gb-col">
+      <span class="gb-step">Adım 2</span>
+      <h3>İçeriği Belirleyin</h3>
+      <div class="gb-items-list" id="gbItemsList"></div>
+      <div class="gb-label-wrap">
+        <label for="gbLabelInput">Adım 3 — Özel Etiket Yazısı (isteğe bağlı)</label>
+        <input type="text" id="gbLabelInput" class="gb-label-input" maxlength="120" placeholder="Örn: Sevgili Ayşeciğim, doğum günün kutlu olsun ❤️" oninput="gbUpdateSummary()">
+      </div>
+    </div>
+    <div class="gb-summary">
+      <p class="gb-summary-text" id="gbSummaryText">Önce bir çanta seçin, sonra içine eklemek istediklerinizi işaretleyin.</p>
+      <button class="btn-gb-send" id="gbSendBtn" onclick="gbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
+    </div>
+  </div>
 </section>
 
 <!-- ÜRÜNLER -->
@@ -1636,6 +1698,109 @@ function renderEvents(list){
   }).join('');
 }
 loadEvents();
+
+/* ════ ŞEFFAF ÇANTA — manifest + builder akışı (Adım G) ════ */
+let giftBags = [];
+let giftBagItems = [];
+const giftbagState = { bag: null, items: new Set() };
+
+async function loadGiftBags(){
+  try{
+    const [bagsRes, itemsRes] = await Promise.all([
+      fetch('data/gift-bags.json',      { cache: 'no-cache' }),
+      fetch('data/gift-bag-items.json', { cache: 'no-cache' }),
+    ]);
+    if(bagsRes.ok){
+      const d = await bagsRes.json();
+      if(Array.isArray(d)) giftBags = d;
+    }
+    if(itemsRes.ok){
+      const d = await itemsRes.json();
+      if(Array.isArray(d)) giftBagItems = d;
+    }
+    renderGiftBags();
+    renderGiftBagItems();
+    gbUpdateSummary();
+  }catch(e){
+    console.warn('Şeffaf çanta manifestleri yüklenemedi:', e);
+  }
+}
+function renderGiftBags(){
+  const wrap = document.getElementById('gbBagGrid');
+  if(!wrap) return;
+  const visible = giftBags.filter(b => b && b.visible !== false);
+  visible.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0));
+  wrap.innerHTML = visible.map(b => {
+    const sel = giftbagState.bag === b.slug ? ' selected' : '';
+    return `<button type="button" class="gb-bag-card${sel}" onclick="gbSelectBag('${jsArg(b.slug||'')}')">
+      <h4>${aiEscape(b.title||'')}</h4>
+      ${b.description ? `<div class="gb-bag-desc">${aiEscape(b.description)}</div>` : ''}
+      ${b.price ? `<div class="gb-bag-price">${aiEscape(b.price)}</div>` : ''}
+    </button>`;
+  }).join('');
+}
+function renderGiftBagItems(){
+  const wrap = document.getElementById('gbItemsList');
+  if(!wrap) return;
+  const visible = giftBagItems.filter(i => i && i.visible !== false);
+  visible.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0));
+  wrap.innerHTML = visible.map(i => {
+    const sel = giftbagState.items.has(i.slug) ? ' selected' : '';
+    return `<button type="button" class="gb-item${sel}" onclick="gbToggleItem('${jsArg(i.slug||'')}')">
+      <span class="gb-item-icon">${aiEscape(i.icon||'•')}</span>
+      <span class="gb-item-info">
+        <span class="gb-item-title">${aiEscape(i.title||'')}</span>
+        ${i.price ? `<span class="gb-item-price">${aiEscape(i.price)}</span>` : ''}
+      </span>
+    </button>`;
+  }).join('');
+}
+function gbSelectBag(slug){
+  giftbagState.bag = slug;
+  renderGiftBags();
+  gbUpdateSummary();
+}
+function gbToggleItem(slug){
+  if(giftbagState.items.has(slug)) giftbagState.items.delete(slug);
+  else giftbagState.items.add(slug);
+  renderGiftBagItems();
+  gbUpdateSummary();
+}
+function gbUpdateSummary(){
+  const sumEl = document.getElementById('gbSummaryText');
+  const btn   = document.getElementById('gbSendBtn');
+  if(!sumEl || !btn) return;
+  const bag = giftBags.find(b => b.slug === giftbagState.bag);
+  if(!bag){
+    sumEl.textContent = 'Önce bir çanta seçin, sonra içine eklemek istediklerinizi işaretleyin.';
+    btn.disabled = true;
+    return;
+  }
+  btn.disabled = false;
+  const items = giftBagItems.filter(i => giftbagState.items.has(i.slug));
+  const itemNames = items.length ? items.map(i => aiEscape(i.title||'')).join(', ') : '(içerik seçilmedi)';
+  const inp = document.getElementById('gbLabelInput');
+  const label = inp && inp.value ? inp.value.trim() : '';
+  const labelHtml = label ? `<br><em>Etiket: "${aiEscape(label)}"</em>` : '';
+  sumEl.innerHTML = `Seçiminiz: <strong>${aiEscape(bag.title||'')}</strong> + ${itemNames}${labelHtml}`;
+}
+function gbBuildMessage(){
+  const bag = giftBags.find(b => b.slug === giftbagState.bag);
+  if(!bag) return null;
+  const items = giftBagItems.filter(i => giftbagState.items.has(i.slug));
+  const itemList = items.length ? items.map(i => i.title).join(', ') : '(içerik seçilmedi)';
+  const inp = document.getElementById('gbLabelInput');
+  const label = inp && inp.value ? inp.value.trim() : '';
+  let msg = `Merhaba! Şu çantayı hazırlamak istiyorum: ${bag.title} + [${itemList}]`;
+  if(label) msg += ` + etiket: "${label}"`;
+  return msg;
+}
+function gbSend(){
+  const msg = gbBuildMessage();
+  if(!msg) return;
+  openWA(msg);
+}
+loadGiftBags();
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){

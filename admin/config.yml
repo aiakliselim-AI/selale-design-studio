@@ -525,3 +525,69 @@ collections:
                   - { label: 'Hedef Değer', name: action_value, widget: string, required: false, hint: 'scroll/filter/event için anahtar; url için tam URL; whatsapp ve none için boş' }
           - { label: 'Alt Yazı 1', name: bottom_left, widget: string, default: '© 2025 Şelale Design Studio' }
           - { label: 'Alt Yazı 2', name: bottom_right, widget: string, default: 'Tüm hakları saklıdır' }
+
+  # ─────────────────────────────────────────────────────────
+  # 12) ŞEFFAF ÇANTA TİPLERİ
+  # ─────────────────────────────────────────────────────────
+  - name: gift_bags
+    label: 12. Şeffaf Çanta Tipleri
+    label_singular: Çanta Tipi
+    description: Şeffaf çanta hediye setleri için çanta tipleri (bordo klasik, kırmızı romantik vb.). Müşteri burada seçer, içerik kalemleriyle birleştirir.
+    folder: gift-bags
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    media_folder: '/images/gift-bags'
+    public_folder: '/images/gift-bags'
+    summary: '{{title}} — {{price}}'
+    sortable_fields: ['order', 'title']
+    fields:
+      - { label: 'Çanta Adı', name: title, widget: string, hint: 'Örn: Bordo Klasik, Kırmızı Romantik' }
+      - { label: 'Slug (URL/anahtar)', name: slug, widget: string, pattern: ['^[a-z0-9-]+$', 'Sadece küçük harf, rakam, tire'], hint: 'Örn: bordo-klasik' }
+      - { label: 'Açıklama', name: description, widget: text, required: false }
+      - { label: 'Fiyat', name: price, widget: string, hint: 'Örn: ₺250' }
+      - { label: 'Görsel', name: image, widget: image, required: false }
+      - label: 'Arka Plan Stili'
+        name: bg
+        widget: select
+        default: c1
+        options:
+          - { label: 'C1 — Bej-Şeftali', value: c1 }
+          - { label: 'C2 — Sage Yeşil', value: c2 }
+          - { label: 'C3 — Pembe-Gül', value: c3 }
+          - { label: 'C4 — Sarı-Hardal', value: c4 }
+          - { label: 'C5 — Lavanta', value: c5 }
+          - { label: 'C6 — Mint-Petrol', value: c6 }
+          - { label: 'C7 — Açık Mavi', value: c7 }
+          - { label: 'C8 — Karamel-Krem', value: c8 }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int, hint: 'Küçük sayı önce' }
+      - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 13) ŞEFFAF ÇANTA İÇERİK SEÇENEKLERİ
+  # ─────────────────────────────────────────────────────────
+  - name: gift_bag_items
+    label: 13. Şeffaf Çanta İçerik Seçenekleri
+    label_singular: Çanta İçeriği
+    description: Şeffaf çantanın içine eklenebilen kalemler (koku, mum, bileklik vb.). Müşteri birden fazla seçer.
+    folder: gift-bag-items
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    media_folder: '/images/gift-bag-items'
+    public_folder: '/images/gift-bag-items'
+    summary: '{{title}}'
+    sortable_fields: ['order', 'title']
+    fields:
+      - { label: 'İçerik Adı', name: title, widget: string, hint: 'Örn: Mini Parfüm, Miyuki Bileklik' }
+      - { label: 'Slug (anahtar)', name: slug, widget: string, pattern: ['^[a-z0-9-]+$', 'Sadece küçük harf, rakam, tire'], hint: 'Örn: mini-parfum' }
+      - { label: 'Açıklama', name: description, widget: text, required: false }
+      - { label: 'Ek Fiyat', name: price, widget: string, required: false, hint: 'Örn: +₺75 (boş bırakılabilir)' }
+      - { label: 'Emoji İkon', name: icon, widget: string, required: false, hint: 'Örn: 🌸 🕯️' }
+      - { label: 'Görsel', name: image, widget: image, required: false }
+      - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int }
+      - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
