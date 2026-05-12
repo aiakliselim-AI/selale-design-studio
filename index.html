@@ -636,52 +636,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <h2>Hangi <em>güne</em> hazırlanıyorsunuz?</h2>
     <p>Düğününüzden nişanınıza, doğum gününden baby shower'a — komple dekorasyon konseptleri hazırlıyoruz.</p>
   </div>
-  <div class="event-grid">
-    <div class="event-card" id="event-card-nishan">
-      <div class="ev-num">01</div>
-      <div class="ev-visual">💍</div>
-      <h3>Nişan Gecenizi<br><em>Unutulmaz Yapın</em></h3>
-      <p>Balon kemerleri, masa süsleri ve kişiye özel Miyuki hediye setleriyle nişan anılarınızı taçlandırıyoruz.</p>
-      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺680</span></div>
-      <button class="btn-event" onclick="openWA('Nişan Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
-    </div>
-
-    <div class="event-card" id="event-card-dugun">
-      <div class="ev-num">02</div>
-      <div class="ev-visual">💒</div>
-      <h3>Düğününüz için<br><em>Özel Tasarım</em></h3>
-      <p>Masa tabelaları, nikah şekeri konsepti ve el yapımı davetiye takılarıyla düğününüzü kişiselleştiriyoruz.</p>
-      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺950</span></div>
-      <button class="btn-event" onclick="openWA('Düğün Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
-    </div>
-
-    <div class="event-card" id="event-card-dogumgunu">
-      <div class="ev-num">03</div>
-      <div class="ev-visual">🎂</div>
-      <h3>Doğum Günü<br><em>Sürprizi</em></h3>
-      <p>Balon panosu, isme özel konfeti ve özel tema seçenekleriyle doğum günlerini renklendiriyoruz.</p>
-      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺490</span></div>
-      <button class="btn-event" onclick="openWA('Doğum Günü Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
-    </div>
-
-    <div class="event-card" id="event-card-babyshower">
-      <div class="ev-num">04</div>
-      <div class="ev-visual">👶</div>
-      <h3>Baby Shower için<br><em>Pastel Renkler</em></h3>
-      <p>Pembe ya da mavi temalı balon süsleri, bebek figürlü mumlar ve kişiselleştirilmiş hatıra setleri.</p>
-      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺420</span></div>
-      <button class="btn-event" onclick="openWA('Baby Shower Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
-    </div>
-
-    <div class="event-card" id="event-card-mezuniyet">
-      <div class="ev-num">05</div>
-      <div class="ev-visual">🎓</div>
-      <h3>Mezuniyet<br><em>Kutlaması</em></h3>
-      <p>Kep figürlü dekorlar, isme özel hatıra Miyuki setleri ve masa düzenlemeleriyle mezuniyeti anlamlı kılın.</p>
-      <div class="ev-price"><span class="from">Fiyat başlangıcı</span><span class="amount">₺350</span></div>
-      <button class="btn-event" onclick="openWA('Mezuniyet Konsepti hakkında bilgi almak istiyorum.')">WhatsApp'tan Sor</button>
-    </div>
-  </div>
+  <div class="event-grid" id="eventGrid"></div>
 </section>
 
 <!-- 3D BASKI -->
@@ -1648,6 +1603,39 @@ function renderReviews(list){
   }).join('');
 }
 loadReviews();
+
+/* ════ ETKİNLİK MANİFESTİ — data/events.json'dan yükle (Adım F) ════ */
+async function loadEvents(){
+  try{
+    const res = await fetch('data/events.json', { cache: 'no-cache' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(!Array.isArray(data)) throw new Error('manifest dizi değil');
+    renderEvents(data);
+  }catch(e){
+    console.warn('Etkinlik manifesti yüklenemedi:', e);
+  }
+}
+function renderEvents(list){
+  const grid = document.getElementById('eventGrid');
+  if(!grid || !Array.isArray(list)) return;
+  const visible = list.filter(e => e && e.visible !== false);
+  visible.sort((a,b) => (Number.isFinite(a.order)?a.order:0) - (Number.isFinite(b.order)?b.order:0));
+  grid.innerHTML = visible.map((e, i) => {
+    const num  = String(i+1).padStart(2, '0');
+    const slug = aiEscape(e.slug || '');
+    const wa   = jsArg(e.wa_message || '');
+    return `<div class="event-card" id="event-card-${slug}">
+      <div class="ev-num">${num}</div>
+      <div class="ev-visual">${aiEscape(e.visual_icon||'')}</div>
+      <h3>${aiEscape(e.title_top||'')}<br><em>${aiEscape(e.title_emphasis||'')}</em></h3>
+      <p>${aiEscape(e.description||'')}</p>
+      <div class="ev-price"><span class="from">${aiEscape(e.price_label||'Fiyat başlangıcı')}</span><span class="amount">${aiEscape(e.price_amount||'')}</span></div>
+      <button class="btn-event" onclick="openWA('${wa}')">WhatsApp'tan Sor</button>
+    </div>`;
+  }).join('');
+}
+loadEvents();
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){
