@@ -765,23 +765,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <div class="tag">✦ Müşteri Yorumları</div>
     <h2>Onlar ne <em>dedi?</em></h2>
   </div>
-  <div class="review-grid">
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Nişan konseptimiz harikaydı. Balon kemeri ve masa süsleri tam hayal ettiğim gibiydi. Çok teşekkürler!"</div>
-      <div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Selin A.</div><div class="review-date">Nişan Konsepti · Mart 2025</div></div></div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Miyuki bilekliği için özel renk istedim, tam istediğim oldu. Paketleme de çok özeldi, hediye gibi geldi."</div>
-      <div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Merve K.</div><div class="review-date">Miyuki Bileklik · Şubat 2025</div></div></div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"3D anahtarlık için özel dosya gönderdim, mükemmel baskıladı. Kalite çok iyiydi, çok hızlı geldi."</div>
-      <div class="review-author"><div class="review-avatar">👨</div><div><div class="review-name">Murat T.</div><div class="review-date">3D Baskı · Ocak 2025</div></div></div>
-    </div>
-  </div>
+  <div class="review-grid" id="reviewGrid"></div>
 </section>
 
 <!-- INSTAGRAM (5.7 — 6 kare placeholder; gerçek embed sonra) -->
@@ -1632,6 +1616,38 @@ function renderCategories(list){
   }).join('');
 }
 loadCategories();
+
+/* ════ YORUM MANİFESTİ — data/reviews.json'dan yükle (Adım E) ════ */
+async function loadReviews(){
+  try{
+    const res = await fetch('data/reviews.json', { cache: 'no-cache' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(!Array.isArray(data)) throw new Error('manifest dizi değil');
+    renderReviews(data);
+  }catch(e){
+    console.warn('Yorum manifesti yüklenemedi:', e);
+  }
+}
+function renderReviews(list){
+  const grid = document.getElementById('reviewGrid');
+  if(!grid || !Array.isArray(list)) return;
+  const visible = list.filter(r => r && r.visible !== false);
+  visible.sort((a,b) => (Number.isFinite(a.order)?a.order:0) - (Number.isFinite(b.order)?b.order:0));
+  grid.innerHTML = visible.map(r => {
+    const n = Math.max(1, Math.min(5, parseInt(r.stars, 10) || 5));
+    const stars = '★'.repeat(n) + '☆'.repeat(5 - n);
+    const topic = aiEscape(r.topic || '');
+    const date  = aiEscape(r.date || '');
+    const meta  = topic && date ? `${topic} · ${date}` : (topic || date);
+    return `<div class="review-card reveal">
+      <div class="review-stars">${stars}</div>
+      <div class="review-text">"${aiEscape(r.text||'')}"</div>
+      <div class="review-author"><div class="review-avatar">${aiEscape(r.avatar||'👤')}</div><div><div class="review-name">${aiEscape(r.author||'')}</div><div class="review-date">${meta}</div></div></div>
+    </div>`;
+  }).join('');
+}
+loadReviews();
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){
