@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Miyuki Takılar",
+    "subtitle": "Bileklik · Kolye · Küpe · Yüzük",
+    "icon": "",
+    "bg": "c1",
+    "action_type": "filter",
+    "action_value": "miyuki",
+    "order": 1,
+    "visible": true
+  },
+  {
+    "title": "El Yapımı Mumlar",
+    "subtitle": "Şekilli · Kokulu · Dekoratif",
+    "icon": "",
+    "bg": "c2",
+    "action_type": "filter",
+    "action_value": "mum",
+    "order": 2,
+    "visible": true
+  },
+  {
+    "title": "Nişan Konsepti",
+    "subtitle": "Masa · Balon · Arka Plan",
+    "icon": "",
+    "bg": "c3",
+    "action_type": "event",
+    "action_value": "nishan",
+    "order": 3,
+    "visible": true
+  },
+  {
+    "title": "Düğün Konsepti",
+    "subtitle": "Tablo · Süsleme · Dekor",
+    "icon": "",
+    "bg": "c4",
+    "action_type": "event",
+    "action_value": "dugun",
+    "order": 4,
+    "visible": true
+  },
+  {
+    "title": "Doğum Günü",
+    "subtitle": "Pasta · Masa · Balon Süsü",
+    "icon": "",
+    "bg": "c5",
+    "action_type": "event",
+    "action_value": "dogumgunu",
+    "order": 5,
+    "visible": true
+  },
+  {
+    "title": "3D Baskı",
+    "subtitle": "Anahtarlık · Alet · Oyuncak",
+    "icon": "",
+    "bg": "c7",
+    "action_type": "scroll",
+    "action_value": "printer-section",
+    "order": 6,
+    "visible": true
+  },
+  {
+    "title": "Anahtarlık",
+    "subtitle": "Miyuki · 3D Baskı · Kişisel",
+    "icon": "",
+    "bg": "c8",
+    "action_type": "filter",
+    "action_value": "anahtarlik",
+    "order": 7,
+    "visible": true
+  }
+]

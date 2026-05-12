@@ -597,43 +597,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <div class="tag">✦ Kategoriler</div>
     <h2>Ne arıyorsunuz <em>bugün?</em></h2>
   </div>
-  <div class="cat-grid">
-    <div class="cat-card reveal" onclick="goTo('products');filterProducts('miyuki',null)">
-      <div class="cat-bg c1"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>Miyuki Takılar</h3><p>Bileklik · Kolye · Küpe · Yüzük</p></div>
-    </div>
-    <div class="cat-card reveal" onclick="goTo('products');filterProducts('mum',null)">
-      <div class="cat-bg c2"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>El Yapımı Mumlar</h3><p>Şekilli · Kokulu · Dekoratif</p></div>
-    </div>
-    <div class="cat-card reveal" onclick="goTo('events-section');setEventTab('nishan')">
-      <div class="cat-bg c3"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>Nişan Konsepti</h3><p>Masa · Balon · Arka Plan</p></div>
-    </div>
-    <div class="cat-card reveal" onclick="goTo('events-section');setEventTab('dugun')">
-      <div class="cat-bg c4"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>Düğün Konsepti</h3><p>Tablo · Süsleme · Dekor</p></div>
-    </div>
-    <div class="cat-card reveal" onclick="goTo('events-section');setEventTab('dogumgunu')">
-      <div class="cat-bg c5"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>Doğum Günü</h3><p>Pasta · Masa · Balon Süsü</p></div>
-    </div>
-    <div class="cat-card reveal" onclick="goTo('printer-section')">
-      <div class="cat-bg c7"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>3D Baskı</h3><p>Anahtarlık · Alet · Oyuncak</p></div>
-    </div>
-    <div class="cat-card reveal" onclick="goTo('products');filterProducts('anahtarlik',null)">
-      <div class="cat-bg c8"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>Anahtarlık</h3><p>Miyuki · 3D Baskı · Kişisel</p></div>
-    </div>
-  </div>
+  <div class="cat-grid" id="catGrid"></div>
 </section>
 
 <!-- ŞEFFAF ÇANTA BANNER (5.6 — Adım G'de iç sayfa eklenecek) -->
@@ -1635,6 +1599,39 @@ async function loadProducts(){
   }
 }
 loadProducts();
+
+/* ════ KATEGORİ MANİFESTİ — data/categories.json'dan yükle (Adım D) ════ */
+async function loadCategories(){
+  try{
+    const res = await fetch('data/categories.json', { cache: 'no-cache' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(!Array.isArray(data)) throw new Error('manifest dizi değil');
+    renderCategories(data);
+  }catch(e){
+    console.warn('Kategori manifesti yüklenemedi:', e);
+  }
+}
+function renderCategories(list){
+  const grid = document.getElementById('catGrid');
+  if(!grid || !Array.isArray(list)) return;
+  const visible = list.filter(c => c && c.visible !== false);
+  visible.sort((a,b) => (Number.isFinite(a.order)?a.order:0) - (Number.isFinite(b.order)?b.order:0));
+  grid.innerHTML = visible.map(c => {
+    const type = c.action_type || 'filter';
+    const val = jsArg(c.action_value || '');
+    let onclick = '';
+    if(type === 'event')       onclick = `goTo('events-section');setEventTab('${val}')`;
+    else if(type === 'scroll') onclick = `goTo('${val}')`;
+    else                       onclick = `goTo('products');filterProducts('${val}',null)`;
+    return `<div class="cat-card reveal" onclick="${onclick}">
+      <div class="cat-bg ${aiEscape(c.bg||'c1')}"></div>
+      <div class="cat-overlay"><span>Görüntüle</span></div>
+      <div class="cat-info"><h3>${aiEscape(c.title||'')}</h3><p>${aiEscape(c.subtitle||'')}</p></div>
+    </div>`;
+  }).join('');
+}
+loadCategories();
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){
