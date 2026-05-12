@@ -5,11 +5,12 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-12. Adım H + Adım I tamamlandı —
+> **Son güncelleme:** 2026-05-12. Adım H + I + J tamamlandı —
 > özel günden şeffaf çanta builder'a preset yönlendirme; hero foto
-> modu polish (overlay yoğunluğu + onerror fallback). Önceki büyük
-> güncelleme 2026-05-08 (Aşama 5 tasarım kararları, sağdan drawer,
-> hero YouTube vb.).
+> modu polish (overlay yoğunluğu + onerror fallback); ürün
+> kategorileri genişletildi (koku, parfum, anahtarlık alt etiketleri)
+> + AI sözlüğü sync. Önceki büyük güncelleme 2026-05-08
+> (Aşama 5 tasarım kararları, sağdan drawer, hero YouTube vb.).
 
 ---
 
@@ -166,16 +167,13 @@ Tıklayınca → Şeffaf Çanta akışına gider, **uygun filtre uygulanmış** 
 - `data/drawer.yml`'den ilgili link silinecek
 - AI asistanın `AI_CATS` sözlüğünden çıkarılacak
 
-### 4.9 Ürün kategori yapısı genişletme
+### 4.9 Ürün kategori yapısı genişletme ✅ TAMAMLANDI (Adım J, 2026-05-12)
 
-`admin/config.yml` içindeki `cat` seçeneklerine eklenecekler:
-- `koku` (Koku & Parfüm)
-- `parfum`
-- `seffaf-canta` (ana kategori)
-- `canta-icerik` (çanta içine eklenebilen kalemler)
-- Anahtarlık alt etiketleri: `anahtarlik-hayvan`, `anahtarlik-karakter`, `anahtarlik-spor`, `anahtarlik-arac`, `anahtarlik-isimli`
-
-AI asistanın `AI_COLORS` ve niyet ayrıştırıcısı bu yeni kategorilerle senkron tutulacak.
+- `admin/config.yml` `cat` seçeneklerine 7 yeni değer eklendi: `koku`, `parfum`, `anahtarlik-hayvan`, `anahtarlik-karakter`, `anahtarlik-spor`, `anahtarlik-arac`, `anahtarlik-isimli` (`seffaf-canta` ve `canta-icerik` Adım B'de zaten eklenmişti)
+- `AI_CATS` sözlüğüne 7 yeni anahtar + eş anlamlılar (penguen/vosvos/isimli/spor takım adları vs.) — `canta-icerik`'ten `parfum`/`koku`/`kolonya` çıkarıldı (artık kendi cat'leri var)
+- `AI_SECTIONS` ve `AI_CAT_LABEL` 7 yeni anahtarla senkronlandı
+- Filter butonları markup'ta değişmedi (3D sub-label'ler de filter bar'da değil; AI asistan + drawer üzerinden erişiliyor)
+- Henüz bu cat'lerle etiketlenmiş ürün yok — Sveltia panelinden yeni ürün eklenince çalışacak
 
 ### 4.10 WhatsApp dinamik mesaj davranışı
 
@@ -514,7 +512,11 @@ EN ALT (sabit)
 - `admin/config.yml` hero hint'leri netleştirildi (boyut, fallback davranışı)
 - `data/hero.yml` default `overlay_intensity: medium` ile güncellendi
 
-**Adım J — Ürün kategori genişletme (§ 4.9)**
+✅ **Adım J — 2026-05-12 — Ürün kategori genişletme (§ 4.9) TAMAMLANDI**
+- `admin/config.yml`'e 7 yeni cat değeri (koku, parfum, 5 anahtarlık alt etiketi)
+- `AI_CATS` + `AI_SECTIONS` + `AI_CAT_LABEL` üçlüsü 7 yeni anahtarla senkron
+- `canta-icerik` AI synonyms'inden `parfum`/`koku`/`kolonya` çıkarıldı (artık dedicated cat)
+- Filter butonları değişmedi (3D sub-label pattern'iyle tutarlı)
 
 **Adım K — WhatsApp dinamik mesaj (§ 4.10)**
 

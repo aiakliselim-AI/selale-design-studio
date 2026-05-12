@@ -294,7 +294,14 @@ collections:
           - { label: 'Küpe', value: kupe }
           - { label: 'Yüzük', value: yuzuk }
           - { label: 'Anahtarlık', value: anahtarlik }
+          - { label: 'Anahtarlık — Hayvan', value: anahtarlik-hayvan }
+          - { label: 'Anahtarlık — Karakter', value: anahtarlik-karakter }
+          - { label: 'Anahtarlık — Spor Takımı', value: anahtarlik-spor }
+          - { label: 'Anahtarlık — Araç', value: anahtarlik-arac }
+          - { label: 'Anahtarlık — İsimli', value: anahtarlik-isimli }
           - { label: 'Mum', value: mum }
+          - { label: 'Koku & Parfüm', value: koku }
+          - { label: 'Parfüm', value: parfum }
           - { label: 'Şeffaf Çanta', value: seffaf-canta }
           - { label: 'Çanta İçeriği', value: canta-icerik }
           - { label: '3D Baskı (genel)', value: '3d' }
