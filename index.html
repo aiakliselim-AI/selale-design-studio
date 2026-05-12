@@ -545,7 +545,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   </div>
 
   <div class="drawer-footer">
-    <a class="drawer-wa" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
+    <a class="drawer-wa wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M3.5 20.5l1.5-4.5A8.5 8.5 0 1 1 7.5 19l-4 1.5z"/>
         <path d="M8.5 9.5c.2-.5.6-.7 1-.7s.7 0 .9.3l1 1.5c.2.3.2.6 0 .9l-.5.7c.5 1 1.5 2 2.5 2.5l.7-.5c.3-.2.6-.2.9 0l1.5 1c.3.2.3.5.3.9 0 .5-.3.9-.7 1.1-1.7.7-3.7.4-5.2-.6-1.5-1-2.6-2.6-3-4.3-.1-.5 0-1 .1-1.4z"/>
@@ -566,7 +566,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
         </svg>
         <span class="nav-badge" id="navFavCount">0</span>
       </button>
-      <a class="nav-icon-btn" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp">
+      <a class="nav-icon-btn wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3.5 20.5l1.5-4.5A8.5 8.5 0 1 1 7.5 19l-4 1.5z"/>
           <path d="M8.5 9.5c.2-.5.6-.7 1-.7s.7 0 .9.3l1 1.5c.2.3.2.6 0 .9l-.5.7c.5 1 1.5 2 2.5 2.5l.7-.5c.3-.2.6-.2.9 0l1.5 1c.3.2.3.5.3.9 0 .5-.3.9-.7 1.1-1.7.7-3.7.4-5.2-.6-1.5-1-2.6-2.6-3-4.3-.1-.5 0-1 .1-1.4z"/>
@@ -778,7 +778,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       <div class="about-feature"><span>🚀</span> Hızlı Kargo, Güvenli Teslimat</div>
       <div class="about-feature"><span>🖨️</span> Profesyonel 3D Baskı Hizmeti</div>
     </div>
-    <a class="btn-wa-order" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
+    <a class="btn-wa-order wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
       📱 WhatsApp'tan Sipariş / Soru
     </a>
   </div>
@@ -868,7 +868,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
         <li><a onclick="goTo('products');filterProducts('3d',null)">3D Baskı</a></li>
         <li><a>Kargo & İade</a></li>
         <li><a>Özel Sipariş</a></li>
-        <li><a href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">İletişim</a></li>
+        <li><a class="wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">İletişim</a></li>
       </ul>
     </div>
   </div>
@@ -957,7 +957,7 @@ try{
 }catch(e){ favorites = []; }
 let currentProduct = null;
 
-function saveFavs(){ try{localStorage.setItem('atelyeFavs',JSON.stringify(favorites));}catch(e){} updateFavCounts(); }
+function saveFavs(){ try{localStorage.setItem('atelyeFavs',JSON.stringify(favorites));}catch(e){} updateFavCounts(); if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks(); }
 function isFaved(id){ return favorites.includes(id); }
 function updateFavCounts(){
   const c = favorites.length;
@@ -1119,7 +1119,7 @@ function openModal(id){
   galleryIndex = 0;
   renderGalleryThumbs();
   renderGalleryStage();
-  const waMsg = encodeURIComponent(`Merhaba! "${currentProduct.name}" ürününü sipariş etmek istiyorum.`);
+  const waMsg = encodeURIComponent(`Merhaba! ${currentProduct.name} hakkında bilgi alabilir miyim?`);
   document.getElementById('modalWaBtn').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
   updateModalFavBtn();
   document.getElementById('modalOverlay').classList.add('open');
@@ -1149,7 +1149,7 @@ function renderFavPage(){
   }
   const fp = products.filter(p=>favorites.includes(p.id));
   body.innerHTML=`<div class="fav-grid">${fp.map(p=>{
-    const waMsg=encodeURIComponent(`Merhaba! "${p.name}" ürününü sipariş etmek istiyorum.`);
+    const waMsg=encodeURIComponent(`Merhaba! ${p.name} hakkında bilgi alabilir miyim?`);
     return `<div class="fav-card">
       <div class="fav-img ${aiEscape(p.bg)}">${imgContent(p)}
         <button class="fav-remove" onclick="toggleFav(${p.id});renderFavPage()" title="Çıkar">✕</button>
@@ -1195,6 +1195,26 @@ function setEventTab(tab){
 
 /* ════ WA HELPER ════ */
 function openWA(msg){ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Merhaba! '+msg)}`,'_blank'); }
+
+/* Adım K — favorilere göre dinamik genel WhatsApp mesajı */
+function buildWAMessage(){
+  const ids = Array.isArray(favorites) ? favorites : [];
+  if(!ids.length || !Array.isArray(products) || !products.length){
+    return 'Merhaba! Ürünleriniz hakkında bilgi alabilir miyim?';
+  }
+  const names = products
+    .filter(p => p && ids.includes(p.id))
+    .map(p => p.name)
+    .filter(Boolean);
+  if(!names.length) return 'Merhaba! Ürünleriniz hakkında bilgi alabilir miyim?';
+  return `Merhabalar, ${names.join(', ')} hakkında bilgi alabilir miyim?`;
+}
+function refreshDynamicWALinks(){
+  const text = encodeURIComponent(buildWAMessage());
+  document.querySelectorAll('a.wa-dynamic').forEach(a => {
+    a.href = `https://wa.me/${WA_NUMBER}?text=${text}`;
+  });
+}
 
 /* ════ TOAST ════ */
 function showToast(icon,msg){
@@ -1604,6 +1624,7 @@ function toggleAI(){
 
 /* ════ BAŞLAT ════ */
 updateFavCounts();
+refreshDynamicWALinks();
 
 /* ════ ÜRÜN MANİFESTİ — data/products.json'dan yükle ════ */
 async function loadProducts(){
@@ -1615,6 +1636,7 @@ async function loadProducts(){
     // Güvenlik: id'leri tam sayı ve 1-9999 aralığında olanları kabul et
     products = data.filter(p => p && Number.isInteger(p.id) && p.id > 0 && p.id < 10000);
     renderProducts(products);
+    if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
   }catch(e){
     console.warn('Ürün manifesti yüklenemedi:', e);
     const grid = document.getElementById('productGrid');
@@ -2249,8 +2271,11 @@ function applyWANumber(num){
   if(!num) return;
   WA_NUMBER = String(num);
   document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
+    // .wa-dynamic linkleri refreshDynamicWALinks tarafından text + numara birlikte güncellenir.
+    if(a.classList.contains('wa-dynamic')) return;
     a.href = `https://wa.me/${WA_NUMBER}`;
   });
+  if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
 }
 
 function applySettings(s){

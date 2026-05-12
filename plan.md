@@ -5,12 +5,13 @@
 > mimariyi anlatır, plan.md ise sıradaki işleri ve tasarım
 > kararlarını anlatır.
 >
-> **Son güncelleme:** 2026-05-12. Adım H + I + J tamamlandı —
+> **Son güncelleme:** 2026-05-12. Adım H + I + J + K tamamlandı —
 > özel günden şeffaf çanta builder'a preset yönlendirme; hero foto
 > modu polish (overlay yoğunluğu + onerror fallback); ürün
 > kategorileri genişletildi (koku, parfum, anahtarlık alt etiketleri)
-> + AI sözlüğü sync. Önceki büyük güncelleme 2026-05-08
-> (Aşama 5 tasarım kararları, sağdan drawer, hero YouTube vb.).
+> + AI sözlüğü sync; favorilere göre dinamik WhatsApp mesajları.
+> Önceki büyük güncelleme 2026-05-08 (Aşama 5 tasarım kararları,
+> sağdan drawer, hero YouTube vb.).
 
 ---
 
@@ -175,14 +176,15 @@ Tıklayınca → Şeffaf Çanta akışına gider, **uygun filtre uygulanmış** 
 - Filter butonları markup'ta değişmedi (3D sub-label'ler de filter bar'da değil; AI asistan + drawer üzerinden erişiliyor)
 - Henüz bu cat'lerle etiketlenmiş ürün yok — Sveltia panelinden yeni ürün eklenince çalışacak
 
-### 4.10 WhatsApp dinamik mesaj davranışı
+### 4.10 WhatsApp dinamik mesaj davranışı ✅ TAMAMLANDI (Adım K, 2026-05-12)
 
-WhatsApp butonu mesajı favorilere göre değişir:
-- Favoriler boşsa → `"Merhaba! Ürünleriniz hakkında bilgi alabilir miyim?"`
-- Favoriler doluysa → `"Merhabalar, [Ürün 1], [Ürün 2], [Ürün 3] hakkında bilgi alabilir miyim?"`
-- Ürün detay butonu → `"Merhaba! [Ürün adı] hakkında bilgi alabilir miyim?"`
-
-Genel WhatsApp butonuna entegre olur — ayrı buton koyulmaz.
+- `buildWAMessage()` favorilere göre metin döner:
+  - Boş → "Merhaba! Ürünleriniz hakkında bilgi alabilir miyim?"
+  - Dolu → "Merhabalar, [Ürün 1], [Ürün 2], … hakkında bilgi alabilir miyim?"
+- `refreshDynamicWALinks()` `.wa-dynamic` marker'lı tüm linklerin href'ini yeniler (text + numara birlikte)
+- 4 generic WA noktası `.wa-dynamic` ile işaretlendi: drawer footer, nav icon, hakkımızda CTA, footer iletişim
+- Trigger'lar: `saveFavs()`, `applyWANumber()`, `loadProducts()` sonu, başlangıçta `updateFavCounts()` yanı sıra
+- Ürün detay butonları (modal + fav-card) yeni metinle: "Merhaba! [Ürün adı] hakkında bilgi alabilir miyim?"
 
 ### 4.11 AI asistan sözlüğü güncelleme
 
@@ -518,7 +520,12 @@ EN ALT (sabit)
 - `canta-icerik` AI synonyms'inden `parfum`/`koku`/`kolonya` çıkarıldı (artık dedicated cat)
 - Filter butonları değişmedi (3D sub-label pattern'iyle tutarlı)
 
-**Adım K — WhatsApp dinamik mesaj (§ 4.10)**
+✅ **Adım K — 2026-05-12 — WhatsApp dinamik mesaj (§ 4.10) TAMAMLANDI**
+- `buildWAMessage()` + `refreshDynamicWALinks()` helper'ları eklendi
+- 4 generic WA linki (`.wa-dynamic`): drawer / nav / hakkımızda CTA / footer iletişim
+- `saveFavs`, `applyWANumber`, `loadProducts` sonu ve boot'ta refresh tetikleniyor
+- `applyWANumber` `.wa-dynamic` linklerini skip ediyor (yoksa `?text=`'i siliyordu)
+- Modal + fav-card mesajları "[Ürün adı] hakkında bilgi alabilir miyim?" şekline alındı
 
 **Adım L — AI asistan sözlüğü (§ 4.11)**
 
