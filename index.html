@@ -10,7 +10,7 @@
 <meta name="description" content="Şelale Design Studio — El emeği Miyuki bileklik, mum, 3D baskı ve kişiye özel hediyeler.">
 <link rel="canonical" href="https://selale-design-studio.com/">
 <meta property="og:title" content="Şelale Design Studio — Kişiye Özel Tasarım">
-<meta property="og:description" content="El emeği Miyuki bileklik, mum, şeffaf çanta hediye setleri ve 3D baskı — Ankara'dan kişiye özel hediyeler.">
+<meta property="og:description" content="El emeği Miyuki bileklik, mum, çanta setleri ve 3D baskı — Ankara'dan kişiye özel hediyeler.">
 <meta property="og:image" content="https://selale-design-studio.com/images/og-banner.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Şelale Design Studio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Şelale Design Studio — Kişiye Özel Tasarım">
-<meta name="twitter:description" content="El emeği Miyuki bileklik, mum, şeffaf çanta hediye setleri ve 3D baskı.">
+<meta name="twitter:description" content="El emeği Miyuki bileklik, mum, çanta setleri ve 3D baskı.">
 <meta name="twitter:image" content="https://selale-design-studio.com/images/og-banner.jpg">
 <title>Şelale Design Studio — Kişiye Özel Tasarım</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -669,8 +669,8 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 <!-- ŞEFFAF ÇANTA BANNER (5.6) -->
 <section class="giftbag-banner" id="giftbag-banner">
   <div class="gb-tag">✦ Hediye Konsepti</div>
-  <h2><em>Şeffaf Çanta</em> Hediye Setleri</h2>
-  <p>Sevdiklerinize özel, içerisini birlikte tasarladığınız zarif şeffaf çantalar — koku, mum, miyuki bileklik ve daha fazlası.</p>
+  <h2><em>Çanta</em> Setleri</h2>
+  <p>Sevdiklerinize özel, içerisini birlikte tasarladığınız zarif çanta setleri — koku, mum, miyuki bileklik ve daha fazlası.</p>
   <a class="btn-gb" href="#giftbag-builder" onclick="event.preventDefault();goTo('giftbag-builder')">Keşfet →</a>
 </section>
 
@@ -1289,7 +1289,7 @@ const AI_CATS = {
   mum:           ['mum','mumlar','candle','kokulu mum','koku mumu'],
   koku:          ['koku','kolonya','koku kart','cicekli kart','kart sunum'],
   parfum:        ['parfum','parfüm','mini parfum','parfum sisesi','tek sise'],
-  'seffaf-canta':['seffaf canta','şeffaf çanta','seffafcanta','hediye seti','gift bag','hediye paketi'],
+  'seffaf-canta':['canta seti','canta setleri','çanta seti','çanta setleri','seffaf canta','şeffaf çanta','seffafcanta','hediye seti','gift bag','hediye paketi'],
   'canta-icerik':['canta icerik','çanta içerik','canta icerigi','şişe','sise','dekor','dekorasyon','vazo','kuru cicek','kuru çiçek','etiket'],
   '3d':          ['3d','3 d','baski','baskı','print','figur','figür','oyuncak','aksesuar']
 };
@@ -1404,7 +1404,7 @@ const AI_CAT_LABEL = {
   'anahtarlik-spor':'spor takımı anahtarlık','anahtarlik-arac':'araç anahtarlığı',
   'anahtarlik-isimli':'isimli anahtarlık',
   mum:'mum',koku:'koku & parfüm sunumu',parfum:'parfüm',
-  'seffaf-canta':'şeffaf çanta hediye seti','canta-icerik':'çanta içerik kalemleri',
+  'seffaf-canta':'çanta seti','canta-icerik':'çanta seti içerik kalemleri',
   '3d':'3D baskı ürünleri'
 };
 
@@ -1515,7 +1515,7 @@ function aiHandle(text){
   if(intent.specials.includes('sevgili')){
     aiAfter(600, ()=>{
       aiAskConfirm(
-        'Sevgiliniz için romantik bir öneri: <b>Kırmızı Romantik şeffaf çanta</b> + mini parfüm + Miyuki bileklik + kuru çiçek 💕<br>Hediye paketini birlikte hazırlayalım mı?',
+        'Sevgiliniz için romantik bir öneri: <b>Kırmızı Romantik çanta seti</b> + mini parfüm + Miyuki bileklik + kuru çiçek 💕<br>Hediye paketini birlikte hazırlayalım mı?',
         ()=>{
           aiAfter(400, ()=>{
             aiBotMsg('Tamam, hediye paketi sayfasını açıyorum 🌸');
@@ -1535,7 +1535,7 @@ function aiHandle(text){
   if(intent.specials.includes('annelergunu')){
     aiAfter(600, ()=>{
       aiAskConfirm(
-        'Anneler günü için sevilen seçenekler: <b>Bordo Klasik şeffaf çanta</b> + mini parfüm + Miyuki bileklik + özel etiket 🌷<br>Hediye paketini hazırlamaya geçelim mi?',
+        'Anneler günü için sevilen seçenekler: <b>Bordo Klasik çanta seti</b> + mini parfüm + Miyuki bileklik + özel etiket 🌷<br>Hediye paketini hazırlamaya geçelim mi?',
         ()=>{
           aiAfter(400, ()=>{
             aiBotMsg('Harika 🌸 Hediye paketi sayfasını açıyorum.');
@@ -1551,10 +1551,10 @@ function aiHandle(text){
     return;
   }
 
-  // Adım L — direkt şeffaf çanta builder'a yönlendir
+  // Adım L — direkt çanta seti builder'a yönlendir
   if(intent.specials.includes('giftbagset')){
     aiAfter(500, ()=>{
-      aiBotMsg('Şeffaf çanta hediye paketi sayfasını açıyorum 🌸 Çantanızı ve içeriği seçebilirsiniz.');
+      aiBotMsg('Çanta seti sayfasını açıyorum 🌸 Çantanızı ve içeriği seçebilirsiniz.');
       setTimeout(()=>{
         goTo('giftbag-builder');
         if(typeof closeAIPanel === 'function') closeAIPanel();
@@ -1794,7 +1794,7 @@ function renderEvents(list){
     const wa   = jsArg(e.wa_message || '');
     const hasPreset = !!e.gift_bag_preset;
     const gbCta = hasPreset
-      ? `<button type="button" class="ev-gb-cta" onclick="openGiftbagFromEvent('${slugArg}')" aria-label="Bu güne özel şeffaf çanta hediye paketi hazırla">
+      ? `<button type="button" class="ev-gb-cta" onclick="openGiftbagFromEvent('${slugArg}')" aria-label="Bu güne özel çanta seti hazırla">
           <span class="gb-cta-icon">🎁</span>
           <span class="gb-cta-text">Bu güne özel <strong>hediye paketi</strong> hazırla</span>
           <span class="gb-cta-arrow">→</span>
@@ -1821,7 +1821,7 @@ function aiApplyGiftbagPreset(bagSlug, itemSlugs){
   if(typeof gbUpdateSummary === 'function') gbUpdateSummary();
   goTo('giftbag-builder');
 }
-// Etkinlik kartından şeffaf çanta builder'a yönlendirme — bag + items ön seçilir.
+// Etkinlik kartından çanta seti builder'a yönlendirme — bag + items ön seçilir.
 function openGiftbagFromEvent(slug){
   const ev = eventsList.find(e => e && e.slug === slug);
   if(!ev || !ev.gift_bag_preset) return;
@@ -1852,7 +1852,7 @@ async function loadGiftBags(){
     renderGiftBagItems();
     gbUpdateSummary();
   }catch(e){
-    console.warn('Şeffaf çanta manifestleri yüklenemedi:', e);
+    console.warn('Çanta seti manifestleri yüklenemedi:', e);
   }
 }
 function renderGiftBags(){
@@ -2226,7 +2226,8 @@ function renderDrawerItem(item, depth, key){
   const favBadge = item.show_badge
     ? ` <span class="dl-badge" id="drawerFavCount">0</span>` : '';
 
-  if(item.expandable && Array.isArray(item.children) && item.children.length){
+  // 2-kademe sinir: sadece 1. seviyede accordion kabul edilir (3. kademe kapali)
+  if(depth === 1 && item.expandable && Array.isArray(item.children) && item.children.length){
     const children = sortByOrder(item.children)
       .map((c, i) => renderDrawerItem(c, depth+1, `${safeKey}-${i}`)).join('');
     return `<button class="drawer-link" onclick="toggleDrawerGroup('${safeKey}')"${indent}>${iconHtml}${aiEscape(item.label||'')}${badge}<span class="dl-arrow" data-group="${safeKey}">▾</span></button>

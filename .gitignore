@@ -56,3 +56,6 @@ temp/
 *.tmp
 *.bak
 *.old
+
+# ─── Yerel yedekler (her büyük değişiklik öncesi alınıyor) ───
+backups/

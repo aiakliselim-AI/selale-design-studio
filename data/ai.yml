@@ -10,7 +10,7 @@ quick_chips:
   - text: Kokulu mum
   - text: Anneler günü hediyesi
   - text: Sevgilim için hediye
-  - text: Şeffaf çanta seti
+  - text: Çanta seti
   - text: 3D baskı
 
 not_found: 'Üzgünüm, "{q}" için ürün bulamadım. 😔 Başka bir şey deneyelim mi?'

@@ -46,29 +46,8 @@ categories:
         order: 4
       - label: Anahtarlık
         icon: 🔑
-        expandable: true
+        action: { type: filter, target: anahtarlik }
         order: 5
-        children:
-          - label: Hayvan
-            icon: 🐾
-            action: { type: filter, target: anahtarlik-hayvan }
-            order: 1
-          - label: Karakter
-            icon: 🦸
-            action: { type: filter, target: anahtarlik-karakter }
-            order: 2
-          - label: Spor Takımı
-            icon: ⚽
-            action: { type: filter, target: anahtarlik-spor }
-            order: 3
-          - label: Araç
-            icon: 🚗
-            action: { type: filter, target: anahtarlik-arac }
-            order: 4
-          - label: İsimli
-            icon: 🔤
-            action: { type: filter, target: anahtarlik-isimli }
-            order: 5
 
   - label: El Yapımı Mumlar
     icon: 🕯️
@@ -106,7 +85,7 @@ categories:
         action: { type: filter, target: koku-sise }
         order: 2
 
-  - label: Şeffaf Çanta Setleri
+  - label: Çanta Setleri
     icon: 🛍️
     badge: YENİ
     action: { type: filter, target: seffaf-canta }

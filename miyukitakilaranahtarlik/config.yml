@@ -16,12 +16,12 @@ public_folder: /images
 collections:
 
   # ─────────────────────────────────────────────────────────
-  # 1) ÇEKMECE MENÜSÜ (Drawer)
+  # 1) ÇEKMECE MENÜSÜ (Drawer) — 2-kademe: ANA BAŞLIK > Alt Link
   # ─────────────────────────────────────────────────────────
   - name: drawer
     label: 1. Çekmece Menüsü
     label_singular: Çekmece Ayarı
-    description: Sol taraftan açılan hamburger menünün içeriği. Bölüm başlıkları ve alt linkler buradan düzenlenir.
+    description: Sol taraftan açılan hamburger menünün içeriği. Şema gerçek veri yapısı ile birebir — top_links / categories / bottom_links / whatsapp. Sadece 2 kademe: ana başlık + alt link (3. kademe yok).
     delete: false
     editor: { preview: false }
     files:
@@ -32,44 +32,102 @@ collections:
           - label: Üst Linkler
             name: top_links
             widget: list
-            hint: Bölüm başlıklarının üzerinde, en üstte görünen linkler (Ana Sayfa, Tüm Ürünler vb.)
+            hint: 'Çekmece en üstündeki direkt linkler (Ana Sayfa, Tüm Ürünler, Favorilerim).'
             fields:
-              - { label: Emoji, name: icon, widget: string, required: false, hint: '(opsiyonel — kullanılmaz)' }
-              - { label: Yazı, name: label, widget: string }
-              - label: Hedef Tipi
-                name: action_type
-                widget: select
-                options:
-                  - { label: 'Bölüme Git (scroll)', value: scroll }
-                  - { label: 'Ürün Filtrele', value: filter }
-                  - { label: 'Sayfa Aç (favoriler vb.)', value: page }
-              - { label: 'Hedef Değer', name: action_value, widget: string, hint: 'scroll için bölüm id (ör. hero-anchor), filter için kategori (ör. miyuki), page için: favoriler' }
-          - label: Bölümler
-            name: sections
-            widget: list
-            hint: Her bölüm bir başlık ve altındaki linklerden oluşur.
-            fields:
-              - { label: Başlık (Emoji + Metin), name: title, widget: string, hint: 'Örn: 📿 Miyuki Takı & Aksesuar' }
-              - label: Linkler
-                name: links
-                widget: list
+              - { label: 'Etiket (Yazı)', name: label, widget: string }
+              - { label: 'Emoji İkon', name: icon, widget: string, required: false, hint: 'Görsel ipucu (opsiyonel)' }
+              - label: 'Aksiyon'
+                name: action
+                widget: object
                 fields:
-                  - { label: Emoji, name: icon, widget: string, required: false, hint: '(opsiyonel — kullanılmaz)' }
-                  - { label: Yazı, name: label, widget: string }
-                  - label: Hedef Tipi
-                    name: action_type
+                  - label: 'Aksiyon Tipi'
+                    name: type
                     widget: select
                     options:
-                      - { label: 'Bölüme Git (scroll)', value: scroll }
+                      - { label: 'Bölüme Kaydır (scroll)', value: scroll }
+                      - { label: 'Ürün Filtrele', value: filter }
+                      - { label: 'Favoriler Sayfası Aç', value: favorites }
+                  - { label: 'Hedef Değer', name: target, widget: string, required: false, hint: 'scroll için: hero-anchor, products, categories, events-section, printer-section, about | filter için: hepsi, miyuki, bileklik, kolye, kupe, yuzuk, anahtarlik, mum, koku, seffaf-canta, 3d | favorites için: boş bırak' }
+              - { label: 'Favori Sayacı Rozeti Göster?', name: show_badge, widget: boolean, required: false, default: false, hint: 'Sadece Favorilerim linkinde true yapın' }
+              - { label: 'Sıralama', name: order, widget: number, default: 1, value_type: int, hint: 'Küçük sayı önce görünür' }
+
+          - { label: 'Kategoriler Bölüm Başlığı', name: categories_label, widget: string, default: 'Kategoriler', hint: 'Top linkler ile kategori listesi arasındaki gri başlık' }
+
+          - label: Kategoriler (Ana Başlıklar)
+            name: categories
+            widget: list
+            hint: 'Ana çekmece başlıkları. Her başlık ya direkt aksiyon yapar (action) ya da açılır liste olur (expandable + children). Children içinde tekrar children OLMAZ (3. kademe yok).'
+            fields:
+              - { label: 'Başlık (Ana Etiket)', name: label, widget: string }
+              - { label: 'Emoji İkon', name: icon, widget: string, required: false }
+              - { label: 'Rozet (örn. YENİ)', name: badge, widget: string, required: false, hint: 'Etiketin yanında küçük rozet (opsiyonel)' }
+              - { label: 'Açılır Liste mi?', name: expandable, widget: boolean, default: false, hint: 'TRUE: alttaki "Alt Linkler" listesi görünür, ana başlık tıklanınca accordion açılır. FALSE: ana başlık direkt aksiyona gider, alt linkler yok sayılır.' }
+              - label: 'Aksiyon (sadece expandable=false için)'
+                name: action
+                widget: object
+                required: false
+                fields:
+                  - label: 'Aksiyon Tipi'
+                    name: type
+                    widget: select
+                    options:
+                      - { label: 'Bölüme Kaydır (scroll)', value: scroll }
                       - { label: 'Ürün Filtrele', value: filter }
                       - { label: 'Etkinlik Sekmesi Aç', value: event }
-                  - { label: 'Hedef Değer', name: action_value, widget: string, hint: 'scroll için id; filter için kategori; event için sekme adı (nishan, dugun vb.)' }
+                  - { label: 'Hedef Değer', name: target, widget: string, hint: 'scroll için: hero-anchor, products, categories, events-section, printer-section, about, giftbag-builder | filter için: hepsi, miyuki, bileklik, kolye, kupe, yuzuk, anahtarlik, mum, koku, seffaf-canta, 3d, 3d-anahtarlik, 3d-oyuncak, 3d-alet, 3d-deko | event için: nishan, dugun, dogumgunu, babyshower, mezuniyet' }
+              - label: 'Alt Linkler (sadece expandable=true için)'
+                name: children
+                widget: list
+                required: false
+                hint: '2-kademe sinir: bu listede 3. kademe açılır liste TANIMLANSA BİLE site kodu yok sayar. Her alt link direkt aksiyon yapar.'
+                fields:
+                  - { label: 'Alt Etiket', name: label, widget: string }
+                  - { label: 'Emoji İkon', name: icon, widget: string, required: false }
+                  - label: 'Aksiyon'
+                    name: action
+                    widget: object
+                    fields:
+                      - label: 'Aksiyon Tipi'
+                        name: type
+                        widget: select
+                        options:
+                          - { label: 'Bölüme Kaydır (scroll)', value: scroll }
+                          - { label: 'Ürün Filtrele', value: filter }
+                          - { label: 'Etkinlik Sekmesi Aç', value: event }
+                      - { label: 'Hedef Değer', name: target, widget: string, hint: 'filter için kategori slug (bileklik, kolye, kupe, yuzuk, anahtarlik, mum, koku, seffaf-canta, 3d vb.) | scroll için bölüm id | event için sekme (nishan, dugun, dogumgunu, babyshower, mezuniyet)' }
+                  - { label: 'Sıralama', name: order, widget: number, default: 1, value_type: int }
+              - { label: 'Sıralama', name: order, widget: number, default: 1, value_type: int, hint: 'Kategoriler bu sayıya göre dizilir' }
+
+          - label: Alt Linkler (footer öncesi)
+            name: bottom_links
+            widget: list
+            required: false
+            hint: 'WhatsApp butonunun üzerinde duran linkler (Hakkımızda vb.). Bu liste direkt aksiyon — accordion olmaz.'
+            fields:
+              - { label: 'Etiket', name: label, widget: string }
+              - { label: 'Emoji İkon', name: icon, widget: string, required: false }
+              - label: 'Aksiyon'
+                name: action
+                widget: object
+                fields:
+                  - label: 'Aksiyon Tipi'
+                    name: type
+                    widget: select
+                    options:
+                      - { label: 'Bölüme Kaydır (scroll)', value: scroll }
+                      - { label: 'Ürün Filtrele', value: filter }
+                  - { label: 'Hedef Değer', name: target, widget: string, hint: 'scroll için: about, hero-anchor vb. | filter için kategori slug' }
+              - { label: 'Sıralama', name: order, widget: number, default: 1, value_type: int }
+
           - label: Alt WhatsApp Butonu
             name: whatsapp
             widget: object
             fields:
-              - { label: Yazı, name: label, widget: string, default: 'WhatsApp İletişim' }
-              - { label: Aktif mi?, name: enabled, widget: boolean, default: true }
+              - { label: 'Yazı', name: text, widget: string, default: 'WhatsApp''tan Sipariş' }
+              - { label: 'Emoji', name: icon, widget: string, default: '📱' }
+              - { label: 'Stil', name: style, widget: select, default: outlined, options: ['filled', 'outlined'] }
+              - { label: 'Telefon Numarası Göster?', name: show_phone, widget: boolean, default: false }
+              - { label: 'Aktif mi?', name: enabled, widget: boolean, default: true }
 
   # ─────────────────────────────────────────────────────────
   # 2) SİTE AYARLARI
@@ -309,8 +367,8 @@ collections:
           - { label: 'Mum', value: mum }
           - { label: 'Koku & Parfüm', value: koku }
           - { label: 'Parfüm', value: parfum }
-          - { label: 'Şeffaf Çanta', value: seffaf-canta }
-          - { label: 'Çanta İçeriği', value: canta-icerik }
+          - { label: 'Çanta Seti', value: seffaf-canta }
+          - { label: 'Çanta Seti İçeriği', value: canta-icerik }
           - { label: '3D Baskı (genel)', value: '3d' }
           - { label: '3D Anahtarlık', value: '3d-anahtarlik' }
           - { label: '3D Oyuncak', value: '3d-oyuncak' }
@@ -403,7 +461,7 @@ collections:
       - { label: 'Fiyat Etiketi', name: price_label, widget: string, default: 'Fiyat başlangıcı' }
       - { label: 'Fiyat Değeri', name: price_amount, widget: string, hint: 'Örn: ₺680' }
       - { label: 'WhatsApp Mesaj Metni', name: wa_message, widget: string, hint: 'Örn: Nişan Konsepti hakkında bilgi almak istiyorum.' }
-      - label: 'Şeffaf Çanta Önerisi (opsiyonel)'
+      - label: 'Çanta Seti Önerisi (opsiyonel)'
         name: gift_bag_preset
         widget: relation
         collection: gift_bags
@@ -412,7 +470,7 @@ collections:
         search_fields: [title, slug]
         required: false
         hint: 'Bu konsepte uygun çantayı seçin. Müşteri "Hediye Paketi Hazırla" butonuna basınca çanta otomatik seçili gelir.'
-      - label: 'Şeffaf Çanta Önerilen İçerikler (opsiyonel)'
+      - label: 'Çanta Seti Önerilen İçerikler (opsiyonel)'
         name: gift_bag_preset_items
         widget: relation
         collection: gift_bag_items
@@ -565,12 +623,12 @@ collections:
           - { label: 'Alt Yazı 2', name: bottom_right, widget: string, default: 'Tüm hakları saklıdır' }
 
   # ─────────────────────────────────────────────────────────
-  # 12) ŞEFFAF ÇANTA TİPLERİ
+  # 12) ÇANTA SETLERİ
   # ─────────────────────────────────────────────────────────
   - name: gift_bags
-    label: 12. Şeffaf Çanta Tipleri
+    label: 12. Çanta Setleri
     label_singular: Çanta Tipi
-    description: Şeffaf çanta hediye setleri için çanta tipleri (bordo klasik, kırmızı romantik vb.). Müşteri burada seçer, içerik kalemleriyle birleştirir.
+    description: Çanta setleri için çanta tipleri (bordo klasik, kırmızı romantik vb.). Müşteri burada seçer, içerik kalemleriyle birleştirir.
     folder: gift-bags
     create: true
     delete: true
@@ -604,12 +662,12 @@ collections:
       - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
 
   # ─────────────────────────────────────────────────────────
-  # 13) ŞEFFAF ÇANTA İÇERİK SEÇENEKLERİ
+  # 13) ÇANTA SETİ İÇERİKLERİ
   # ─────────────────────────────────────────────────────────
   - name: gift_bag_items
-    label: 13. Şeffaf Çanta İçerik Seçenekleri
+    label: 13. Çanta Seti İçerikleri
     label_singular: Çanta İçeriği
-    description: Şeffaf çantanın içine eklenebilen kalemler (koku, mum, bileklik vb.). Müşteri birden fazla seçer.
+    description: Çanta setinin içine eklenebilen kalemler (koku, mum, bileklik vb.). Müşteri birden fazla seçer.
     folder: gift-bag-items
     create: true
     delete: true
