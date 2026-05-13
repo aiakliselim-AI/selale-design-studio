@@ -1,4 +1,4 @@
-# PLAN.md — ŞELALE DESIGN STUDIO — MASTER PLAN (v6)
+# PLAN.md — ŞELALE DESIGN STUDIO — MASTER PLAN (v7)
 
 > **Bu dosya Claude Code'un yol haritasıdır.**
 > Yeni oturumda **`CLAUDE.md` ile birlikte** bu dosya da okunur.
@@ -6,10 +6,12 @@
 > **alınan tasarım kararlarını** anlatır.
 >
 > **Son güncelleme:** 2026-05-13.
-> **v6 farkı:** v5'te planlanan tüm Claude Code aşamaları (1, 2, 3, 5)
-> tamamlandı ve üretimde canlı. Geriye sadece **Aşama 4** (kullanıcı işi:
-> foto yükleme) kaldı. Yeni özellik veya iyileştirme istendiğinde
-> bu plan **v7** olarak güncellenir.
+> **v7 farkı:** v6'da plan kapanmıştı, ama Adım O sonrası canlıda gezerken
+> 3 bug/eksik çıktı: anasayfada kategori kartları görünmüyor (reveal
+> observer dinamik DOM'la uyumsuz), "Öne Çıkan Ürünler" mantığı belirsiz,
+> çanta builder kategori tabları düz (alt kategori yok). v7 bu 3 işi
+> kapsar (bkz. Bölüm 5B). v6'nın "Tamamlanmış İşler" tablosuna dokunulmaz
+> — tarihsel kayıt olarak korunur.
 
 ---
 
@@ -20,6 +22,7 @@
 3. Proje Bilgileri
 4. Tasarım Kararları (Kesin — Değişmedi)
 5. Kalan İş — Aşama 4 (Kullanıcı: Foto Yükleme)
+5B. Plan v7 — Yapılacak İşler (Claude Code)
 6. Olası Sıradaki İşler (Henüz Planlanmadı)
 7. Claude Code Çalışma Kuralları
 8. Güvenlik & Dokunulmayacak Yerler
@@ -164,6 +167,78 @@ v4'te netleşen ve uygulanan kararlar. v5'te ek karar olmadı; v6'da da yok.
 
 ---
 
+## 5B. PLAN v7 — YAPILACAK İŞLER (CLAUDE CODE)
+
+Canlıda Adım O sonrası tespit edilen 3 iş. Her aşama **ayrı branch**,
+**Türkçe commit**, `[skip ci]` YOK. Sırayla yapılır.
+
+### Aşama v7-1 — Kategoriler bug fix + içerik
+**Branch:** `feat/v7-1-kategoriler-ve-reveal-fix`
+
+**Bug:** Anasayfa "Ne arıyorsunuz bugün?" altında kart görünmüyor. Veri
+var (`categories/*.md` × 7, `data/categories.json` dolu) ama
+`IntersectionObserver` (index.html:1305-1306) sayfa yüklenirken
+çalışıyor — `renderCategories/Events/Reviews/Products` async render'dan
+sonra eklenen `.reveal` elementleri observe edilmiyor, opacity:0
+sabit kalıyor.
+
+**Yapılacak:**
+- `observer`'ı global scope'a taşı (window seviyesi).
+- `renderCategories`, `renderEvents`, `renderReviews`, `renderProducts`
+  sonuna `grid.querySelectorAll('.reveal').forEach(el => observer.observe(el))` ekle.
+- Scroll-reveal animasyonu KORUNUR (ilk gizli, scroll'a geldikçe açılır
+  davranışı bozulmaz). Canlıda görsel test zorunlu.
+
+**İçerik (`categories/*.md`):** 7 → 5 kategori
+- Tut: Miyuki Takılar, El Yapımı Mumlar, 3D Baskı
+- Sil: Nişan, Düğün, Doğum Günü, Anahtarlık (Anahtarlık → Miyuki içinde)
+- Ekle: Şeffaf Çanta (scroll → `giftbag-builder`), Özel Gün (scroll →
+  `events-section`)
+
+**Fallback:** image alanı yoksa renkli daire + ilk harf. Palet:
+- Miyuki = bordo `#7a1f2e` (builder ile aynı, site imzası — dokunma)
+- Mum = turuncu `#c97a3a`
+- Şeffaf Çanta = şampanya/altın `#b8935a` (mor değil — Miyuki bordosuyla
+  çakışmaması için)
+- 3D Baskı = mavi `#2f5f8a`
+- Özel Gün = koyu yeşil `#3a6b4d`
+
+`config.yml` categories collection'a `image` field eklenmeli (panelden
+foto yükleyebilsin).
+
+### Aşama v7-2 — "Öne Çıkan Ürünler" kuralı netleştir
+**Branch:** `feat/v7-2-one-cikan-urunler`
+
+Şu anda mantık belirsiz. Kural:
+- Filtre: `isNew:true` VEYA `badge` alanı dolu (Çok Satan / Yeni / Popüler)
+- Max 8 ürün, `order` alanına göre sıralı
+- Bölüm başlığı veya alt başlığı kuralı yansıtsın ("Yeni & öne çıkanlar"
+  gibi)
+
+Mockup → onay → kod.
+
+### Aşama v7-3 — Çanta builder kategori hiyerarşisi
+**Branch:** `feat/v7-3-builder-alt-kategori`
+
+Yer: yeni çanta builder, Adım 2 sağ sütun (anasayfa değil).
+
+Şu an 3 düz buton: MİYUKİ TAKI / MUMLAR / DİĞER. Ana kategoriye
+tıklayınca **alt kategorilerin açılmasını** istiyoruz, tek seviye
+derinlik:
+- Miyuki Takı → Bileklik / Kolye / Küpe / Yüzük / Anahtarlık
+- Mumlar → (alt kategori şart değil, az ürün var)
+- Diğer → Cam Şişe / Parfüm Şişesi
+
+İki mockup karşılaştırılacak:
+- **1-A** akordeon: ana kategoriye tıklayınca altında alt-chip satırı
+  açılır (collapse animasyon)
+- **1-B** ikinci satır chip: ana kategori seçilince alt chip'ler
+  doğrudan ikinci satırda yerleşir (sticky)
+
+Mockup → UX karar → onay → kod.
+
+---
+
 ## 6. OLASI SIRADAKİ İŞLER (HENÜZ PLANLANMADI)
 
 Bunlar **karar verilmedi** — sadece olası yönler. Kullanıcı bir tanesini seçerse plan v7 yazılır:
@@ -249,8 +324,12 @@ Repo public olduğu için:
   "Tamamlanmış İşler"ine bu konu eklenir, "Yapılacak"a yeni aşamalar yazılır.
 - Her aşama sonrası **canlı siteyi gez** — şüpheli bir şey görürsen "geri al" demekten çekinme.
 - Bu plan v6 olarak **kullanıcının onayıyla** yazıldı (2026-05-13, tüm Claude Code aşamaları tamamlandıktan sonra).
+- **v7 başladı (2026-05-13):** Canlıda 3 bug/eksik çıktı, Bölüm 5B'ye
+  3 aşama yazıldı. Her aşama mockup → onay → ayrı branch → push akışı
+  ile yürütülür.
 
 ---
 
-**Durum:** Plan kapsamındaki tüm Claude Code aşamaları tamamlandı.
-Kalan iş: kullanıcının Sveltia'dan foto yüklemesi. Yeni iş gelirse plan v7. 🌸
+**Durum:** Plan v7 aktif. Üç aşama (v7-1, v7-2, v7-3) Bölüm 5B'de
+sıralı bekliyor. Ayrıca kullanıcı işi olan Aşama 4 (foto yükleme) hâlâ
+geçerli. 🌸
