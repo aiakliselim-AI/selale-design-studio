@@ -10,9 +10,6 @@
       "miyuki",
       "bileklik"
     ],
-    "event_concepts": [
-      "babyshower"
-    ],
     "colors": [
       "pembe",
       "mavi",
@@ -95,10 +92,6 @@
       "miyuki",
       "kolye"
     ],
-    "event_concepts": [
-      "nishan",
-      "dugun"
-    ],
     "colors": [
       "altin",
       "gumus",
@@ -172,9 +165,6 @@
       "miyuki",
       "yuzuk"
     ],
-    "event_concepts": [
-      "nishan"
-    ],
     "colors": [
       "kirmizi",
       "mercan",
@@ -197,9 +187,6 @@
     "cat": [
       "miyuki",
       "anahtarlik"
-    ],
-    "event_concepts": [
-      "mezuniyet"
     ],
     "colors": [
       "kirmizi",
@@ -228,9 +215,6 @@
     "badge": "Yeni",
     "cat": [
       "mum"
-    ],
-    "event_concepts": [
-      "dogumgunu"
     ],
     "colors": [
       "pembe",
@@ -280,10 +264,6 @@
     "badge": "",
     "cat": [
       "mum"
-    ],
-    "event_concepts": [
-      "babyshower",
-      "dogumgunu"
     ],
     "colors": [
       "beyaz",

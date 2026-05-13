@@ -175,9 +175,11 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .strip-section-divider{display:flex;align-items:center;gap:1rem;margin:.4rem 0 -.6rem;color:var(--muted);}
 .strip-section-divider::before,.strip-section-divider::after{content:'';flex:1;height:1px;background:rgba(60,40,25,.18);}
 .strip-section-divider span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;letter-spacing:.5px;white-space:nowrap;}
-.strip-title{font-family:'Cormorant Garamond','Playfair Display',serif;font-size:1.55rem;font-weight:500;color:var(--text);line-height:1;margin-bottom:.85rem;}
+.strip-title{font-family:'Cormorant Garamond','Playfair Display',serif;font-size:16px;font-weight:500;color:var(--text);line-height:1;margin-bottom:.85rem;}
+.strip-secondary .strip-title{font-size:15px;}
 .strip-rail-wrap{position:relative;}
-.strip-rail{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0;}
+.strip-rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0;}
+.strip-secondary .strip-rail{gap:8px;}
 .strip-rail::-webkit-scrollbar{display:none;}
 .strip-card{flex:0 0 auto;aspect-ratio:1/1;border:1px solid #e0dcd3;border-radius:3px;background:#ecebe7;overflow:hidden;position:relative;cursor:pointer;padding:0;scroll-snap-align:start;transition:transform .25s,box-shadow .25s,border-color .25s;}
 .strip-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(44,33,24,.10);border-color:#cdc6b9;}
@@ -185,7 +187,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .strip-card.strip-card-empty:hover{transform:none;box-shadow:none;border-color:#e0dcd3;}
 .strip-card img{width:100%;height:100%;object-fit:cover;display:block;}
 .strip-card-lg{width:130px;}
-.strip-card-sm{width:110px;}
+.strip-card-sm{width:130px;}
 .strip-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid rgba(60,40,25,.18);border-radius:50%;background:rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--text);opacity:.55;transition:opacity .2s,background .2s;z-index:3;line-height:1;font-family:inherit;}
 .strip-arrow:hover{opacity:1;background:rgba(255,255,255,.9);}
 .strip-arrow:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;opacity:1;}
@@ -526,7 +528,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 }
 @media(max-width:600px){
   .strip-card-lg{width:140px;}
-  .strip-card-sm{width:115px;}
+  .strip-card-sm{width:140px;}
   .strip-arrow{display:none;}
   .printer-ready-grid,.printer-custom-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
@@ -1817,14 +1819,16 @@ loadProducts();
    - Her şerit son 30 ürün (id DESC, tarih proxy)
    - Boş şerit: 8 boş çerçeveli placeholder kare
    - Hover'da auto-scroll, manuel chevron oklar, mobil swipe (scroll-snap) */
+// Şerit tanımları (düz sıra). Tüm şeritler ve divider'lar HER ZAMAN render
+// edilir — boş şerit panelden ürün eklenince dolmaya hazır olarak durur.
 const STRIP_DEFS = [
-  { key:'miyuki', label:'Miyuki Takılar',  size:'large',
-    // Miyuki şeridi: açıkça 'miyuki' etiketi olan veya tipik Miyuki alt kategorisinde olan
-    // ürünler. Anahtarlık generic tag'i (Miyuki ile 3D'de ortak) bu yüzden filtreye dahil değil.
+  // Miyuki şeridi: açıkça 'miyuki' etiketi olan veya tipik Miyuki alt kategorisinde
+  // olan ürünler. 'anahtarlik' generic tag'i (Miyuki ile 3D'de ortak) hariç.
+  { key:'miyuki', label:'Miyuki Takılar', size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => ['miyuki','bileklik','kolye','kupe','yuzuk'].includes(c)) },
   { key:'mum',    label:'El Yapımı Mumlar', size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => ['mum','koku','parfum'].includes(c)) },
-  { divider:'Özel Gün Konseptleri' },
+  { divider: 'Özel Gün Konseptleri' },
   { key:'nishan',     label:'Nişan',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('nishan') },
   { key:'dugun',      label:'Düğün',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dugun') },
   { key:'babyshower', label:'Baby Shower', size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('babyshower') },
@@ -1833,6 +1837,9 @@ const STRIP_DEFS = [
   { key:'3d',         label:'3D Baskı',    size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => c === '3d' || String(c).startsWith('3d-')) },
 ];
+// Boş şerit ne kadar placeholder kare gösterir — dolu şeritlerdeki "minimum 12"
+// floor'u ile birebir uyumlu (Math.max(3, ceil(12/picked.length))*picked.length >= 12).
+const EMPTY_PLACEHOLDER_COUNT = 12;
 
 function stripPickProducts(list, match){
   return list
@@ -1858,27 +1865,28 @@ function renderCategoryStrips(list){
   const stack = document.getElementById('stripStack');
   if(!stack) return;
   const source = Array.isArray(list) ? list : [];
-  // Divider'lar sadece kendilerinden sonra en az 1 dolu şerit varsa basılır.
   const parts = [];
-  let pendingDivider = null;
   for(const def of STRIP_DEFS){
     if(def.divider){
-      pendingDivider = def.divider;
+      parts.push(`<div class="strip-section-divider" role="separator"><span>${aiEscape(def.divider)}</span></div>`);
       continue;
     }
-    const picked = stripPickProducts(source, def.match);
-    if(!picked.length) continue; // boş şerit → render etme
-    if(pendingDivider){
-      parts.push(`<div class="strip-section-divider" role="separator"><span>${aiEscape(pendingDivider)}</span></div>`);
-      pendingDivider = null;
-    }
     const sizeClass = def.size === 'small' ? 'strip-card-sm' : 'strip-card-lg';
-    // Sürekli akış izlenimi: ürünleri yeterince tekrarla (en az 3x, en az 12 kart).
-    const repeats = Math.max(3, Math.ceil(12 / picked.length));
-    const looped = [];
-    for(let i=0; i<repeats; i++) looped.push(...picked);
-    const cards = looped.map(p => stripCardHtml(p, sizeClass)).join('');
-    parts.push(`<div class="strip strip-${def.size} reveal" data-strip-key="${aiEscape(def.key)}">
+    const hierarchyClass = def.size === 'small' ? 'strip-secondary' : 'strip-primary';
+    const picked = stripPickProducts(source, def.match);
+    let cards, repeats;
+    if(picked.length){
+      // Sürekli akış izlenimi: ürünleri yeterince tekrarla (en az 3x, en az 12 kart).
+      repeats = Math.max(3, Math.ceil(12 / picked.length));
+      const looped = [];
+      for(let i=0; i<repeats; i++) looped.push(...picked);
+      cards = looped.map(p => stripCardHtml(p, sizeClass)).join('');
+    } else {
+      // Boş şerit: panelden ürün etiketlenince dolmaya hazır 12 placeholder kare.
+      repeats = 1;
+      cards = Array.from({length: EMPTY_PLACEHOLDER_COUNT}, () => stripCardHtml(null, sizeClass)).join('');
+    }
+    parts.push(`<div class="strip ${hierarchyClass} reveal" data-strip-key="${aiEscape(def.key)}">
       <h3 class="strip-title">${aiEscape(def.label)}</h3>
       <div class="strip-rail-wrap">
         <button type="button" class="strip-arrow strip-arrow-left"  aria-label="Geriye kaydır" data-dir="-1">‹</button>
@@ -1900,9 +1908,9 @@ function bindStripBehavior(scope){
     if(!rail) return;
     const leftBtn  = strip.querySelector('.strip-arrow-left');
     const rightBtn = strip.querySelector('.strip-arrow-right');
-    const cardW = strip.classList.contains('strip-small') ? 122 : 142; // kart + gap
+    const cardW = strip.classList.contains('strip-secondary') ? 138 : 140; // kart + gap (sec: 130+8, pri: 130+10)
     const page = () => Math.max(1, Math.round(rail.clientWidth / cardW) - 1) * cardW;
-    const repeats = Math.max(2, parseInt(rail.dataset.repeats || '3', 10));
+    const repeats = parseInt(rail.dataset.repeats || '3', 10);
 
     // Manuel scroll için ok durumu (sadece görsel — döngü auto-scroll'da)
     function updateArrows(){
@@ -1918,7 +1926,9 @@ function bindStripBehavior(scope){
 
     // Sonsuz döngü auto-scroll: ürün listesi N kez tekrarlandığı için
     // scrollLeft (N-1)*oneSet'i geçince sessizce -oneSet yapılır → kesintisiz akış.
-    if(reduceMotion) return;
+    // Boş şeritlerde (repeats=1, placeholder kareler) auto-scroll yok — placeholder
+    // hareketsiz dursun.
+    if(reduceMotion || repeats < 2) return;
     let rafId = null;
     function tick(){
       if(rafId === null) return;
