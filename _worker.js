@@ -34,7 +34,7 @@ const PUBLIC_CSP = [
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const isAdmin = url.pathname === "/admin" || url.pathname.startsWith("/admin/");
+    const isAdmin = url.pathname === "/miyukitakilaranahtarlik" || url.pathname.startsWith("/miyukitakilaranahtarlik/");
 
     const response = await env.ASSETS.fetch(request);
     const headers = new Headers(response.headers);
