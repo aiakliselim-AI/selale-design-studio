@@ -245,10 +245,10 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .event-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;}
 .event-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;transition:background .25s,border-color .25s,transform .25s;color:rgba(255,255,255,.85);}
 .event-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);transform:translateY(-4px);}
-.event-card .ev-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.45);letter-spacing:1px;}
-.event-card .ev-visual{aspect-ratio:1;background:rgba(255,255,255,.05);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;margin:.2rem 0 .6rem;color:rgba(255,255,255,.85);}
-.event-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:#fff;line-height:1.2;}
-.event-card h3 em{font-style:italic;}
+.event-card .ev-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:1.2rem;}
+.event-card .ev-divider{width:40px;height:1px;background:rgba(255,255,255,.25);margin-bottom:1.2rem;}
+.event-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:#fff;line-height:1.15;letter-spacing:1px;margin-bottom:.5rem;}
+.event-card h3 em{font-style:italic;font-weight:400;display:block;font-size:1.05rem;color:rgba(255,255,255,.7);margin-top:.3rem;}
 .event-card p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6;flex:1;}
 .event-card .ev-price{display:flex;flex-direction:column;gap:.15rem;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.1);}
 .event-card .ev-price .from{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);}
@@ -1800,8 +1800,8 @@ function renderEvents(list){
       : '';
     return `<div class="event-card" id="event-card-${slug}">
       <div class="ev-num">${num}</div>
-      <div class="ev-visual">${aiEscape(e.visual_icon||'')}</div>
-      <h3>${aiEscape(e.title_top||'')}<br><em>${aiEscape(e.title_emphasis||'')}</em></h3>
+      <div class="ev-divider"></div>
+      <h3>${aiEscape(e.title_top||'')}<em>${aiEscape(e.title_emphasis||'')}</em></h3>
       <p>${aiEscape(e.description||'')}</p>
       <div class="ev-price"><span class="from">${aiEscape(e.price_label||'Fiyat başlangıcı')}</span><span class="amount">${aiEscape(e.price_amount||'')}</span></div>
       <button class="btn-event" onclick="openWA('${wa}')">WhatsApp'tan Sor</button>
