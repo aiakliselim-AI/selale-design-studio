@@ -51,6 +51,7 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 | Adım K | Dinamik WhatsApp mesajı (favoriler) | `0e89a9d` |
 | Adım L | AI intent'leri (anneler günü, sevgili, gift bag) | `18b9c00` |
 | Adım M | Newsletter izlerinin doğrulanması | `84ef176` |
+| Adım N | Çekmece 2-kademe + çanta seti rename | `8dfffda` |
 
 ### Plan v4-v5 aşamaları (Mayıs 2026)
 
