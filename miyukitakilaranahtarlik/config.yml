@@ -410,6 +410,18 @@ collections:
           - { label: 'P6', value: p6 }
           - { label: 'P7', value: p7 }
           - { label: 'P8', value: p8 }
+      - label: 'Özel Gün Konseptleri'
+        name: event_concepts
+        widget: select
+        multiple: true
+        required: false
+        hint: 'Bu ürün hangi özel gün konseptlerine uygun? Anasayfa "Özel Gün Konseptleri" şeritlerinde görünür. Birden fazla seçilebilir.'
+        options:
+          - { label: 'Nişan', value: nishan }
+          - { label: 'Düğün', value: dugun }
+          - { label: 'Baby Shower', value: babyshower }
+          - { label: 'Mezuniyet', value: mezuniyet }
+          - { label: 'Doğum Günü', value: dogumgunu }
       - { label: 'Rozet', name: badge, widget: string, required: false, hint: 'Yeni / Çok Satan / Popüler — boş bırakılabilir' }
       - { label: 'Yeni Ürün mü?', name: isNew, widget: boolean, default: false }
       - label: 'Ürün Fotoğrafları (çoklu)'

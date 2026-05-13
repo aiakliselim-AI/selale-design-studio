@@ -169,19 +169,31 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .section-title h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--dark);line-height:1.2;}
 .section-title h2 em{color:var(--caramel);font-style:italic;}
 
-/* ═══ CATEGORIES ═══ */
+/* ═══ CATEGORIES — Netflix-tarzı yatay şeritler (v7-1B) ═══ */
 .categories{padding:7rem 5%;background:var(--warm);}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1.2rem;}
-.cat-card{border-radius:4px;overflow:hidden;aspect-ratio:3/4;position:relative;cursor:pointer;transition:transform .35s,box-shadow .3s;display:flex;align-items:flex-end;}
-.cat-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(44,33,24,.14);}
-.cat-card:hover .cat-overlay{opacity:1;}
-.cat-bg{position:absolute;inset:0;background:var(--placeholder);display:flex;align-items:center;justify-content:center;}
-.cat-bg svg{width:38%;max-width:96px;height:auto;color:rgba(0,0,0,.18);}
-.cat-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .3s;}
-.cat-overlay span{background:#fff;color:var(--text);border-radius:4px;padding:.55rem 1.4rem;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;}
-.cat-info{position:relative;z-index:2;padding:1.2rem;width:100%;background:linear-gradient(transparent,rgba(0,0,0,.78));}
-.cat-info h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#fff;margin-bottom:.25rem;}
-.cat-info p{font-size:.72rem;color:rgba(255,255,255,.8);letter-spacing:.5px;}
+.strip-stack{display:flex;flex-direction:column;gap:2.6rem;}
+.strip-section-divider{display:flex;align-items:center;gap:1rem;margin:.4rem 0 -.6rem;color:var(--muted);}
+.strip-section-divider::before,.strip-section-divider::after{content:'';flex:1;height:1px;background:rgba(60,40,25,.18);}
+.strip-section-divider span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;letter-spacing:.5px;white-space:nowrap;}
+.strip-title{font-family:'Cormorant Garamond','Playfair Display',serif;font-size:1.55rem;font-weight:500;color:var(--text);line-height:1;margin-bottom:.85rem;}
+.strip-rail-wrap{position:relative;}
+.strip-rail{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0;}
+.strip-rail::-webkit-scrollbar{display:none;}
+.strip-card{flex:0 0 auto;aspect-ratio:1/1;border:1px solid #e0dcd3;border-radius:3px;background:#ecebe7;overflow:hidden;position:relative;cursor:pointer;padding:0;scroll-snap-align:start;transition:transform .25s,box-shadow .25s,border-color .25s;}
+.strip-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(44,33,24,.10);border-color:#cdc6b9;}
+.strip-card.strip-card-empty{cursor:default;}
+.strip-card.strip-card-empty:hover{transform:none;box-shadow:none;border-color:#e0dcd3;}
+.strip-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.strip-card-lg{width:130px;}
+.strip-card-sm{width:110px;}
+.strip-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid rgba(60,40,25,.18);border-radius:50%;background:rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--text);opacity:.55;transition:opacity .2s,background .2s;z-index:3;line-height:1;font-family:inherit;}
+.strip-arrow:hover{opacity:1;background:rgba(255,255,255,.9);}
+.strip-arrow:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;opacity:1;}
+.strip-arrow-left{left:-6px;}
+.strip-arrow-right{right:-6px;}
+.strip-arrow[disabled]{opacity:.15;cursor:default;}
+@media (hover:none){.strip-arrow{display:none;}}
+@media (prefers-reduced-motion:reduce){.strip-card{transition:none;}}
 
 /* ═══ PRODUCTS ═══ */
 .products{padding:7rem 5%;}
@@ -513,7 +525,9 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   .insta-grid{grid-template-columns:repeat(3,1fr);}
 }
 @media(max-width:600px){
-  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .strip-card-lg{width:140px;}
+  .strip-card-sm{width:115px;}
+  .strip-arrow{display:none;}
   .printer-ready-grid,.printer-custom-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
   .footer-bottom{flex-direction:column;text-align:center;}
@@ -710,13 +724,13 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   </div>
 </div>
 
-<!-- KATEGORİLER -->
+<!-- KATEGORİLER — v7-1B yatay şeritler -->
 <section class="categories" id="categories">
   <div class="section-title reveal">
     <div class="tag">✦ Kategoriler</div>
     <h2>Ne arıyorsunuz <em>bugün?</em></h2>
   </div>
-  <div class="cat-grid" id="catGrid"></div>
+  <div class="strip-stack" id="stripStack"></div>
 </section>
 
 <!-- ŞEFFAF ÇANTA BANNER (5.6) -->
@@ -1096,6 +1110,7 @@ function renderProducts(list){
       </div>
     </div>`;
   }).join('');
+  window.observeRevealIn(grid);
 }
 
 function filterProducts(cat, btn){
@@ -1301,9 +1316,20 @@ function showToast(icon,msg){
 /* ════ NAV SCROLL ════ */
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
 
-/* ════ SCROLL REVEAL ════ */
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+/* ════ SCROLL REVEAL ════
+   Observer global (window.revealObserver) — dinamik HTML enjekte eden
+   render fonksiyonları (renderProducts/Events/Reviews/CategoryStrips)
+   sonunda observeRevealIn(grid) çağırmalı. Aksi takdirde yeni .reveal
+   elementleri opacity:0 takılı kalır. (v7-1B bug fix) */
+window.revealObserver = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+window.observeRevealIn = function(root){
+  if(!root) return;
+  const scope = (root && root.querySelectorAll) ? root : document;
+  scope.querySelectorAll('.reveal').forEach(el=>{
+    if(!el.classList.contains('visible')) window.revealObserver.observe(el);
+  });
+};
+window.observeRevealIn(document);
 
 /* ════════════════════════════════════════════════════════════════
    AI ASİSTAN — Akıllı Anahtar Kelime Tabanlı Yardımcı
@@ -1766,6 +1792,7 @@ async function loadProducts(){
     // Güvenlik: id'leri tam sayı ve 1-9999 aralığında olanları kabul et
     products = data.filter(p => p && Number.isInteger(p.id) && p.id > 0 && p.id < 10000);
     renderProducts(products);
+    if(typeof renderCategoryStrips === 'function') renderCategoryStrips(products);
     if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
     if(typeof renderPrinter === 'function' && _printerData) renderPrinter(_printerData);
     // Çanta builder: ürünler yüklenince kategori tab + ürün gridi + önizleme yenilenmeli
@@ -1777,42 +1804,143 @@ async function loadProducts(){
     console.warn('Ürün manifesti yüklenemedi:', e);
     const grid = document.getElementById('productGrid');
     if(grid) grid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Ürünler şu anda yüklenemedi. Lütfen sayfayı yenileyin.</p>';
+    // Şeritleri yine de placeholder ile bas, sayfa görünmesin diye.
+    if(typeof renderCategoryStrips === 'function') renderCategoryStrips([]);
   }
 }
 loadProducts();
 
-/* ════ KATEGORİ MANİFESTİ — data/categories.json'dan yükle (Adım D) ════ */
-async function loadCategories(){
-  try{
-    const res = await fetch('data/categories.json', { cache: 'no-cache' });
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    if(!Array.isArray(data)) throw new Error('manifest dizi değil');
-    renderCategories(data);
-  }catch(e){
-    console.warn('Kategori manifesti yüklenemedi:', e);
+/* ════ KATEGORİ ŞERİTLERİ — v7-1B (Netflix-tarzı yatay kayan şeritler) ════
+   Anasayfa "Kategoriler" bölümü `products.json` üzerinden dinamik
+   filtrelenmiş 8 şerit üretir. Eski categories/*.md + data/categories.json
+   bağlantısı kesildi (dosyalar korunuyor — gelecekte tekrar lazım olabilir).
+   - Her şerit son 30 ürün (id DESC, tarih proxy)
+   - Boş şerit: 8 boş çerçeveli placeholder kare
+   - Hover'da auto-scroll, manuel chevron oklar, mobil swipe (scroll-snap) */
+const STRIP_DEFS = [
+  { key:'miyuki', label:'Miyuki Takılar',  size:'large',
+    // Miyuki şeridi: açıkça 'miyuki' etiketi olan veya tipik Miyuki alt kategorisinde olan
+    // ürünler. Anahtarlık generic tag'i (Miyuki ile 3D'de ortak) bu yüzden filtreye dahil değil.
+    match:p => Array.isArray(p.cat) && p.cat.some(c => ['miyuki','bileklik','kolye','kupe','yuzuk'].includes(c)) },
+  { key:'mum',    label:'El Yapımı Mumlar', size:'large',
+    match:p => Array.isArray(p.cat) && p.cat.some(c => ['mum','koku','parfum'].includes(c)) },
+  { divider:'Özel Gün Konseptleri' },
+  { key:'nishan',     label:'Nişan',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('nishan') },
+  { key:'dugun',      label:'Düğün',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dugun') },
+  { key:'babyshower', label:'Baby Shower', size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('babyshower') },
+  { key:'mezuniyet',  label:'Mezuniyet',   size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('mezuniyet') },
+  { key:'dogumgunu',  label:'Doğum Günü',  size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dogumgunu') },
+  { key:'3d',         label:'3D Baskı',    size:'large',
+    match:p => Array.isArray(p.cat) && p.cat.some(c => c === '3d' || String(c).startsWith('3d-')) },
+];
+
+function stripPickProducts(list, match){
+  return list
+    .filter(p => p && match(p))
+    .sort((a,b) => (b.id||0) - (a.id||0))
+    .slice(0,30);
+}
+
+function stripCardHtml(p, sizeClass){
+  if(!p){
+    return `<div class="strip-card ${sizeClass} strip-card-empty" aria-hidden="true"></div>`;
   }
+  const firstImage = p.image
+    || (Array.isArray(p.images) && p.images[0] && p.images[0].src)
+    || '';
+  const inner = firstImage
+    ? `<img src="${aiEscape(firstImage)}" alt="${aiEscape(p.name||'')}" loading="lazy" onerror="this.remove()">`
+    : '';
+  return `<button type="button" class="strip-card ${sizeClass}" onclick="openModal(${p.id})" aria-label="${aiEscape(p.name||'')}">${inner}</button>`;
 }
-function renderCategories(list){
-  const grid = document.getElementById('catGrid');
-  if(!grid || !Array.isArray(list)) return;
-  const visible = list.filter(c => c && c.visible !== false);
-  visible.sort((a,b) => (Number.isFinite(a.order)?a.order:0) - (Number.isFinite(b.order)?b.order:0));
-  grid.innerHTML = visible.map(c => {
-    const type = c.action_type || 'filter';
-    const val = jsArg(c.action_value || '');
-    let onclick = '';
-    if(type === 'event')       onclick = `goTo('events-section');setEventTab('${val}')`;
-    else if(type === 'scroll') onclick = `goTo('${val}')`;
-    else                       onclick = `goTo('products');filterProducts('${val}',null)`;
-    return `<div class="cat-card reveal" onclick="${onclick}">
-      <div class="cat-bg ${aiEscape(c.bg||'c1')}"></div>
-      <div class="cat-overlay"><span>Görüntüle</span></div>
-      <div class="cat-info"><h3>${aiEscape(c.title||'')}</h3><p>${aiEscape(c.subtitle||'')}</p></div>
-    </div>`;
-  }).join('');
+
+function renderCategoryStrips(list){
+  const stack = document.getElementById('stripStack');
+  if(!stack) return;
+  const source = Array.isArray(list) ? list : [];
+  // Divider'lar sadece kendilerinden sonra en az 1 dolu şerit varsa basılır.
+  const parts = [];
+  let pendingDivider = null;
+  for(const def of STRIP_DEFS){
+    if(def.divider){
+      pendingDivider = def.divider;
+      continue;
+    }
+    const picked = stripPickProducts(source, def.match);
+    if(!picked.length) continue; // boş şerit → render etme
+    if(pendingDivider){
+      parts.push(`<div class="strip-section-divider" role="separator"><span>${aiEscape(pendingDivider)}</span></div>`);
+      pendingDivider = null;
+    }
+    const sizeClass = def.size === 'small' ? 'strip-card-sm' : 'strip-card-lg';
+    // Sürekli akış izlenimi: ürünleri yeterince tekrarla (en az 3x, en az 12 kart).
+    const repeats = Math.max(3, Math.ceil(12 / picked.length));
+    const looped = [];
+    for(let i=0; i<repeats; i++) looped.push(...picked);
+    const cards = looped.map(p => stripCardHtml(p, sizeClass)).join('');
+    parts.push(`<div class="strip strip-${def.size} reveal" data-strip-key="${aiEscape(def.key)}">
+      <h3 class="strip-title">${aiEscape(def.label)}</h3>
+      <div class="strip-rail-wrap">
+        <button type="button" class="strip-arrow strip-arrow-left"  aria-label="Geriye kaydır" data-dir="-1">‹</button>
+        <div class="strip-rail" data-rail data-repeats="${repeats}">${cards}</div>
+        <button type="button" class="strip-arrow strip-arrow-right" aria-label="İleriye kaydır" data-dir="1">›</button>
+      </div>
+    </div>`);
+  }
+  stack.innerHTML = parts.join('');
+  bindStripBehavior(stack);
+  window.observeRevealIn(stack);
 }
-loadCategories();
+
+/* Şerit davranışı: hover auto-scroll (sonsuz döngü) + chevron tıklama. */
+function bindStripBehavior(scope){
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  scope.querySelectorAll('.strip').forEach(strip => {
+    const rail = strip.querySelector('[data-rail]');
+    if(!rail) return;
+    const leftBtn  = strip.querySelector('.strip-arrow-left');
+    const rightBtn = strip.querySelector('.strip-arrow-right');
+    const cardW = strip.classList.contains('strip-small') ? 122 : 142; // kart + gap
+    const page = () => Math.max(1, Math.round(rail.clientWidth / cardW) - 1) * cardW;
+    const repeats = Math.max(2, parseInt(rail.dataset.repeats || '3', 10));
+
+    // Manuel scroll için ok durumu (sadece görsel — döngü auto-scroll'da)
+    function updateArrows(){
+      const max = rail.scrollWidth - rail.clientWidth - 1;
+      if(leftBtn)  leftBtn.toggleAttribute('disabled',  rail.scrollLeft <= 0);
+      if(rightBtn) rightBtn.toggleAttribute('disabled', rail.scrollLeft >= max);
+    }
+    updateArrows();
+    rail.addEventListener('scroll', updateArrows, { passive:true });
+
+    if(leftBtn)  leftBtn.addEventListener('click',  () => rail.scrollBy({ left: -page(), behavior:'smooth' }));
+    if(rightBtn) rightBtn.addEventListener('click', () => rail.scrollBy({ left:  page(), behavior:'smooth' }));
+
+    // Sonsuz döngü auto-scroll: ürün listesi N kez tekrarlandığı için
+    // scrollLeft (N-1)*oneSet'i geçince sessizce -oneSet yapılır → kesintisiz akış.
+    if(reduceMotion) return;
+    let rafId = null;
+    function tick(){
+      if(rafId === null) return;
+      const oneSet = rail.scrollWidth / repeats;
+      rail.scrollLeft += 0.6;
+      if(oneSet > 0 && rail.scrollLeft >= oneSet * (repeats - 1)){
+        rail.scrollLeft -= oneSet; // sessiz reset, kullanıcı kesintiyi görmez
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+    function start(){ if(rafId === null){ rafId = requestAnimationFrame(tick); } }
+    function stop(){ if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; } }
+    // Varsayılan: sürekli akar. Hover'da pause, mouse çıkınca yeniden başlar.
+    start();
+    rail.addEventListener('mouseenter', stop);
+    rail.addEventListener('mouseleave', start);
+    // Manuel scroll (wheel / touch) sırasında geçici olarak duraklat.
+    rail.addEventListener('wheel', stop, { passive:true });
+    rail.addEventListener('touchstart', stop, { passive:true });
+    rail.addEventListener('touchend', start, { passive:true });
+  });
+}
 
 /* ════ YORUM MANİFESTİ — data/reviews.json'dan yükle (Adım E) ════ */
 async function loadReviews(){
@@ -1843,6 +1971,7 @@ function renderReviews(list){
       <div class="review-author"><div class="review-avatar">${aiEscape(r.avatar||'👤')}</div><div><div class="review-name">${aiEscape(r.author||'')}</div><div class="review-date">${meta}</div></div></div>
     </div>`;
   }).join('');
+  window.observeRevealIn(grid);
 }
 loadReviews();
 
@@ -1888,6 +2017,7 @@ function renderEvents(list){
       ${gbCta}
     </div>`;
   }).join('');
+  window.observeRevealIn(grid);
 }
 // Etkinlik kartından çanta builder'a yönlendirme — bag ön seçilir (varsa).
 // Eski preset items akışı yeni sisteme uymadığı için yalnızca çanta seçimi taşınır.
