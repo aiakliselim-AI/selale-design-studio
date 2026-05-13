@@ -22,4 +22,6 @@ colors:
   - mor
 isNew: false
 image: ""
+giftBagEligible: true
+giftBagPrice: 60
 ---

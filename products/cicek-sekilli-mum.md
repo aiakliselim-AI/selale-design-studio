@@ -17,4 +17,6 @@ colors:
   - sari
 isNew: true
 image: ""
+giftBagEligible: true
+giftBagPrice: 85
 ---

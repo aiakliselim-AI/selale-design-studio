@@ -17,4 +17,6 @@ colors:
   - beyaz
 isNew: false
 image: ""
+giftBagEligible: true
+giftBagPrice: 75
 ---

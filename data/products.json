@@ -22,7 +22,9 @@
     "badge": "Çok Satan",
     "isNew": false,
     "image": "",
-    "order": 1
+    "order": 1,
+    "giftBagEligible": true,
+    "giftBagPrice": 120
   },
   {
     "id": 2,
@@ -72,7 +74,9 @@
       "pembe"
     ],
     "isNew": false,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 120
   },
   {
     "id": 4,
@@ -195,7 +199,9 @@
       "mor"
     ],
     "isNew": false,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 60
   },
   {
     "id": 9,
@@ -217,7 +223,9 @@
       "sari"
     ],
     "isNew": true,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 85
   },
   {
     "id": 10,
@@ -240,7 +248,9 @@
       "kahverengi"
     ],
     "isNew": false,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 85
   },
   {
     "id": 11,
@@ -283,7 +293,9 @@
       "yesil"
     ],
     "isNew": false,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 85
   },
   {
     "id": 13,
@@ -305,7 +317,9 @@
       "altin"
     ],
     "isNew": true,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 50
   },
   {
     "id": 14,
@@ -327,7 +341,9 @@
       "beyaz"
     ],
     "isNew": false,
-    "image": ""
+    "image": "",
+    "giftBagEligible": true,
+    "giftBagPrice": 75
   },
   {
     "id": 15,
