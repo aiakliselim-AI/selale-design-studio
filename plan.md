@@ -1,4 +1,4 @@
-# PLAN.md — ŞELALE DESIGN STUDIO — MASTER PLAN (v5)
+# PLAN.md — ŞELALE DESIGN STUDIO — MASTER PLAN (v6)
 
 > **Bu dosya Claude Code'un yol haritasıdır.**
 > Yeni oturumda **`CLAUDE.md` ile birlikte** bu dosya da okunur.
@@ -6,11 +6,10 @@
 > **alınan tasarım kararlarını** anlatır.
 >
 > **Son güncelleme:** 2026-05-13.
-> **v5 farkı:** Aşama 1, 2, 3 tamamlandı ve üretimde canlı. v4'teki tasarım
-> kararları (Mockup 1-A, 2-C, admin URL değişimi) UI'a yansıdı. Geriye
-> sadece **Aşama 4** (foto yükleme — kullanıcı işi) ve **Aşama 5**
-> (SEO + sitemap + OG — düşük öncelik) kaldı.
-> Yeni karar yok; v5 sadece durum + sıralama güncellemesi.
+> **v6 farkı:** v5'te planlanan tüm Claude Code aşamaları (1, 2, 3, 5)
+> tamamlandı ve üretimde canlı. Geriye sadece **Aşama 4** (kullanıcı işi:
+> foto yükleme) kaldı. Yeni özellik veya iyileştirme istendiğinde
+> bu plan **v7** olarak güncellenir.
 
 ---
 
@@ -20,13 +19,11 @@
 2. Mevcut Durum
 3. Proje Bilgileri
 4. Tasarım Kararları (Kesin — Değişmedi)
-5. Yapılacak Aşamalar (Kalan)
-   - Aşama 4 — Foto Yükleme Süreci (Kullanıcı işi)
-   - Aşama 5 — SEO + Sitemap + OG (Düşük öncelik)
-6. Claude Code Çalışma Kuralları
-7. Güvenlik & Dokunulmayacak Yerler
-8. Karar Tablosu
-9. Sıradaki Claude Code Oturumu — İlk Prompt
+5. Kalan İş — Aşama 4 (Kullanıcı: Foto Yükleme)
+6. Olası Sıradaki İşler (Henüz Planlanmadı)
+7. Claude Code Çalışma Kuralları
+8. Güvenlik & Dokunulmayacak Yerler
+9. Karar Tablosu
 10. Notlar
 
 ---
@@ -35,7 +32,7 @@
 
 Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 
-### Tasarım yenileme ve altyapı (v4 öncesi)
+### Tasarım yenileme ve altyapı (Plan v4 öncesi)
 
 | Aşama | İçerik | Commit |
 |-------|--------|--------|
@@ -55,13 +52,14 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 | Adım L | AI intent'leri (anneler günü, sevgili, gift bag) | `18b9c00` |
 | Adım M | Newsletter izlerinin doğrulanması | `84ef176` |
 
-### Plan v4 aşamaları (Mayıs 2026)
+### Plan v4-v5 aşamaları (Mayıs 2026)
 
 | Aşama | İçerik | Commit |
 |-------|--------|--------|
 | **Aşama 1** | Admin URL `/admin/` → `/miyukitakilaranahtarlik/` (klasör rename + `_worker.js` + `_headers` + CLAUDE.md güncelle) | `4e2d90e` |
 | **Aşama 2** | Özel gün konseptleri — emoji ikon kaldır, numaralı tipografi (Mockup 1-A) | `a6bd23a` |
 | **Aşama 3** | 3D Baskı iki bölüm — Hazır Ürünler + Kişiye Özel Tasarım (Mockup 2-C) | `41af915` |
+| **Aşama 5** | SEO + sitemap.xml + Open Graph + Twitter Card + robots.txt + OG banner şeması | `f4d0f44` |
 
 ---
 
@@ -69,6 +67,7 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 
 - **Site canlı:** https://selale-design-studio.com
 - **Admin paneli:** https://selale-design-studio.com/miyukitakilaranahtarlik/
+- **Sitemap:** https://selale-design-studio.com/sitemap.xml
 - **Repo:** `aiakliselim-AI/selale-design-studio` (**public**)
 - **CMS:** Sveltia (`/miyukitakilaranahtarlik/`), PAT ile giriş çalışıyor
 - **Deploy:** Cloudflare Pages, otomatik push-deploy
@@ -79,11 +78,15 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 - 7 CMS collection dosya-bazlı (products, categories, events, reviews, gift-bags, gift-bag-items + workflow'lar)
 - 7 CMS singleton (settings, drawer, hero, about, printer, footer, ai)
 - 1 master worker (CSP path-bazlı, `/miyukitakilaranahtarlik/*` admin path)
+- Sitemap + Open Graph + Twitter Card meta'lar
+- Settings şemasında `og_banner` alanı (kullanıcı yüklemesi bekliyor)
 
-**Plan v4 UI değişiklikleri canlıda:**
+**Plan v4-v5 UI/SEO değişiklikleri canlıda:**
+- Admin paneli `/miyukitakilaranahtarlik/`'de, eski `/admin/` 404 dönüyor
 - Etkinlik kartları emoji-suz, numaralı (01-05) tipografi
 - 3D Baskı iki bölümlü (Hazır Ürünler 4 kart + Kişiye Özel 4 numaralı kart + tek WA CTA)
-- Admin paneli yeni URL'de, eski `/admin/` 404 dönüyor
+- sitemap.xml ve OG/Twitter meta'lar canlı (og:image dosyası kullanıcı yüklemesi bekliyor)
+- robots.txt'te admin paneli Disallow + Sitemap referansı
 
 ---
 
@@ -103,145 +106,81 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 
 ## 4. TASARIM KARARLARI (KESİN — DEĞİŞMEDİ)
 
-v4'te netleşen ve uygulanan kararlar. v5'te ek karar yok.
+v4'te netleşen ve uygulanan kararlar. v5'te ek karar olmadı; v6'da da yok.
 
-### 4.1 — Özel Gün Konseptleri (Mockup 1, Seçenek A) ✅ Uygulandı
-Emoji ikon kutusu kaldırıldı, numaralı (01-05) Cormorant Garamond italik tipografi, 40px ince çizgi divider, italik küçük emphasis.
-
-### 4.2 — 3D Baskı (Mockup 2, Seçenek C) ✅ Uygulandı
-İki ayrı bölüm: üst HAZIR ÜRÜNLER (products.json ID referansı ile 4 kart), alt KİŞİYE ÖZEL TASARIM HİZMETİ (numaralı 01-04 kart), tek WhatsApp CTA.
-
-### 4.3 — Çekmece (Yarı-statik)
-Çekmecenin **iskelet kodda sabit** kalır; içerik panelden (kategori CMS) gelir. Aksiyon türü seçimi YOK.
-
-### 4.4 — Çoklu WhatsApp
-Sadece **Favoriler sayfasında** kalır (Adım K'da uygulandı).
-
-### 4.5 — Tema Renkleri
-❌ Panelden değiştirilebilir tema rengi **YOK**. Renkler kodda kalır.
-
-### 4.6 — Foto Stratejisi
-Foto yokken **düz placeholder SVG** (mevcut). Emoji ikon YOK. Foto yükleme **kullanıcının işi** (Sveltia panelinden) — **Aşama 4**.
-
-### 4.7 — Admin URL ✅ Uygulandı
-`/admin/` → `/miyukitakilaranahtarlik/`
-
-### 4.8 — Mobil
-Responsive web. Etkinlik kartları 5 → 3 → 2 → 1 sütun, 3D Baskı grid 4 → 2 → 1 sütun.
-
-### 4.9 — Newsletter
-Kaldırıldı. WhatsApp grubu açılırsa drawer/footer'a link eklenebilir.
+| # | Karar | Durum |
+|---|-------|-------|
+| 4.1 | Özel Gün — emoji-suz, numaralı (Mockup 1-A) | ✅ Aşama 2 |
+| 4.2 | 3D Baskı — iki bölüm (Mockup 2-C) | ✅ Aşama 3 |
+| 4.3 | Çekmece — yarı-statik (iskelet kodda, içerik panelden) | Mevcut |
+| 4.4 | Çoklu WhatsApp — sadece favoriler | ✅ Adım K |
+| 4.5 | Panelden tema rengi YOK | Karar kesin |
+| 4.6 | Foto stratejisi — düz placeholder, kullanıcı yükler | Aşama 4 |
+| 4.7 | Admin URL `/miyukitakilaranahtarlik/` | ✅ Aşama 1 |
+| 4.8 | Mobil responsive (5→3→2→1 grid) | Her bölümde |
+| 4.9 | Newsletter — yok | Karar kesin |
 
 ---
 
-## 5. YAPILACAK AŞAMALAR (KALAN)
+## 5. KALAN İŞ — AŞAMA 4 (KULLANICI: FOTO YÜKLEME)
 
-> v5'te sadece iki aşama kaldı.
-> **Aşama 4** Claude Code işi değil — kullanıcı Sveltia panelinden foto yükleyecek.
-> **Aşama 5** düşük öncelik — istenildiğinde başlatılır.
+**Bu Claude Code işi DEĞİL.** Kullanıcının Sveltia panelinden yapacağı iş.
 
----
-
-### 📷 AŞAMA 4 — Foto Yükleme Süreci (Kullanıcı İşi — DOKÜMANTASYON)
-
-**Amaç:** Şu an çoğu üründe foto yok. Kullanıcının Sveltia panelinden foto yüklemesi için **yazılı rehber**.
-
-**Bu Claude Code işi DEĞİL.** Kullanıcının yapacağı iş.
-
-**Kullanıcı için adımlar:**
-1. Yeni admin URL'e git: `https://selale-design-studio.com/miyukitakilaranahtarlik/`
+### Kullanıcı için adımlar
+1. Admin URL'e git: `https://selale-design-studio.com/miyukitakilaranahtarlik/`
 2. PAT ile giriş yap
-3. "6. Ürünler" koleksiyonuna gir
-4. Her ürün için:
-   - Ürünü aç
-   - "Ürün Fotoğrafları (çoklu)" alanına bir veya daha fazla foto yükle (1200x1200 kare önerilir)
-   - Kaydet
-5. Aynı işlem `categories/`, `events/`, `gift-bags/`, `reviews/`, `hero` için de yapılır
+3. İlgili koleksiyona gir, ürünü/etkinliği aç, foto alanına yükle, kaydet
+4. Sveltia otomatik commit atar → GitHub Actions manifest'i günceller → Cloudflare deploy eder
 
-**Foto kalite önerileri:**
-- Ürün fotoları: 1200×1200 px, JPG/WebP, beyaz veya yumuşak gri arka plan
-- Hero foto: 1920×823 px (21:9), JPG/WebP, max 2MB
-- Mobil dostu: aspect-ratio 1:1 veya 4:3
+### Öncelikli yükleme listesi
 
-**Öncelikli ürünler (3D bölümünde görünenler):**
-- ID 16: Özel 3D Anahtarlık
-- ID 17: 3D Figür & Oyuncak
-- ID 19: 3D Dekoratif Obje
-- ID 20: 3D Faydalı Alet
+**Settings (Genel Ayarlar) — 1 foto, en yüksek öncelik:**
+- `og_banner` → 1200×630 px, dosya adı **`og-banner.jpg`** (sabit, index.html bu adı bekliyor)
+- Etki: WhatsApp/Facebook/Twitter paylaşımlarında görsel önizleme
 
-**Çıktı:** Hiç commit yok. Sveltia panelinden GitHub'a otomatik commit gider.
+**Ürünler (özellikle 3D bölümünde görünenler):**
+- ID 16 — Özel 3D Anahtarlık
+- ID 17 — 3D Figür & Oyuncak
+- ID 19 — 3D Dekoratif Obje
+- ID 20 — 3D Faydalı Alet
 
----
+**Diğer alanlar (zaman buldukça):**
+- `products/*.md` — tüm ürünler
+- `categories/*.md` — kategori kartları
+- `events/*.md` — özel gün konseptleri
+- `gift-bags/*.md`, `gift-bag-items/*.md` — şeffaf çanta sistemi
+- `reviews/*.md` — müşteri yorumları
+- `data/hero.yml` — açılış bölümü görselleri
 
-### 🌐 AŞAMA 5 — SEO + Sitemap + Open Graph (DÜŞÜK ÖNCELİK)
+### Foto kalite önerileri
+- Ürün: 1200×1200 px (kare), JPG/WebP, beyaz veya yumuşak gri arka plan
+- Hero: 1920×823 px (21:9), JPG/WebP, max 2MB
+- OG Banner: 1200×630 px (1.91:1), JPG, max 1MB
+- Mobil dostu aspect ratio: 1:1 veya 4:3
 
-**Amaç:** Google ve sosyal medyada görünürlük.
-
-**Etkilenen dosyalar:**
-- Yeni: `sitemap.xml`
-- `index.html` (Open Graph meta tagları)
-- `_worker.js` (sitemap CSP'sini gerektirmiyor)
-- `robots.txt` (sitemap referansı + admin Disallow)
-
-**Adımlar:**
-
-**Adım 5a — sitemap.xml oluştur**
-
-Statik XML:
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://selale-design-studio.com/</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-</urlset>
-```
-
-Site tek sayfa olduğu için sadece ana URL. Ürünler ayrı route alırsa genişletilir — şu an gerek yok.
-
-**Adım 5b — Open Graph meta tagları**
-
-`index.html` `<head>` içine:
-```html
-<meta property="og:title" content="Şelale Design Studio — Kişiye Özel Tasarım">
-<meta property="og:description" content="El emeği Miyuki bileklik, mum, şeffaf çanta hediye setleri ve 3D baskı.">
-<meta property="og:image" content="https://selale-design-studio.com/images/og-banner.jpg">
-<meta property="og:url" content="https://selale-design-studio.com/">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="tr_TR">
-<meta name="twitter:card" content="summary_large_image">
-```
-
-OG banner için 1200×630 px görsel oluşturulmalı — kullanıcı Sveltia'dan yükleyebilir (yeni "OG Banner" alanı eklenir `settings.yml`'e).
-
-**Adım 5c — robots.txt sitemap referansı**
-
-Mevcut `robots.txt`'e ekle:
-```
-Sitemap: https://selale-design-studio.com/sitemap.xml
-```
-
-Ayrıca, admin paneline noindex direktifi için `Disallow: /miyukitakilaranahtarlik/` satırı eklenebilir (zaten `<meta name="robots" content="noindex">` admin sayfasında var, ama tutarlılık için).
-
-**Adım 5d — JSON-LD (opsiyonel)**
-
-Product schema mark-up `index.html` veya ayrı dosyada. Şu an erken — site büyüyünce ekle.
-
-**Risk:** Düşük. Sadece okuma için ekleme; kullanıcı deneyimini etkilemez.
-
-**Test (deploy sonrası):**
-- [ ] `https://selale-design-studio.com/sitemap.xml` erişilebilir mi?
-- [ ] Facebook Debugger ile OG önizleme doğru mu? (https://developers.facebook.com/tools/debug/)
-- [ ] WhatsApp paylaşım önizlemesinde foto + başlık görünüyor mu?
-
-**Commit mesajı:** `feat(seo): sitemap.xml + open graph meta + JSON-LD altyapı`
+**Çıktı:** Hiç manuel commit yok. Sveltia panelinden GitHub'a otomatik gider.
 
 ---
 
-## 6. CLAUDE CODE ÇALIŞMA KURALLARI
+## 6. OLASI SIRADAKİ İŞLER (HENÜZ PLANLANMADI)
+
+Bunlar **karar verilmedi** — sadece olası yönler. Kullanıcı bir tanesini seçerse plan v7 yazılır:
+
+- **JSON-LD Product Schema:** Google rich result için ürün şemaları (`Product`, `Offer`, `AggregateRating`). Site büyüyünce.
+- **Sayfa içi ürün sayfaları:** Şu an tek sayfa. Her ürün için `/urun/<slug>` route + sitemap genişlemesi.
+- **WhatsApp grup link entegrasyonu:** Newsletter yerine WA grup linki (drawer/footer'da).
+- **Çok dilli (TR + EN):** Sveltia i18n + dil seçici.
+- **Analytics:** GA4 veya Plausible (CSP güncellemesi gerekir).
+- **Ürün stoku / "tükendi" rozeti:** Schema'ya `stock` alanı + UI durumu.
+- **Filtre genişletme:** Fiyat aralığı, renk kombinasyonu, ürün boyutu.
+- **Performans:** Image lazy-load, font subsetting, CSS critical-path.
+- **Test altyapısı:** Playwright veya Cypress smoke test'leri.
+
+Kullanıcı bunlardan birini seçtiğinde Claude Code'a verilecek prompt için plan v7 yazılır.
+
+---
+
+## 7. CLAUDE CODE ÇALIŞMA KURALLARI
 
 Claude Code yeni oturumda bu kuralları izler:
 
@@ -259,7 +198,7 @@ Claude Code yeni oturumda bu kuralları izler:
 
 ---
 
-## 7. GÜVENLİK & DOKUNULMAYACAK YERLER
+## 8. GÜVENLİK & DOKUNULMAYACAK YERLER
 
 ### Asla dokunulmayacak:
 - ❌ Cloudflare Worker (`sveltia-cms-auth.aiakliselim.workers.dev`)
@@ -271,13 +210,6 @@ Claude Code yeni oturumda bu kuralları izler:
 - ❌ PAT (Personal Access Token) — kullanıcı tarayıcısında saklı
 - ❌ `data/products.json` (manuel) — workflow otomatik üretir
 
-### Sadece planlı değişecek (Aşama 5'te):
-- ✅ `index.html` (OG meta tagları)
-- ✅ Yeni: `sitemap.xml`
-- ✅ `robots.txt` (sitemap + admin Disallow)
-- ✅ Yeni: `images/og-banner.jpg` (kullanıcı yüklemesi)
-- ✅ `miyukitakilaranahtarlik/config.yml` settings şeması (opsiyonel — OG banner alanı)
-
 ### Repo public — hassas bilgi kontrolü
 Repo public olduğu için:
 - ✅ Frontend kodu zaten herkese açık — sorun değil
@@ -286,56 +218,37 @@ Repo public olduğu için:
 
 ---
 
-## 8. KARAR TABLOSU
+## 9. KARAR TABLOSU
 
 | Konu | Karar | Durum |
 |------|-------|-------|
 | Tema renkleri panelden | ❌ Yok, kodda kalır | Karar kesin |
-| Çekmece esnekliği | Yarı-statik (iskelet kod, içerik panel) | Mevcut |
-| Çoklu WhatsApp | Sadece favoriler | Adım K'da tamam |
-| Admin URL | `/miyukitakilaranahtarlik/` | ✅ Aşama 1 — Canlı |
-| Özel gün ikonları | Kaldırıldı, numaralı | ✅ Aşama 2 — Canlı |
-| 3D Baskı yapısı | İki bölüm (hazır + özel) | ✅ Aşama 3 — Canlı |
-| Foto stratejisi | Düz placeholder, kullanıcı yükler | Aşama 4 (kullanıcı işi) |
-| SEO/Sitemap | Plan'da, düşük öncelik | Aşama 5 (sırada) |
-| Newsletter | Yok | Tamam |
-| Mobil destek | Responsive, native app yok | Her aşamada test |
+| Çekmece esnekliği | Yarı-statik | Mevcut |
+| Çoklu WhatsApp | Sadece favoriler | ✅ Canlı |
+| Admin URL | `/miyukitakilaranahtarlik/` | ✅ Canlı |
+| Özel gün ikonları | Kaldırıldı, numaralı | ✅ Canlı |
+| 3D Baskı yapısı | İki bölüm (hazır + özel) | ✅ Canlı |
+| Foto stratejisi | Düz placeholder, kullanıcı yükler | Aşama 4 (kullanıcı) |
+| SEO/Sitemap | sitemap.xml + OG + Twitter | ✅ Canlı |
+| OG görseli | Sveltia'dan kullanıcı yükler | Aşama 4 (kullanıcı) |
+| JSON-LD product schema | Şimdilik atlandı | v7 ile gündeme gelebilir |
+| Newsletter | Yok | Karar kesin |
+| Mobil destek | Responsive | Her bölümde test |
 | Plan formatı | Tek dosya (bu plan.md) | — |
-
----
-
-## 9. SIRADAKİ CLAUDE CODE OTURUMU — İLK PROMPT
-
-Aşama 4 kullanıcı işidir; Claude'a iş düşmüyor. Sıradaki Claude oturumunda **Aşama 5** çalışılır.
-
-Kullanıcı Claude Code'u açıp şu prompt'u verecek:
-
-> **Prompt:**
-> "Plan.md (v5) ve CLAUDE.md'yi oku. **Aşama 5 — SEO + Sitemap + OG** ile başlayalım.
->
-> Şunu yap:
-> 1. Yeni branch aç: `feat/seo-sitemap-og`
-> 2. `sitemap.xml` oluştur (plan.md'de şablon var — tek URL: ana sayfa)
-> 3. `index.html` `<head>` içine Open Graph + Twitter Card meta tagları ekle
-> 4. `robots.txt`'e `Sitemap:` satırı + opsiyonel `Disallow: /miyukitakilaranahtarlik/` ekle
-> 5. `miyukitakilaranahtarlik/config.yml` settings şemasına opsiyonel "OG Banner" foto alanı ekle (kullanıcı sonra yükler)
-> 6. JSON-LD product schema ekleme — şu an atla, sonra gelecek
-> 7. Test özetini bana ver, push etme. Onayımı bekle.
->
-> Sadece bu adım. Başka dosyaya dokunma."
-
-Kullanıcı test ettikten sonra commit + push komutunu verecek, sonra main'e merge.
 
 ---
 
 ## 10. NOTLAR
 
-- **Aşama 4 (Foto Yükleme):** Tamamen kullanıcının işi. Claude Code prompt'una gerek yok. Sveltia panelinden yapılır.
-- **Aşama 5 sonrası:** Plan v6 yazılır (ya da plan kapatılır eğer yeni özellik isteği yoksa).
+- **Aşama 4 (Foto Yükleme):** Tamamen kullanıcının işi. Sveltia panelinden yapılır.
+- **JSON-LD ve ürün route'ları:** Site büyüyünce gündem. Şu an gerek yok.
+- **Plan v7 ne zaman yazılır?** Kullanıcı yeni özellik veya iyileştirme istediğinde
+  (Bölüm 6'daki listeden veya yeni bir fikirden). Plan v7 başında v6'nın
+  "Tamamlanmış İşler"ine bu konu eklenir, "Yapılacak"a yeni aşamalar yazılır.
 - Her aşama sonrası **canlı siteyi gez** — şüpheli bir şey görürsen "geri al" demekten çekinme.
-- Plan.md herhangi bir aşamada güncellenebilir — örn. Aşama 5'i yaparken "şu da olsun" dersen plan ek aşama ile genişletilir.
-- Bu plan v5 olarak **kullanıcının onayıyla** yazıldı (2026-05-13, Aşama 1-3 tamamlandıktan sonra). Sonraki kararlar için plan v6 yazılır.
+- Bu plan v6 olarak **kullanıcının onayıyla** yazıldı (2026-05-13, tüm Claude Code aşamaları tamamlandıktan sonra).
 
 ---
 
-**Hazır.** Aşama 4 (foto) — kullanıcı işi. Aşama 5 (SEO) — istenildiğinde başlatılır. 🌸
+**Durum:** Plan kapsamındaki tüm Claude Code aşamaları tamamlandı.
+Kalan iş: kullanıcının Sveltia'dan foto yüklemesi. Yeni iş gelirse plan v7. 🌸
