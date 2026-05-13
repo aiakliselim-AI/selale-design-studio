@@ -11,6 +11,8 @@ badge: Yeni
 cat:
   - miyuki
   - yuzuk
+event_concepts:
+  - nishan
 colors:
   - kirmizi
   - mercan

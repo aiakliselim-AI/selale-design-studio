@@ -10,6 +10,9 @@ bg: p3
 badge: ""
 cat:
   - mum
+event_concepts:
+  - babyshower
+  - dogumgunu
 colors:
   - beyaz
   - bej

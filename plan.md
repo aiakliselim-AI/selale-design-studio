@@ -5,13 +5,18 @@
 > `CLAUDE.md` teknik mimariyi anlatır; bu dosya **sıradaki işleri** ve
 > **alınan tasarım kararlarını** anlatır.
 >
-> **Son güncelleme:** 2026-05-13.
+> **Son güncelleme:** 2026-05-13 (v7-1B revizyonu).
 > **v7 farkı:** v6'da plan kapanmıştı, ama Adım O sonrası canlıda gezerken
 > 3 bug/eksik çıktı: anasayfada kategori kartları görünmüyor (reveal
 > observer dinamik DOM'la uyumsuz), "Öne Çıkan Ürünler" mantığı belirsiz,
 > çanta builder kategori tabları düz (alt kategori yok). v7 bu 3 işi
 > kapsar (bkz. Bölüm 5B). v6'nın "Tamamlanmış İşler" tablosuna dokunulmaz
 > — tarihsel kayıt olarak korunur.
+>
+> **v7-1B revizyonu:** v7-1 (kategoriler 7→5 + fallback renkler) iptal
+> edildi. Yerine v7-1B geldi: anasayfa kategori bölümü Netflix-tarzı
+> yatay kayan şeritlerle yeniden yazılıyor (kategori kartı sistemi
+> kaldırılıyor). Reveal bug fix kısmı korunur — yeni şeritler de scroll-reveal kullanır.
 
 ---
 
@@ -172,39 +177,69 @@ v4'te netleşen ve uygulanan kararlar. v5'te ek karar olmadı; v6'da da yok.
 Canlıda Adım O sonrası tespit edilen 3 iş. Her aşama **ayrı branch**,
 **Türkçe commit**, `[skip ci]` YOK. Sırayla yapılır.
 
-### Aşama v7-1 — Kategoriler bug fix + içerik
-**Branch:** `feat/v7-1-kategoriler-ve-reveal-fix`
+### Aşama v7-1 — Kategoriler bug fix + içerik · **İPTAL** (v7-1B ile değişti)
+**Branch:** `feat/v7-1-kategoriler-ve-reveal-fix` (boş, hiç commit edilmedi)
 
-**Bug:** Anasayfa "Ne arıyorsunuz bugün?" altında kart görünmüyor. Veri
-var (`categories/*.md` × 7, `data/categories.json` dolu) ama
-`IntersectionObserver` (index.html:1305-1306) sayfa yüklenirken
-çalışıyor — `renderCategories/Events/Reviews/Products` async render'dan
-sonra eklenen `.reveal` elementleri observe edilmiyor, opacity:0
-sabit kalıyor.
+Mockup gözden geçirildiğinde 5-7 büyük kategori kartı yaklaşımı vitrin
+hissi vermediği için iptal edildi. Yerine Netflix-tarzı yatay şerit
+yaklaşımı (v7-1B) tercih edildi. Reveal observer bug fix kısmı v7-1B'ye
+taşındı (orada uygulanıyor). Bu satır geçmiş kaydı olarak korunur,
+silinmez.
 
-**Yapılacak:**
-- `observer`'ı global scope'a taşı (window seviyesi).
-- `renderCategories`, `renderEvents`, `renderReviews`, `renderProducts`
-  sonuna `grid.querySelectorAll('.reveal').forEach(el => observer.observe(el))` ekle.
-- Scroll-reveal animasyonu KORUNUR (ilk gizli, scroll'a geldikçe açılır
-  davranışı bozulmaz). Canlıda görsel test zorunlu.
+### Aşama v7-1B — Kategori şeritleri (Netflix-tarzı)
+**Branch:** `feat/v7-1B-kategori-seritleri`
 
-**İçerik (`categories/*.md`):** 7 → 5 kategori
-- Tut: Miyuki Takılar, El Yapımı Mumlar, 3D Baskı
-- Sil: Nişan, Düğün, Doğum Günü, Anahtarlık (Anahtarlık → Miyuki içinde)
-- Ekle: Şeffaf Çanta (scroll → `giftbag-builder`), Özel Gün (scroll →
-  `events-section`)
+**Hedef:** Anasayfa "Kategoriler" bölümü tamamen yeniden yazılır. Eski
+`renderCategories` + `cat-grid` + `.cat-card` sistemi kaldırılır; yerine
+dikey sıralı yatay-kayan şeritler (Netflix tarzı) gelir.
 
-**Fallback:** image alanı yoksa renkli daire + ilk harf. Palet:
-- Miyuki = bordo `#7a1f2e` (builder ile aynı, site imzası — dokunma)
-- Mum = turuncu `#c97a3a`
-- Şeffaf Çanta = şampanya/altın `#b8935a` (mor değil — Miyuki bordosuyla
-  çakışmaması için)
-- 3D Baskı = mavi `#2f5f8a`
-- Özel Gün = koyu yeşil `#3a6b4d`
+**Şerit yapısı (yukarıdan aşağı):**
+1. Miyuki Takılar (büyük kareler, ~130px)
+2. El Yapımı Mumlar (büyük kareler, ~130px)
+3. ── ÖZEL GÜN KONSEPTLERİ ── (ince çizgili alt başlık)
+   - Nişan (küçük kareler, ~110px)
+   - Düğün
+   - Baby Shower
+   - Mezuniyet
+   - Doğum Günü
+4. 3D Baskı (büyük kareler, ~130px)
 
-`config.yml` categories collection'a `image` field eklenmeli (panelden
-foto yükleyebilsin).
+**Şerit anatomisi:**
+- Sol başlık: kategori adı (Cormorant Garamond / Playfair).
+- Sağ etiket: `SON 30` (uppercase, küçük, `--muted` rengi).
+- İçerik: ilgili kategorideki son 30 ürün, `id DESC` sırada (tarih proxy).
+- Kareler: `aspect-ratio: 1/1`, ince çerçeve (`0.5px solid` veya `1px solid #e0e0e0` benzeri).
+- Foto varsa foto; yoksa içi grimsi-bej dolgu (`--warm` veya `#ecebe7`).
+- **HİÇ harf/emoji/ikon fallback YOK** — sadece boş çerçeveli kare.
+
+**Davranış:**
+- Mouse şeride girince: sağdan sola otomatik kayar (yavaş, ~30-40 saniye tam tur).
+- Mouse çıkınca: durur, pozisyon korunur.
+- Sol/sağ şeffaf chevron oklar: manuel tıklamayla ~3-4 kart genişliği kaydırır.
+- Oklar: `rgba(255,255,255,0.6) + backdrop-filter: blur(4px)`, opacity 0.5-0.6, hover'da 1.0.
+- Mobil: `scroll-snap-type: x mandatory` + `overflow-x: auto` + `-webkit-overflow-scrolling: touch`.
+
+**Responsive:**
+- Desktop: 5-6 kart aynı anda.
+- Tablet: 4 kart.
+- Mobil: 2.5 kart (yarım kart taşar, kaydırılabilir olduğu sezilsin).
+
+**Veri:**
+- Her şerit `products.json` üzerinde filtre ile dolar.
+- Filtre alanları: ürünün `cat[]` veya yeni `event_concepts[]` alanı.
+- Boş şerit: 6-8 adet boş çerçeveli kare (placeholder).
+
+**Bug fix (korundu):**
+- `IntersectionObserver` global scope'a taşınır (`window.revealObserver`).
+- `window.observeRevealIn(root)` helper'ı eklenir.
+- `renderProducts` / `renderEvents` / `renderReviews` sonuna observe çağrısı.
+- `renderCategories` artık yok — yeni şerit render fonksiyonu da observe eder.
+
+**CMS güncellemesi:**
+- `products` collection'a `event_concepts` multi-select field eklenir
+  (Nişan/Düğün/Baby Shower/Mezuniyet/Doğum Günü slug'ları).
+- `categories` collection ve `categories/*.md` dosyaları **dokunulmaz**
+  (silinmez, sadece bağlantı kesilir — gelecekte tekrar lazım olabilir).
 
 ### Aşama v7-2 — "Öne Çıkan Ürünler" kuralı netleştir
 **Branch:** `feat/v7-2-one-cikan-urunler`
