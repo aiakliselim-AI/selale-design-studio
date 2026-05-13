@@ -1,11 +1,15 @@
 # Şelale Design Studio - Bot Kuralları
 
+Sitemap: https://selale-design-studio.com/sitemap.xml
+
 # İyi botlara izin ver (Google, Bing vs.)
 User-agent: Googlebot
 Allow: /
+Disallow: /miyukitakilaranahtarlik/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /miyukitakilaranahtarlik/
 
 # Bilinen kötü/agresif scraper'ları engelle
 User-agent: AhrefsBot
@@ -39,4 +43,5 @@ Disallow: /
 # Genel bot kuralı
 User-agent: *
 Allow: /
+Disallow: /miyukitakilaranahtarlik/
 Crawl-delay: 10

@@ -88,6 +88,13 @@ collections:
           - { label: 'Marka Alt Adı (italik)', name: brand_subname, widget: string, default: 'Design Studio', hint: 'Logoda italik karamel renkli alt yazı' }
           - { label: 'Site Sloganı', name: tagline, widget: string, default: 'Kişiye Özel Tasarım', hint: 'Tarayıcı sekmesinde başlıktan sonra görünür' }
           - { label: 'Meta Açıklama (SEO)', name: meta_description, widget: text, hint: 'Google sonuçlarında görünen kısa açıklama, en fazla 160 karakter' }
+          - label: 'Open Graph Banner (Sosyal Medya)'
+            name: og_banner
+            widget: image
+            required: false
+            media_folder: '/images'
+            public_folder: '/images'
+            hint: 'WhatsApp, Facebook, Twitter paylaşımlarında çıkan görsel. 1200x630 px önerilir. Dosya adi og-banner.jpg olarak kaydedilmelidir (zorunlu, index.html sabit referans).'
           - label: WhatsApp
             name: whatsapp
             widget: object
