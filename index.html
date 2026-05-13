@@ -263,23 +263,32 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 
 /* ═══ 3D BASKI ═══ */
 .printer-section{padding:7rem 5%;}
-.printer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
-.printer-visual{border-radius:4px;background:linear-gradient(145deg,#1a1a2a,#2a2a4a);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2.5rem;position:relative;overflow:hidden;}
-.printer-visual::before{content:'';position:absolute;top:-30%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(100,120,200,.15) 0%,transparent 70%);border-radius:50%;}
-.printer-icon{font-size:5rem;}
-.printer-samples{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
-.printer-sample{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:.6rem 1rem;font-size:.78rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.4rem;}
-.printer-text{}
-.printer-text .tag{display:inline-block;color:var(--caramel);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.7rem;}
-.printer-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--dark);line-height:1.2;margin-bottom:1rem;}
-.printer-text h2 em{color:var(--caramel);font-style:italic;}
-.printer-text p{color:var(--muted);line-height:1.8;font-size:.9rem;margin-bottom:1.5rem;}
-.printer-cats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:2rem;}
-.printer-cat{background:var(--warm);border-radius:4px;padding:1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:background .2s,transform .2s;border:1.5px solid transparent;}
-.printer-cat:hover{background:var(--blush);transform:translateY(-2px);border-color:var(--caramel);}
-.printer-cat .pci{font-size:1.5rem;}
-.printer-cat-text h4{font-size:.85rem;font-weight:500;color:var(--dark);}
-.printer-cat-text p{font-size:.72rem;color:var(--muted);}
+.printer-divider{display:flex;align-items:center;gap:1.2rem;margin:3rem 0 2.2rem;}
+.printer-divider .line{flex:1;height:1px;background:rgba(0,0,0,.15);}
+.printer-divider .label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(0,0,0,.55);letter-spacing:2px;text-transform:uppercase;}
+.printer-ready-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+.printer-ready-card{background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .25s,box-shadow .25s;}
+.printer-ready-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08);}
+.printer-ready-card .pr-img{aspect-ratio:1;background:var(--placeholder);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.printer-ready-card .pr-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.printer-ready-card .pr-info{padding:.9rem 1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem;}
+.printer-ready-card .pr-info h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--dark);font-weight:500;line-height:1.25;}
+.printer-ready-card .pr-info .pr-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--dark);}
+.printer-ready-card .pr-info .pr-btn{margin-top:.3rem;background:transparent;border:1px solid rgba(0,0,0,.25);color:var(--dark);padding:.55rem .8rem;font-size:.65rem;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;border-radius:4px;font-family:'Inter',sans-serif;transition:background .2s,color .2s,border-color .2s;font-weight:500;}
+.printer-ready-card .pr-info .pr-btn:hover{background:var(--dark);color:#fff;border-color:var(--dark);}
+.printer-custom-intro{text-align:center;max-width:640px;margin:0 auto 2rem;color:var(--muted);line-height:1.7;font-size:.92rem;}
+.printer-custom-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+.printer-custom-card{background:var(--warm);border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.3rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;transition:background .2s,border-color .2s,transform .2s;}
+.printer-custom-card:hover{background:var(--blush);border-color:rgba(0,0,0,.35);transform:translateY(-3px);}
+.printer-custom-card .pc-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(0,0,0,.4);letter-spacing:1px;margin-bottom:.9rem;}
+.printer-custom-card .pc-divider{width:40px;height:1px;background:rgba(0,0,0,.22);margin-bottom:.9rem;}
+.printer-custom-card h4{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--dark);line-height:1.15;letter-spacing:.5px;margin-bottom:.3rem;}
+.printer-custom-card p{font-size:.78rem;color:var(--muted);line-height:1.6;flex:1;margin-bottom:.6rem;}
+.printer-custom-card .pc-ask{background:transparent;border:1px solid rgba(0,0,0,.3);color:var(--dark);padding:.55rem .8rem;font-size:.65rem;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;border-radius:4px;font-family:'Inter',sans-serif;transition:background .2s,color .2s,border-color .2s;font-weight:500;align-self:flex-start;}
+.printer-custom-card .pc-ask:hover{background:var(--dark);color:#fff;border-color:var(--dark);}
+.printer-cta-wrap{display:flex;justify-content:center;margin-top:2.5rem;}
+.btn-wa-printer{background:var(--dark);color:#fff;padding:1rem 2.2rem;border-radius:4px;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--dark);cursor:pointer;}
+.btn-wa-printer:hover{background:#000;transform:translateY(-2px);}
 
 /* ═══ ABOUT (5.7 — düz görsel, 3 istatistik) ═══ */
 .about{padding:6rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
@@ -415,7 +424,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   .nav-links{gap:.8rem;}
   .nav-links a{font-size:.7rem;}
   .event-grid{grid-template-columns:repeat(3,1fr);}
-  .printer-grid{grid-template-columns:1fr;}
+  .printer-ready-grid,.printer-custom-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:680px){
   .event-grid{grid-template-columns:repeat(2,1fr);}
@@ -437,7 +446,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 }
 @media(max-width:600px){
   .cat-grid{grid-template-columns:repeat(2,1fr);}
-  .printer-cats{grid-template-columns:1fr;}
+  .printer-ready-grid,.printer-custom-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
   .footer-bottom{flex-direction:column;text-align:center;}
   .btn-wa-text{display:none;}
@@ -715,41 +724,18 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <div class="tag">✦ 3D Baskı</div>
     <h2>Hayal ettiğinizi <em>basıyoruz</em></h2>
   </div>
-  <div class="printer-grid">
-    <div class="printer-visual reveal">
-      <div class="printer-icon">🖨️</div>
-      <div class="printer-samples">
-        <div class="printer-sample">🔑 Anahtarlık</div>
-        <div class="printer-sample">⚙️ Araba Parçası</div>
-        <div class="printer-sample">🧸 Oyuncak</div>
-        <div class="printer-sample">🔧 Alet</div>
-        <div class="printer-sample">🏠 Eşya Parçası</div>
-        <div class="printer-sample">🎮 Aksesuvar</div>
-      </div>
-    </div>
-    <div class="printer-text reveal">
-      <div class="tag">✦ 3D Baskı Kategorileri</div>
-      <h2>Her fikir <em>gerçek olur</em></h2>
-      <p>Kişiselleştirilmiş anahtarlıktan araç aksesuvara, oyuncaktan ev eşyası parçasına — üç boyutlu yazıcımızla üretiyoruz.</p>
-      <div class="printer-cats">
-        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-anahtarlik',null)">
-          <span class="pci">🔑</span>
-          <div class="printer-cat-text"><h4>Anahtarlık</h4><p>İsme özel, 3D baskı</p></div>
-        </div>
-        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-oyuncak',null)">
-          <span class="pci">🧸</span>
-          <div class="printer-cat-text"><h4>Oyuncak & Figür</h4><p>Kişiselleştirilebilir</p></div>
-        </div>
-        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-alet',null)">
-          <span class="pci">🔧</span>
-          <div class="printer-cat-text"><h4>Alet & Parça</h4><p>Araba, ev, elektronik</p></div>
-        </div>
-        <div class="printer-cat" onclick="goTo('products');filterProducts('3d-deko',null)">
-          <span class="pci">🏺</span>
-          <div class="printer-cat-text"><h4>Dekoratif</h4><p>Ev & masa dekoru</p></div>
-        </div>
-      </div>
-      <button class="btn-primary" onclick="goTo('products');filterProducts('3d',null)">Tüm 3D Ürünleri Gör</button>
+
+  <div class="printer-divider reveal"><div class="line"></div><div class="label" id="printerReadyLabel">Hazır Ürünler</div><div class="line"></div></div>
+  <div class="printer-ready reveal">
+    <div class="printer-ready-grid" id="printerReadyGrid"></div>
+  </div>
+
+  <div class="printer-divider reveal"><div class="line"></div><div class="label" id="printerCustomLabel">Kişiye Özel Tasarım Hizmeti</div><div class="line"></div></div>
+  <div class="printer-custom reveal">
+    <p class="printer-custom-intro" id="printerCustomIntro"></p>
+    <div class="printer-custom-grid" id="printerCustomGrid"></div>
+    <div class="printer-cta-wrap">
+      <button type="button" class="btn-wa-printer" id="printerWaCta" onclick="openWA('3D baskı hakkında detaylı bilgi almak istiyorum.')">WhatsApp'tan Detay Sor</button>
     </div>
   </div>
 </section>
@@ -1693,6 +1679,7 @@ async function loadProducts(){
     products = data.filter(p => p && Number.isInteger(p.id) && p.id > 0 && p.id < 10000);
     renderProducts(products);
     if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
+    if(typeof renderPrinter === 'function' && _printerData) renderPrinter(_printerData);
   }catch(e){
     console.warn('Ürün manifesti yüklenemedi:', e);
     const grid = document.getElementById('productGrid');
@@ -2245,39 +2232,70 @@ function toggleDrawerGroup(key){
   if(arrow) arrow.textContent = el.classList.contains('open') ? '▴' : '▾';
 }
 
+var _printerData = null;
 function renderPrinter(d){
-  if(!d) return;
+  if(d) _printerData = d;
+  const data = _printerData;
+  if(!data) return;
   const sec = document.querySelector('.printer-section');
   if(!sec) return;
-  const tags = sec.querySelectorAll('.tag');
-  if(tags[0] && d.tag_top) tags[0].textContent = d.tag_top;
-  if(tags[1] && d.tag_bottom) tags[1].textContent = d.tag_bottom;
-  const h2s = sec.querySelectorAll('h2');
-  if(h2s[0] && (d.title_top_plain || d.title_top_emphasis)){
-    h2s[0].innerHTML = `${aiEscape(d.title_top_plain||'')} <em>${aiEscape(d.title_top_emphasis||'')}</em>`;
+  // Üst başlık + tag
+  const tag = sec.querySelector('.section-title .tag');
+  if(tag && data.tag_top) tag.textContent = data.tag_top;
+  const h2 = sec.querySelector('.section-title h2');
+  if(h2 && (data.title_top_plain || data.title_top_emphasis)){
+    h2.innerHTML = `${aiEscape(data.title_top_plain||'')} <em>${aiEscape(data.title_top_emphasis||'')}</em>`;
   }
-  if(h2s[1] && (d.title_bottom_plain || d.title_bottom_emphasis)){
-    h2s[1].innerHTML = `${aiEscape(d.title_bottom_plain||'')} <em>${aiEscape(d.title_bottom_emphasis||'')}</em>`;
+  // Bölüm 1 etiket
+  const readyLabel = document.getElementById('printerReadyLabel');
+  if(readyLabel && data.ready_label) readyLabel.textContent = data.ready_label;
+  // Bölüm 1 — products.json'dan id'lere göre ürün kartları
+  const readyGrid = document.getElementById('printerReadyGrid');
+  if(readyGrid && Array.isArray(data.ready_products) && Array.isArray(products) && products.length){
+    const ids = data.ready_products
+      .map(x => (x && typeof x === 'object') ? x.id : x)
+      .map(n => Number(n))
+      .filter(n => Number.isInteger(n) && n > 0 && n < 10000);
+    const items = ids.map(id => products.find(p => p && p.id === id)).filter(Boolean);
+    readyGrid.innerHTML = items.map(p => {
+      const name = aiEscape(p.name || '');
+      const price = aiEscape(p.price || 'Fiyat sor');
+      const waMsg = jsArg(`${p.name || ''} için 3D baskı siparişi vermek istiyorum.`);
+      return `<div class="printer-ready-card" onclick="openWA('${waMsg}')">
+        <div class="pr-img">${imgContent(p)}</div>
+        <div class="pr-info">
+          <h4>${name}</h4>
+          <div class="pr-price">${price}</div>
+          <button type="button" class="pr-btn" onclick="event.stopPropagation();openWA('${waMsg}')">Sipariş Ver</button>
+        </div>
+      </div>`;
+    }).join('');
   }
-  const icon = sec.querySelector('.printer-icon');
-  if(icon && d.visual_icon) icon.textContent = d.visual_icon;
-  const samples = sec.querySelector('.printer-samples');
-  if(samples && Array.isArray(d.samples)){
-    samples.innerHTML = d.samples.map(s=>`<div class="printer-sample">${aiEscape(s.icon||'')} ${aiEscape(s.text||'')}</div>`).join('');
+  // Bölüm 2 etiket + tanıtım
+  const customLabel = document.getElementById('printerCustomLabel');
+  if(customLabel && data.custom_label) customLabel.textContent = data.custom_label;
+  const customIntro = document.getElementById('printerCustomIntro');
+  if(customIntro && data.custom_intro) customIntro.textContent = String(data.custom_intro).trim();
+  // Bölüm 2 — numaralı kategori kartları
+  const customGrid = document.getElementById('printerCustomGrid');
+  if(customGrid && Array.isArray(data.custom_categories)){
+    customGrid.innerHTML = data.custom_categories.map((c, i) => {
+      const num = String(i+1).padStart(2, '0');
+      const title = aiEscape(c.title || '');
+      const desc = aiEscape(c.description || '');
+      const waMsg = jsArg(`${c.title || ''} için 3D baskı fiyat sormak istiyorum.`);
+      return `<div class="printer-custom-card">
+        <div class="pc-num">${num}</div>
+        <div class="pc-divider"></div>
+        <h4>${title}</h4>
+        <p>${desc}</p>
+        <button type="button" class="pc-ask" onclick="openWA('${waMsg}')">Fiyat Sor</button>
+      </div>`;
+    }).join('');
   }
-  const desc = sec.querySelector('.printer-text p');
-  if(desc && d.description) desc.textContent = String(d.description).trim();
-  const cats = sec.querySelector('.printer-cats');
-  if(cats && Array.isArray(d.subcategories)){
-    cats.innerHTML = d.subcategories.map(s=>
-      `<div class="printer-cat" onclick="goTo('products');filterProducts('${jsArg(s.filter||'')}',null)"><span class="pci">${aiEscape(s.icon||'')}</span><div class="printer-cat-text"><h4>${aiEscape(s.title||'')}</h4><p>${aiEscape(s.subtitle||'')}</p></div></div>`
-    ).join('');
-  }
-  const cta = sec.querySelector('.printer-text .btn-primary');
-  if(cta){
-    if(d.cta_label) cta.textContent = d.cta_label;
-    if(d.cta_filter) cta.setAttribute('onclick', `goTo('products');filterProducts('${jsArg(d.cta_filter)}',null)`);
-  }
+  // CTA
+  const cta = document.getElementById('printerWaCta');
+  if(cta && data.wa_cta_label) cta.textContent = data.wa_cta_label;
 }
 
 function renderFooter(d){

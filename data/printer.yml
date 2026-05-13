@@ -2,27 +2,21 @@ tag_top: ✦ 3D Baskı
 title_top_plain: Hayal ettiğinizi
 title_top_emphasis: basıyoruz
 
-visual_icon: 🖨️
-samples:
-  - { icon: '🔑', text: 'Anahtarlık' }
-  - { icon: '⚙️', text: 'Araba Parçası' }
-  - { icon: '🧸', text: 'Oyuncak' }
-  - { icon: '🔧', text: 'Alet' }
-  - { icon: '🏠', text: 'Eşya Parçası' }
-  - { icon: '🎮', text: 'Aksesuvar' }
+ready_label: Hazır Ürünler
+ready_products:
+  - 16
+  - 17
+  - 19
+  - 20
 
-tag_bottom: ✦ 3D Baskı Kategorileri
-title_bottom_plain: Her fikir
-title_bottom_emphasis: gerçek olur
-description: >
-  Kişiselleştirilmiş anahtarlıktan araç aksesuvara, oyuncaktan ev eşyası parçasına
-  — üç boyutlu yazıcımızla üretiyoruz.
+custom_label: Kişiye Özel Tasarım Hizmeti
+custom_intro: >
+  Aklınızdaki tasarımı bize anlatın, biz basalım. PLA, PETG ve TPU
+  malzeme seçenekleriyle profesyonel 3D baskı hizmeti.
+custom_categories:
+  - { title: 'Anahtarlık',        description: 'İsim, logo veya özel tasarım',          filter: '3d-anahtarlik' }
+  - { title: 'Araba Parçası',     description: 'Yedek klips, tutucu, kapak',            filter: '3d-alet' }
+  - { title: 'Oyuncak & Figür',   description: 'İstediğiniz karakter veya figür',       filter: '3d-oyuncak' }
+  - { title: 'Ev Eşyası Parçası', description: 'Kapı takozu, telefon standı, organizer', filter: '3d-deko' }
 
-subcategories:
-  - { icon: '🔑', title: 'Anahtarlık',      subtitle: 'İsme özel, 3D baskı',   filter: '3d-anahtarlik' }
-  - { icon: '🧸', title: 'Oyuncak & Figür', subtitle: 'Kişiselleştirilebilir', filter: '3d-oyuncak' }
-  - { icon: '🔧', title: 'Alet & Parça',    subtitle: 'Araba, ev, elektronik', filter: '3d-alet' }
-  - { icon: '🏺', title: 'Dekoratif',       subtitle: 'Ev & masa dekoru',      filter: '3d-deko' }
-
-cta_label: Tüm 3D Ürünleri Gör
-cta_filter: '3d'
+wa_cta_label: WhatsApp'tan Detay Sor

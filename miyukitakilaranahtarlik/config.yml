@@ -432,30 +432,25 @@ collections:
         file: data/printer.yml
         fields:
           - { label: 'Üst Etiket', name: tag_top, widget: string, default: '✦ 3D Baskı' }
-          - { label: 'Üst Başlık - Düz', name: title_top_plain, widget: string, default: 'Hayal ettiğinizi' }
-          - { label: 'Üst Başlık - Vurgu', name: title_top_emphasis, widget: string, default: 'basıyoruz' }
-          - { label: 'Sol Panel Ana Emoji', name: visual_icon, widget: string, default: '🖨️' }
-          - label: 'Sol Panel Örnek Etiketler'
-            name: samples
+          - { label: 'Başlık - Düz', name: title_top_plain, widget: string, default: 'Hayal ettiğinizi' }
+          - { label: 'Başlık - Vurgu', name: title_top_emphasis, widget: string, default: 'basıyoruz' }
+          - { label: 'Hazır Ürünler Bölüm Başlığı', name: ready_label, widget: string, default: 'Hazır Ürünler' }
+          - label: 'Hazır Ürünler — Ürün ID Listesi'
+            name: ready_products
             widget: list
-            hint: 'Yazıcı görselinin altındaki örnek baskı etiketleri'
-            fields:
-              - { label: Emoji, name: icon, widget: string }
-              - { label: Metin, name: text, widget: string }
-          - { label: 'Alt Etiket', name: tag_bottom, widget: string, default: '✦ 3D Baskı Kategorileri' }
-          - { label: 'Alt Başlık - Düz', name: title_bottom_plain, widget: string, default: 'Her fikir' }
-          - { label: 'Alt Başlık - Vurgu', name: title_bottom_emphasis, widget: string, default: 'gerçek olur' }
-          - { label: 'Açıklama', name: description, widget: text }
-          - label: 'Alt Kategori Kartları'
-            name: subcategories
+            hint: 'products.json icindeki ID numaralari (orn: 16, 17, 19, 20). Her satira tek ID.'
+            field: { label: 'Ürün ID', name: id, widget: number, value_type: int, min: 1 }
+          - { label: 'Kişiye Özel Bölüm Başlığı', name: custom_label, widget: string, default: 'Kişiye Özel Tasarım Hizmeti' }
+          - { label: 'Kişiye Özel — Tanıtım Metni', name: custom_intro, widget: text }
+          - label: 'Kişiye Özel — Kategori Kartları'
+            name: custom_categories
             widget: list
+            hint: 'Numarali (01-04) kartlar — kullanici bu kategoride 3D baski yaptirmak istediginde "Fiyat Sor" butonuna basar.'
             fields:
-              - { label: Emoji, name: icon, widget: string }
               - { label: Başlık, name: title, widget: string }
-              - { label: Açıklama, name: subtitle, widget: string }
-              - { label: 'Filtre Hedefi', name: filter, widget: string, hint: 'Örn: 3d-anahtarlik, 3d-oyuncak' }
-          - { label: 'CTA Buton Metni', name: cta_label, widget: string, default: 'Tüm 3D Ürünleri Gör' }
-          - { label: 'CTA Filtre Hedefi', name: cta_filter, widget: string, default: '3d' }
+              - { label: Açıklama, name: description, widget: string }
+              - { label: 'Filtre Hedefi', name: filter, widget: string, hint: 'Örn: 3d-anahtarlik, 3d-oyuncak, 3d-alet, 3d-deko' }
+          - { label: 'Ana WhatsApp CTA Metni', name: wa_cta_label, widget: string, default: 'WhatsApp''tan Detay Sor' }
 
   # ─────────────────────────────────────────────────────────
   # 9) MÜŞTERİ YORUMLARI
