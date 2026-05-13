@@ -21,4 +21,6 @@ colors:
   - pembe
 isNew: false
 image: ""
+giftBagEligible: true
+giftBagPrice: 120
 ---

@@ -52,6 +52,7 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 | Adım L | AI intent'leri (anneler günü, sevgili, gift bag) | `18b9c00` |
 | Adım M | Newsletter izlerinin doğrulanması | `84ef176` |
 | Adım N | Çekmece 2-kademe + çanta seti rename | `8dfffda` |
+| Adım O | Görsel çanta builder (Yol B — resim tabanlı, bags collection + products.giftBagEligible migration) | `f71c98f`, `e7a184f`, `e0d1c76`, `6d5fa3c` |
 
 ### Plan v4-v5 aşamaları (Mayıs 2026)
 

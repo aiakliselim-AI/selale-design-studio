@@ -218,37 +218,90 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .btn-gb:hover{background:#fff;color:#1a1a1a;}
 
 /* ═══ ŞEFFAF ÇANTA BUILDER (Adım G) ═══ */
-.giftbag-builder{padding:7rem 5%;background:#faf6f0;}
+.giftbag-builder{padding:6rem 5%;background:#faf6f0;}
 .giftbag-builder .section-title{text-align:center;margin-bottom:3rem;}
-.gb-builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1180px;margin:0 auto;}
-.gb-col h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--text);margin-bottom:.4rem;}
-.gb-col .gb-step{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:1.2rem;display:block;}
-.gb-bag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;}
-.gb-bag-card{background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:1.2rem 1rem;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;display:flex;flex-direction:column;gap:.4rem;text-align:left;font:inherit;color:inherit;}
-.gb-bag-card:hover{border-color:#888;}
-.gb-bag-card.selected{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;}
-.gb-bag-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);font-weight:500;}
-.gb-bag-card .gb-bag-desc{font-size:.78rem;color:var(--neutral-muted);line-height:1.5;}
-.gb-bag-card .gb-bag-price{font-size:.88rem;font-weight:500;color:var(--text);margin-top:.3rem;font-family:'Inter',sans-serif;}
-.gb-items-list{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
-.gb-item{display:flex;align-items:flex-start;gap:.7rem;background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:.85rem 1rem;cursor:pointer;transition:border-color .2s,background .15s;font:inherit;text-align:left;color:inherit;}
-.gb-item:hover{border-color:#888;}
-.gb-item.selected{border-color:#1a1a1a;background:#fff;box-shadow:0 0 0 1px #1a1a1a inset;}
-.gb-item-icon{font-size:1.3rem;flex-shrink:0;line-height:1;margin-top:.1rem;}
-.gb-item-info{flex:1;min-width:0;}
-.gb-item-title{font-size:.85rem;font-weight:500;color:var(--text);}
-.gb-item-price{font-size:.72rem;color:var(--neutral-muted);margin-top:.15rem;font-family:'Inter',sans-serif;}
-.gb-item input[type="checkbox"]{display:none;}
-.gb-label-wrap{margin-top:1.5rem;}
-.gb-label-wrap label{display:block;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:.5rem;}
-.gb-label-input{width:100%;padding:.9rem 1rem;border:1.5px solid var(--line);border-radius:4px;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--text);background:#fff;transition:border-color .2s;}
-.gb-label-input:focus{outline:none;border-color:#1a1a1a;}
-.gb-summary{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--line);grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:1.2rem;text-align:center;}
-.gb-summary-text{font-size:.85rem;color:var(--neutral-muted);max-width:560px;line-height:1.7;}
-.gb-summary-text strong{color:var(--text);font-weight:500;}
-.btn-gb-send{display:inline-flex;align-items:center;gap:.7rem;background:#1a1a1a;color:#fff;border:none;border-radius:4px;padding:1.1rem 2.8rem;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .2s;font-family:'Inter',sans-serif;font-weight:500;}
-.btn-gb-send:hover:not(:disabled){background:#000;transform:translateY(-2px);}
-.btn-gb-send:disabled{background:#999;cursor:not-allowed;}
+.giftbag-builder .section-title h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-style:italic;font-weight:500;line-height:1.15;color:var(--text);margin-bottom:.5rem;}
+.giftbag-builder .section-title p{font-size:.92rem;color:var(--neutral-muted);max-width:520px;margin:0 auto;line-height:1.6;}
+.bb-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:2.6rem;max-width:1200px;margin:0 auto;align-items:start;}
+.bb-col-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--text);margin-bottom:.3rem;font-weight:500;}
+.bb-step{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:1rem;display:block;}
+.bb-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.4rem;margin-bottom:1.6rem;}
+/* Adım 1 — Çanta seçim grid */
+.bb-bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem;}
+.bb-bag-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:.9rem;cursor:pointer;transition:border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.6rem;text-align:left;font:inherit;color:inherit;position:relative;}
+.bb-bag-card:hover{border-color:#888;}
+.bb-bag-card.selected{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;}
+.bb-bag-card .bb-bag-check{position:absolute;top:.5rem;right:.5rem;width:22px;height:22px;border-radius:50%;background:#1a1a1a;color:#fff;display:none;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;}
+.bb-bag-card.selected .bb-bag-check{display:flex;}
+.bb-bag-thumb{aspect-ratio:1/1;border-radius:4px;background:var(--placeholder);display:flex;align-items:center;justify-content:center;overflow:hidden;color:#bdbdbd;}
+.bb-bag-thumb img{width:100%;height:100%;object-fit:contain;background:#fff;}
+.bb-bag-thumb .bb-bag-svg{width:54%;height:54%;}
+.bb-bag-thumb .bb-bag-placeholder-text{position:absolute;bottom:.6rem;left:0;right:0;text-align:center;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);}
+.bb-bag-name{font-family:'Cormorant Garamond',serif;font-size:.98rem;color:var(--text);font-weight:500;line-height:1.2;}
+.bb-bag-price{font-size:.82rem;color:var(--neutral-muted);font-family:'Inter',sans-serif;}
+.bb-empty{padding:1rem;color:var(--neutral-muted);font-size:.85rem;text-align:center;}
+/* Adım 3 — Çanta önizleme */
+.bb-preview-wrap{margin-top:1.4rem;}
+.bb-preview{position:relative;aspect-ratio:1/1;border-radius:6px;background:linear-gradient(135deg,#f4eadb 0%,#e8d8c2 100%);overflow:hidden;border:1px solid var(--line);}
+.bb-preview-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;color:rgba(26,26,26,.55);}
+.bb-preview-empty svg{width:32%;height:32%;opacity:.4;margin-bottom:1rem;}
+.bb-preview-empty span{font-size:.78rem;letter-spacing:1px;text-transform:uppercase;}
+.bb-preview-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.bb-preview-bg img{max-width:88%;max-height:88%;object-fit:contain;opacity:.85;}
+.bb-preview-bg .bb-bag-svg{width:55%;height:55%;color:rgba(26,26,26,.18);}
+.bb-preview-bg .bb-bag-placeholder-text{position:absolute;bottom:1rem;left:0;right:0;text-align:center;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(26,26,26,.45);}
+.bb-preview-items{position:absolute;inset:22% 14% 18%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:.4rem;pointer-events:none;}
+.bb-chip{background:rgba(255,255,255,.92);border:1px solid rgba(26,26,26,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;aspect-ratio:1/1;box-shadow:0 2px 6px rgba(0,0,0,.08);}
+.bb-chip img{width:88%;height:88%;object-fit:cover;border-radius:50%;}
+.bb-chip-fallback{width:88%;height:88%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;color:#fff;font-size:1rem;line-height:1;}
+.bb-chip-more{background:rgba(26,26,26,.85);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;aspect-ratio:1/1;width:100%;}
+/* Adım 3 — Fiyat özeti + sipariş */
+.bb-summary{margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;}
+.bb-sum-row{display:flex;justify-content:space-between;font-size:.88rem;color:var(--text);padding:.35rem 0;}
+.bb-sum-row .bb-sum-label{color:var(--neutral-muted);}
+.bb-sum-divider{height:1px;background:var(--line);margin:.5rem 0;}
+.bb-sum-total{display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--text);margin-top:.3rem;}
+.bb-send-row{margin-top:1.2rem;}
+.bb-send-btn{display:flex;width:100%;justify-content:center;align-items:center;gap:.7rem;background:#1a1a1a;color:#fff;border:none;border-radius:4px;padding:1rem 1.4rem;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .25s;font-family:'Inter',sans-serif;font-weight:500;}
+.bb-send-btn:hover:not(:disabled){background:#000;}
+.bb-send-btn:disabled{background:#999;cursor:not-allowed;}
+.bb-send-hint{margin-top:.5rem;font-size:.72rem;color:var(--neutral-muted);text-align:center;letter-spacing:1px;text-transform:uppercase;}
+/* Adım 2 — Kategori tabları + ürün grid */
+.bb-cat-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem;}
+.bb-cat-tab{background:#fff;color:var(--text);border:1.5px solid var(--line);border-radius:50px;padding:.5rem 1rem;font-size:.74rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s,background .2s,color .2s;}
+.bb-cat-tab:hover{border-color:#888;}
+.bb-cat-tab.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
+.bb-prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;}
+.bb-prod-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;}
+.bb-prod-card.added{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;background:#fdfdfd;}
+.bb-prod-thumb{aspect-ratio:1/1;background:var(--placeholder);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.bb-prod-thumb img{width:100%;height:100%;object-fit:cover;}
+.bb-prod-fallback{width:64%;height:64%;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.2rem;line-height:1;}
+.bb-prod-info{padding:.7rem .9rem .9rem;display:flex;flex-direction:column;gap:.6rem;flex:1;}
+.bb-prod-name{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--text);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.15rem;}
+.bb-prod-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
+.bb-prod-price{font-size:.85rem;color:var(--text);font-weight:500;}
+.bb-prod-add{background:transparent;border:1.5px solid var(--text);color:var(--text);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:500;transition:background .2s,color .2s;font-family:'Inter',sans-serif;line-height:1;padding:0;}
+.bb-prod-add:hover{background:var(--text);color:#fff;}
+.bb-prod-card.added .bb-prod-add{background:#1a1a1a;color:#fff;border-color:#1a1a1a;width:auto;border-radius:50px;padding:.25rem .8rem;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+.bb-prod-empty{grid-column:1/-1;padding:2.5rem 1rem;text-align:center;color:var(--neutral-muted);font-size:.85rem;background:#fff;border:1px dashed var(--line);border-radius:6px;}
+/* Renk paleti — fallback daireleri */
+.bb-tint-miyuki{background:#7a1f2e;}
+.bb-tint-mum{background:#c97a3a;}
+.bb-tint-koku{background:#6b4d8a;}
+.bb-tint-3d{background:#2f5f8a;}
+.bb-tint-diger{background:#666;}
+/* Adım 3 alt — Özel etiket */
+.bb-label-area{margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;}
+.bb-label-area label{display:block;font-size:.74rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:.6rem;}
+.bb-label-input{width:100%;min-height:72px;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:4px;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--text);background:#fff;transition:border-color .2s;resize:vertical;}
+.bb-label-input:focus{outline:none;border-color:#1a1a1a;}
+.bb-label-meta{display:flex;justify-content:space-between;margin-top:.4rem;font-size:.7rem;color:var(--neutral-muted);}
+@media (max-width: 880px){
+  .bb-grid{grid-template-columns:1fr;gap:1.6rem;}
+  .bb-prod-grid{grid-template-columns:repeat(2,1fr);}
+  .bb-preview-items{inset:18% 10% 14%;}
+}
 @media(max-width:780px){.gb-builder-grid{grid-template-columns:1fr;gap:2.2rem;}.gb-items-list{grid-template-columns:1fr;}}
 
 /* ═══ ÖZEL GÜN KONSEPT BÖLÜMÜ (5.6 — 5 dikey kart) ═══ */
@@ -669,35 +722,55 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 <!-- ŞEFFAF ÇANTA BANNER (5.6) -->
 <section class="giftbag-banner" id="giftbag-banner">
   <div class="gb-tag">✦ Hediye Konsepti</div>
-  <h2><em>Çanta</em> Setleri</h2>
-  <p>Sevdiklerinize özel, içerisini birlikte tasarladığınız zarif çanta setleri — koku, mum, miyuki bileklik ve daha fazlası.</p>
-  <a class="btn-gb" href="#giftbag-builder" onclick="event.preventDefault();goTo('giftbag-builder')">Keşfet →</a>
+  <h2><em>Çantanızı</em> siz doldurun</h2>
+  <p>Hediye setinizi siz tasarlayın — çantayı seçin, içine sevdiklerinize özel ürünleri ekleyin.</p>
+  <a class="btn-gb" href="#giftbag-builder" onclick="event.preventDefault();goTo('giftbag-builder')">Tasarla →</a>
 </section>
 
-<!-- ŞEFFAF ÇANTA BUILDER (Adım G — çanta + içerik + etiket → WhatsApp) -->
+<!-- ÇANTANIZI SİZ DOLDURUN — Görsel Çanta Builder v2 -->
 <section class="giftbag-builder" id="giftbag-builder">
   <div class="section-title reveal">
     <div class="tag">✦ Hediye Setinizi Tasarlayın</div>
-    <h2>Çantanızı <em>siz seçin</em></h2>
+    <h2>Çantanızı <em>siz doldurun</em></h2>
+    <p>Hediye setinizi tasarlayın</p>
   </div>
-  <div class="gb-builder-grid">
-    <div class="gb-col">
-      <span class="gb-step">Adım 1</span>
-      <h3>Çantanızı Seçin</h3>
-      <div class="gb-bag-grid" id="gbBagGrid"></div>
-    </div>
-    <div class="gb-col">
-      <span class="gb-step">Adım 2</span>
-      <h3>İçeriği Belirleyin</h3>
-      <div class="gb-items-list" id="gbItemsList"></div>
-      <div class="gb-label-wrap">
-        <label for="gbLabelInput">Adım 3 — Özel Etiket Yazısı (isteğe bağlı)</label>
-        <input type="text" id="gbLabelInput" class="gb-label-input" maxlength="120" placeholder="Örn: Sevgili Ayşeciğim, doğum günün kutlu olsun ❤️" oninput="gbUpdateSummary()">
+  <div class="bb-grid">
+    <!-- SOL SÜTUN: çanta seçim + önizleme + sipariş -->
+    <div class="bb-col-left">
+      <div class="bb-card">
+        <span class="bb-step">Adım 1</span>
+        <h3 class="bb-col-title">Çantanızı seçin</h3>
+        <div class="bb-bag-grid" id="bbBagGrid"><p class="bb-empty">Çantalar yükleniyor…</p></div>
+      </div>
+      <div class="bb-card">
+        <span class="bb-step">Adım 3</span>
+        <h3 class="bb-col-title">Çantanızın görünümü</h3>
+        <div class="bb-preview-wrap">
+          <div class="bb-preview" id="bbPreview"></div>
+        </div>
+        <div class="bb-summary" id="bbSummary"></div>
+        <div class="bb-send-row">
+          <button type="button" class="bb-send-btn" id="bbSendBtn" onclick="bbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
+          <p class="bb-send-hint" id="bbSendHint">En az 1 ürün ekleyin</p>
+        </div>
       </div>
     </div>
-    <div class="gb-summary">
-      <p class="gb-summary-text" id="gbSummaryText">Önce bir çanta seçin, sonra içine eklemek istediklerinizi işaretleyin.</p>
-      <button class="btn-gb-send" id="gbSendBtn" onclick="gbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
+    <!-- SAĞ SÜTUN: kategori tab + ürün grid + özel etiket -->
+    <div class="bb-col-right">
+      <div class="bb-card">
+        <span class="bb-step">Adım 2</span>
+        <h3 class="bb-col-title">İçeriği belirleyin</h3>
+        <div class="bb-cat-tabs" id="bbCatTabs"></div>
+        <div class="bb-prod-grid" id="bbProdGrid"></div>
+      </div>
+      <div class="bb-label-area">
+        <label for="bbLabel">Özel Etiket (isteğe bağlı)</label>
+        <textarea id="bbLabel" class="bb-label-input" maxlength="100" placeholder="Örn: Sevgili Ayşe, doğum günün kutlu olsun"></textarea>
+        <div class="bb-label-meta">
+          <span>İsteğe bağlı</span>
+          <span><span id="bbLabelCount">0</span>/100</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1695,6 +1768,11 @@ async function loadProducts(){
     renderProducts(products);
     if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
     if(typeof renderPrinter === 'function' && _printerData) renderPrinter(_printerData);
+    // Çanta builder: ürünler yüklenince kategori tab + ürün gridi + önizleme yenilenmeli
+    if(typeof bbRenderCatTabs === 'function') bbRenderCatTabs();
+    if(typeof bbRenderProducts === 'function') bbRenderProducts();
+    if(typeof bbRenderPreview === 'function') bbRenderPreview();
+    if(typeof bbRenderSummary === 'function') bbRenderSummary();
   }catch(e){
     console.warn('Ürün manifesti yüklenemedi:', e);
     const grid = document.getElementById('productGrid');
@@ -1811,126 +1889,286 @@ function renderEvents(list){
     </div>`;
   }).join('');
 }
-// Ortak helper — bag + items preset'i uygula, builder'a kaydır (Adım H + L).
-function aiApplyGiftbagPreset(bagSlug, itemSlugs){
-  if(!bagSlug) return;
-  giftbagState.bag = bagSlug;
-  giftbagState.items = new Set(Array.isArray(itemSlugs) ? itemSlugs : []);
-  if(typeof renderGiftBags === 'function') renderGiftBags();
-  if(typeof renderGiftBagItems === 'function') renderGiftBagItems();
-  if(typeof gbUpdateSummary === 'function') gbUpdateSummary();
+// Etkinlik kartından çanta builder'a yönlendirme — bag ön seçilir (varsa).
+// Eski preset items akışı yeni sisteme uymadığı için yalnızca çanta seçimi taşınır.
+function aiApplyGiftbagPreset(bagSlug, _itemSlugs){
+  if(bagSlug && bagSlug in {} === false){
+    bbState.bag = String(bagSlug);
+  }
+  if(typeof bbRenderBags === 'function') bbRenderBags();
+  if(typeof bbRenderPreview === 'function') bbRenderPreview();
+  if(typeof bbRenderSummary === 'function') bbRenderSummary();
   goTo('giftbag-builder');
 }
-// Etkinlik kartından çanta seti builder'a yönlendirme — bag + items ön seçilir.
 function openGiftbagFromEvent(slug){
   const ev = eventsList.find(e => e && e.slug === slug);
-  if(!ev || !ev.gift_bag_preset) return;
+  if(!ev) return;
   aiApplyGiftbagPreset(ev.gift_bag_preset, ev.gift_bag_preset_items);
 }
 loadEvents();
 
-/* ════ ŞEFFAF ÇANTA — manifest + builder akışı (Adım G) ════ */
-let giftBags = [];
-let giftBagItems = [];
-const giftbagState = { bag: null, items: new Set() };
+/* ════ ÇANTA BUILDER v2 — görsel, resim tabanlı ════ */
+let bbBags = [];
+const bbState = { bag: null, items: new Set(), activeCat: 'miyuki' };
 
-async function loadGiftBags(){
-  try{
-    const [bagsRes, itemsRes] = await Promise.all([
-      fetch('data/gift-bags.json',      { cache: 'no-cache' }),
-      fetch('data/gift-bag-items.json', { cache: 'no-cache' }),
-    ]);
-    if(bagsRes.ok){
-      const d = await bagsRes.json();
-      if(Array.isArray(d)) giftBags = d;
-    }
-    if(itemsRes.ok){
-      const d = await itemsRes.json();
-      if(Array.isArray(d)) giftBagItems = d;
-    }
-    renderGiftBags();
-    renderGiftBagItems();
-    gbUpdateSummary();
-  }catch(e){
-    console.warn('Çanta seti manifestleri yüklenemedi:', e);
+const BB_CATS = [
+  { key: 'miyuki',  label: 'Miyuki Takı', match: ['miyuki','bileklik','kolye','kupe','yuzuk','anahtarlik'] },
+  { key: 'mum',     label: 'Mumlar',      match: ['mum'] },
+  { key: 'koku',    label: 'Koku & Parfüm', match: ['koku','parfum'] },
+  { key: '3d',      label: '3D Baskı',    match: ['3d','3d-anahtarlik','3d-oyuncak','3d-alet','3d-deko'] },
+  { key: 'diger',   label: 'Diğer',       match: null },
+];
+const BB_TINT = { miyuki:'bb-tint-miyuki', mum:'bb-tint-mum', koku:'bb-tint-koku', '3d':'bb-tint-3d', diger:'bb-tint-diger' };
+
+// Inline SVG çanta silueti — placeholder ve önizleme arka planı için.
+const BB_BAG_SVG = '<svg class="bb-bag-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 22h36l-3 30a4 4 0 0 1-4 3.6H21a4 4 0 0 1-4-3.6L14 22Z"/><path d="M22 22v-4a10 10 0 0 1 20 0v4"/></svg>';
+
+function bbProductCat(p){
+  if(!p || !Array.isArray(p.cat)) return 'diger';
+  for(const c of BB_CATS){
+    if(c.match && p.cat.some(x => c.match.includes(x))) return c.key;
   }
+  return 'diger';
 }
-function renderGiftBags(){
-  const wrap = document.getElementById('gbBagGrid');
+function bbEligibleProducts(){
+  return (products||[]).filter(p => p && p.giftBagEligible === true && Number(p.giftBagPrice) > 0);
+}
+function bbFirstLetter(name){
+  const s = String(name||'').trim();
+  return s ? s[0].toUpperCase() : '•';
+}
+function bbProdImage(p){
+  if(p.images && Array.isArray(p.images) && p.images.length && p.images[0] && p.images[0].src) return p.images[0].src;
+  if(p.image) return p.image;
+  return '';
+}
+function bbSelectedBag(){
+  return bbBags.find(b => b && b.id === bbState.bag) || null;
+}
+
+async function bbLoadBags(){
+  const wrap = document.getElementById('bbBagGrid');
+  try{
+    const res = await fetch('data/bags.json', { cache: 'no-cache' });
+    if(res.ok){
+      const d = await res.json();
+      if(Array.isArray(d)) bbBags = d;
+    }
+  }catch(e){
+    console.warn('Çantalar yüklenemedi:', e);
+  }
+  bbBags = bbBags.filter(b => b && b.active !== false && b.id);
+  bbBags.sort((a,b)=>(Number.isFinite(a.order)?a.order:9999)-(Number.isFinite(b.order)?b.order:9999));
+  // Tek çanta varsa otomatik seç
+  if(!bbState.bag && bbBags.length){
+    bbState.bag = bbBags[0].id;
+  }
+  bbRenderBags();
+  bbRenderCatTabs();
+  bbRenderProducts();
+  bbRenderPreview();
+  bbRenderSummary();
+}
+
+function bbRenderBags(){
+  const wrap = document.getElementById('bbBagGrid');
   if(!wrap) return;
-  const visible = giftBags.filter(b => b && b.visible !== false);
-  visible.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0));
-  wrap.innerHTML = visible.map(b => {
-    const sel = giftbagState.bag === b.slug ? ' selected' : '';
-    return `<button type="button" class="gb-bag-card${sel}" onclick="gbSelectBag('${jsArg(b.slug||'')}')">
-      <h4>${aiEscape(b.title||'')}</h4>
-      ${b.description ? `<div class="gb-bag-desc">${aiEscape(b.description)}</div>` : ''}
-      ${b.price ? `<div class="gb-bag-price">${aiEscape(b.price)}</div>` : ''}
-    </button>`;
-  }).join('');
-}
-function renderGiftBagItems(){
-  const wrap = document.getElementById('gbItemsList');
-  if(!wrap) return;
-  const visible = giftBagItems.filter(i => i && i.visible !== false);
-  visible.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0));
-  wrap.innerHTML = visible.map(i => {
-    const sel = giftbagState.items.has(i.slug) ? ' selected' : '';
-    return `<button type="button" class="gb-item${sel}" onclick="gbToggleItem('${jsArg(i.slug||'')}')">
-      <span class="gb-item-icon">${aiEscape(i.icon||'•')}</span>
-      <span class="gb-item-info">
-        <span class="gb-item-title">${aiEscape(i.title||'')}</span>
-        ${i.price ? `<span class="gb-item-price">${aiEscape(i.price)}</span>` : ''}
-      </span>
-    </button>`;
-  }).join('');
-}
-function gbSelectBag(slug){
-  giftbagState.bag = slug;
-  renderGiftBags();
-  gbUpdateSummary();
-}
-function gbToggleItem(slug){
-  if(giftbagState.items.has(slug)) giftbagState.items.delete(slug);
-  else giftbagState.items.add(slug);
-  renderGiftBagItems();
-  gbUpdateSummary();
-}
-function gbUpdateSummary(){
-  const sumEl = document.getElementById('gbSummaryText');
-  const btn   = document.getElementById('gbSendBtn');
-  if(!sumEl || !btn) return;
-  const bag = giftBags.find(b => b.slug === giftbagState.bag);
-  if(!bag){
-    sumEl.textContent = 'Önce bir çanta seçin, sonra içine eklemek istediklerinizi işaretleyin.';
-    btn.disabled = true;
+  if(!bbBags.length){
+    wrap.innerHTML = '<p class="bb-empty">Çanta yakında eklenecek.</p>';
     return;
   }
-  btn.disabled = false;
-  const items = giftBagItems.filter(i => giftbagState.items.has(i.slug));
-  const itemNames = items.length ? items.map(i => aiEscape(i.title||'')).join(', ') : '(içerik seçilmedi)';
-  const inp = document.getElementById('gbLabelInput');
-  const label = inp && inp.value ? inp.value.trim() : '';
-  const labelHtml = label ? `<br><em>Etiket: "${aiEscape(label)}"</em>` : '';
-  sumEl.innerHTML = `Seçiminiz: <strong>${aiEscape(bag.title||'')}</strong> + ${itemNames}${labelHtml}`;
+  wrap.innerHTML = bbBags.map(b => {
+    const sel = bbState.bag === b.id ? ' selected' : '';
+    const img = b.image ? `<img src="${aiEscape(b.image)}" alt="${aiEscape(b.name||'')}">` : `${BB_BAG_SVG}<span class="bb-bag-placeholder-text">Foto yakında</span>`;
+    return `<button type="button" class="bb-bag-card${sel}" data-bag="${aiEscape(b.id)}" onclick="bbSelectBag('${jsArg(b.id)}')">
+      <span class="bb-bag-check" aria-hidden="true">✓</span>
+      <div class="bb-bag-thumb">${img}</div>
+      <span class="bb-bag-name">${aiEscape(b.name||'')}</span>
+      <span class="bb-bag-price">₺${aiEscape(String(b.price ?? ''))}</span>
+    </button>`;
+  }).join('');
 }
-function gbBuildMessage(){
-  const bag = giftBags.find(b => b.slug === giftbagState.bag);
+
+function bbSelectBag(id){
+  bbState.bag = String(id||'');
+  bbRenderBags();
+  bbRenderPreview();
+  bbRenderSummary();
+}
+
+function bbRenderCatTabs(){
+  const wrap = document.getElementById('bbCatTabs');
+  if(!wrap) return;
+  // Hangi kategorilerde uygun ürün var?
+  const eligible = bbEligibleProducts();
+  const avail = new Set(eligible.map(p => bbProductCat(p)));
+  const tabs = BB_CATS.filter(c => avail.has(c.key));
+  if(!tabs.length){
+    wrap.innerHTML = '';
+    return;
+  }
+  // Aktif kategori uygun değilse ilkine geç
+  if(!tabs.some(t => t.key === bbState.activeCat)) bbState.activeCat = tabs[0].key;
+  wrap.innerHTML = tabs.map(c =>
+    `<button type="button" class="bb-cat-tab${c.key===bbState.activeCat?' active':''}" onclick="bbSelectCat('${jsArg(c.key)}')">${aiEscape(c.label)}</button>`
+  ).join('');
+}
+
+function bbSelectCat(key){
+  bbState.activeCat = String(key||'');
+  bbRenderCatTabs();
+  bbRenderProducts();
+}
+
+function bbRenderProducts(){
+  const wrap = document.getElementById('bbProdGrid');
+  if(!wrap) return;
+  const list = bbEligibleProducts().filter(p => bbProductCat(p) === bbState.activeCat);
+  list.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0));
+  if(!list.length){
+    wrap.innerHTML = '<div class="bb-prod-empty">Bu kategoride henüz çantaya eklenebilir ürün yok. Panelden ürüne "Çanta Setine Uygun" işaretleyebilirsiniz.</div>';
+    return;
+  }
+  wrap.innerHTML = list.map(p => {
+    const id = Number(p.id);
+    const added = bbState.items.has(id);
+    const img = bbProdImage(p);
+    const cat = bbProductCat(p);
+    const tint = BB_TINT[cat] || BB_TINT.diger;
+    const thumb = img
+      ? `<img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}">`
+      : `<div class="bb-prod-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div>`;
+    return `<div class="bb-prod-card${added?' added':''}">
+      <div class="bb-prod-thumb">${thumb}</div>
+      <div class="bb-prod-info">
+        <div class="bb-prod-name">${aiEscape(p.name||'')}</div>
+        <div class="bb-prod-foot">
+          <span class="bb-prod-price">+₺${aiEscape(String(p.giftBagPrice||0))}</span>
+          <button type="button" class="bb-prod-add" onclick="bbToggleProduct(${id})" aria-label="${added?'Çantadan çıkar':'Çantaya ekle'}">${added?'✓ Eklendi':'+'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function bbToggleProduct(id){
+  const num = Number(id);
+  if(!Number.isFinite(num)) return;
+  if(bbState.items.has(num)) bbState.items.delete(num);
+  else bbState.items.add(num);
+  bbRenderProducts();
+  bbRenderPreview();
+  bbRenderSummary();
+}
+
+function bbRenderPreview(){
+  const wrap = document.getElementById('bbPreview');
+  if(!wrap) return;
+  const bag = bbSelectedBag();
+  const itemIds = Array.from(bbState.items);
+  if(!bag){
+    wrap.innerHTML = `<div class="bb-preview-empty">${BB_BAG_SVG}<span>Önce bir çanta seçin</span></div>`;
+    return;
+  }
+  // Çanta arka planı
+  const bagBg = bag.image
+    ? `<div class="bb-preview-bg"><img src="${aiEscape(bag.image)}" alt="${aiEscape(bag.name||'')}"></div>`
+    : `<div class="bb-preview-bg">${BB_BAG_SVG}<span class="bb-bag-placeholder-text">Çanta fotoğrafı panelden yüklenecek</span></div>`;
+  if(!itemIds.length){
+    wrap.innerHTML = `${bagBg}<div class="bb-preview-empty" style="background:rgba(255,255,255,.6);"><span>Ürün ekleyerek çantanızı doldurun</span></div>`;
+    return;
+  }
+  // Ürün chip'leri (max 8, 9+ ise son hücre rozet)
+  const items = itemIds.map(id => (products||[]).find(p => Number(p.id) === Number(id))).filter(Boolean);
+  const max = 9;
+  const showItems = items.slice(0, items.length > max ? max-1 : max);
+  const overflow = items.length - showItems.length;
+  const chips = showItems.map(p => {
+    const img = bbProdImage(p);
+    const cat = bbProductCat(p);
+    const tint = BB_TINT[cat] || BB_TINT.diger;
+    if(img){
+      return `<div class="bb-chip"><img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}"></div>`;
+    }
+    return `<div class="bb-chip"><div class="bb-chip-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div></div>`;
+  }).join('');
+  const more = overflow > 0 ? `<div class="bb-chip"><div class="bb-chip-more">+${overflow}</div></div>` : '';
+  wrap.innerHTML = `${bagBg}<div class="bb-preview-items">${chips}${more}</div>`;
+}
+
+function bbItemsTotal(){
+  let total = 0;
+  for(const id of bbState.items){
+    const p = (products||[]).find(x => Number(x.id) === Number(id));
+    if(p) total += Number(p.giftBagPrice||0);
+  }
+  return total;
+}
+
+function bbRenderSummary(){
+  const sum = document.getElementById('bbSummary');
+  const btn = document.getElementById('bbSendBtn');
+  const hint = document.getElementById('bbSendHint');
+  if(!sum || !btn) return;
+  const bag = bbSelectedBag();
+  if(!bag){
+    sum.innerHTML = `<div class="bb-sum-row"><span class="bb-sum-label">Önce bir çanta seçin</span><span></span></div>`;
+    btn.disabled = true;
+    if(hint) hint.textContent = 'Önce çanta seçin';
+    return;
+  }
+  const itemsCount = bbState.items.size;
+  const itemsTotal = bbItemsTotal();
+  const bagPrice = Number(bag.price||0);
+  const total = bagPrice + itemsTotal;
+  sum.innerHTML = `
+    <div class="bb-sum-row"><span class="bb-sum-label">Çanta: ${aiEscape(bag.name||'')}</span><span>₺${aiEscape(String(bagPrice))}</span></div>
+    <div class="bb-sum-row"><span class="bb-sum-label">+ ${itemsCount} ürün</span><span>₺${aiEscape(String(itemsTotal))}</span></div>
+    <div class="bb-sum-divider"></div>
+    <div class="bb-sum-total"><span>Toplam</span><span>₺${aiEscape(String(total))}</span></div>
+  `;
+  if(itemsCount === 0){
+    btn.disabled = true;
+    if(hint) hint.textContent = 'En az 1 ürün ekleyin';
+  } else {
+    btn.disabled = false;
+    if(hint) hint.textContent = 'WhatsApp ile bağlanacaksınız';
+  }
+}
+
+// Etiket sayacı
+document.addEventListener('input', (e)=>{
+  if(e.target && e.target.id === 'bbLabel'){
+    const c = document.getElementById('bbLabelCount');
+    if(c) c.textContent = String(e.target.value.length);
+  }
+});
+
+function bbBuildMessage(){
+  const bag = bbSelectedBag();
   if(!bag) return null;
-  const items = giftBagItems.filter(i => giftbagState.items.has(i.slug));
-  const itemList = items.length ? items.map(i => i.title).join(', ') : '(içerik seçilmedi)';
-  const inp = document.getElementById('gbLabelInput');
-  const label = inp && inp.value ? inp.value.trim() : '';
-  let msg = `Merhaba! Şu çantayı hazırlamak istiyorum: ${bag.title} + [${itemList}]`;
-  if(label) msg += ` + etiket: "${label}"`;
+  const items = Array.from(bbState.items)
+    .map(id => (products||[]).find(p => Number(p.id) === Number(id)))
+    .filter(Boolean);
+  if(!items.length) return null;
+  const labelEl = document.getElementById('bbLabel');
+  const label = labelEl && labelEl.value ? labelEl.value.trim().slice(0,100) : '';
+  const bagPrice = Number(bag.price||0);
+  const itemsTotal = items.reduce((s,p)=>s+Number(p.giftBagPrice||0),0);
+  const total = bagPrice + itemsTotal;
+  const lines = items.map(p => `  - ${p.name} (+₺${Number(p.giftBagPrice||0)})`).join('\n');
+  let msg = `Merhaba! 🛍️\nÇanta Seti Siparişi:\n• Çanta: ${bag.name} (₺${bagPrice})\n• İçerik:\n${lines}\n\nToplam: ₺${total}`;
+  if(label) msg += `\nEtiket: "${label}"`;
   return msg;
 }
-function gbSend(){
-  const msg = gbBuildMessage();
+
+function bbSend(){
+  const msg = bbBuildMessage();
   if(!msg) return;
   openWA(msg);
 }
-loadGiftBags();
+
+bbLoadBags();
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){

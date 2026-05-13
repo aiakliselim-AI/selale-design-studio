@@ -421,6 +421,8 @@ collections:
           - { label: 'Foto', name: src, widget: image }
       - { label: 'Ürün Fotoğrafı (eski tek foto — yeni ürünlerde "Ürün Fotoğrafları"nı kullanın)', name: image, widget: image, required: false }
       - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int, hint: 'Küçük sayı önce gösterilir' }
+      - { label: 'Çanta Setine Uygun mu?', name: giftBagEligible, widget: boolean, default: false, hint: 'TRUE ise yeni çanta seti builder''ında (Çantanızı siz doldurun) bu ürün seçilebilir hale gelir.' }
+      - { label: 'Çantaya Eklenince Ek Fiyat (₺)', name: giftBagPrice, widget: number, value_type: int, required: false, min: 0, hint: 'Yalnızca çanta setine eklenecek ürünler için. Müşteri bu ürünü çantaya eklediğinde toplama eklenir. Boş veya 0 ise çanta seti listesinde görünmez.' }
 
   # ─────────────────────────────────────────────────────────
   # 7) ÖZEL GÜN KONSEPTLERİ (Etkinlikler)
@@ -687,3 +689,28 @@ collections:
       - { label: 'Görsel', name: image, widget: image, required: false }
       - { label: 'Sıralama', name: order, widget: number, default: 0, value_type: int }
       - { label: 'Görünür mü?', name: visible, widget: boolean, default: true }
+
+  # ─────────────────────────────────────────────────────────
+  # 14) ÇANTALAR (YENİ — Görsel Çanta Builder için)
+  # ─────────────────────────────────────────────────────────
+  - name: bags
+    label: 14. Çantalar (Yeni Builder)
+    label_singular: Çanta
+    description: '"Çantanızı siz doldurun" builder''ında müşterinin seçeceği çanta tipleri. Eski "Çanta Setleri" (12) görseli olan hazır setlerdir; bu yeni koleksiyonda çantanın kendisi olur — müşteri içine ürün ekleyerek özelleştirir.'
+    folder: data/bags
+    create: true
+    delete: true
+    slug: '{{id}}'
+    extension: json
+    format: json
+    media_folder: '/images/bags'
+    public_folder: '/images/bags'
+    summary: '{{name}} — ₺{{price}} (#{{order}})'
+    sortable_fields: ['order', 'name', 'price']
+    fields:
+      - { label: 'ID (slug — dosya adı)', name: id, widget: string, pattern: ['^[a-z0-9-]+$', 'Sadece küçük harf, rakam, tire'], hint: 'Örn: bordo-klasik. Dosya bu adla data/bags/ içinde oluşur.' }
+      - { label: 'İsim', name: name, widget: string, hint: 'Örn: Bordo Klasik Çanta' }
+      - { label: 'Çanta Fotoğrafı (şeffaf PNG önerilir)', name: image, widget: image, required: false, hint: '600x600 px, transparan arka plan ideal. Boş bırakılırsa builder''da SVG placeholder kutusu gösterilir.' }
+      - { label: 'Çanta Fiyatı (₺)', name: price, widget: number, value_type: int, min: 0, hint: 'Sadece rakam (örn: 250). Toplam fiyat hesaplamasında ham değer kullanılır.' }
+      - { label: 'Aktif mi?', name: active, widget: boolean, default: true, hint: 'FALSE ise builder''da seçim listesinde görünmez.' }
+      - { label: 'Sıralama', name: order, widget: number, default: 1, value_type: int, hint: 'Küçük sayı önce gösterilir' }

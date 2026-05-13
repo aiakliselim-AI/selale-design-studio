@@ -1,0 +1,49 @@
+name: build-bags-manifest
+
+# data/bags/*.json -> data/bags.json
+# Yeni "Cantanizi siz doldurun" builder'i icin manifest uretici.
+# Mevcut build-gift-bags-manifest.yml ESKI sistem icin korunuyor (events relation'i bagli).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/bags/**'
+      - 'scripts/build-bags-manifest.mjs'
+      - '.github/workflows/build-bags-manifest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-bags-manifest
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build manifest
+        run: node scripts/build-bags-manifest.mjs
+
+      - name: Commit manifest if changed
+        # NOT: [skip ci] kullanma — Cloudflare Pages deploy'u atlar. Loop guard
+        # paths filtresi: yalnizca data/bags/**, script ve bu workflow degisirse calisir.
+        # data/bags.json (output) commit edildiginde paths eslesmedigi icin tekrar tetiklenmez.
+        run: |
+          if [ -n "$(git status --porcelain data/bags.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/bags.json
+            git commit -m "data/bags.json: canta manifesti guncellendi"
+            git push
+          else
+            echo "manifest is up to date"
+          fi

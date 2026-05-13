@@ -17,4 +17,6 @@ colors:
   - altin
 isNew: true
 image: ""
+giftBagEligible: true
+giftBagPrice: 50
 ---

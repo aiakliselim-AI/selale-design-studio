@@ -17,4 +17,6 @@ colors:
   - yesil
 isNew: false
 image: ""
+giftBagEligible: true
+giftBagPrice: 85
 ---

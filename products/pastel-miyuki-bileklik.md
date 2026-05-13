@@ -20,4 +20,6 @@ badge: Çok Satan
 isNew: false
 image: ''
 order: 1
+giftBagEligible: true
+giftBagPrice: 120
 ---
