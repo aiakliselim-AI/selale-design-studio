@@ -11,8 +11,6 @@ badge: ""
 cat:
   - miyuki
   - anahtarlik
-event_concepts:
-  - mezuniyet
 colors:
   - kirmizi
   - mavi

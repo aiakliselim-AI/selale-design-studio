@@ -10,8 +10,6 @@ bg: p1
 badge: Yeni
 cat:
   - mum
-event_concepts:
-  - dogumgunu
 colors:
   - pembe
   - beyaz

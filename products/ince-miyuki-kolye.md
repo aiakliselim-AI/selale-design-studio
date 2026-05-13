@@ -11,9 +11,6 @@ badge: ""
 cat:
   - miyuki
   - kolye
-event_concepts:
-  - nishan
-  - dugun
 colors:
   - altin
   - gumus

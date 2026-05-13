@@ -8,8 +8,6 @@ icon: 📿
 cat:
   - miyuki
   - bileklik
-event_concepts:
-  - babyshower
 colors:
   - pembe
   - mavi
