@@ -5,7 +5,7 @@
 > `CLAUDE.md` teknik mimariyi anlatır; bu dosya **sıradaki işleri** ve
 > **alınan tasarım kararlarını** anlatır.
 >
-> **Son güncelleme:** 2026-05-13 (v7-1B revizyonu).
+> **Son güncelleme:** 2026-05-14 (v7-1B tamamlandı + config.yml YAML parse fix).
 > **v7 farkı:** v6'da plan kapanmıştı, ama Adım O sonrası canlıda gezerken
 > 3 bug/eksik çıktı: anasayfada kategori kartları görünmüyor (reveal
 > observer dinamik DOM'la uyumsuz), "Öne Çıkan Ürünler" mantığı belirsiz,
@@ -70,6 +70,13 @@ Bu aşamalar **bitti, canlıda çalışıyor.** Tekrar yapma:
 | **Aşama 2** | Özel gün konseptleri — emoji ikon kaldır, numaralı tipografi (Mockup 1-A) | `a6bd23a` |
 | **Aşama 3** | 3D Baskı iki bölüm — Hazır Ürünler + Kişiye Özel Tasarım (Mockup 2-C) | `41af915` |
 | **Aşama 5** | SEO + sitemap.xml + Open Graph + Twitter Card + robots.txt + OG banner şeması | `f4d0f44` |
+
+### Plan v7 aşamaları (Mayıs 2026)
+
+| Aşama | İçerik | Commit |
+|-------|--------|--------|
+| **v7-1B** | Anasayfa kategori şeritleri (Netflix-tarzı yatay kayan) — eski cat-grid kaldırıldı, 3 büyük + 5 küçük şerit, hover auto-scroll, chevron oklar, mobil swipe; `event_concepts` multi-select alanı products şemasına eklendi; IntersectionObserver global'e taşındı | `bee41a9`, `9fa7d9a` |
+| **v7-1B follow-up** | `miyukitakilaranahtarlik/config.yml` YAML parse hataları (line 24 description + line 172 `Aktif mi?` label) tek tırnağa alındı — strict-parser uyumu | `663a2b7` |
 
 ---
 
@@ -186,8 +193,9 @@ yaklaşımı (v7-1B) tercih edildi. Reveal observer bug fix kısmı v7-1B'ye
 taşındı (orada uygulanıyor). Bu satır geçmiş kaydı olarak korunur,
 silinmez.
 
-### Aşama v7-1B — Kategori şeritleri (Netflix-tarzı)
-**Branch:** `feat/v7-1B-kategori-seritleri`
+### Aşama v7-1B — Kategori şeritleri (Netflix-tarzı) · ✅ TAMAMLANDI
+**Branch:** `feat/v7-1B-kategori-seritleri` (merge edildi + silindi)
+**Commits:** `bee41a9` (feat) + `9fa7d9a` (her-zaman-görünür düzeltmesi) + `663a2b7` (config.yml YAML parse fix)
 
 **Hedef:** Anasayfa "Kategoriler" bölümü tamamen yeniden yazılır. Eski
 `renderCategories` + `cat-grid` + `.cat-card` sistemi kaldırılır; yerine
@@ -365,6 +373,7 @@ Repo public olduğu için:
 
 ---
 
-**Durum:** Plan v7 aktif. Üç aşama (v7-1, v7-2, v7-3) Bölüm 5B'de
-sıralı bekliyor. Ayrıca kullanıcı işi olan Aşama 4 (foto yükleme) hâlâ
-geçerli. 🌸
+**Durum:** Plan v7 kısmen tamam. v7-1 iptal edildi, v7-1B canlıda
+(2026-05-14). Kalan: **v7-2** (Öne Çıkan Ürünler kuralı) ve **v7-3**
+(Çanta builder alt-kategori hiyerarşisi). Ayrıca kullanıcı işi olan
+Aşama 4 (foto yükleme) hâlâ geçerli. 🌸
