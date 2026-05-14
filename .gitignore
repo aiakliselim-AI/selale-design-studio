@@ -59,3 +59,6 @@ temp/
 
 # ─── Yerel yedekler (her büyük değişiklik öncesi alınıyor) ───
 backups/
+
+.dev.vars*
+!.dev.vars.example
