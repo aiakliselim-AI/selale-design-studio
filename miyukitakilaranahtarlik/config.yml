@@ -21,7 +21,7 @@ collections:
   - name: drawer
     label: 1. Çekmece Menüsü
     label_singular: Çekmece Ayarı
-    description: Sol taraftan açılan hamburger menünün içeriği. Şema gerçek veri yapısı ile birebir — top_links / categories / bottom_links / whatsapp. Sadece 2 kademe: ana başlık + alt link (3. kademe yok).
+    description: 'Sol taraftan açılan hamburger menünün içeriği. Şema gerçek veri yapısı ile birebir — top_links / categories / bottom_links / whatsapp. Sadece 2 kademe: ana başlık + alt link (3. kademe yok).'
     delete: false
     editor: { preview: false }
     files:
@@ -169,7 +169,7 @@ collections:
                 options: ['Instagram', 'TikTok', 'Facebook', 'Pinterest', 'YouTube', 'X']
               - { label: Emoji İkon, name: icon, widget: string, hint: 'Örn: 📸 🎵' }
               - { label: 'URL', name: url, widget: string, pattern: ['^https?://', 'http(s):// ile başlamalı'] }
-              - { label: Aktif mi?, name: enabled, widget: boolean, default: true }
+              - { label: 'Aktif mi?', name: enabled, widget: boolean, default: true }
           - label: Üst Banner (Marquee)
             name: marquee
             widget: list
