@@ -12,13 +12,16 @@ UI strings and code comments are in Turkish. Preserve Turkish when editing user-
 
 ## Yol haritası
 
-Tamamlanan aşamalar (1, 2, 3) ve devam eden iş (Aşama 4 alt adımları) **`plan.md`** (master plan v3) içinde. Yeni oturumda her iki dosya da okunmalı.
+Tamamlanan aşamalar ve devam eden iş **`plan.md`** (master plan v7) içinde. Yeni oturumda her iki dosya da okunmalı.
 
 **Hızlı durum:**
-- Aşama 1, 2, 3 tamam (sadeleştirme + placeholder).
-- Aşama 4 alt-tamam — `loadCMSData()` zaten settings, drawer, hero, about, footer, printer, ai çekiyor.
-- Kalan iş: kategori kartları, yorumlar, özel günler henüz hardcoded; manifest workflow'ları eksik; Şeffaf Çanta sistemi yok; drawer hiyerarşisi güncellenecek.
-- Detaylı sıralı plan: `plan.md` Bölüm 9 ("Çalışma sırası").
+- Adım A–O (drawer 2-kademe, kategori CMS, yorumlar, özel günler, çanta builder, AI intent'leri, hero foto modu) + Aşama 1–5 (admin rename, mockup UI, SEO/sitemap/OG) tamam ve canlıda.
+- v7-1 iptal edildi (5–7 büyük kategori kartı yaklaşımı vitrin hissi vermedi).
+- **v7-1B tamamlandı** — anasayfa Netflix-tarzı yatay kayan kategori şeritleri canlıda; products şemasına `event_concepts` multi-select eklendi; IntersectionObserver global'e taşındı.
+- Son aktif iş: `miyukitakilaranahtarlik/config.yml` YAML parse fix (commit `663a2b7`).
+- Kalan v7 işleri: **v7-2** (Öne Çıkan Ürünler kuralı) ve **v7-3** (Çanta builder alt-kategori hiyerarşisi) — ikisi de mockup → onay aşamasında bekliyor.
+- Kullanıcı işi: Aşama 4 (Sveltia panelinden foto yükleme, özellikle `og-banner.jpg` ve 3D ürün foto'ları).
+- Detaylı plan: `plan.md` §1 (Tamamlanmış İşler) + §5B (Plan v7 — Yapılacak İşler).
 
 ## Architecture
 
