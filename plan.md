@@ -280,6 +280,45 @@ derinlik:
 
 Mockup → UX karar → onay → kod.
 
+### Aşama v7-4 — Güvenlik Denetimi
+**Branch:** Her alt adım kendi branch'i (aşağıda belirtilmiş)
+
+**Bağlam:** Mayıs 2026'da PR #3 sürecinde GitHub failed-check'li merge
+teklif etti. O an Yol B ile güvenli kapatıldı, ama branch protection
+olsaydı bu risk hiç doğmazdı. Bu aşama plan'a yazılı olmayan güvenlik
+açıklarını sistemli kapatır.
+
+**Hedef:** 6 alt adımda yapılandırma + denetim.
+Hiçbir alt adım siteyi etkilemez (kullanıcı tarafından görülmez).
+
+**Alt adımlar (sırayla, her biri ayrı branch + PR):**
+
+- **v7-4.1 — .gitignore güncelle** · Branch: `chore/v7-4-1-gitignore-yerel-dosyalar`
+  `prompt.txt` (yerel prompt çalışma alanı) ve `.claude/scheduled_tasks.lock`
+  (Claude Code lock dosyası) untracked durumda. `.gitignore`a eklenir.
+  Etki: Sıfır. Sadece git hijyeni.
+
+- **v7-4.2 — Branch protection (main)** · GitHub web arayüzü, kod değişikliği yok.
+  Kural: main'e doğrudan push yasak, PR zorunlu, failed check'li merge engelli,
+  admin bypass açık (acil müdahale için).
+
+- **v7-4.3 — GitHub 2FA + Cloudflare 2FA doğrulama** · Hesap ayarları, kod değişikliği yok.
+  GitHub Settings → Password and authentication → Two-factor authentication
+  aktif mi; aynısı Cloudflare hesabında.
+
+- **v7-4.4 — Secret scanning + Dependabot aktivasyonu** · Repo Settings → Code security.
+  GitHub otomatik secret tarama + bağımlılık güncellemesi uyarısı.
+  Public repo için ücretsiz.
+
+- **v7-4.5 — SRI hash + CSP audit** · Branch: `chore/v7-4-5-sri-csp-audit`
+  CDN script tag'lerine integrity hash eklenir; CSP denetlenir.
+
+- **v7-4.6 — Plan + dokümantasyon temizliği** · Branch: `docs/v7-4-6-plan-tutarlilik`
+  plan.md ve CLAUDE.md tutarlılığı gözden geçirilir. Konum Ankara olarak
+  tüm dokümanlarda netleştirilir.
+
+**Sıra:** v7-4.1 → v7-4.2 → v7-4.3 → v7-4.4 → v7-4.5 → v7-4.6
+
 ---
 
 ## 6. OLASI SIRADAKİ İŞLER (HENÜZ PLANLANMADI)
