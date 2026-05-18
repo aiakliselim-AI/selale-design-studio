@@ -13,6 +13,7 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 .idea/
 .claude/settings.local.json
+.claude/scheduled_tasks.lock
 *.swp
 *.swo
 *.sublime-project
@@ -56,6 +57,7 @@ temp/
 *.tmp
 *.bak
 *.old
+prompt.txt
 
 # ─── Yerel yedekler (her büyük değişiklik öncesi alınıyor) ───
 backups/
