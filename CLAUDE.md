@@ -19,7 +19,7 @@ Tamamlanan aşamalar ve devam eden iş **`plan.md`** (master plan v7) içinde. Y
 - v7-1 iptal edildi (5–7 büyük kategori kartı yaklaşımı vitrin hissi vermedi).
 - **v7-1B tamamlandı** — anasayfa Netflix-tarzı yatay kayan kategori şeritleri canlıda; products şemasına `event_concepts` multi-select eklendi; IntersectionObserver global'e taşındı.
 - Son aktif iş: `miyukitakilaranahtarlik/config.yml` YAML parse fix (commit `663a2b7`).
-- Kalan v7 işleri: **v7-2** (Öne Çıkan Ürünler kuralı) ve **v7-3** (Çanta builder alt-kategori hiyerarşisi) — ikisi de mockup → onay aşamasında bekliyor.
+- Kalan v7 işleri: v7-2 ve v7-3. v7-4 tamamlandı.
 - Kullanıcı işi: Aşama 4 (Sveltia panelinden foto yükleme, özellikle `og-banner.jpg` ve 3D ürün foto'ları).
 - Detaylı plan: `plan.md` §1 (Tamamlanmış İşler) + §5B (Plan v7 — Yapılacak İşler).
 
