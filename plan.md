@@ -5,7 +5,7 @@
 > `CLAUDE.md` teknik mimariyi anlatır; bu dosya **sıradaki işleri** ve
 > **alınan tasarım kararlarını** anlatır.
 >
-> **Son güncelleme:** 2026-05-14 (v7-1B tamamlandı + config.yml YAML parse fix).
+> **Son güncelleme:** 2026-05-18 (v7-4 Güvenlik Denetimi tamamlandı).
 > **v7 farkı:** v6'da plan kapanmıştı, ama Adım O sonrası canlıda gezerken
 > 3 bug/eksik çıktı: anasayfada kategori kartları görünmüyor (reveal
 > observer dinamik DOM'la uyumsuz), "Öne Çıkan Ürünler" mantığı belirsiz,
@@ -280,7 +280,7 @@ derinlik:
 
 Mockup → UX karar → onay → kod.
 
-### Aşama v7-4 — Güvenlik Denetimi
+### Aşama v7-4 — Güvenlik Denetimi · ✅ TAMAMLANDI
 **Branch:** Her alt adım kendi branch'i (aşağıda belirtilmiş)
 
 **Bağlam:** Mayıs 2026'da PR #3 sürecinde GitHub failed-check'li merge
@@ -293,27 +293,27 @@ Hiçbir alt adım siteyi etkilemez (kullanıcı tarafından görülmez).
 
 **Alt adımlar (sırayla, her biri ayrı branch + PR):**
 
-- **v7-4.1 — .gitignore güncelle** · Branch: `chore/v7-4-1-gitignore-yerel-dosyalar`
+- **v7-4.1 — .gitignore güncelle** · ✅ · Branch: `chore/v7-4-1-gitignore-yerel-dosyalar`
   `prompt.txt` (yerel prompt çalışma alanı) ve `.claude/scheduled_tasks.lock`
   (Claude Code lock dosyası) untracked durumda. `.gitignore`a eklenir.
   Etki: Sıfır. Sadece git hijyeni.
 
-- **v7-4.2 — Branch protection (main)** · GitHub web arayüzü, kod değişikliği yok.
+- **v7-4.2 — Branch protection (main)** · ✅ · GitHub web arayüzü, kod değişikliği yok.
   Kural: main'e doğrudan push yasak, PR zorunlu, failed check'li merge engelli,
   admin bypass açık (acil müdahale için).
 
-- **v7-4.3 — GitHub 2FA + Cloudflare 2FA doğrulama** · Hesap ayarları, kod değişikliği yok.
+- **v7-4.3 — GitHub 2FA + Cloudflare 2FA doğrulama** · ✅ · Hesap ayarları, kod değişikliği yok.
   GitHub Settings → Password and authentication → Two-factor authentication
   aktif mi; aynısı Cloudflare hesabında.
 
-- **v7-4.4 — Secret scanning + Dependabot aktivasyonu** · Repo Settings → Code security.
+- **v7-4.4 — Secret scanning + Dependabot aktivasyonu** · ✅ · Repo Settings → Code security.
   GitHub otomatik secret tarama + bağımlılık güncellemesi uyarısı.
   Public repo için ücretsiz.
 
-- **v7-4.5 — SRI hash + CSP audit** · Branch: `chore/v7-4-5-sri-csp-audit`
+- **v7-4.5 — SRI hash + CSP audit** · ✅ · Branch: `chore/v7-4-5-sri-csp-audit`
   CDN script tag'lerine integrity hash eklenir; CSP denetlenir.
 
-- **v7-4.6 — Plan + dokümantasyon temizliği** · Branch: `docs/v7-4-6-plan-tutarlilik`
+- **v7-4.6 — Plan + dokümantasyon temizliği** · ✅ · Branch: `docs/v7-4-6-plan-tutarlilik`
   plan.md ve CLAUDE.md tutarlılığı gözden geçirilir. Konum Ankara olarak
   tüm dokümanlarda netleştirilir.
 
@@ -412,7 +412,6 @@ Repo public olduğu için:
 
 ---
 
-**Durum:** Plan v7 kısmen tamam. v7-1 iptal edildi, v7-1B canlıda
-(2026-05-14). Kalan: **v7-2** (Öne Çıkan Ürünler kuralı) ve **v7-3**
-(Çanta builder alt-kategori hiyerarşisi). Ayrıca kullanıcı işi olan
-Aşama 4 (foto yükleme) hâlâ geçerli. 🌸
+**Durum:** Kalan: v7-2 ve v7-3. v7-4 Güvenlik Denetimi tamamlandı
+(2026-05-18). v7-1 iptal edildi, v7-1B canlıda (2026-05-14). Ayrıca
+kullanıcı işi olan Aşama 4 (foto yükleme) hâlâ geçerli. 🌸
