@@ -591,6 +591,22 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   .ai-panel{bottom:0;right:0;left:0;width:100%;max-width:100%;height:100%;max-height:100%;border-radius:0;}
   .ai-fab{bottom:80px;right:15px;width:54px;height:54px;font-size:1.5rem;}
 }
+
+/* ═══ ÖNE ÇIKAN ÜRÜNLER — v7-2 ═══ */
+.featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;padding:0 2rem;}
+.featured-card{background:#fff;border:0.5px solid #e5e5e5;border-radius:12px;overflow:hidden;position:relative;transition:transform 0.2s;}
+.featured-card:hover{transform:translateY(-2px);}
+.featured-card-image{aspect-ratio:1/1;background:#ecebe7;background-size:cover;background-position:center;}
+.featured-card-info{padding:10px 12px;}
+.featured-card-name{font-size:13px;color:#1a1a1a;margin-bottom:3px;}
+.featured-card-price{font-size:13px;color:#666;}
+.featured-badge{position:absolute;top:8px;left:8px;font-size:11px;padding:3px 9px;border-radius:8px;z-index:1;}
+.badge-yeni{background:#E6F1FB;color:#0C447C;}
+.badge-coksatan{background:#F4E3D0;color:#854F0B;}
+.badge-populer{background:#FBEAF0;color:#993556;}
+@media(max-width:768px){
+  .featured-grid{grid-template-columns:repeat(2,1fr);padding:0 1rem;}
+}
 </style>
 </head>
 <body>
@@ -725,6 +741,16 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <span>3D Baskı</span><span>Doğum Günü</span><span>Özel Sipariş</span><span>Hediyelik</span>
   </div>
 </div>
+
+<!-- ÖNE ÇIKAN ÜRÜNLER — v7-2 -->
+<section id="featured-products" class="section" style="display:none;">
+  <div class="section-header section-title reveal">
+    <div class="tag">✦ ÖNE ÇIKANLAR</div>
+    <h2>Yeni & <em>öne çıkanlar</em></h2>
+    <p class="section-sub">Sizin için seçtiklerimiz</p>
+  </div>
+  <div id="featured-grid" class="featured-grid"></div>
+</section>
 
 <!-- KATEGORİLER — v7-1B yatay şeritler -->
 <section class="categories" id="categories">
@@ -1794,6 +1820,7 @@ async function loadProducts(){
     // Güvenlik: id'leri tam sayı ve 1-9999 aralığında olanları kabul et
     products = data.filter(p => p && Number.isInteger(p.id) && p.id > 0 && p.id < 10000);
     renderProducts(products);
+    renderFeaturedProducts();
     if(typeof renderCategoryStrips === 'function') renderCategoryStrips(products);
     if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
     if(typeof renderPrinter === 'function' && _printerData) renderPrinter(_printerData);
@@ -1859,6 +1886,48 @@ function stripCardHtml(p, sizeClass){
     ? `<img src="${aiEscape(firstImage)}" alt="${aiEscape(p.name||'')}" loading="lazy" onerror="this.remove()">`
     : '';
   return `<button type="button" class="strip-card ${sizeClass}" onclick="openModal(${p.id})" aria-label="${aiEscape(p.name||'')}">${inner}</button>`;
+}
+
+/* ════ ÖNE ÇIKAN ÜRÜNLER — v7-2 ════ */
+function renderFeaturedProducts() {
+  const section = document.getElementById('featured-products');
+  const grid = document.getElementById('featured-grid');
+  if (!section || !grid || !products) return;
+
+  const featured = products
+    .filter(p => p.isNew === true || (p.badge && p.badge.trim().length > 0))
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  if (featured.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = '';
+  grid.innerHTML = featured.map(p => {
+    const badgeClass = p.badge === 'Yeni' ? 'badge-yeni'
+                     : p.badge === 'Çok Satan' ? 'badge-coksatan'
+                     : p.badge === 'Popüler' ? 'badge-populer'
+                     : '';
+    const badgeHtml = p.badge && p.badge.trim()
+      ? `<div class="featured-badge ${badgeClass}">${aiEscape(p.badge)}</div>`
+      : '';
+    const imageStyle = p.image
+      ? `background-image: url('${aiEscape(p.image)}');`
+      : '';
+    return `
+      <div class="featured-card">
+        ${badgeHtml}
+        <div class="featured-card-image" style="${imageStyle}"></div>
+        <div class="featured-card-info">
+          <div class="featured-card-name">${aiEscape(p.name)}</div>
+          <div class="featured-card-price">₺${aiEscape(String(p.price || ''))}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  if (window.observeRevealIn) window.observeRevealIn(grid);
 }
 
 function renderCategoryStrips(list){
