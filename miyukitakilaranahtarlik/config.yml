@@ -422,7 +422,13 @@ collections:
           - { label: 'Baby Shower', value: babyshower }
           - { label: 'Mezuniyet', value: mezuniyet }
           - { label: 'Doğum Günü', value: dogumgunu }
-      - { label: 'Rozet', name: badge, widget: string, required: false, hint: 'Yeni / Çok Satan / Popüler — boş bırakılabilir' }
+      - label: 'Rozet'
+        name: badge
+        widget: select
+        required: false
+        options: ['', 'Yeni', 'Çok Satan', 'Popüler']
+        default: ''
+        hint: 'Öne Çıkan Ürünler bölümünde gösterilecek rozet'
       - { label: 'Yeni Ürün mü?', name: isNew, widget: boolean, default: false }
       - label: 'Ürün Fotoğrafları (çoklu)'
         name: images
