@@ -5,7 +5,7 @@
 > `CLAUDE.md` teknik mimariyi anlatır; bu dosya **sıradaki işleri** ve
 > **alınan tasarım kararlarını** anlatır.
 >
-> **Son güncelleme:** 2026-05-18 (v7-4 Güvenlik Denetimi tamamlandı).
+> **Son güncelleme:** 2026-06-13 (v7-3 Çanta builder alt-kategori tamamlandı).
 > **v7 farkı:** v6'da plan kapanmıştı, ama Adım O sonrası canlıda gezerken
 > 3 bug/eksik çıktı: anasayfada kategori kartları görünmüyor (reveal
 > observer dinamik DOM'la uyumsuz), "Öne Çıkan Ürünler" mantığı belirsiz,
@@ -260,8 +260,16 @@ dikey sıralı yatay-kayan şeritler (Netflix tarzı) gelir.
 
 Mockup → onay → kod.
 
-### Aşama v7-3 — Çanta builder kategori hiyerarşisi
-**Branch:** `feat/v7-3-builder-alt-kategori`
+### Aşama v7-3 — Çanta builder kategori hiyerarşisi · ✅ TAMAMLANDI (13 Haziran 2026)
+**Branch:** `feat/v7-3-bag-builder-subcategory` (PR #9, merge edildi)
+
+**Uygulama:** Akordeon (1-A) yaklaşımı seçildi. Çanta builder Adım 2'de ana
+kategoriye tıklayınca altında alt-kategori chip şeridi (`.bb-sub-chips`)
+saf CSS `max-height`/`opacity` geçişiyle açılır. İlk chip her zaman "Tümü".
+Miyuki için 5 alt-kategori (Bileklik/Kolye/Küpe/Yüzük/Anahtarlık) `BB_CATS`
+sabitinde tanımlı; `bbAvailableSubs()` yalnızca ürünü olan alt-kategorileri
+gösterir, en az 2 alt-kategori yoksa şerit açılmaz. Filtreleme
+`bbRenderProducts()` içinde ana kategori + `activeSub` çift katmanlı.
 
 Yer: yeni çanta builder, Adım 2 sağ sütun (anasayfa değil).
 
@@ -412,6 +420,8 @@ Repo public olduğu için:
 
 ---
 
-**Durum:** Kalan: v7-2 ve v7-3. v7-4 Güvenlik Denetimi tamamlandı
-(2026-05-18). v7-1 iptal edildi, v7-1B canlıda (2026-05-14). Ayrıca
-kullanıcı işi olan Aşama 4 (foto yükleme) hâlâ geçerli. 🌸
+**Durum:** Tüm v7 Claude Code aşamaları tamamlandı. v7-2 Öne Çıkan
+Ürünler (PR #8) ve v7-3 Çanta builder alt-kategori (PR #9, 13 Haziran 2026)
+canlıda. v7-4 Güvenlik Denetimi tamamlandı (2026-05-18). v7-1 iptal edildi,
+v7-1B canlıda (2026-05-14). Geriye yalnızca kullanıcı işi olan Aşama 4
+(foto yükleme) kaldı. 🌸
