@@ -327,6 +327,49 @@ Hiçbir alt adım siteyi etkilemez (kullanıcı tarafından görülmez).
 
 **Sıra:** v7-4.1 → v7-4.2 → v7-4.3 → v7-4.4 → v7-4.5 → v7-4.6
 
+### Aşama v7-5 — Toplu ürün yükleme (~30 ürün)
+**Branch:** `feat/v7-5-toplu-urun-yukleme`
+
+Eski blogspot sitesindeki ürünlerin (~30 adet) toplu olarak `products/`
+koleksiyonuna aktarılması. Tek tek CMS girişi yerine yarı-otomatik akış.
+
+- Eski blogspot sitesinden ürün aktarımı (isim, açıklama, fiyat, kategori).
+- Google Sheets şablonu + script ile `products/*.md` markdown dosyaları üretimi
+  (YAML frontmatter şemaya uygun: `cat`, `colors`, `giftBagEligible` vb.).
+- Resimler kullanıcı tarafından manuel eşleştirilecek (Sveltia panelinden
+  veya `images/products/`'a yüklenip frontmatter'a referans).
+
+Şablon → script → markdown → manifest workflow → onay → merge.
+
+### Aşama v7-6 — Çanta builder carousel iyileştirmesi
+**Branch:** `feat/v7-6-builder-carousel`
+
+Çanta builder Adım 2'deki mevcut sabit 2-kolon grid (`bb-prod-grid`)
+yatay kaydırmalı carousel düzenine dönüşür. Alt-kategori akordeon yapısı
+(v7-3) korunur, ürün gösterimi yenilenir.
+
+- **Masaüstü:** her alt-kategori kendi yatay kaydırmalı satırında
+  (2 ürün yan yana görünür, sağa kaydırılarak diğerleri açılır).
+- **Mobil:** üstte çanta sabit (sticky), altta alt-kategoriler dikey
+  scroll'da; her alt-kategori satırı kendi içinde yatay kaydırmalı.
+- Mevcut grid düzeni carousel'a dönüşecek — saf CSS scroll-snap, JS
+  animasyon kütüphanesi yok (v7-3 deseniyle tutarlı).
+
+Mockup → UX karar → onay → kod.
+
+### Aşama v7-7 — Çanta ürün görselleri (cutout katmanlama)
+**Branch:** `feat/v7-7-cutout-katmanlama`
+
+Çanta önizlemesinde ürünlerin gerçek görsellerinin çanta fotoğrafı
+üzerine katmanlanması — seçilen ürünler çantanın içinde görünür.
+
+- Boş çanta üstten çekim (1 fotoğraf, sabit arka plan).
+- Her ürün şeffaf arka plan PNG (remove.bg ile cutout).
+- CSS `position:absolute` ile ürün görselleri çanta içine otomatik
+  yerleştirilir (seçilen ürün sayısına göre konumlama).
+
+Foto hazırlık (kullanıcı) → konumlama algoritması → onay → kod.
+
 ---
 
 ## 6. OLASI SIRADAKİ İŞLER (HENÜZ PLANLANMADI)
