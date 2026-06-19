@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: build-reviews-manifest
@@ -32,19 +33,19 @@ jobs:
       - name: Build manifest
         run: node scripts/build-reviews-manifest.mjs
 
-      - name: Commit manifest if changed
-        # NOT: commit mesaji [skip ci] icermez — Cloudflare Pages [skip ci] gorunce
-        # deploy'u atliyor, bu da data/reviews.json guncellemelerinin canli siteye
-        # yansimamasina neden oluyordu. Workflow kendini sonsuz tetiklemiyor cunku
-        # `on.push.paths` filtresi yalnizca reviews/**, scripts/** ve bu workflow
-        # dosyasinda degisiklik olunca calisiyor; data/reviews.json bu listede yok.
-        run: |
-          if [ -n "$(git status --porcelain data/reviews.json)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/reviews.json
-            git commit -m "data/reviews.json: müşteri yorumları manifesti güncellendi"
-            git push
-          else
-            echo "manifest is up to date"
-          fi
+      - name: Manifest değiştiyse PR aç ve otomatik birleştir
+        # NOT: [skip ci] kullanma — Cloudflare Pages deploy'u atlar.
+        # Doğrudan push yerine PR akışı: main-protection ruleset ile uyumlu.
+        # Loop guard: on.push.paths filtresi data/reviews.json içermiyor,
+        # bu PR merge edildiğinde workflow yeniden tetiklenmez.
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "data/reviews.json: müşteri yorumları manifesti güncellendi"
+          title: "data/reviews.json: müşteri yorumları manifesti güncellendi"
+          body: "Otomatik manifest güncellemesi — `build-reviews-manifest` workflow tarafından üretildi."
+          branch: ci/update-reviews-manifest
+          base: main
+          delete-branch: true
+          add-paths: data/reviews.json
+          auto-merge: squash
