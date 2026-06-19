@@ -105,14 +105,10 @@
   },
   {
     "id": 5,
-    "order": 5,
     "name": "Çiçek Desenli Kolye",
-    "desc": "Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.",
     "price": "₺270",
     "oldPrice": "₺320",
-    "icon": "🌸",
-    "bg": "p5",
-    "badge": "Popüler",
+    "desc": "Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.",
     "cat": [
       "miyuki",
       "kolye"
@@ -124,8 +120,13 @@
       "mor",
       "yesil"
     ],
+    "bg": "p5",
+    "badge": "Popüler",
     "isNew": false,
-    "image": ""
+    "image": "/images/products/Photo_1600696888258.jpg",
+    "order": 5,
+    "giftBagPrice": null,
+    "icon": "🌸"
   },
   {
     "id": 6,
@@ -205,14 +206,10 @@
   },
   {
     "id": 9,
-    "order": 9,
     "name": "Çiçek Şekilli Mum",
-    "desc": "El yapımı çiçek formunda dekoratif mum. Masa süsü.",
     "price": "₺220",
     "oldPrice": "",
-    "icon": "🌺",
-    "bg": "p1",
-    "badge": "Yeni",
+    "desc": "El yapımı çiçek formunda dekoratif mum. Masa süsü.",
     "cat": [
       "mum"
     ],
@@ -222,10 +219,14 @@
       "kirmizi",
       "sari"
     ],
+    "bg": "p1",
+    "badge": "Yeni",
     "isNew": true,
-    "image": "",
+    "image": "/images/products/16.jpeg",
+    "order": 9,
     "giftBagEligible": true,
-    "giftBagPrice": 85
+    "giftBagPrice": 85,
+    "icon": "🌺"
   },
   {
     "id": 10,
