@@ -1,13 +1,9 @@
 ---
 id: 9
-order: 9
 name: Çiçek Şekilli Mum
-desc: El yapımı çiçek formunda dekoratif mum. Masa süsü.
 price: ₺220
-oldPrice: ""
-icon: 🌺
-bg: p1
-badge: Yeni
+oldPrice: ''
+desc: El yapımı çiçek formunda dekoratif mum. Masa süsü.
 cat:
   - mum
 colors:
@@ -15,8 +11,12 @@ colors:
   - beyaz
   - kirmizi
   - sari
+bg: p1
+badge: Yeni
 isNew: true
-image: ""
+image: /images/products/16.jpeg
+order: 9
 giftBagEligible: true
 giftBagPrice: 85
+icon: 🌺
 ---
