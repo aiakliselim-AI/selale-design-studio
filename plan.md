@@ -327,19 +327,13 @@ Hiçbir alt adım siteyi etkilemez (kullanıcı tarafından görülmez).
 
 **Sıra:** v7-4.1 → v7-4.2 → v7-4.3 → v7-4.4 → v7-4.5 → v7-4.6
 
-### Aşama v7-5 — Toplu ürün yükleme (~30 ürün)
-**Branch:** `feat/v7-5-toplu-urun-yukleme`
+### Aşama v7-5 — Toplu ürün yükleme · ✅ TAMAMLANDI (1 Temmuz 2026)
+**Branch:** `feat/v7-5-urun-yukleme` (PR #13, merge edildi)
 
-Eski blogspot sitesindeki ürünlerin (~30 adet) toplu olarak `products/`
-koleksiyonuna aktarılması. Tek tek CMS girişi yerine yarı-otomatik akış.
-
-- Eski blogspot sitesinden ürün aktarımı (isim, açıklama, fiyat, kategori).
-- Google Sheets şablonu + script ile `products/*.md` markdown dosyaları üretimi
-  (YAML frontmatter şemaya uygun: `cat`, `colors`, `giftBagEligible` vb.).
-- Resimler kullanıcı tarafından manuel eşleştirilecek (Sveltia panelinden
-  veya `images/products/`'a yüklenip frontmatter'a referans).
-
-Şablon → script → markdown → manifest workflow → onay → merge.
+75 Miyuki takı (ID 21–95) + 27 Mum (ID 96–122) = 102 ürün `products/*.md`
+ve `images/products/` klasörlerine aktarıldı. Fiyat/açıklama alanları boş —
+Sveltia panelinden doldurulacak. Filtre çubuğu sadeleştirildi: Hepsi /
+Miyuki / Mumlar / Çanta Seti (alt kategoriler HTML yorumunda gizli, GİZLİ-v7-5 etiketiyle).
 
 ### Aşama v7-6 — Çanta builder carousel iyileştirmesi
 **Branch:** `feat/v7-6-builder-carousel`
@@ -463,8 +457,7 @@ Repo public olduğu için:
 
 ---
 
-**Durum:** Tüm v7 Claude Code aşamaları tamamlandı. v7-2 Öne Çıkan
-Ürünler (PR #8) ve v7-3 Çanta builder alt-kategori (PR #9, 13 Haziran 2026)
-canlıda. v7-4 Güvenlik Denetimi tamamlandı (2026-05-18). v7-1 iptal edildi,
-v7-1B canlıda (2026-05-14). Geriye yalnızca kullanıcı işi olan Aşama 4
-(foto yükleme) kaldı. 🌸
+**Durum:** v7-5 Toplu Ürün Yükleme tamamlandı (PR #13, 1 Temmuz 2026) —
+102 ürün canlıda. Kalan v7 işleri: v7-6 (çanta builder carousel) ve
+v7-7 (cutout katmanlama). Kullanıcı işi: Aşama 4 (Sveltia'dan fiyat/açıklama
+doldurma + foto yükleme). 🌸
