@@ -1014,7 +1014,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       <div class="modal-cat" id="modalCat"></div>
       <h4 id="modalName"></h4>
       <p id="modalDesc"></p>
-      <div class="modal-price" id="modalPrice"></div>
       <div class="modal-actions">
         <button class="modal-fav-btn" id="modalFavBtn" onclick="toggleFavFromModal()">🤍 Favorilere Ekle</button>
         <a class="btn-wa-order" id="modalWaBtn" href="#" target="_blank" rel="noopener noreferrer">
@@ -1138,7 +1137,6 @@ function renderProducts(list){
       <div class="product-info">
         ${catLabel ? `<div class="product-cat">${aiEscape(catLabel)}</div>` : ''}
         <h3>${aiEscape(p.name)}</h3>
-        <div class="product-price">${aiEscape(p.price)}${p.oldPrice?`<small>${aiEscape(p.oldPrice)}</small>`:''}</div>
       </div>
     </div>`;
   }).join('');
@@ -1233,7 +1231,6 @@ function openModal(id){
   currentProduct = products.find(p => p.id === id); if(!currentProduct) return;
   document.getElementById('modalName').textContent  = currentProduct.name;
   document.getElementById('modalDesc').textContent  = currentProduct.desc;
-  document.getElementById('modalPrice').textContent = currentProduct.price;
   const catRaw = Array.isArray(currentProduct.cat) ? currentProduct.cat[0] : currentProduct.cat;
   document.getElementById('modalCat').textContent = catRaw ? String(catRaw).replace(/-/g,' ') : '';
   galleryImages = getProductImages(currentProduct);
@@ -1277,7 +1274,6 @@ function renderFavPage(){
       </div>
       <div class="fav-info">
         <h4>${aiEscape(p.name)}</h4>
-        <div class="fav-price">${aiEscape(p.price)}</div>
         <a class="fav-wa" href="https://wa.me/${WA_NUMBER}?text=${waMsg}" target="_blank" rel="noopener noreferrer">📱 Sipariş Ver</a>
       </div>
     </div>`;
@@ -1927,7 +1923,6 @@ function renderFeaturedProducts() {
         <div class="featured-card-image" style="${imageStyle}"></div>
         <div class="featured-card-info">
           <div class="featured-card-name">${aiEscape(p.name)}</div>
-          <div class="featured-card-price">₺${aiEscape(String(p.price || ''))}</div>
         </div>
       </div>
     `;
@@ -2788,13 +2783,11 @@ function renderPrinter(d){
     const items = ids.map(id => products.find(p => p && p.id === id)).filter(Boolean);
     readyGrid.innerHTML = items.map(p => {
       const name = aiEscape(p.name || '');
-      const price = aiEscape(p.price || 'Fiyat sor');
       const waMsg = jsArg(`${p.name || ''} için 3D baskı siparişi vermek istiyorum.`);
       return `<div class="printer-ready-card" onclick="openWA('${waMsg}')">
         <div class="pr-img">${imgContent(p)}</div>
         <div class="pr-info">
           <h4>${name}</h4>
-          <div class="pr-price">${price}</div>
           <button type="button" class="pr-btn" onclick="event.stopPropagation();openWA('${waMsg}')">Sipariş Ver</button>
         </div>
       </div>`;
