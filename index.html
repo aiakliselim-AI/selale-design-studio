@@ -56,6 +56,9 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark);ov
 .drawer-link:hover,.drawer-link.active{background:var(--warm);color:var(--caramel);}
 .drawer-link .dl-arrow{margin-left:auto;color:var(--muted);font-size:.7rem;}
 .drawer-link .dl-badge{margin-left:auto;background:var(--caramel);color:#fff;border-radius:50px;font-size:.68rem;padding:.18rem .5rem;font-weight:500;min-width:20px;text-align:center;}
+.drawer-link-disabled{opacity:.45;pointer-events:none;cursor:default;}
+.drawer-link-disabled:hover{background:transparent;color:var(--dark);}
+.drawer-link-disabled .dl-badge{background:var(--muted);}
 .drawer-divider{height:1px;background:rgba(200,149,108,.15);margin:.4rem 1.6rem;}
 .drawer-footer{padding:1.2rem 1.6rem 1.6rem;border-top:1px solid rgba(200,149,108,.2);margin-top:.5rem;}
 .drawer-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;background:transparent;color:var(--text);border:1.5px solid var(--text);border-radius:4px;padding:.9rem 1.2rem;width:100%;cursor:pointer;font-size:.78rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;font-family:'Inter',sans-serif;transition:background .2s,color .2s;text-decoration:none;}
@@ -634,29 +637,20 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 
   <!-- Takı -->
   <div class="drawer-section-label">Miyuki Takı & Aksesuar</div>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('bileklik',null);closeDrawer()">Miyuki Bileklik</button>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('kolye',null);closeDrawer()">Miyuki Kolye</button>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('kupe',null);closeDrawer()">Miyuki Küpe</button>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('yuzuk',null);closeDrawer()">Miyuki Yüzük</button>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('anahtarlik',null);closeDrawer()">Miyuki Anahtarlık</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('miyuki',null);closeDrawer()">Miyuki Takılar</button>
 
   <!-- Ev -->
   <div class="drawer-section-label">Ev & Dekor</div>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('mum',null);closeDrawer()">El Yapımı Mumlar</button>
+  <button class="drawer-link" onclick="goTo('products');filterProducts('mum',null);closeDrawer()">Mumlar</button>
   <button class="drawer-link" onclick="goTo('products');filterProducts('susleme',null);closeDrawer()">Süsleme Ürünleri</button>
 
-  <!-- 3D -->
+  <!-- 3D — v7-8: geçici pasif, Faz sonrası geri açılabilir -->
   <div class="drawer-section-label">3D Baskı</div>
-  <button class="drawer-link" onclick="goTo('printer-section');closeDrawer()">3D Baskı Ürünleri</button>
-  <button class="drawer-link" onclick="goTo('products');filterProducts('3d',null);closeDrawer()">Tüm 3D Ürünler</button>
+  <button class="drawer-link drawer-link-disabled" disabled aria-disabled="true">3D Baskı Ürünleri<span class="dl-badge">Yakında</span></button>
 
-  <!-- Özel Günler -->
+  <!-- Özel Günler — v7-8: geçici pasif, Faz sonrası geri açılabilir -->
   <div class="drawer-section-label">Özel Gün Konseptleri</div>
-  <button class="drawer-link" onclick="goTo('events-section');setEventTab('dugun');closeDrawer()">Düğün Konsepti</button>
-  <button class="drawer-link" onclick="goTo('events-section');setEventTab('nishan');closeDrawer()">Nişan Konsepti</button>
-  <button class="drawer-link" onclick="goTo('events-section');setEventTab('dogumgunu');closeDrawer()">Doğum Günü</button>
-  <button class="drawer-link" onclick="goTo('events-section');setEventTab('babyshower');closeDrawer()">Baby Shower</button>
-  <button class="drawer-link" onclick="goTo('events-section');setEventTab('mezuniyet');closeDrawer()">Mezuniyet</button>
+  <button class="drawer-link drawer-link-disabled" disabled aria-disabled="true">Özel Gün Konseptleri<span class="dl-badge">Yakında</span></button>
   </div>
 
   <div class="drawer-footer">
@@ -828,7 +822,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 <section class="products" id="products">
   <div class="section-title reveal">
     <div class="tag">✦ Koleksiyon</div>
-    <h2>Öne Çıkan <em>Ürünler</em></h2>
+    <h2>Tüm <em>Ürünler</em></h2>
   </div>
   <div class="filter-bar">
     <button class="filter-btn active" onclick="filterProducts('hepsi',this)">Hepsi</button>
@@ -849,7 +843,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 </section>
 
 <!-- ÖZEL GÜN KONSEPTLERİ -->
-<section class="events-section" id="events-section">
+<section class="events-section" id="events-section" style="display:none;">
   <div class="section-title reveal">
     <div class="tag">✦ Özel Gün Konseptleri</div>
     <h2>Hangi <em>güne</em> hazırlanıyorsunuz?</h2>
@@ -859,7 +853,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
 </section>
 
 <!-- 3D BASKI -->
-<section class="printer-section" id="printer-section">
+<section class="printer-section" id="printer-section" style="display:none;">
   <div class="section-title reveal">
     <div class="tag">✦ 3D Baskı</div>
     <h2>Hayal ettiğinizi <em>basıyoruz</em></h2>
@@ -1865,6 +1859,7 @@ const STRIP_DEFS = [
     match:p => Array.isArray(p.cat) && p.cat.some(c => ['miyuki','bileklik','kolye','kupe','yuzuk'].includes(c)) },
   { key:'mum',    label:'El Yapımı Mumlar', size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => ['mum','koku','parfum'].includes(c)) },
+  /* v7-8: geçici devre dışı, Faz sonrası geri açılabilir
   { divider: 'Özel Gün Konseptleri' },
   { key:'nishan',     label:'Nişan',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('nishan') },
   { key:'dugun',      label:'Düğün',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dugun') },
@@ -1873,6 +1868,7 @@ const STRIP_DEFS = [
   { key:'dogumgunu',  label:'Doğum Günü',  size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dogumgunu') },
   { key:'3d',         label:'3D Baskı',    size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => c === '3d' || String(c).startsWith('3d-')) },
+  */
 ];
 // Boş şerit ne kadar placeholder kare gösterir — dolu şeritlerdeki "minimum 12"
 // floor'u ile birebir uyumlu (Math.max(3, ceil(12/picked.length))*picked.length >= 12).
@@ -2738,6 +2734,10 @@ function renderDrawerItem(item, depth, key){
     ? ` <span class="drawer-badge">${aiEscape(item.badge)}</span>` : '';
   const favBadge = item.show_badge
     ? ` <span class="dl-badge" id="drawerFavCount">0</span>` : '';
+
+  if(item.disabled){
+    return `<button class="drawer-link drawer-link-disabled" disabled aria-disabled="true"${indent}>${iconHtml}${aiEscape(item.label||'')}${badge}</button>`;
+  }
 
   // 2-kademe sinir: sadece 1. seviyede accordion kabul edilir (3. kademe kapali)
   if(depth === 1 && item.expandable && Array.isArray(item.children) && item.children.length){
