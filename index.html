@@ -959,38 +959,38 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       <div class="logo">Şelale <span>Design Studio</span></div>
       <p>El emeği, özen ve yaratıcılıkla üretilmiş ürünler. Her parça bir hikâye anlatır.</p>
       <div class="footer-socials">
-        <button class="social-btn" title="Instagram">📸</button>
-        <button class="social-btn" title="WhatsApp">📱</button>
-        <button class="social-btn" title="TikTok">🎵</button>
+        <a class="social-btn" title="Instagram" href="https://instagram.com/selale_miyuki/" target="_blank" rel="noopener noreferrer">📸</a>
+        <a class="social-btn" title="WhatsApp" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">📱</a>
+        <a class="social-btn" title="TikTok" href="https://tiktok.com/" target="_blank" rel="noopener noreferrer">🎵</a>
       </div>
     </div>
     <div class="footer-col">
       <h4>Takı</h4>
       <ul>
-        <li><a onclick="goTo('products');filterProducts('bileklik',null)">Miyuki Bileklik</a></li>
-        <li><a onclick="goTo('products');filterProducts('kolye',null)">Miyuki Kolye</a></li>
-        <li><a onclick="goTo('products');filterProducts('kupe',null)">Küpe</a></li>
-        <li><a onclick="goTo('products');filterProducts('yuzuk',null)">Yüzük</a></li>
-        <li><a onclick="goTo('products');filterProducts('anahtarlik',null)">Anahtarlık</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Miyuki Bileklik</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Miyuki Kolye</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Küpe</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Yüzük</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Anahtarlık</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Özel Günler</h4>
       <ul>
-        <li><a onclick="goTo('events-section');setEventTab('nishan')">Nişan Konsepti</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('dugun')">Düğün Konsepti</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('dogumgunu')">Doğum Günü</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('babyshower')">Baby Shower</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('mezuniyet')">Mezuniyet</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Nişan Konsepti</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Düğün Konsepti</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Doğum Günü</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Baby Shower</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Mezuniyet</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Bilgi</h4>
       <ul>
-        <li><a onclick="goTo('about')">Hakkımızda</a></li>
-        <li><a onclick="goTo('products');filterProducts('3d',null)">3D Baskı</a></li>
-        <li><a>Kargo & İade</a></li>
-        <li><a>Özel Sipariş</a></li>
+        <li><a onclick="showComingSoon('Yakında hizmetinizde')">Hakkımızda</a></li>
+        <li><a onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">3D Baskı</a></li>
+        <li><a onclick="showComingSoon('Yakında hizmetinizde')">Kargo & İade</a></li>
+        <li><a onclick="showComingSoon('Yakında hizmetinizde')">Özel Sipariş</a></li>
         <li><a class="wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">İletişim</a></li>
       </ul>
     </div>
@@ -2852,6 +2852,7 @@ function renderFooter(d){
           case 'event':  return `<li><a onclick="goTo('events-section');setEventTab('${jsArg(l.action_value||'')}')">${lbl}</a></li>`;
           case 'url':    return `<li><a href="${attrEsc(l.action_value||'#')}" target="_blank" rel="noopener noreferrer">${lbl}</a></li>`;
           case 'whatsapp': return `<li><a href="https://wa.me/${attrEsc(WA_NUMBER)}" target="_blank" rel="noopener noreferrer">${lbl}</a></li>`;
+          case 'soon':   return `<li><a onclick="showComingSoon('${jsArg(l.soon_message||'Yakında hizmetinizde')}')">${lbl}</a></li>`;
           case 'none':   return `<li><a>${lbl}</a></li>`;
           default:       return `<li><a>${lbl}</a></li>`;
         }
