@@ -1340,6 +1340,11 @@ function showToast(icon,msg){
   document.getElementById('toastMsg').textContent=msg;
   t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800);
 }
+/* v7-8 Faz 2: pasif kategori/bölüm/link tıklamaları için tek merkezi mesaj.
+   showToast textContent kullanır (innerHTML değil), bu yüzden ek escape gerekmez. */
+function showComingSoon(text){
+  showToast('⏳', text);
+}
 
 /* ════ NAV SCROLL ════ */
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
