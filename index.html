@@ -1147,6 +1147,7 @@ function renderProducts(list){
 }
 
 function filterProducts(cat, btn){
+  if(!btn) btn = document.querySelector(`.filter-btn[onclick*="filterProducts('${cat}'"]`);
   if(btn){ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
   const f = cat==='hepsi' ? products
     : cat==='yeni'        ? products.filter(p=>p.isNew)
