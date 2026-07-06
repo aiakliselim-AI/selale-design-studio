@@ -1295,7 +1295,7 @@ function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
 /* ════ EVENT TABS (5.6 — kart scroll + flash) ════ */
 function setEventTab(tab){
   // Eski tab arayüzü 5.6'da 5 dikey karta dönüştü; bu fonksiyon ilgili karta scroll yapar.
-  // Drawer, footer ve hero CTA linkleri hâlâ setEventTab(slug) çağırıyor.
+  // v7-8 Faz 2: drawer/footer artık setEventTab çağırmıyor (events-section pasif); fonksiyon altyapı olarak kalıyor.
   if(!tab) return;
   const card = document.getElementById('event-card-' + tab);
   if(!card) return;
@@ -1595,16 +1595,10 @@ function aiShowMatches(matches, intent){
   // 3. AI paneli otomatik küçült (eylem tamamlandı — sayfa görünür olsun)
   closeAIPanel();
 
-  // 4. 3D ürünleri varsa printer-section'a, değilse products bölümüne kay
-  const hasOnly3D = matches.length && matches.every(p=>{
-    const c = Array.isArray(p.cat)?p.cat:[p.cat];
-    return c.includes('3d');
-  });
-  const targetId = hasOnly3D ? 'printer-section' : 'products';
-
-  // 5. Smooth scroll — panel kapanma animasyonundan (.28s) sonra başlat
+  // 4. v7-8 Faz 2: printer-section pasif/gizli, eşleşen ürünler her zaman
+  //    products grid'inde gösterildiği için oraya kaydır (3D dahil).
   setTimeout(()=>{
-    const target = document.getElementById(targetId);
+    const target = document.getElementById('products');
     if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
   }, 320);
 
