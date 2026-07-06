@@ -1865,6 +1865,7 @@ const STRIP_DEFS = [
     match:p => Array.isArray(p.cat) && p.cat.some(c => ['miyuki','bileklik','kolye','kupe','yuzuk'].includes(c)) },
   { key:'mum',    label:'El Yapımı Mumlar', size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => ['mum','koku','parfum'].includes(c)) },
+  /* v7-8: geçici devre dışı, Faz sonrası geri açılabilir
   { divider: 'Özel Gün Konseptleri' },
   { key:'nishan',     label:'Nişan',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('nishan') },
   { key:'dugun',      label:'Düğün',       size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dugun') },
@@ -1873,6 +1874,7 @@ const STRIP_DEFS = [
   { key:'dogumgunu',  label:'Doğum Günü',  size:'small', match:p => Array.isArray(p.event_concepts) && p.event_concepts.includes('dogumgunu') },
   { key:'3d',         label:'3D Baskı',    size:'large',
     match:p => Array.isArray(p.cat) && p.cat.some(c => c === '3d' || String(c).startsWith('3d-')) },
+  */
 ];
 // Boş şerit ne kadar placeholder kare gösterir — dolu şeritlerdeki "minimum 12"
 // floor'u ile birebir uyumlu (Math.max(3, ceil(12/picked.length))*picked.length >= 12).
