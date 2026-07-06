@@ -25,51 +25,13 @@ categories_label: Kategoriler
 categories:
   - label: Miyuki Takılar
     icon: 📿
-    expandable: true
+    action: { type: filter, target: miyuki }
     order: 1
-    children:
-      - label: Bileklik
-        icon: 📿
-        action: { type: filter, target: bileklik }
-        order: 1
-      - label: Kolye
-        icon: 💎
-        action: { type: filter, target: kolye }
-        order: 2
-      - label: Küpe
-        icon: ✨
-        action: { type: filter, target: kupe }
-        order: 3
-      - label: Yüzük
-        icon: 💍
-        action: { type: filter, target: yuzuk }
-        order: 4
-      - label: Anahtarlık
-        icon: 🔑
-        action: { type: filter, target: anahtarlik }
-        order: 5
 
-  - label: El Yapımı Mumlar
+  - label: Mumlar
     icon: 🕯️
-    expandable: true
+    action: { type: filter, target: mum }
     order: 2
-    children:
-      - label: Şekilli Mumlar
-        icon: 🌸
-        action: { type: filter, target: mum-sekilli }
-        order: 1
-      - label: Kokulu Mumlar
-        icon: 🌿
-        action: { type: filter, target: mum-kokulu }
-        order: 2
-      - label: Mum Setleri
-        icon: 🎁
-        action: { type: filter, target: mum-set }
-        order: 3
-      - label: Dekoratif / Özel
-        icon: ✨
-        action: { type: filter, target: mum-dekoratif }
-        order: 4
 
   - label: Koku & Parfüm
     icon: 🌷
@@ -93,33 +55,14 @@ categories:
 
   - label: Özel Gün Konseptleri
     icon: 🎉
-    expandable: true
+    disabled: true
+    badge: Yakında
     order: 5
-    children:
-      - label: Nişan
-        icon: 💍
-        action: { type: event, tab: nishan }
-        order: 1
-      - label: Düğün
-        icon: 💒
-        action: { type: event, tab: dugun }
-        order: 2
-      - label: Doğum Günü
-        icon: 🎂
-        action: { type: event, tab: dogumgunu }
-        order: 3
-      - label: Baby Shower
-        icon: 👶
-        action: { type: event, tab: babyshower }
-        order: 4
-      - label: Mezuniyet
-        icon: 🎓
-        action: { type: event, tab: mezuniyet }
-        order: 5
 
   - label: 3D Baskı Ürünler
     icon: 🖨️
-    action: { type: scroll, target: printer-section }
+    disabled: true
+    badge: Yakında
     order: 6
 
 bottom_links:
