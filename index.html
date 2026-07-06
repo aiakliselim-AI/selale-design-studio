@@ -2085,11 +2085,9 @@ function renderEvents(list){
   grid.innerHTML = visible.map((e, i) => {
     const num  = String(i+1).padStart(2, '0');
     const slug = aiEscape(e.slug || '');
-    const slugArg = jsArg(e.slug || '');
-    const wa   = jsArg(e.wa_message || '');
     const hasPreset = !!e.gift_bag_preset;
     const gbCta = hasPreset
-      ? `<button type="button" class="ev-gb-cta" onclick="openGiftbagFromEvent('${slugArg}')" aria-label="Bu güne özel çanta seti hazırla">
+      ? `<button type="button" class="ev-gb-cta" onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')" aria-label="Bu güne özel çanta seti hazırla">
           <span class="gb-cta-icon">🎁</span>
           <span class="gb-cta-text">Bu güne özel <strong>hediye paketi</strong> hazırla</span>
           <span class="gb-cta-arrow">→</span>
@@ -2101,7 +2099,7 @@ function renderEvents(list){
       <h3>${aiEscape(e.title_top||'')}<em>${aiEscape(e.title_emphasis||'')}</em></h3>
       <p>${aiEscape(e.description||'')}</p>
       <div class="ev-price"><span class="from">${aiEscape(e.price_label||'Fiyat başlangıcı')}</span><span class="amount">${aiEscape(e.price_amount||'')}</span></div>
-      <button class="btn-event" onclick="openWA('${wa}')">WhatsApp'tan Sor</button>
+      <button class="btn-event" onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">WhatsApp'tan Sor</button>
       ${gbCta}
     </div>`;
   }).join('');
