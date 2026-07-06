@@ -205,6 +205,8 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .filter-bar{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;}
 .filter-btn{border:1.5px solid var(--blush);background:transparent;color:var(--muted);border-radius:50px;padding:.45rem 1.2rem;font-size:.78rem;letter-spacing:.8px;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif;}
 .filter-btn.active,.filter-btn:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
+.filter-btn-soon{opacity:.45;}
+.filter-btn-soon:hover{background:transparent;border-color:var(--blush);color:var(--muted);}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.8rem;}
 .product-card{background:#fff;border-radius:4px;overflow:hidden;transition:transform .3s,box-shadow .3s;border:1px solid var(--line);position:relative;cursor:pointer;}
 .product-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.08);}
@@ -828,14 +830,15 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <button class="filter-btn active" onclick="filterProducts('hepsi',this)">Hepsi</button>
     <button class="filter-btn" onclick="filterProducts('miyuki',this)">📿 Miyuki</button>
     <button class="filter-btn" onclick="filterProducts('mum',this)">🕯️ Mumlar</button>
-    <button class="filter-btn" onclick="filterProducts('seffaf-canta',this)">🛍️ Çanta Seti</button>
-    <!-- GİZLİ-v7-5: alt kategoriler — ileride açılacak
-    <button class="filter-btn" onclick="filterProducts('bileklik',this)">〰️ Bileklik</button>
-    <button class="filter-btn" onclick="filterProducts('kolye',this)">💎 Kolye</button>
-    <button class="filter-btn" onclick="filterProducts('kupe',this)">✨ Küpe</button>
-    <button class="filter-btn" onclick="filterProducts('yuzuk',this)">💍 Yüzük</button>
-    <button class="filter-btn" onclick="filterProducts('anahtarlik',this)">🔑 Anahtarlık</button>
-    <button class="filter-btn" onclick="filterProducts('3d',this)">🖨️ 3D Baskı</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">〰️ Bileklik</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">💎 Kolye</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">✨ Küpe</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">💍 Yüzük</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🔑 Anahtarlık</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🖨️ 3D Baskı</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🎉 Özel Gün</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🛍️ Çanta Setleri</button>
+    <!-- GİZLİ-v7-5: yeni ürün filtresi — ileride açılacak
     <button class="filter-btn" onclick="filterProducts('yeni',this)">🆕 Yeni</button>
     -->
   </div>
@@ -869,48 +872,9 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <p class="printer-custom-intro" id="printerCustomIntro"></p>
     <div class="printer-custom-grid" id="printerCustomGrid"></div>
     <div class="printer-cta-wrap">
-      <button type="button" class="btn-wa-printer" id="printerWaCta" onclick="openWA('3D baskı hakkında detaylı bilgi almak istiyorum.')">WhatsApp'tan Detay Sor</button>
+      <button type="button" class="btn-wa-printer" id="printerWaCta" onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">WhatsApp'tan Detay Sor</button>
     </div>
   </div>
-</section>
-
-<!-- HAKKIMIZDA (5.7 — düz görsel + 3 istatistik) -->
-<section class="about" id="about">
-  <div class="about-visual reveal">
-    <div class="about-main">
-      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
-    </div>
-    <div class="about-stats">
-      <div class="about-stat"><strong>500+</strong><span>Mutlu Müşteri</span></div>
-      <div class="about-stat"><strong>3 Yıl</strong><span>Deneyim</span></div>
-      <div class="about-stat"><strong>%100</strong><span>El Yapımı</span></div>
-    </div>
-  </div>
-  <div class="about-text reveal">
-    <div class="tag">✦ Hikayemiz</div>
-    <h2>Sevgiyle yapılan her şeyin <em>farkı vardır.</em></h2>
-    <p>Küçük bir atölyeden doğan büyük bir tutku. Her ürünümüz sabırla, özenle ve gerçek el emeğiyle hazırlanır.</p>
-    <p>Takıdan muma, özel gün konseptinden 3D baskıya — her kategoride aynı özen, aynı sevgi.</p>
-    <div class="about-features">
-      <div class="about-feature"><span>💎</span> %100 El Yapımı, Seri Üretim Yok</div>
-      <div class="about-feature"><span>🎨</span> Özel Renk & Kişiselleştirme</div>
-      <div class="about-feature"><span>🎁</span> Özenli Hediye Paketleme</div>
-      <div class="about-feature"><span>🚀</span> Hızlı Kargo, Güvenli Teslimat</div>
-      <div class="about-feature"><span>🖨️</span> Profesyonel 3D Baskı Hizmeti</div>
-    </div>
-    <a class="btn-wa-order wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
-      📱 WhatsApp'tan Sipariş / Soru
-    </a>
-  </div>
-</section>
-
-<!-- YORUMLAR -->
-<section class="testimonials reveal" id="testimonials">
-  <div class="section-title">
-    <div class="tag">✦ Müşteri Yorumları</div>
-    <h2>Onlar ne <em>dedi?</em></h2>
-  </div>
-  <div class="review-grid" id="reviewGrid"></div>
 </section>
 
 <!-- INSTAGRAM (5.7 — 6 kare placeholder; gerçek embed sonra) -->
@@ -949,6 +913,45 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
   <a class="btn-insta" href="https://www.instagram.com/selale_miyuki" target="_blank" rel="noopener noreferrer">Instagram'da Takip Et</a>
 </section>
 
+<!-- HAKKIMIZDA (5.7 — düz görsel + 3 istatistik) — v7-8 Faz 2: Instagram altına taşındı, geçici gizli -->
+<section class="about" id="about" style="display:none;">
+  <div class="about-visual reveal">
+    <div class="about-main">
+      <div class="product-placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2.5h8L18 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></div>
+    </div>
+    <div class="about-stats">
+      <div class="about-stat"><strong>500+</strong><span>Mutlu Müşteri</span></div>
+      <div class="about-stat"><strong>3 Yıl</strong><span>Deneyim</span></div>
+      <div class="about-stat"><strong>%100</strong><span>El Yapımı</span></div>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="tag">✦ Hikayemiz</div>
+    <h2>Sevgiyle yapılan her şeyin <em>farkı vardır.</em></h2>
+    <p>Küçük bir atölyeden doğan büyük bir tutku. Her ürünümüz sabırla, özenle ve gerçek el emeğiyle hazırlanır.</p>
+    <p>Takıdan muma, özel gün konseptinden 3D baskıya — her kategoride aynı özen, aynı sevgi.</p>
+    <div class="about-features">
+      <div class="about-feature"><span>💎</span> %100 El Yapımı, Seri Üretim Yok</div>
+      <div class="about-feature"><span>🎨</span> Özel Renk & Kişiselleştirme</div>
+      <div class="about-feature"><span>🎁</span> Özenli Hediye Paketleme</div>
+      <div class="about-feature"><span>🚀</span> Hızlı Kargo, Güvenli Teslimat</div>
+      <div class="about-feature"><span>🖨️</span> Profesyonel 3D Baskı Hizmeti</div>
+    </div>
+    <a class="btn-wa-order wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">
+      📱 WhatsApp'tan Sipariş / Soru
+    </a>
+  </div>
+</section>
+
+<!-- YORUMLAR — v7-8 Faz 2: Hikayemiz altında, geçici gizli -->
+<section class="testimonials reveal" id="testimonials" style="display:none;">
+  <div class="section-title">
+    <div class="tag">✦ Müşteri Yorumları</div>
+    <h2>Onlar ne <em>dedi?</em></h2>
+  </div>
+  <div class="review-grid" id="reviewGrid"></div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -956,38 +959,38 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       <div class="logo">Şelale <span>Design Studio</span></div>
       <p>El emeği, özen ve yaratıcılıkla üretilmiş ürünler. Her parça bir hikâye anlatır.</p>
       <div class="footer-socials">
-        <button class="social-btn" title="Instagram">📸</button>
-        <button class="social-btn" title="WhatsApp">📱</button>
-        <button class="social-btn" title="TikTok">🎵</button>
+        <a class="social-btn" title="Instagram" href="https://instagram.com/selale_miyuki/" target="_blank" rel="noopener noreferrer">📸</a>
+        <a class="social-btn" title="WhatsApp" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">📱</a>
+        <a class="social-btn" title="TikTok" href="https://tiktok.com/" target="_blank" rel="noopener noreferrer">🎵</a>
       </div>
     </div>
     <div class="footer-col">
       <h4>Takı</h4>
       <ul>
-        <li><a onclick="goTo('products');filterProducts('bileklik',null)">Miyuki Bileklik</a></li>
-        <li><a onclick="goTo('products');filterProducts('kolye',null)">Miyuki Kolye</a></li>
-        <li><a onclick="goTo('products');filterProducts('kupe',null)">Küpe</a></li>
-        <li><a onclick="goTo('products');filterProducts('yuzuk',null)">Yüzük</a></li>
-        <li><a onclick="goTo('products');filterProducts('anahtarlik',null)">Anahtarlık</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Miyuki Bileklik</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Miyuki Kolye</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Küpe</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Yüzük</a></li>
+        <li><a onclick="showComingSoon('Bu kategori yakında hizmetinizde')">Anahtarlık</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Özel Günler</h4>
       <ul>
-        <li><a onclick="goTo('events-section');setEventTab('nishan')">Nişan Konsepti</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('dugun')">Düğün Konsepti</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('dogumgunu')">Doğum Günü</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('babyshower')">Baby Shower</a></li>
-        <li><a onclick="goTo('events-section');setEventTab('mezuniyet')">Mezuniyet</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Nişan Konsepti</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Düğün Konsepti</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Doğum Günü</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Baby Shower</a></li>
+        <li><a onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">Mezuniyet</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Bilgi</h4>
       <ul>
-        <li><a onclick="goTo('about')">Hakkımızda</a></li>
-        <li><a onclick="goTo('products');filterProducts('3d',null)">3D Baskı</a></li>
-        <li><a>Kargo & İade</a></li>
-        <li><a>Özel Sipariş</a></li>
+        <li><a onclick="showComingSoon('Yakında hizmetinizde')">Hakkımızda</a></li>
+        <li><a onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">3D Baskı</a></li>
+        <li><a onclick="showComingSoon('Yakında hizmetinizde')">Kargo & İade</a></li>
+        <li><a onclick="showComingSoon('Yakında hizmetinizde')">Özel Sipariş</a></li>
         <li><a class="wa-dynamic" href="https://wa.me/905330944969" target="_blank" rel="noopener noreferrer">İletişim</a></li>
       </ul>
     </div>
@@ -1014,7 +1017,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       <div class="modal-cat" id="modalCat"></div>
       <h4 id="modalName"></h4>
       <p id="modalDesc"></p>
-      <div class="modal-price" id="modalPrice"></div>
       <div class="modal-actions">
         <button class="modal-fav-btn" id="modalFavBtn" onclick="toggleFavFromModal()">🤍 Favorilere Ekle</button>
         <a class="btn-wa-order" id="modalWaBtn" href="#" target="_blank" rel="noopener noreferrer">
@@ -1138,7 +1140,6 @@ function renderProducts(list){
       <div class="product-info">
         ${catLabel ? `<div class="product-cat">${aiEscape(catLabel)}</div>` : ''}
         <h3>${aiEscape(p.name)}</h3>
-        <div class="product-price">${aiEscape(p.price)}${p.oldPrice?`<small>${aiEscape(p.oldPrice)}</small>`:''}</div>
       </div>
     </div>`;
   }).join('');
@@ -1146,6 +1147,7 @@ function renderProducts(list){
 }
 
 function filterProducts(cat, btn){
+  if(!btn) btn = document.querySelector(`.filter-btn[onclick*="filterProducts('${cat}'"]`);
   if(btn){ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
   const f = cat==='hepsi' ? products
     : cat==='yeni'        ? products.filter(p=>p.isNew)
@@ -1233,7 +1235,6 @@ function openModal(id){
   currentProduct = products.find(p => p.id === id); if(!currentProduct) return;
   document.getElementById('modalName').textContent  = currentProduct.name;
   document.getElementById('modalDesc').textContent  = currentProduct.desc;
-  document.getElementById('modalPrice').textContent = currentProduct.price;
   const catRaw = Array.isArray(currentProduct.cat) ? currentProduct.cat[0] : currentProduct.cat;
   document.getElementById('modalCat').textContent = catRaw ? String(catRaw).replace(/-/g,' ') : '';
   galleryImages = getProductImages(currentProduct);
@@ -1277,7 +1278,6 @@ function renderFavPage(){
       </div>
       <div class="fav-info">
         <h4>${aiEscape(p.name)}</h4>
-        <div class="fav-price">${aiEscape(p.price)}</div>
         <a class="fav-wa" href="https://wa.me/${WA_NUMBER}?text=${waMsg}" target="_blank" rel="noopener noreferrer">📱 Sipariş Ver</a>
       </div>
     </div>`;
@@ -1295,7 +1295,7 @@ function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
 /* ════ EVENT TABS (5.6 — kart scroll + flash) ════ */
 function setEventTab(tab){
   // Eski tab arayüzü 5.6'da 5 dikey karta dönüştü; bu fonksiyon ilgili karta scroll yapar.
-  // Drawer, footer ve hero CTA linkleri hâlâ setEventTab(slug) çağırıyor.
+  // v7-8 Faz 2: drawer/footer artık setEventTab çağırmıyor (events-section pasif); fonksiyon altyapı olarak kalıyor.
   if(!tab) return;
   const card = document.getElementById('event-card-' + tab);
   if(!card) return;
@@ -1343,6 +1343,11 @@ function showToast(icon,msg){
   document.getElementById('toastIcon').textContent=icon;
   document.getElementById('toastMsg').textContent=msg;
   t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800);
+}
+/* v7-8 Faz 2: pasif kategori/bölüm/link tıklamaları için tek merkezi mesaj.
+   showToast textContent kullanır (innerHTML değil), bu yüzden ek escape gerekmez. */
+function showComingSoon(text){
+  showToast('⏳', text);
 }
 
 /* ════ NAV SCROLL ════ */
@@ -1590,16 +1595,10 @@ function aiShowMatches(matches, intent){
   // 3. AI paneli otomatik küçült (eylem tamamlandı — sayfa görünür olsun)
   closeAIPanel();
 
-  // 4. 3D ürünleri varsa printer-section'a, değilse products bölümüne kay
-  const hasOnly3D = matches.length && matches.every(p=>{
-    const c = Array.isArray(p.cat)?p.cat:[p.cat];
-    return c.includes('3d');
-  });
-  const targetId = hasOnly3D ? 'printer-section' : 'products';
-
-  // 5. Smooth scroll — panel kapanma animasyonundan (.28s) sonra başlat
+  // 4. v7-8 Faz 2: printer-section pasif/gizli, eşleşen ürünler her zaman
+  //    products grid'inde gösterildiği için oraya kaydır (3D dahil).
   setTimeout(()=>{
-    const target = document.getElementById(targetId);
+    const target = document.getElementById('products');
     if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
   }, 320);
 
@@ -1927,7 +1926,6 @@ function renderFeaturedProducts() {
         <div class="featured-card-image" style="${imageStyle}"></div>
         <div class="featured-card-info">
           <div class="featured-card-name">${aiEscape(p.name)}</div>
-          <div class="featured-card-price">₺${aiEscape(String(p.price || ''))}</div>
         </div>
       </div>
     `;
@@ -2082,11 +2080,9 @@ function renderEvents(list){
   grid.innerHTML = visible.map((e, i) => {
     const num  = String(i+1).padStart(2, '0');
     const slug = aiEscape(e.slug || '');
-    const slugArg = jsArg(e.slug || '');
-    const wa   = jsArg(e.wa_message || '');
     const hasPreset = !!e.gift_bag_preset;
     const gbCta = hasPreset
-      ? `<button type="button" class="ev-gb-cta" onclick="openGiftbagFromEvent('${slugArg}')" aria-label="Bu güne özel çanta seti hazırla">
+      ? `<button type="button" class="ev-gb-cta" onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')" aria-label="Bu güne özel çanta seti hazırla">
           <span class="gb-cta-icon">🎁</span>
           <span class="gb-cta-text">Bu güne özel <strong>hediye paketi</strong> hazırla</span>
           <span class="gb-cta-arrow">→</span>
@@ -2098,7 +2094,7 @@ function renderEvents(list){
       <h3>${aiEscape(e.title_top||'')}<em>${aiEscape(e.title_emphasis||'')}</em></h3>
       <p>${aiEscape(e.description||'')}</p>
       <div class="ev-price"><span class="from">${aiEscape(e.price_label||'Fiyat başlangıcı')}</span><span class="amount">${aiEscape(e.price_amount||'')}</span></div>
-      <button class="btn-event" onclick="openWA('${wa}')">WhatsApp'tan Sor</button>
+      <button class="btn-event" onclick="showComingSoon('Özel gün konseptleri yakında hizmetinizde')">WhatsApp'tan Sor</button>
       ${gbCta}
     </div>`;
   }).join('');
@@ -2788,14 +2784,11 @@ function renderPrinter(d){
     const items = ids.map(id => products.find(p => p && p.id === id)).filter(Boolean);
     readyGrid.innerHTML = items.map(p => {
       const name = aiEscape(p.name || '');
-      const price = aiEscape(p.price || 'Fiyat sor');
-      const waMsg = jsArg(`${p.name || ''} için 3D baskı siparişi vermek istiyorum.`);
-      return `<div class="printer-ready-card" onclick="openWA('${waMsg}')">
+      return `<div class="printer-ready-card" onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">
         <div class="pr-img">${imgContent(p)}</div>
         <div class="pr-info">
           <h4>${name}</h4>
-          <div class="pr-price">${price}</div>
-          <button type="button" class="pr-btn" onclick="event.stopPropagation();openWA('${waMsg}')">Sipariş Ver</button>
+          <button type="button" class="pr-btn" onclick="event.stopPropagation();showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">Sipariş Ver</button>
         </div>
       </div>`;
     }).join('');
@@ -2812,13 +2805,12 @@ function renderPrinter(d){
       const num = String(i+1).padStart(2, '0');
       const title = aiEscape(c.title || '');
       const desc = aiEscape(c.description || '');
-      const waMsg = jsArg(`${c.title || ''} için 3D baskı fiyat sormak istiyorum.`);
       return `<div class="printer-custom-card">
         <div class="pc-num">${num}</div>
         <div class="pc-divider"></div>
         <h4>${title}</h4>
         <p>${desc}</p>
-        <button type="button" class="pc-ask" onclick="openWA('${waMsg}')">Fiyat Sor</button>
+        <button type="button" class="pc-ask" onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">Fiyat Sor</button>
       </div>`;
     }).join('');
   }
@@ -2855,6 +2847,7 @@ function renderFooter(d){
           case 'event':  return `<li><a onclick="goTo('events-section');setEventTab('${jsArg(l.action_value||'')}')">${lbl}</a></li>`;
           case 'url':    return `<li><a href="${attrEsc(l.action_value||'#')}" target="_blank" rel="noopener noreferrer">${lbl}</a></li>`;
           case 'whatsapp': return `<li><a href="https://wa.me/${attrEsc(WA_NUMBER)}" target="_blank" rel="noopener noreferrer">${lbl}</a></li>`;
+          case 'soon':   return `<li><a onclick="showComingSoon('${jsArg(l.soon_message||'Yakında hizmetinizde')}')">${lbl}</a></li>`;
           case 'none':   return `<li><a>${lbl}</a></li>`;
           default:       return `<li><a>${lbl}</a></li>`;
         }

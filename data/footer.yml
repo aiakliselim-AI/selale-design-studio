@@ -13,51 +13,51 @@ columns:
   - heading: Takı
     links:
       - label: Miyuki Bileklik
-        action_type: filter
-        action_value: bileklik
+        action_type: soon
+        soon_message: Bu kategori yakında hizmetinizde
       - label: Miyuki Kolye
-        action_type: filter
-        action_value: kolye
+        action_type: soon
+        soon_message: Bu kategori yakında hizmetinizde
       - label: Küpe
-        action_type: filter
-        action_value: kupe
+        action_type: soon
+        soon_message: Bu kategori yakında hizmetinizde
       - label: Yüzük
-        action_type: filter
-        action_value: yuzuk
+        action_type: soon
+        soon_message: Bu kategori yakında hizmetinizde
       - label: Anahtarlık
-        action_type: filter
-        action_value: anahtarlik
+        action_type: soon
+        soon_message: Bu kategori yakında hizmetinizde
   - heading: Özel Günler
     links:
       - label: Nişan Konsepti
-        action_type: event
-        action_value: nishan
+        action_type: soon
+        soon_message: Özel gün konseptleri yakında hizmetinizde
       - label: Düğün Konsepti
-        action_type: event
-        action_value: dugun
+        action_type: soon
+        soon_message: Özel gün konseptleri yakında hizmetinizde
       - label: Doğum Günü
-        action_type: event
-        action_value: dogumgunu
+        action_type: soon
+        soon_message: Özel gün konseptleri yakında hizmetinizde
       - label: Baby Shower
-        action_type: event
-        action_value: babyshower
+        action_type: soon
+        soon_message: Özel gün konseptleri yakında hizmetinizde
       - label: Mezuniyet
-        action_type: event
-        action_value: mezuniyet
+        action_type: soon
+        soon_message: Özel gün konseptleri yakında hizmetinizde
   - heading: Bilgi
     links:
       - label: Hakkımızda
-        action_type: scroll
-        action_value: about
+        action_type: soon
+        soon_message: Yakında hizmetinizde
       - label: 3D Baskı
-        action_type: filter
-        action_value: 3d
+        action_type: soon
+        soon_message: Hayal ettiğinizi basıyoruz — yakında hizmetinizde
       - label: Kargo & İade
-        action_type: none
-        action_value: ''
+        action_type: soon
+        soon_message: Yakında hizmetinizde
       - label: Özel Sipariş
-        action_type: none
-        action_value: ''
+        action_type: soon
+        soon_message: Yakında hizmetinizde
       - label: İletişim
         action_type: whatsapp
         action_value: ''

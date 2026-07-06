@@ -364,6 +364,46 @@ Mockup → UX karar → onay → kod.
 
 Foto hazırlık (kullanıcı) → konumlama algoritması → onay → kod.
 
+### Aşama v7-8 — Anasayfa sadeleştirme · Faz 1 ✅ TAMAMLANDI (6 Temmuz 2026), Faz 2 push edildi (onay bekliyor)
+**Faz 1 Branch:** `feat/v7-8-anasayfa-sadelestirme` (PR #17, merge edildi, main'de `6c1cba7`)
+**Faz 2 Branch:** `feat/v7-8-faz2-davranis-pasiflik` (push edildi, PR/merge kullanıcı onayı bekliyor)
+
+Site canlıya çok erken açıldığı ve hazır olmayan bölümler (Özel Gün
+Konseptleri, 3D Baskı, fiyatlar, hikayemiz/yorumlar) kafa karışıklığı
+yarattığı için anasayfa geçici olarak sadeleştirildi:
+
+- 20 demo/sahte ürün silindi (ID 1-20).
+- Kategori şeritleri, ana filtre barı ve drawer sadece Miyuki + Mumlar
+  ile aktif; diğer kategoriler (Bileklik/Kolye/Küpe/Yüzük/Anahtarlık/
+  3D Baskı/Özel Gün/Çanta Setleri) soluk görünümde, tıklanınca merkezi
+  `showComingSoon()` toast'ı ile "yakında" mesajı veriyor — hiçbiri
+  gerçek sayfaya/filtreye gitmiyor.
+- Özel Gün Konseptleri ve 3D Baskı bölümleri `display:none`, içindeki
+  tüm kart/link/butonlar da pasif (geri açılabilir, silinmedi).
+- Ürünlerde fiyat gösterimi tamamen kaldırıldı (kart, modal, favoriler,
+  öne çıkanlar, 3D hazır ürün kartları) — CMS'teki `price` alanı duruyor,
+  sadece sitede basılmıyor.
+- "Hikayemiz" ve "Müşteri Yorumları" bölümleri Instagram'ın hemen altına
+  taşındı ve gizlendi (Instagram'ın konumu korundu).
+- Footer: sosyal ikonlar (Instagram, WhatsApp) gerçek hesap linklerine
+  gidiyor; diğer tüm footer linkleri "yakında" mesajı veriyor.
+- Drawer/footer "Tüm Ürünler" ve "Favorilerim" zaten tek veri kaynağından
+  (`products` dizisi) besleniyordu — ayrı bir liste yoktu, doğrulandı.
+- Regresyon taraması sırasında 2 gerçek bug bulunup düzeltildi: drawer'ın
+  "Hakkımızda" linki artık gizli `about` bölümüne gitmiyor (Yakında
+  rozetiyle pasif); AI asistanın 3D ürün eşleşmeleri artık gizli
+  `printer-section` yerine görünür `products` grid'ine kaydırıyor.
+
+**Bekleyen küçük düzeltmeler (v7-8 kapsamı dışında bırakıldı, ayrı ele alınacak):**
+- Hero bölümündeki "Hediye Setleri" butonu (`goTo('events-section')`)
+  hâlâ artık gizli olan Özel Gün Konseptleri bölümüne gidiyor — tıklayınca
+  görünürde bir şey olmuyor. Faz 1'den beri var, v7-8 Faz 2 sırasında
+  fark edildi ama kapsam dışı bırakıldı; ayrı bir adımda düzeltilecek
+  (muhtemelen `showComingSoon()`'a bağlanacak).
+- Footer sosyal ikonlarından TikTok linki (`https://tiktok.com/`)
+  hesaba özel değil, genel ana sayfa — placeholder. Kullanıcı gerçek
+  hesap linkini verdiğinde manuel güncellenecek.
+
 ---
 
 ## 6. OLASI SIRADAKİ İŞLER (HENÜZ PLANLANMADI)
@@ -457,7 +497,9 @@ Repo public olduğu için:
 
 ---
 
-**Durum:** v7-5 Toplu Ürün Yükleme tamamlandı (PR #13, 1 Temmuz 2026) —
-102 ürün canlıda. Kalan v7 işleri: v7-6 (çanta builder carousel) ve
-v7-7 (cutout katmanlama). Kullanıcı işi: Aşama 4 (Sveltia'dan fiyat/açıklama
-doldurma + foto yükleme). 🌸
+**Durum:** v7-8 Anasayfa Sadeleştirme — Faz 1 tamamlandı (PR #17, 6 Temmuz
+2026), Faz 2 push edildi (`feat/v7-8-faz2-davranis-pasiflik`), merge onayı
+bekliyor. Kalan v7 işleri: v7-6 (çanta builder carousel), v7-7 (cutout
+katmanlama) ve v7-8 sonrası bekleyen küçük düzeltmeler (hero "Hediye
+Setleri" butonu, footer TikTok linki). Kullanıcı işi: Aşama 4 (Sveltia'dan
+fiyat/açıklama doldurma + foto yükleme). 🌸

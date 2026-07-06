@@ -68,7 +68,8 @@ categories:
 bottom_links:
   - label: Hakkımızda
     icon: 🌿
-    action: { type: scroll, target: about }
+    disabled: true
+    badge: Yakında
     order: 1
 
 whatsapp:
