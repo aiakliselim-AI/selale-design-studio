@@ -872,7 +872,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <p class="printer-custom-intro" id="printerCustomIntro"></p>
     <div class="printer-custom-grid" id="printerCustomGrid"></div>
     <div class="printer-cta-wrap">
-      <button type="button" class="btn-wa-printer" id="printerWaCta" onclick="openWA('3D baskı hakkında detaylı bilgi almak istiyorum.')">WhatsApp'tan Detay Sor</button>
+      <button type="button" class="btn-wa-printer" id="printerWaCta" onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">WhatsApp'tan Detay Sor</button>
     </div>
   </div>
 </section>
@@ -2789,12 +2789,11 @@ function renderPrinter(d){
     const items = ids.map(id => products.find(p => p && p.id === id)).filter(Boolean);
     readyGrid.innerHTML = items.map(p => {
       const name = aiEscape(p.name || '');
-      const waMsg = jsArg(`${p.name || ''} için 3D baskı siparişi vermek istiyorum.`);
-      return `<div class="printer-ready-card" onclick="openWA('${waMsg}')">
+      return `<div class="printer-ready-card" onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">
         <div class="pr-img">${imgContent(p)}</div>
         <div class="pr-info">
           <h4>${name}</h4>
-          <button type="button" class="pr-btn" onclick="event.stopPropagation();openWA('${waMsg}')">Sipariş Ver</button>
+          <button type="button" class="pr-btn" onclick="event.stopPropagation();showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">Sipariş Ver</button>
         </div>
       </div>`;
     }).join('');
@@ -2811,13 +2810,12 @@ function renderPrinter(d){
       const num = String(i+1).padStart(2, '0');
       const title = aiEscape(c.title || '');
       const desc = aiEscape(c.description || '');
-      const waMsg = jsArg(`${c.title || ''} için 3D baskı fiyat sormak istiyorum.`);
       return `<div class="printer-custom-card">
         <div class="pc-num">${num}</div>
         <div class="pc-divider"></div>
         <h4>${title}</h4>
         <p>${desc}</p>
-        <button type="button" class="pc-ask" onclick="openWA('${waMsg}')">Fiyat Sor</button>
+        <button type="button" class="pc-ask" onclick="showComingSoon('Hayal ettiğinizi basıyoruz — yakında hizmetinizde')">Fiyat Sor</button>
       </div>`;
     }).join('');
   }
