@@ -205,6 +205,8 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .filter-bar{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;}
 .filter-btn{border:1.5px solid var(--blush);background:transparent;color:var(--muted);border-radius:50px;padding:.45rem 1.2rem;font-size:.78rem;letter-spacing:.8px;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif;}
 .filter-btn.active,.filter-btn:hover{background:var(--caramel);border-color:var(--caramel);color:#fff;}
+.filter-btn-soon{opacity:.45;}
+.filter-btn-soon:hover{background:transparent;border-color:var(--blush);color:var(--muted);}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.8rem;}
 .product-card{background:#fff;border-radius:4px;overflow:hidden;transition:transform .3s,box-shadow .3s;border:1px solid var(--line);position:relative;cursor:pointer;}
 .product-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.08);}
@@ -828,14 +830,15 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <button class="filter-btn active" onclick="filterProducts('hepsi',this)">Hepsi</button>
     <button class="filter-btn" onclick="filterProducts('miyuki',this)">📿 Miyuki</button>
     <button class="filter-btn" onclick="filterProducts('mum',this)">🕯️ Mumlar</button>
-    <button class="filter-btn" onclick="filterProducts('seffaf-canta',this)">🛍️ Çanta Seti</button>
-    <!-- GİZLİ-v7-5: alt kategoriler — ileride açılacak
-    <button class="filter-btn" onclick="filterProducts('bileklik',this)">〰️ Bileklik</button>
-    <button class="filter-btn" onclick="filterProducts('kolye',this)">💎 Kolye</button>
-    <button class="filter-btn" onclick="filterProducts('kupe',this)">✨ Küpe</button>
-    <button class="filter-btn" onclick="filterProducts('yuzuk',this)">💍 Yüzük</button>
-    <button class="filter-btn" onclick="filterProducts('anahtarlik',this)">🔑 Anahtarlık</button>
-    <button class="filter-btn" onclick="filterProducts('3d',this)">🖨️ 3D Baskı</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">〰️ Bileklik</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">💎 Kolye</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">✨ Küpe</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">💍 Yüzük</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🔑 Anahtarlık</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🖨️ 3D Baskı</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🎉 Özel Gün</button>
+    <button class="filter-btn filter-btn-soon" onclick="showComingSoon('Bu kategori yakında hizmetinizde')">🛍️ Çanta Setleri</button>
+    <!-- GİZLİ-v7-5: yeni ürün filtresi — ileride açılacak
     <button class="filter-btn" onclick="filterProducts('yeni',this)">🆕 Yeni</button>
     -->
   </div>
