@@ -1889,14 +1889,37 @@ function stripCardHtml(p, sizeClass){
 }
 
 /* ════ ÖNE ÇIKAN ÜRÜNLER — v7-2 ════ */
+// Kart olarak gösterilebilir mi? İsim ve en az bir görseli olmayan ürün
+// boş kart olarak render edilmesin diye listeye hiç girmez.
+function featuredHasContent(p) {
+  if (!p || !p.name || !String(p.name).trim()) return false;
+  const hasImage = (p.image && String(p.image).trim())
+    || (Array.isArray(p.images) && p.images.length && p.images[0] && (typeof p.images[0] === 'string' ? p.images[0].trim() : (p.images[0].src || '').trim()));
+  return !!hasImage;
+}
+
 function renderFeaturedProducts() {
   const section = document.getElementById('featured-products');
   const grid = document.getElementById('featured-grid');
   if (!section || !grid || !products) return;
 
-  const featured = products
-    .filter(p => p.isNew === true || (p.badge && p.badge.trim().length > 0))
-    .sort((a, b) => (a.order || 0) - (b.order || 0));
+  const byIdDesc = (a, b) => (b.id || 0) - (a.id || 0);
+
+  // 1. featured:true işaretli ürünler (en yeni önce), en fazla 12.
+  const flagged = products
+    .filter(p => p.featured === true && featuredHasContent(p))
+    .sort(byIdDesc)
+    .slice(0, 12);
+
+  // 2. 12'den az ise en yeni ürünlerle (flagged olmayan) tamamla.
+  let featured = flagged;
+  if (featured.length < 12) {
+    const chosenIds = new Set(featured.map(p => p.id));
+    const fillers = products
+      .filter(p => !chosenIds.has(p.id) && featuredHasContent(p))
+      .sort(byIdDesc);
+    featured = featured.concat(fillers.slice(0, 12 - featured.length));
+  }
 
   if (featured.length === 0) {
     section.style.display = 'none';
@@ -1912,11 +1935,14 @@ function renderFeaturedProducts() {
     const badgeHtml = p.badge && p.badge.trim()
       ? `<div class="featured-badge ${badgeClass}">${aiEscape(p.badge)}</div>`
       : '';
-    const imageStyle = p.image
-      ? `background-image: url('${aiEscape(p.image)}');`
+    const firstImage = p.image
+      || (Array.isArray(p.images) && p.images[0] && (typeof p.images[0] === 'string' ? p.images[0] : p.images[0].src))
+      || '';
+    const imageStyle = firstImage
+      ? `background-image: url('${aiEscape(firstImage)}');`
       : '';
     return `
-      <div class="featured-card">
+      <div class="featured-card" onclick="openModal(${p.id})">
         ${badgeHtml}
         <div class="featured-card-image" style="${imageStyle}"></div>
         <div class="featured-card-info">

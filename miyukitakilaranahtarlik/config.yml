@@ -430,6 +430,7 @@ collections:
         default: ''
         hint: 'Öne Çıkan Ürünler bölümünde gösterilecek rozet'
       - { label: 'Yeni Ürün mü?', name: isNew, widget: boolean, default: false }
+      - { label: 'Öne Çıkan Ürün mü?', name: featured, widget: boolean, default: false, hint: '"Yeni & Öne Çıkanlar" bölümünde öncelikli gösterilir (en fazla 12, en yeni işaretli önce). 12''den az işaretli ürün varsa kalan yerler otomatik en yeni ürünlerle doldurulur.' }
       - label: 'Ürün Fotoğrafları (çoklu)'
         name: images
         widget: list
