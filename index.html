@@ -1994,6 +1994,23 @@ function renderCategoryStrips(list){
   window.observeRevealIn(stack);
 }
 
+// Chevron tıklamasıyla kaydırma: native `scrollBy({behavior:'smooth'})`
+// kullanılmıyor çünkü `scroll-snap-type:x mandatory` ile birleşince
+// Chromium'da smooth scroll sessizce hiç ilerlemiyor (doğrulanmış bug).
+// Bunun yerine auto-scroll'un da kullandığı manuel rAF animasyonu.
+function smoothScrollRailBy(rail, delta, duration){
+  const start = rail.scrollLeft;
+  const target = start + delta;
+  const t0 = performance.now();
+  function step(now){
+    const t = Math.min(1, (now - t0) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    rail.scrollLeft = start + (target - start) * eased;
+    if(t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 /* Şerit davranışı: hover auto-scroll (sonsuz döngü) + chevron tıklama. */
 function bindStripBehavior(scope){
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2015,8 +2032,8 @@ function bindStripBehavior(scope){
     updateArrows();
     rail.addEventListener('scroll', updateArrows, { passive:true });
 
-    if(leftBtn)  leftBtn.addEventListener('click',  () => rail.scrollBy({ left: -page(), behavior:'smooth' }));
-    if(rightBtn) rightBtn.addEventListener('click', () => rail.scrollBy({ left:  page(), behavior:'smooth' }));
+    if(leftBtn)  leftBtn.addEventListener('click',  () => smoothScrollRailBy(rail, -page(), 380));
+    if(rightBtn) rightBtn.addEventListener('click', () => smoothScrollRailBy(rail,  page(), 380));
 
     // Sonsuz döngü auto-scroll: ürün listesi N kez tekrarlandığı için
     // scrollLeft (N-1)*oneSet'i geçince sessizce -oneSet yapılır → kesintisiz akış.

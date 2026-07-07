@@ -50,7 +50,7 @@ categories:
   - label: Çanta Setleri
     icon: 🛍️
     badge: YENİ
-    action: { type: filter, target: seffaf-canta }
+    action: { type: scroll, target: giftbag-builder }
     order: 4
 
   - label: Özel Gün Konseptleri
