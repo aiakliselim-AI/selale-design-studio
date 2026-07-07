@@ -241,10 +241,10 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .giftbag-builder .section-title{text-align:center;margin-bottom:3rem;}
 .giftbag-builder .section-title h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-style:italic;font-weight:500;line-height:1.15;color:var(--text);margin-bottom:.5rem;}
 .giftbag-builder .section-title p{font-size:.92rem;color:var(--neutral-muted);max-width:520px;margin:0 auto;line-height:1.6;}
-.bb-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:2.6rem;max-width:1200px;margin:0 auto;align-items:start;}
+.bb-flow{display:flex;flex-direction:column;gap:1.6rem;max-width:680px;margin:0 auto;}
 .bb-col-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--text);margin-bottom:.3rem;font-weight:500;}
 .bb-step{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:1rem;display:block;}
-.bb-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.4rem;margin-bottom:1.6rem;}
+.bb-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.4rem;}
 /* Adım 1 — Çanta seçim grid */
 .bb-bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem;}
 .bb-bag-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:.9rem;cursor:pointer;transition:border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.6rem;text-align:left;font:inherit;color:inherit;position:relative;}
@@ -259,21 +259,24 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-bag-name{font-family:'Cormorant Garamond',serif;font-size:.98rem;color:var(--text);font-weight:500;line-height:1.2;}
 .bb-bag-price{font-size:.82rem;color:var(--neutral-muted);font-family:'Inter',sans-serif;}
 .bb-empty{padding:1rem;color:var(--neutral-muted);font-size:.85rem;text-align:center;}
-/* Adım 3 — Çanta önizleme */
+/* Adım 3 — Çanta önizleme: çanta görseli + seçili ürün listesi yan yana */
 .bb-preview-wrap{margin-top:1.4rem;}
-.bb-preview{position:relative;aspect-ratio:1/1;border-radius:6px;background:linear-gradient(135deg,#f4eadb 0%,#e8d8c2 100%);overflow:hidden;border:1px solid var(--line);}
-.bb-preview-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;color:rgba(26,26,26,.55);}
+.bb-preview-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;text-align:center;color:rgba(26,26,26,.55);background:linear-gradient(135deg,#f4eadb 0%,#e8d8c2 100%);border-radius:6px;border:1px solid var(--line);}
 .bb-preview-empty svg{width:32%;height:32%;opacity:.4;margin-bottom:1rem;}
 .bb-preview-empty span{font-size:.78rem;letter-spacing:1px;text-transform:uppercase;}
-.bb-preview-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
-.bb-preview-bg img{max-width:88%;max-height:88%;object-fit:contain;opacity:.85;}
-.bb-preview-bg .bb-bag-svg{width:55%;height:55%;color:rgba(26,26,26,.18);}
-.bb-preview-bg .bb-bag-placeholder-text{position:absolute;bottom:1rem;left:0;right:0;text-align:center;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(26,26,26,.45);}
-.bb-preview-items{position:absolute;inset:22% 14% 18%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:.4rem;pointer-events:none;}
-.bb-chip{background:rgba(255,255,255,.92);border:1px solid rgba(26,26,26,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;aspect-ratio:1/1;box-shadow:0 2px 6px rgba(0,0,0,.08);}
-.bb-chip img{width:88%;height:88%;object-fit:cover;border-radius:50%;}
-.bb-chip-fallback{width:88%;height:88%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;color:#fff;font-size:1rem;line-height:1;}
-.bb-chip-more{background:rgba(26,26,26,.85);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;aspect-ratio:1/1;width:100%;}
+.bb-preview-row{display:flex;gap:1rem;align-items:flex-start;}
+.bb-preview-bagbox{position:relative;flex:0 0 40%;aspect-ratio:1/1;border-radius:6px;background:linear-gradient(135deg,#f4eadb 0%,#e8d8c2 100%);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.bb-preview-bagbox img{max-width:88%;max-height:88%;object-fit:contain;}
+.bb-preview-bagbox .bb-bag-svg{width:55%;height:55%;color:rgba(26,26,26,.18);}
+.bb-preview-bagbox .bb-bag-placeholder-text{position:absolute;bottom:.6rem;left:0;right:0;text-align:center;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(26,26,26,.45);}
+.bb-preview-list{flex:1;min-width:0;display:flex;flex-direction:column;gap:.5rem;max-height:220px;overflow-y:auto;}
+.bb-preview-item{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:6px;padding:.4rem .6rem;}
+.bb-preview-item-thumb{width:34px;height:34px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--placeholder);}
+.bb-preview-item-thumb img{width:100%;height:100%;object-fit:cover;}
+.bb-preview-item-fallback{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;color:#fff;font-size:.85rem;line-height:1;}
+.bb-preview-item-name{font-size:.8rem;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bb-preview-item-price{font-size:.75rem;color:var(--neutral-muted);flex-shrink:0;}
+.bb-preview-empty-list{font-size:.8rem;color:var(--neutral-muted);text-align:center;padding:1.2rem .8rem;}
 /* Adım 3 — Fiyat özeti + sipariş */
 .bb-summary{margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;}
 .bb-sum-row{display:flex;justify-content:space-between;font-size:.88rem;color:var(--text);padding:.35rem 0;}
@@ -290,22 +293,19 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-cat-tab{background:#fff;color:var(--text);border:1.5px solid var(--line);border-radius:50px;padding:.5rem 1rem;font-size:.74rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s,background .2s,color .2s;}
 .bb-cat-tab:hover{border-color:#888;}
 .bb-cat-tab.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
-/* Adım 2 — v7-6: her alt-kategori kendi yatay kaydırmalı rayında (carousel, saf CSS scroll-snap) */
+/* Adım 2 — her alt-kategori kendi yatay kaydırmalı rayında (carousel, saf CSS scroll-snap) */
 .bb-prod-grid{display:flex;flex-direction:column;gap:1.5rem;}
 .bb-prod-row-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--text);margin-bottom:.7rem;font-weight:500;}
-.bb-prod-rail{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:.3rem;}
-.bb-prod-card{flex:0 0 calc(50% - .45rem);scroll-snap-align:start;background:#fff;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;}
-.bb-prod-card.added{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;background:#fdfdfd;}
-.bb-prod-thumb{aspect-ratio:1/1;background:var(--placeholder);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.bb-prod-rail{display:flex;gap:.7rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.3rem .3rem .5rem;}
+.bb-prod-card{position:relative;flex:0 0 100px;width:100px;aspect-ratio:1/1;border-radius:8px;overflow:hidden;scroll-snap-align:start;transition:transform .2s ease,box-shadow .2s ease;}
+.bb-prod-card:hover{transform:scale(1.12);z-index:2;box-shadow:0 8px 20px rgba(0,0,0,.18);}
+.bb-prod-card.added{box-shadow:0 0 0 2px #1a1a1a;}
+.bb-prod-thumb{width:100%;height:100%;background:var(--placeholder);display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .bb-prod-thumb img{width:100%;height:100%;object-fit:cover;}
-.bb-prod-fallback{width:64%;height:64%;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.2rem;line-height:1;}
-.bb-prod-info{padding:.7rem .9rem .9rem;display:flex;flex-direction:column;gap:.6rem;flex:1;}
-.bb-prod-name{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--text);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.15rem;}
-.bb-prod-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
-.bb-prod-price{font-size:.85rem;color:var(--text);font-weight:500;}
-.bb-prod-add{background:transparent;border:1.5px solid var(--text);color:var(--text);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:500;transition:background .2s,color .2s;font-family:'Inter',sans-serif;line-height:1;padding:0;}
+.bb-prod-fallback{width:64%;height:64%;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.4rem;line-height:1;}
+.bb-prod-add{position:absolute;bottom:5px;right:5px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);border:1.5px solid var(--text);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,color .2s;line-height:1;padding:0;}
 .bb-prod-add:hover{background:var(--text);color:#fff;}
-.bb-prod-card.added .bb-prod-add{background:#1a1a1a;color:#fff;border-color:#1a1a1a;width:auto;border-radius:50px;padding:.25rem .8rem;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+.bb-prod-card.added .bb-prod-add{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
 .bb-prod-empty{padding:2.5rem 1rem;text-align:center;color:var(--neutral-muted);font-size:.85rem;background:#fff;border:1px dashed var(--line);border-radius:6px;}
 /* Renk paleti — fallback daireleri */
 .bb-tint-miyuki{background:#7a1f2e;}
@@ -313,16 +313,12 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-tint-koku{background:#6b4d8a;}
 .bb-tint-3d{background:#2f5f8a;}
 .bb-tint-diger{background:#666;}
-/* Adım 3 alt — Özel etiket */
-.bb-label-area{margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;}
+/* Özel etiket — Adım 2 ile Adım 3 arasında */
+.bb-label-area{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;}
 .bb-label-area label{display:block;font-size:.74rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--neutral-muted);margin-bottom:.6rem;}
 .bb-label-input{width:100%;min-height:72px;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:4px;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--text);background:#fff;transition:border-color .2s;resize:vertical;}
 .bb-label-input:focus{outline:none;border-color:#1a1a1a;}
 .bb-label-meta{display:flex;justify-content:space-between;margin-top:.4rem;font-size:.7rem;color:var(--neutral-muted);}
-@media (max-width: 880px){
-  .bb-grid{grid-template-columns:1fr;gap:1.6rem;}
-  .bb-preview-items{inset:18% 10% 14%;}
-}
 @media(max-width:780px){.gb-builder-grid{grid-template-columns:1fr;gap:2.2rem;}.gb-items-list{grid-template-columns:1fr;}}
 
 /* ═══ ÖZEL GÜN KONSEPT BÖLÜMÜ (5.6 — 5 dikey kart) ═══ */
@@ -774,42 +770,36 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <h2>Çantanızı <em>siz doldurun</em></h2>
     <p>Hediye setinizi tasarlayın</p>
   </div>
-  <div class="bb-grid">
-    <!-- SOL SÜTUN: çanta seçim + önizleme + sipariş -->
-    <div class="bb-col-left">
-      <div class="bb-card">
-        <span class="bb-step">Adım 1</span>
-        <h3 class="bb-col-title">Çantanızı seçin</h3>
-        <div class="bb-bag-grid" id="bbBagGrid"><p class="bb-empty">Çantalar yükleniyor…</p></div>
-      </div>
-      <div class="bb-card">
-        <span class="bb-step">Adım 3</span>
-        <h3 class="bb-col-title">Çantanızın görünümü</h3>
-        <div class="bb-preview-wrap">
-          <div class="bb-preview" id="bbPreview"></div>
-        </div>
-        <div class="bb-summary" id="bbSummary"></div>
-        <div class="bb-send-row">
-          <button type="button" class="bb-send-btn" id="bbSendBtn" onclick="bbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
-          <p class="bb-send-hint" id="bbSendHint">En az 1 ürün ekleyin</p>
-        </div>
+  <div class="bb-flow">
+    <div class="bb-card">
+      <span class="bb-step">Adım 1</span>
+      <h3 class="bb-col-title">Çantanızı seçin</h3>
+      <div class="bb-bag-grid" id="bbBagGrid"><p class="bb-empty">Çantalar yükleniyor…</p></div>
+    </div>
+    <div class="bb-card">
+      <span class="bb-step">Adım 2</span>
+      <h3 class="bb-col-title">İçini doldurun</h3>
+      <div class="bb-cat-tabs" id="bbCatTabs"></div>
+      <div class="bb-prod-grid" id="bbProdGrid"></div>
+    </div>
+    <div class="bb-label-area">
+      <label for="bbLabel">Özel Etiket (isteğe bağlı)</label>
+      <textarea id="bbLabel" class="bb-label-input" maxlength="100" placeholder="Örn: Sevgili Ayşe, doğum günün kutlu olsun"></textarea>
+      <div class="bb-label-meta">
+        <span>İsteğe bağlı</span>
+        <span><span id="bbLabelCount">0</span>/100</span>
       </div>
     </div>
-    <!-- SAĞ SÜTUN: kategori tab + ürün grid + özel etiket -->
-    <div class="bb-col-right">
-      <div class="bb-card">
-        <span class="bb-step">Adım 2</span>
-        <h3 class="bb-col-title">İçeriği belirleyin</h3>
-        <div class="bb-cat-tabs" id="bbCatTabs"></div>
-        <div class="bb-prod-grid" id="bbProdGrid"></div>
+    <div class="bb-card">
+      <span class="bb-step">Adım 3</span>
+      <h3 class="bb-col-title">Çantanızın görünümü</h3>
+      <div class="bb-preview-wrap">
+        <div class="bb-preview" id="bbPreview"></div>
       </div>
-      <div class="bb-label-area">
-        <label for="bbLabel">Özel Etiket (isteğe bağlı)</label>
-        <textarea id="bbLabel" class="bb-label-input" maxlength="100" placeholder="Örn: Sevgili Ayşe, doğum günün kutlu olsun"></textarea>
-        <div class="bb-label-meta">
-          <span>İsteğe bağlı</span>
-          <span><span id="bbLabelCount">0</span>/100</span>
-        </div>
+      <div class="bb-summary" id="bbSummary"></div>
+      <div class="bb-send-row">
+        <button type="button" class="bb-send-btn" id="bbSendBtn" onclick="bbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
+        <p class="bb-send-hint" id="bbSendHint">En az 1 ürün ekleyin</p>
       </div>
     </div>
   </div>
@@ -2335,15 +2325,9 @@ function bbProdCardHtml(p){
   const thumb = img
     ? `<img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}">`
     : `<div class="bb-prod-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div>`;
-  return `<div class="bb-prod-card${added?' added':''}" data-id="${id}">
+  return `<div class="bb-prod-card${added?' added':''}" data-id="${id}" title="${aiEscape(p.name||'')}">
       <div class="bb-prod-thumb">${thumb}</div>
-      <div class="bb-prod-info">
-        <div class="bb-prod-name">${aiEscape(p.name||'')}</div>
-        <div class="bb-prod-foot">
-          <span class="bb-prod-price">+₺${aiEscape(String(p.giftBagPrice||0))}</span>
-          <button type="button" class="bb-prod-add" onclick="bbToggleProduct(${id})" aria-label="${added?'Çantadan çıkar':'Çantaya ekle'}">${added?'✓ Eklendi':'+'}</button>
-        </div>
-      </div>
+      <button type="button" class="bb-prod-add" onclick="bbToggleProduct(${id})" aria-label="${added?'Çantadan çıkar':'Çantaya ekle'} — ${aiEscape(p.name||'')}">${added?'✓':'+'}</button>
     </div>`;
 }
 
@@ -2376,8 +2360,9 @@ function bbUpdateProductCard(id){
     card.classList.toggle('added', added);
     const btn = card.querySelector('.bb-prod-add');
     if(btn){
-      btn.textContent = added ? '✓ Eklendi' : '+';
-      btn.setAttribute('aria-label', added ? 'Çantadan çıkar' : 'Çantaya ekle');
+      btn.textContent = added ? '✓' : '+';
+      const name = card.getAttribute('title') || '';
+      btn.setAttribute('aria-label', `${added ? 'Çantadan çıkar' : 'Çantaya ekle'} — ${name}`);
     }
   });
 }
@@ -2401,30 +2386,28 @@ function bbRenderPreview(){
     wrap.innerHTML = `<div class="bb-preview-empty">${BB_BAG_SVG}<span>Önce bir çanta seçin</span></div>`;
     return;
   }
-  // Çanta arka planı
-  const bagBg = bag.image
-    ? `<div class="bb-preview-bg"><img src="${aiEscape(bag.image)}" alt="${aiEscape(bag.name||'')}"></div>`
-    : `<div class="bb-preview-bg">${BB_BAG_SVG}<span class="bb-bag-placeholder-text">Çanta fotoğrafı panelden yüklenecek</span></div>`;
-  if(!itemIds.length){
-    wrap.innerHTML = `${bagBg}<div class="bb-preview-empty" style="background:rgba(255,255,255,.6);"><span>Ürün ekleyerek çantanızı doldurun</span></div>`;
-    return;
-  }
-  // Ürün chip'leri (max 8, 9+ ise son hücre rozet)
+  // Çanta görseli (sol/üst kutu)
+  const bagBox = bag.image
+    ? `<div class="bb-preview-bagbox"><img src="${aiEscape(bag.image)}" alt="${aiEscape(bag.name||'')}"></div>`
+    : `<div class="bb-preview-bagbox">${BB_BAG_SVG}<span class="bb-bag-placeholder-text">Çanta fotoğrafı panelden yüklenecek</span></div>`;
+  // Seçili ürün listesi (sağ/alt liste) — çanta görselinin yanında, üzerine bindirilmeden.
   const items = itemIds.map(id => (products||[]).find(p => Number(p.id) === Number(id))).filter(Boolean);
-  const max = 9;
-  const showItems = items.slice(0, items.length > max ? max-1 : max);
-  const overflow = items.length - showItems.length;
-  const chips = showItems.map(p => {
-    const img = bbProdImage(p);
-    const cat = bbProductCat(p);
-    const tint = BB_TINT[cat] || BB_TINT.diger;
-    if(img){
-      return `<div class="bb-chip"><img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}"></div>`;
-    }
-    return `<div class="bb-chip"><div class="bb-chip-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div></div>`;
-  }).join('');
-  const more = overflow > 0 ? `<div class="bb-chip"><div class="bb-chip-more">+${overflow}</div></div>` : '';
-  wrap.innerHTML = `${bagBg}<div class="bb-preview-items">${chips}${more}</div>`;
+  const listHtml = items.length
+    ? items.map(p => {
+        const img = bbProdImage(p);
+        const cat = bbProductCat(p);
+        const tint = BB_TINT[cat] || BB_TINT.diger;
+        const thumb = img
+          ? `<img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}">`
+          : `<div class="bb-preview-item-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div>`;
+        return `<div class="bb-preview-item">
+          <div class="bb-preview-item-thumb">${thumb}</div>
+          <span class="bb-preview-item-name">${aiEscape(p.name||'')}</span>
+          <span class="bb-preview-item-price">+₺${aiEscape(String(p.giftBagPrice||0))}</span>
+        </div>`;
+      }).join('')
+    : `<div class="bb-preview-empty-list">Ürün ekleyerek çantanızı doldurun</div>`;
+  wrap.innerHTML = `<div class="bb-preview-row">${bagBox}<div class="bb-preview-list">${listHtml}</div></div>`;
 }
 
 function bbItemsTotal(){
