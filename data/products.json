@@ -215,7 +215,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "bileklik"
     ],
     "colors": [],
     "bg": "p1",
@@ -223,7 +224,7 @@
     "isNew": false,
     "image": "/images/products/chubby-cactus.jpg",
     "order": 32,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-012"
   },
@@ -462,7 +463,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "bileklik"
     ],
     "colors": [],
     "bg": "p1",
@@ -470,7 +472,7 @@
     "isNew": false,
     "image": "/images/products/kisisellestirilmis-tasarim-bileklik.jpg",
     "order": 45,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-025"
   },
@@ -633,7 +635,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "kolye"
     ],
     "colors": [],
     "bg": "p1",
@@ -641,7 +644,7 @@
     "isNew": false,
     "image": "/images/products/mavi-sans-kolyesi.jpg",
     "order": 54,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-034"
   },
@@ -728,7 +731,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "bileklik"
     ],
     "colors": [],
     "bg": "p1",
@@ -736,7 +740,7 @@
     "isNew": false,
     "image": "/images/products/nazar-boncugu.jpg",
     "order": 59,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-039"
   },
@@ -1032,7 +1036,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "kolye"
     ],
     "colors": [],
     "bg": "p1",
@@ -1040,7 +1045,7 @@
     "isNew": false,
     "image": "/images/products/sultan-kalbi-kirmizi.jpg",
     "order": 75,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-055"
   },
@@ -1203,7 +1208,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "kupe"
     ],
     "colors": [],
     "bg": "p1",
@@ -1211,7 +1217,7 @@
     "isNew": false,
     "image": "/images/products/venus-gizemli-kupeler-5.jpg",
     "order": 84,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-064"
   },
@@ -1241,7 +1247,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "kolye"
     ],
     "colors": [],
     "bg": "p1",
@@ -1249,7 +1256,7 @@
     "isNew": false,
     "image": "/images/products/yesil-sans-kolyesi.jpg",
     "order": 86,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-066"
   },
@@ -1279,7 +1286,8 @@
     "oldPrice": "",
     "desc": "",
     "cat": [
-      "miyuki"
+      "miyuki",
+      "kupe"
     ],
     "colors": [],
     "bg": "p1",
@@ -1287,7 +1295,7 @@
     "isNew": false,
     "image": "/images/products/yildizlar-arasi.jpg",
     "order": 88,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MIYUKI-068"
   },
@@ -1439,7 +1447,7 @@
     "isNew": false,
     "image": "/images/products/mum-2.jpeg",
     "order": 96,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MUM-001"
   },
@@ -1686,7 +1694,7 @@
     "isNew": false,
     "image": "/images/products/mum-15.jpeg",
     "order": 109,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MUM-014"
   },
@@ -1933,7 +1941,7 @@
     "isNew": false,
     "image": "/images/products/mum-28.jpeg",
     "order": 122,
-    "giftBagEligible": false,
+    "giftBagEligible": true,
     "giftBagPrice": 0,
     "code": "MUM-027"
   }

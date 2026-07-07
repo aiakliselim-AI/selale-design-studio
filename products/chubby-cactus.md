@@ -6,12 +6,13 @@ oldPrice: ""
 desc: ""
 cat:
   - miyuki
+  - bileklik
 colors: []
 bg: p1
 badge: ""
 isNew: false
 image: '/images/products/chubby-cactus.jpg'
 order: 32
-giftBagEligible: false
+giftBagEligible: true
 giftBagPrice: 0
 ---
