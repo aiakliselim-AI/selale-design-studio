@@ -6,12 +6,13 @@ oldPrice: ""
 desc: ""
 cat:
   - miyuki
+  - bileklik
 colors: []
 bg: p1
 badge: ""
 isNew: false
 image: '/images/products/nazar-boncugu.jpg'
 order: 59
-giftBagEligible: false
+giftBagEligible: true
 giftBagPrice: 0
 ---

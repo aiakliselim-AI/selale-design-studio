@@ -6,12 +6,13 @@ oldPrice: ""
 desc: ""
 cat:
   - miyuki
+  - kolye
 colors: []
 bg: p1
 badge: ""
 isNew: false
 image: '/images/products/yesil-sans-kolyesi.jpg'
 order: 86
-giftBagEligible: false
+giftBagEligible: true
 giftBagPrice: 0
 ---

@@ -1,7 +1,7 @@
 {
   "id": "bordo-klasik",
   "name": "Bordo Klasik Çanta",
-  "image": "",
+  "image": "/assets/urunler/cantaSet/canta.png",
   "price": 250,
   "active": true,
   "order": 1

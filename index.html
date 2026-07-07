@@ -1898,6 +1898,15 @@ function featuredHasContent(p) {
   return !!hasImage;
 }
 
+// Kaba kategori grubu — sadece otomatik tamamlama sırasında tek kategorinin
+// (örn. Mumlar, ID'leri yüksek olduğu için) listeye hakim olmasını önlemek içindir.
+function featuredCategoryOf(p) {
+  const cat = Array.isArray(p.cat) ? p.cat : [p.cat].filter(Boolean);
+  if (cat.some(c => ['miyuki', 'bileklik', 'kolye', 'kupe', 'yuzuk', 'anahtarlik'].includes(c))) return 'miyuki';
+  if (cat.includes('mum')) return 'mum';
+  return 'diger';
+}
+
 function renderFeaturedProducts() {
   const section = document.getElementById('featured-products');
   const grid = document.getElementById('featured-grid');
@@ -1911,14 +1920,42 @@ function renderFeaturedProducts() {
     .sort(byIdDesc)
     .slice(0, 12);
 
-  // 2. 12'den az ise en yeni ürünlerle (flagged olmayan) tamamla.
+  // 2. 12'den az ise kalan yerleri kategori bazında BLOK halinde doldur —
+  // örn. ilk 6 kart en yeni Miyuki, sonraki 6 kart en yeni Mum. Kota eşit
+  // bölünür (need / kategori sayısı); bir kategori kotasını dolduramazsa
+  // kalan yerler öncelik sırasındaki bir sonraki kategoriye eklenir.
+  const FEATURED_CAT_ORDER = ['miyuki', 'mum', 'diger'];
   let featured = flagged;
   if (featured.length < 12) {
     const chosenIds = new Set(featured.map(p => p.id));
-    const fillers = products
-      .filter(p => !chosenIds.has(p.id) && featuredHasContent(p))
-      .sort(byIdDesc);
-    featured = featured.concat(fillers.slice(0, 12 - featured.length));
+    const candidates = products.filter(p => !chosenIds.has(p.id) && featuredHasContent(p));
+    const byCat = {};
+    candidates.forEach(p => {
+      const cat = featuredCategoryOf(p);
+      (byCat[cat] = byCat[cat] || []).push(p);
+    });
+    const orderedKeys = Object.keys(byCat).sort((a, b) => {
+      const ia = FEATURED_CAT_ORDER.indexOf(a), ib = FEATURED_CAT_ORDER.indexOf(b);
+      return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+    });
+    orderedKeys.forEach(k => byCat[k].sort(byIdDesc));
+
+    const need = 12 - featured.length;
+    const quota = Math.floor(need / (orderedKeys.length || 1));
+    const blocks = {};
+    orderedKeys.forEach(k => { blocks[k] = byCat[k].slice(0, quota); });
+    let total = Object.values(blocks).reduce((s, l) => s + l.length, 0);
+    if (total < need) {
+      for (const k of orderedKeys) {
+        if (total >= need) break;
+        const already = blocks[k].length;
+        const extra = byCat[k].slice(already, already + (need - total));
+        blocks[k] = blocks[k].concat(extra);
+        total += extra.length;
+      }
+    }
+    const fillers = orderedKeys.reduce((acc, k) => acc.concat(blocks[k]), []);
+    featured = featured.concat(fillers.slice(0, need));
   }
 
   if (featured.length === 0) {
@@ -2161,7 +2198,7 @@ let bbBags = [];
 const bbState = { bag: null, items: new Set(), activeCat: 'miyuki' };
 
 const BB_CATS = [
-  { key: 'miyuki',  label: 'Miyuki Takı', match: ['miyuki','bileklik','kolye','kupe','yuzuk','anahtarlik'],
+  { key: 'miyuki',  label: 'Miyuki', match: ['miyuki','bileklik','kolye','kupe','yuzuk','anahtarlik'],
     subs: [
       { key: 'bileklik',   label: 'Bileklik' },
       { key: 'kolye',      label: 'Kolye' },
@@ -2172,7 +2209,7 @@ const BB_CATS = [
   { key: 'mum',     label: 'Mumlar',      match: ['mum'] },
   { key: 'koku',    label: 'Koku & Parfüm', match: ['koku','parfum'] },
   { key: '3d',      label: '3D Baskı',    match: ['3d','3d-anahtarlik','3d-oyuncak','3d-alet','3d-deko'] },
-  { key: 'diger',   label: 'Diğer',       match: null },
+  { key: 'diger',   label: 'Koku',        match: null },
 ];
 const BB_TINT = { miyuki:'bb-tint-miyuki', mum:'bb-tint-mum', koku:'bb-tint-koku', '3d':'bb-tint-3d', diger:'bb-tint-diger' };
 
@@ -2323,7 +2360,7 @@ function bbRenderProducts(){
   const rows = subs.length
     ? subs.map(s => ({ title: s.label, items: inCat.filter(p => bbProdMatchesSub(p, s.key)) })).filter(r => r.items.length)
     : [{ title: '', items: inCat }];
-  rows.forEach(r => r.items.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0)));
+  rows.forEach(r => r.items.sort((a,b)=>(b.id||0)-(a.id||0)));
   wrap.innerHTML = rows.map(row => {
     const titleHtml = row.title ? `<h4 class="bb-prod-row-title">${aiEscape(row.title)}</h4>` : '';
     const cards = row.items.map(p => bbProdCardHtml(p)).join('');

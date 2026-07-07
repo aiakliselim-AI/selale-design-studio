@@ -12,6 +12,6 @@ badge: ""
 isNew: false
 image: '/images/products/mum-15.jpeg'
 order: 109
-giftBagEligible: false
+giftBagEligible: true
 giftBagPrice: 0
 ---
