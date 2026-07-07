@@ -41,5 +41,30 @@ products.sort((a, b) => {
   return (a.id ?? 0) - (b.id ?? 0);
 });
 
+// Otomatik ürün kodu (örn. MIYUKI-001, MUM-001, CANTA-001) — kategoriye göre
+// önek + kategori içinde id sırasına göre artan numara. Elle girilmez,
+// panelden düzenlenemez; sadece bu üretim script'inde hesaplanır.
+const CODE_PREFIX_RULES = [
+  { prefix: 'MIYUKI', match: ['miyuki', 'bileklik', 'kolye', 'kupe', 'yuzuk', 'anahtarlik'] },
+  { prefix: 'MUM', match: ['mum'] },
+  { prefix: 'CANTA', match: ['seffaf-canta', 'canta-icerik'] },
+  { prefix: 'KOKU', match: ['koku', 'parfum'] },
+  { prefix: '3D', match: (cat) => cat.some((c) => c === '3d' || String(c).startsWith('3d-')) },
+];
+function codePrefixFor(cat) {
+  const arr = Array.isArray(cat) ? cat : [cat].filter(Boolean);
+  for (const rule of CODE_PREFIX_RULES) {
+    const hit = typeof rule.match === 'function' ? rule.match(arr) : arr.some((c) => rule.match.includes(c));
+    if (hit) return rule.prefix;
+  }
+  return 'GENEL';
+}
+const codeCounters = {};
+for (const p of products.slice().sort((a, b) => (a.id ?? 0) - (b.id ?? 0))) {
+  const prefix = codePrefixFor(p.cat);
+  codeCounters[prefix] = (codeCounters[prefix] || 0) + 1;
+  p.code = `${prefix}-${String(codeCounters[prefix]).padStart(3, '0')}`;
+}
+
 await writeFile(outFile, JSON.stringify(products, null, 2) + '\n');
 console.log(`wrote ${products.length} products to data/products.json`);

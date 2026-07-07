@@ -1,501 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Pastel Miyuki Bileklik",
-    "price": "₺190",
-    "oldPrice": "₺240",
-    "desc": "El yapımı pastel tonlarda Miyuki boncuk bileklik. İstenen renkte yapılır.DENEMEEEEEEE",
-    "icon": "📿",
-    "cat": [
-      "miyuki",
-      "bileklik"
-    ],
-    "colors": [
-      "pembe",
-      "mavi",
-      "sari",
-      "yesil",
-      "mor",
-      "pastel"
-    ],
-    "bg": "p1",
-    "badge": "Çok Satan",
-    "isNew": false,
-    "image": "",
-    "order": 1,
-    "giftBagEligible": true,
-    "giftBagPrice": 120
-  },
-  {
-    "id": 2,
-    "order": 2,
-    "name": "Çift Kişilik Bileklik Set",
-    "desc": "Sevgililer için uyumlu renk Miyuki bileklik seti. İsme özel hazırlanır.",
-    "price": "₺320",
-    "oldPrice": "",
-    "icon": "💞",
-    "bg": "p2",
-    "badge": "Yeni",
-    "cat": [
-      "miyuki",
-      "bileklik"
-    ],
-    "colors": [
-      "kirmizi",
-      "pembe",
-      "mavi",
-      "siyah",
-      "beyaz"
-    ],
-    "isNew": true,
-    "image": ""
-  },
-  {
-    "id": 3,
-    "order": 3,
-    "name": "Gökkuşağı Bileklik",
-    "desc": "Renkli Miyuki boncuklarla gökkuşağı desenli bileklik.",
-    "price": "₺210",
-    "oldPrice": "",
-    "icon": "🌈",
-    "bg": "p3",
-    "badge": "",
-    "cat": [
-      "miyuki",
-      "bileklik"
-    ],
-    "colors": [
-      "kirmizi",
-      "turuncu",
-      "sari",
-      "yesil",
-      "mavi",
-      "mor",
-      "pembe"
-    ],
-    "isNew": false,
-    "image": "",
-    "giftBagEligible": true,
-    "giftBagPrice": 120
-  },
-  {
-    "id": 4,
-    "order": 4,
-    "name": "İnce Miyuki Kolye",
-    "desc": "İnce zincir üzerine el yapımı Miyuki boncuk kolye. Kişiselleştirilebilir.",
-    "price": "₺240",
-    "oldPrice": "",
-    "icon": "💎",
-    "bg": "p4",
-    "badge": "",
-    "cat": [
-      "miyuki",
-      "kolye"
-    ],
-    "colors": [
-      "altin",
-      "gumus",
-      "beyaz",
-      "siyah",
-      "mavi",
-      "pembe"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
-    "id": 5,
-    "name": "Çiçek Desenli Kolye",
-    "price": "₺270",
-    "oldPrice": "₺320",
-    "desc": "Çiçek motifli Miyuki boncuk kolye. İstenilen renk seçeneği.",
-    "cat": [
-      "miyuki",
-      "kolye"
-    ],
-    "colors": [
-      "pembe",
-      "beyaz",
-      "sari",
-      "mor",
-      "yesil"
-    ],
-    "bg": "p5",
-    "badge": "Popüler",
-    "isNew": false,
-    "image": "/images/products/Photo_1600696888258.jpg",
-    "order": 5,
-    "giftBagPrice": null,
-    "icon": "🌸"
-  },
-  {
-    "id": 6,
-    "order": 6,
-    "name": "Miyuki Sallantı Küpe",
-    "desc": "El yapımı Miyuki boncuklu küpe. Hafif ve şık, her kıyafete uyar.",
-    "price": "₺160",
-    "oldPrice": "",
-    "icon": "✨",
-    "bg": "p6",
-    "badge": "Yeni",
-    "cat": [
-      "miyuki",
-      "kupe"
-    ],
-    "colors": [
-      "altin",
-      "gumus",
-      "mavi",
-      "pembe",
-      "siyah"
-    ],
-    "isNew": true,
-    "image": ""
-  },
-  {
-    "id": 7,
-    "order": 7,
-    "name": "Miyuki Mercan Yüzük",
-    "desc": "El yapımı mercan renkli Miyuki boncuk yüzük. Özel beden seçeneği.",
-    "price": "₺140",
-    "oldPrice": "",
-    "icon": "💍",
-    "bg": "p7",
-    "badge": "Yeni",
-    "cat": [
-      "miyuki",
-      "yuzuk"
-    ],
-    "colors": [
-      "kirmizi",
-      "mercan",
-      "turuncu",
-      "pembe"
-    ],
-    "isNew": true,
-    "image": ""
-  },
-  {
-    "id": 8,
-    "order": 8,
-    "name": "Miyuki İsim Anahtarlık",
-    "desc": "İsme özel Miyuki boncuk anahtarlık. Farklı renk seçenekleri.",
-    "price": "₺75",
-    "oldPrice": "₺95",
-    "icon": "🔑",
-    "bg": "p8",
-    "badge": "",
-    "cat": [
-      "miyuki",
-      "anahtarlik"
-    ],
-    "colors": [
-      "kirmizi",
-      "mavi",
-      "yesil",
-      "sari",
-      "pembe",
-      "siyah",
-      "beyaz",
-      "mor"
-    ],
-    "isNew": false,
-    "image": "",
-    "giftBagEligible": true,
-    "giftBagPrice": 60
-  },
-  {
-    "id": 9,
-    "name": "Çiçek Şekilli Mum",
-    "price": "₺220",
-    "oldPrice": "",
-    "desc": "El yapımı çiçek formunda dekoratif mum. Masa süsü.",
-    "cat": [
-      "mum"
-    ],
-    "colors": [
-      "pembe",
-      "beyaz",
-      "kirmizi",
-      "sari"
-    ],
-    "bg": "p1",
-    "badge": "Yeni",
-    "isNew": true,
-    "image": "/images/products/16.jpeg",
-    "order": 9,
-    "giftBagEligible": true,
-    "giftBagPrice": 85,
-    "icon": "🌺"
-  },
-  {
-    "id": 10,
-    "order": 10,
-    "name": "Taş Dokulu Mum",
-    "desc": "Taş görünümlü el yapımı dekoratif mum. Çeşit renk seçeneği.",
-    "price": "₺190",
-    "oldPrice": "₺240",
-    "icon": "🪨",
-    "bg": "p2",
-    "badge": "Çok Satan",
-    "cat": [
-      "mum"
-    ],
-    "colors": [
-      "gri",
-      "bej",
-      "beyaz",
-      "siyah",
-      "kahverengi"
-    ],
-    "isNew": false,
-    "image": "",
-    "giftBagEligible": true,
-    "giftBagPrice": 85
-  },
-  {
-    "id": 11,
-    "order": 11,
-    "name": "Kabartmalı Mum Seti (3'lü)",
-    "desc": "3'lü kabartmalı desen mum seti. Hediye paketinde teslim.",
-    "price": "₺350",
-    "oldPrice": "",
-    "icon": "🕯️",
-    "bg": "p3",
-    "badge": "",
-    "cat": [
-      "mum"
-    ],
-    "colors": [
-      "beyaz",
-      "bej",
-      "pembe"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
-    "id": 12,
-    "order": 12,
-    "name": "Koku Mumu",
-    "desc": "Lavanta · Vanilya · Gül · Sandal ağacı kokusu seçenekli el yapımı mum.",
-    "price": "₺175",
-    "oldPrice": "",
-    "icon": "🌿",
-    "bg": "p4",
-    "badge": "",
-    "cat": [
-      "mum"
-    ],
-    "colors": [
-      "mor",
-      "beyaz",
-      "sari",
-      "yesil"
-    ],
-    "isNew": false,
-    "image": "",
-    "giftBagEligible": true,
-    "giftBagPrice": 85
-  },
-  {
-    "id": 13,
-    "order": 13,
-    "name": "Süslü Cam Şişe",
-    "desc": "Kurdele, boncuk ve çiçeklerle süslenmiş dekoratif cam şişe. Masa hediyesi.",
-    "price": "₺125",
-    "oldPrice": "",
-    "icon": "🫙",
-    "bg": "p5",
-    "badge": "Yeni",
-    "cat": [
-      "canta-icerik"
-    ],
-    "colors": [
-      "seffaf",
-      "beyaz",
-      "pembe",
-      "altin"
-    ],
-    "isNew": true,
-    "image": "",
-    "giftBagEligible": true,
-    "giftBagPrice": 50
-  },
-  {
-    "id": 14,
-    "order": 14,
-    "name": "Parfüm Dekor Şişesi",
-    "desc": "İsme özel süslemeli parfüm şişesi. Kişiye özel mesaj eklenebilir.",
-    "price": "₺340",
-    "oldPrice": "",
-    "icon": "🌷",
-    "bg": "p6",
-    "badge": "",
-    "cat": [
-      "canta-icerik"
-    ],
-    "colors": [
-      "altin",
-      "gumus",
-      "pembe",
-      "beyaz"
-    ],
-    "isNew": false,
-    "image": "",
-    "giftBagEligible": true,
-    "giftBagPrice": 75
-  },
-  {
-    "id": 15,
-    "order": 15,
-    "name": "Karma Dekor Seti",
-    "desc": "Mum + süslü şişe + Miyuki bileklik + hediye kutusu. Komple özel gün seti.",
-    "price": "₺580",
-    "oldPrice": "₺720",
-    "icon": "✨",
-    "bg": "p7",
-    "badge": "Popüler",
-    "cat": [
-      "seffaf-canta",
-      "mum",
-      "miyuki"
-    ],
-    "colors": [
-      "pembe",
-      "beyaz",
-      "altin",
-      "bej"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
-    "id": 16,
-    "order": 16,
-    "name": "Özel 3D Anahtarlık",
-    "desc": "İsim, logo veya özel tasarım 3D baskı anahtarlık. Dayanıklı PLA/PETG malzeme.",
-    "price": "₺60",
-    "oldPrice": "",
-    "icon": "🔑",
-    "bg": "p8",
-    "badge": "",
-    "cat": [
-      "3d",
-      "anahtarlik",
-      "3d-anahtarlik"
-    ],
-    "colors": [
-      "kirmizi",
-      "mavi",
-      "yesil",
-      "sari",
-      "siyah",
-      "beyaz",
-      "turuncu",
-      "mor",
-      "pembe"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
-    "id": 17,
-    "order": 17,
-    "name": "3D Figür & Oyuncak",
-    "desc": "İstediğiniz karakter veya figür 3D baskı. Oyuncak ve dekoratif amaçlı.",
-    "price": "₺85",
-    "oldPrice": "",
-    "icon": "🧸",
-    "bg": "p1",
-    "badge": "Yeni",
-    "cat": [
-      "3d",
-      "3d-oyuncak"
-    ],
-    "colors": [
-      "kirmizi",
-      "mavi",
-      "yesil",
-      "sari",
-      "siyah",
-      "beyaz",
-      "turuncu",
-      "mor",
-      "pembe"
-    ],
-    "isNew": true,
-    "image": ""
-  },
-  {
-    "id": 18,
-    "order": 18,
-    "name": "3D Araba Aksesuar Parçası",
-    "desc": "Araba içi tutucu, klips, kapak vb. yedek veya özel parçalar. Ölçüye göre üretilir.",
-    "price": "₺95",
-    "oldPrice": "",
-    "icon": "⚙️",
-    "bg": "p2",
-    "badge": "",
-    "cat": [
-      "3d",
-      "3d-alet"
-    ],
-    "colors": [
-      "siyah",
-      "beyaz",
-      "gri"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
-    "id": 19,
-    "order": 19,
-    "name": "3D Dekoratif Obje",
-    "desc": "Ev & masa dekoru için 3D baskı vazolar, çerçeveler, süs nesneleri.",
-    "price": "₺110",
-    "oldPrice": "",
-    "icon": "🏺",
-    "bg": "p3",
-    "badge": "",
-    "cat": [
-      "3d",
-      "3d-deko"
-    ],
-    "colors": [
-      "beyaz",
-      "siyah",
-      "altin",
-      "gumus",
-      "pembe"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
-    "id": 20,
-    "order": 20,
-    "name": "3D Faydalı Alet",
-    "desc": "Kapı takozundan telefon standına — hayatı kolaylaştıran 3D baskı çözümler.",
-    "price": "₺70",
-    "oldPrice": "",
-    "icon": "🔧",
-    "bg": "p4",
-    "badge": "",
-    "cat": [
-      "3d",
-      "3d-alet"
-    ],
-    "colors": [
-      "siyah",
-      "beyaz",
-      "gri"
-    ],
-    "isNew": false,
-    "image": ""
-  },
-  {
     "id": 21,
     "name": "Anne Ve Kız Kardeş Seti",
     "price": "",
@@ -511,7 +15,8 @@
     "image": "/images/products/anne-ve-kiz-kardes-seti.jpg",
     "order": 21,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-001"
   },
   {
     "id": 22,
@@ -529,7 +34,8 @@
     "image": "/images/products/asalet-anahtar-seti.jpg",
     "order": 22,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-002"
   },
   {
     "id": 23,
@@ -547,7 +53,8 @@
     "image": "/images/products/asil-ugur-bocegi.jpg",
     "order": 23,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-003"
   },
   {
     "id": 24,
@@ -565,7 +72,8 @@
     "image": "/images/products/asil-cicek-bahcesi.jpg",
     "order": 24,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-004"
   },
   {
     "id": 25,
@@ -583,7 +91,8 @@
     "image": "/images/products/ask-gulu.jpg",
     "order": 25,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-005"
   },
   {
     "id": 26,
@@ -601,7 +110,8 @@
     "image": "/images/products/baris-yapragi.jpg",
     "order": 26,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-006"
   },
   {
     "id": 27,
@@ -619,7 +129,8 @@
     "image": "/images/products/bereket-incisi.jpg",
     "order": 27,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-007"
   },
   {
     "id": 28,
@@ -637,7 +148,8 @@
     "image": "/images/products/bilgelik-seti.jpg",
     "order": 28,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-008"
   },
   {
     "id": 29,
@@ -655,7 +167,8 @@
     "image": "/images/products/bolluk-seti.jpg",
     "order": 29,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-009"
   },
   {
     "id": 30,
@@ -673,7 +186,8 @@
     "image": "/images/products/buyulenme.jpg",
     "order": 30,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-010"
   },
   {
     "id": 31,
@@ -691,7 +205,8 @@
     "image": "/images/products/cennet-meyvesi.jpg",
     "order": 31,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-011"
   },
   {
     "id": 32,
@@ -709,7 +224,8 @@
     "image": "/images/products/chubby-cactus.jpg",
     "order": 32,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-012"
   },
   {
     "id": 33,
@@ -727,7 +243,8 @@
     "image": "/images/products/elmanin-yarisi.jpg",
     "order": 33,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-013"
   },
   {
     "id": 34,
@@ -745,7 +262,8 @@
     "image": "/images/products/first-lady.jpg",
     "order": 34,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-014"
   },
   {
     "id": 35,
@@ -763,7 +281,8 @@
     "image": "/images/products/genc-ve-guzel-set.jpg",
     "order": 35,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-015"
   },
   {
     "id": 36,
@@ -781,7 +300,8 @@
     "image": "/images/products/gizli-hazine.jpg",
     "order": 36,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-016"
   },
   {
     "id": 37,
@@ -799,7 +319,8 @@
     "image": "/images/products/gurur-seti.jpg",
     "order": 37,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-017"
   },
   {
     "id": 38,
@@ -817,7 +338,8 @@
     "image": "/images/products/gul-bahcesi.jpg",
     "order": 38,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-018"
   },
   {
     "id": 39,
@@ -835,7 +357,8 @@
     "image": "/images/products/gunese-yolculuk.jpg",
     "order": 39,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-019"
   },
   {
     "id": 40,
@@ -853,7 +376,8 @@
     "image": "/images/products/guclu-tilsim.jpg",
     "order": 40,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-020"
   },
   {
     "id": 41,
@@ -871,7 +395,8 @@
     "image": "/images/products/hazine-anahtar-seti.jpg",
     "order": 41,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-021"
   },
   {
     "id": 42,
@@ -889,7 +414,8 @@
     "image": "/images/products/her-zaman-ask-seti.jpg",
     "order": 42,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-022"
   },
   {
     "id": 43,
@@ -907,7 +433,8 @@
     "image": "/images/products/kalbimdeki-kilit.jpg",
     "order": 43,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-023"
   },
   {
     "id": 44,
@@ -925,7 +452,8 @@
     "image": "/images/products/kapadokya.jpg",
     "order": 44,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-024"
   },
   {
     "id": 45,
@@ -943,7 +471,8 @@
     "image": "/images/products/kisisellestirilmis-tasarim-bileklik.jpg",
     "order": 45,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-025"
   },
   {
     "id": 46,
@@ -961,7 +490,8 @@
     "image": "/images/products/kisisellestirilmis-tasarim.jpg",
     "order": 46,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-026"
   },
   {
     "id": 47,
@@ -979,7 +509,8 @@
     "image": "/images/products/kozmik-isinlar.jpg",
     "order": 47,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-027"
   },
   {
     "id": 48,
@@ -997,7 +528,8 @@
     "image": "/images/products/kutsal-yolculuk.jpg",
     "order": 48,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-028"
   },
   {
     "id": 49,
@@ -1015,7 +547,8 @@
     "image": "/images/products/kucuk-melek.jpg",
     "order": 49,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-029"
   },
   {
     "id": 50,
@@ -1033,7 +566,8 @@
     "image": "/images/products/kucuk-penguen.jpg",
     "order": 50,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-030"
   },
   {
     "id": 51,
@@ -1051,7 +585,8 @@
     "image": "/images/products/kirmizi-tilsim-seti.jpg",
     "order": 51,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-031"
   },
   {
     "id": 52,
@@ -1069,7 +604,8 @@
     "image": "/images/products/lotus-seti.jpg",
     "order": 52,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-032"
   },
   {
     "id": 53,
@@ -1087,7 +623,8 @@
     "image": "/images/products/mavi-yaprak.jpg",
     "order": 53,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-033"
   },
   {
     "id": 54,
@@ -1105,7 +642,8 @@
     "image": "/images/products/mavi-sans-kolyesi.jpg",
     "order": 54,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-034"
   },
   {
     "id": 55,
@@ -1123,7 +661,8 @@
     "image": "/images/products/melek-seti.jpg",
     "order": 55,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-035"
   },
   {
     "id": 56,
@@ -1141,7 +680,8 @@
     "image": "/images/products/melek.jpg",
     "order": 56,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-036"
   },
   {
     "id": 57,
@@ -1159,7 +699,8 @@
     "image": "/images/products/minik-patiler.jpg",
     "order": 57,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-037"
   },
   {
     "id": 58,
@@ -1177,7 +718,8 @@
     "image": "/images/products/mor-araba.jpg",
     "order": 58,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-038"
   },
   {
     "id": 59,
@@ -1195,7 +737,8 @@
     "image": "/images/products/nazar-boncugu.jpg",
     "order": 59,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-039"
   },
   {
     "id": 60,
@@ -1213,7 +756,8 @@
     "image": "/images/products/nazar-ilaci.jpg",
     "order": 60,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-040"
   },
   {
     "id": 61,
@@ -1231,7 +775,8 @@
     "image": "/images/products/neseli-gencler.jpg",
     "order": 61,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-041"
   },
   {
     "id": 62,
@@ -1249,7 +794,8 @@
     "image": "/images/products/okyanus-macerasi.jpg",
     "order": 62,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-042"
   },
   {
     "id": 63,
@@ -1267,7 +813,8 @@
     "image": "/images/products/pembe-guzellik.jpg",
     "order": 63,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-043"
   },
   {
     "id": 64,
@@ -1285,7 +832,8 @@
     "image": "/images/products/renkli-bahce.jpg",
     "order": 64,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-044"
   },
   {
     "id": 65,
@@ -1303,7 +851,8 @@
     "image": "/images/products/renkli-plaj.jpg",
     "order": 65,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-045"
   },
   {
     "id": 66,
@@ -1321,7 +870,8 @@
     "image": "/images/products/sadakat-yemini.jpg",
     "order": 66,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-046"
   },
   {
     "id": 67,
@@ -1339,7 +889,8 @@
     "image": "/images/products/sarayin-kralicesi.jpg",
     "order": 67,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-047"
   },
   {
     "id": 68,
@@ -1357,7 +908,8 @@
     "image": "/images/products/sevimli-hayvanlar.jpg",
     "order": 68,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-048"
   },
   {
     "id": 69,
@@ -1375,7 +927,8 @@
     "image": "/images/products/sevimli-kelebek.jpg",
     "order": 69,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-049"
   },
   {
     "id": 70,
@@ -1393,7 +946,8 @@
     "image": "/images/products/sevimli-orman-cetesi.jpg",
     "order": 70,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-050"
   },
   {
     "id": 71,
@@ -1411,7 +965,8 @@
     "image": "/images/products/sevimli-pony.jpg",
     "order": 71,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-051"
   },
   {
     "id": 72,
@@ -1429,7 +984,8 @@
     "image": "/images/products/sevimli-tavsan.jpg",
     "order": 72,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-052"
   },
   {
     "id": 73,
@@ -1447,7 +1003,8 @@
     "image": "/images/products/sevimli-tekboynuz.jpg",
     "order": 73,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-053"
   },
   {
     "id": 74,
@@ -1465,7 +1022,8 @@
     "image": "/images/products/size-iyi-sanslar-diliyorum.jpg",
     "order": 74,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-054"
   },
   {
     "id": 75,
@@ -1483,7 +1041,8 @@
     "image": "/images/products/sultan-kalbi-kirmizi.jpg",
     "order": 75,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-055"
   },
   {
     "id": 76,
@@ -1501,7 +1060,8 @@
     "image": "/images/products/sultan-kalbi-mavi.jpg",
     "order": 76,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-056"
   },
   {
     "id": 77,
@@ -1519,7 +1079,8 @@
     "image": "/images/products/sicak-deniz.jpg",
     "order": 77,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-057"
   },
   {
     "id": 78,
@@ -1537,7 +1098,8 @@
     "image": "/images/products/sicak-yaz.jpg",
     "order": 78,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-058"
   },
   {
     "id": 79,
@@ -1555,7 +1117,8 @@
     "image": "/images/products/tatli-ananas.jpg",
     "order": 79,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-059"
   },
   {
     "id": 80,
@@ -1573,7 +1136,8 @@
     "image": "/images/products/utangac-panda.jpg",
     "order": 80,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-060"
   },
   {
     "id": 81,
@@ -1591,7 +1155,8 @@
     "image": "/images/products/uv-isigi.jpg",
     "order": 81,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-061"
   },
   {
     "id": 82,
@@ -1609,7 +1174,8 @@
     "image": "/images/products/uzay-yolculugu.jpg",
     "order": 82,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-062"
   },
   {
     "id": 83,
@@ -1627,7 +1193,8 @@
     "image": "/images/products/venus-gizemi.jpg",
     "order": 83,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-063"
   },
   {
     "id": 84,
@@ -1645,7 +1212,8 @@
     "image": "/images/products/venus-gizemli-kupeler-5.jpg",
     "order": 84,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-064"
   },
   {
     "id": 85,
@@ -1663,7 +1231,8 @@
     "image": "/images/products/yaz-meyveleri.jpg",
     "order": 85,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-065"
   },
   {
     "id": 86,
@@ -1681,7 +1250,8 @@
     "image": "/images/products/yesil-sans-kolyesi.jpg",
     "order": 86,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-066"
   },
   {
     "id": 87,
@@ -1699,7 +1269,8 @@
     "image": "/images/products/yuce-bilgelik.jpg",
     "order": 87,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-067"
   },
   {
     "id": 88,
@@ -1717,7 +1288,8 @@
     "image": "/images/products/yildizlar-arasi.jpg",
     "order": 88,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-068"
   },
   {
     "id": 89,
@@ -1735,7 +1307,8 @@
     "image": "/images/products/cicek-acan-kelebek.jpg",
     "order": 89,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-069"
   },
   {
     "id": 90,
@@ -1753,7 +1326,8 @@
     "image": "/images/products/cicek-agaci.jpg",
     "order": 90,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-070"
   },
   {
     "id": 91,
@@ -1771,7 +1345,8 @@
     "image": "/images/products/cicek-kiz.jpg",
     "order": 91,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-071"
   },
   {
     "id": 92,
@@ -1789,7 +1364,8 @@
     "image": "/images/products/ozel-tasarim-seti.jpg",
     "order": 92,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-072"
   },
   {
     "id": 93,
@@ -1807,7 +1383,8 @@
     "image": "/images/products/sans-yildizi.jpg",
     "order": 93,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-073"
   },
   {
     "id": 94,
@@ -1825,7 +1402,8 @@
     "image": "/images/products/sansli-prenses.jpg",
     "order": 94,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-074"
   },
   {
     "id": 95,
@@ -1843,7 +1421,8 @@
     "image": "/images/products/sismis-gozler.jpg",
     "order": 95,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MIYUKI-075"
   },
   {
     "id": 96,
@@ -1861,7 +1440,8 @@
     "image": "/images/products/mum-2.jpeg",
     "order": 96,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-001"
   },
   {
     "id": 97,
@@ -1879,7 +1459,8 @@
     "image": "/images/products/mum-3.jpeg",
     "order": 97,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-002"
   },
   {
     "id": 98,
@@ -1897,7 +1478,8 @@
     "image": "/images/products/mum-4.jpeg",
     "order": 98,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-003"
   },
   {
     "id": 99,
@@ -1915,7 +1497,8 @@
     "image": "/images/products/mum-5.jpeg",
     "order": 99,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-004"
   },
   {
     "id": 100,
@@ -1933,7 +1516,8 @@
     "image": "/images/products/mum-6.jpeg",
     "order": 100,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-005"
   },
   {
     "id": 101,
@@ -1951,7 +1535,8 @@
     "image": "/images/products/mum-7.jpeg",
     "order": 101,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-006"
   },
   {
     "id": 102,
@@ -1969,7 +1554,8 @@
     "image": "/images/products/mum-8.jpeg",
     "order": 102,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-007"
   },
   {
     "id": 103,
@@ -1987,7 +1573,8 @@
     "image": "/images/products/mum-9.jpeg",
     "order": 103,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-008"
   },
   {
     "id": 104,
@@ -2005,7 +1592,8 @@
     "image": "/images/products/mum-10.jpeg",
     "order": 104,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-009"
   },
   {
     "id": 105,
@@ -2023,7 +1611,8 @@
     "image": "/images/products/mum-11.jpeg",
     "order": 105,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-010"
   },
   {
     "id": 106,
@@ -2041,7 +1630,8 @@
     "image": "/images/products/mum-12.jpeg",
     "order": 106,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-011"
   },
   {
     "id": 107,
@@ -2059,7 +1649,8 @@
     "image": "/images/products/mum-13.jpeg",
     "order": 107,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-012"
   },
   {
     "id": 108,
@@ -2077,7 +1668,8 @@
     "image": "/images/products/mum-14.jpeg",
     "order": 108,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-013"
   },
   {
     "id": 109,
@@ -2095,7 +1687,8 @@
     "image": "/images/products/mum-15.jpeg",
     "order": 109,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-014"
   },
   {
     "id": 110,
@@ -2113,7 +1706,8 @@
     "image": "/images/products/mum-16.jpeg",
     "order": 110,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-015"
   },
   {
     "id": 111,
@@ -2131,7 +1725,8 @@
     "image": "/images/products/mum-17.jpeg",
     "order": 111,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-016"
   },
   {
     "id": 112,
@@ -2149,7 +1744,8 @@
     "image": "/images/products/mum-18.jpeg",
     "order": 112,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-017"
   },
   {
     "id": 113,
@@ -2167,7 +1763,8 @@
     "image": "/images/products/mum-19.jpeg",
     "order": 113,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-018"
   },
   {
     "id": 114,
@@ -2185,7 +1782,8 @@
     "image": "/images/products/mum-20.jpeg",
     "order": 114,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-019"
   },
   {
     "id": 115,
@@ -2203,7 +1801,8 @@
     "image": "/images/products/mum-21.jpeg",
     "order": 115,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-020"
   },
   {
     "id": 116,
@@ -2221,7 +1820,8 @@
     "image": "/images/products/mum-22.jpeg",
     "order": 116,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-021"
   },
   {
     "id": 117,
@@ -2239,7 +1839,8 @@
     "image": "/images/products/mum-23.jpeg",
     "order": 117,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-022"
   },
   {
     "id": 118,
@@ -2257,7 +1858,8 @@
     "image": "/images/products/mum-24.jpeg",
     "order": 118,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-023"
   },
   {
     "id": 119,
@@ -2275,7 +1877,8 @@
     "image": "/images/products/mum-25.jpeg",
     "order": 119,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-024"
   },
   {
     "id": 120,
@@ -2293,7 +1896,8 @@
     "image": "/images/products/mum-26.jpeg",
     "order": 120,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-025"
   },
   {
     "id": 121,
@@ -2311,7 +1915,8 @@
     "image": "/images/products/mum-27.jpeg",
     "order": 121,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-026"
   },
   {
     "id": 122,
@@ -2329,6 +1934,7 @@
     "image": "/images/products/mum-28.jpeg",
     "order": 122,
     "giftBagEligible": false,
-    "giftBagPrice": 0
+    "giftBagPrice": 0,
+    "code": "MUM-027"
   }
 ]
