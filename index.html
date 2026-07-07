@@ -290,14 +290,11 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-cat-tab{background:#fff;color:var(--text);border:1.5px solid var(--line);border-radius:50px;padding:.5rem 1rem;font-size:.74rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s,background .2s,color .2s;}
 .bb-cat-tab:hover{border-color:#888;}
 .bb-cat-tab.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
-/* Adım 2 — Alt kategori chip şeridi (akordeon, ana kategori altında açılır) */
-.bb-sub-chips{display:flex;flex-wrap:wrap;gap:.4rem;overflow:hidden;max-height:0;opacity:0;margin:0;transition:max-height .3s ease,opacity .25s ease,margin-bottom .3s ease;}
-.bb-sub-chips.open{max-height:200px;opacity:1;margin-bottom:1.2rem;}
-.bb-sub-chip{background:#fff;color:var(--neutral-muted);border:1px solid var(--line);border-radius:3px;padding:.36rem .8rem;font-size:.72rem;letter-spacing:.5px;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s,background .2s,color .2s;}
-.bb-sub-chip:hover{border-color:#888;color:var(--text);}
-.bb-sub-chip.active{background:var(--text);color:#fff;border-color:var(--text);}
-.bb-prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;}
-.bb-prod-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;}
+/* Adım 2 — v7-6: her alt-kategori kendi yatay kaydırmalı rayında (carousel, saf CSS scroll-snap) */
+.bb-prod-grid{display:flex;flex-direction:column;gap:1.5rem;}
+.bb-prod-row-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--text);margin-bottom:.7rem;font-weight:500;}
+.bb-prod-rail{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:.3rem;}
+.bb-prod-card{flex:0 0 calc(50% - .45rem);scroll-snap-align:start;background:#fff;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;}
 .bb-prod-card.added{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;background:#fdfdfd;}
 .bb-prod-thumb{aspect-ratio:1/1;background:var(--placeholder);display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .bb-prod-thumb img{width:100%;height:100%;object-fit:cover;}
@@ -309,7 +306,7 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-prod-add{background:transparent;border:1.5px solid var(--text);color:var(--text);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:500;transition:background .2s,color .2s;font-family:'Inter',sans-serif;line-height:1;padding:0;}
 .bb-prod-add:hover{background:var(--text);color:#fff;}
 .bb-prod-card.added .bb-prod-add{background:#1a1a1a;color:#fff;border-color:#1a1a1a;width:auto;border-radius:50px;padding:.25rem .8rem;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
-.bb-prod-empty{grid-column:1/-1;padding:2.5rem 1rem;text-align:center;color:var(--neutral-muted);font-size:.85rem;background:#fff;border:1px dashed var(--line);border-radius:6px;}
+.bb-prod-empty{padding:2.5rem 1rem;text-align:center;color:var(--neutral-muted);font-size:.85rem;background:#fff;border:1px dashed var(--line);border-radius:6px;}
 /* Renk paleti — fallback daireleri */
 .bb-tint-miyuki{background:#7a1f2e;}
 .bb-tint-mum{background:#c97a3a;}
@@ -324,7 +321,6 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-label-meta{display:flex;justify-content:space-between;margin-top:.4rem;font-size:.7rem;color:var(--neutral-muted);}
 @media (max-width: 880px){
   .bb-grid{grid-template-columns:1fr;gap:1.6rem;}
-  .bb-prod-grid{grid-template-columns:repeat(2,1fr);}
   .bb-preview-items{inset:18% 10% 14%;}
 }
 @media(max-width:780px){.gb-builder-grid{grid-template-columns:1fr;gap:2.2rem;}.gb-items-list{grid-template-columns:1fr;}}
@@ -805,7 +801,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
         <span class="bb-step">Adım 2</span>
         <h3 class="bb-col-title">İçeriği belirleyin</h3>
         <div class="bb-cat-tabs" id="bbCatTabs"></div>
-        <div class="bb-sub-chips" id="bbSubChips" role="group" aria-label="Alt kategoriler"></div>
         <div class="bb-prod-grid" id="bbProdGrid"></div>
       </div>
       <div class="bb-label-area">
@@ -2120,7 +2115,7 @@ loadEvents();
 
 /* ════ ÇANTA BUILDER v2 — görsel, resim tabanlı ════ */
 let bbBags = [];
-const bbState = { bag: null, items: new Set(), activeCat: 'miyuki', activeSub: null };
+const bbState = { bag: null, items: new Set(), activeCat: 'miyuki' };
 
 const BB_CATS = [
   { key: 'miyuki',  label: 'Miyuki Takı', match: ['miyuki','bileklik','kolye','kupe','yuzuk','anahtarlik'],
@@ -2223,7 +2218,6 @@ function bbRenderCatTabs(){
   const tabs = BB_CATS.filter(c => avail.has(c.key));
   if(!tabs.length){
     wrap.innerHTML = '';
-    bbRenderSubChips();
     return;
   }
   // Aktif kategori uygun değilse ilkine geç
@@ -2231,7 +2225,6 @@ function bbRenderCatTabs(){
   wrap.innerHTML = tabs.map(c =>
     `<button type="button" class="bb-cat-tab${c.key===bbState.activeCat?' active':''}" onclick="bbSelectCat('${jsArg(c.key)}')">${aiEscape(c.label)}</button>`
   ).join('');
-  bbRenderSubChips();
 }
 
 function bbActiveCatDef(){
@@ -2244,68 +2237,25 @@ function bbProdMatchesSub(p, subKey){
   return p.cat.some(x => x === subKey || String(x).startsWith(subKey + '-'));
 }
 
-// Aktif ana kategoride, uygun ürünü bulunan alt-kategoriler
-function bbAvailableSubs(){
-  const def = bbActiveCatDef();
-  if(!def || !Array.isArray(def.subs) || !def.subs.length) return [];
-  const inCat = bbEligibleProducts().filter(p => bbProductCat(p) === bbState.activeCat);
-  return def.subs.filter(s => inCat.some(p => bbProdMatchesSub(p, s.key)));
-}
-
-function bbRenderSubChips(){
-  const wrap = document.getElementById('bbSubChips');
-  if(!wrap) return;
-  const subs = bbAvailableSubs();
-  // En az 2 alt-kategori yoksa şerit açma ("Tümü + tek chip" gereksiz)
-  if(subs.length < 2){
-    bbState.activeSub = null;
-    wrap.classList.remove('open');
-    wrap.innerHTML = '';
-    return;
-  }
-  // Aktif alt-kat artık uygun değilse "Tümü"ye dön
-  if(bbState.activeSub && !subs.some(s => s.key === bbState.activeSub)) bbState.activeSub = null;
-  const chips = [`<button type="button" class="bb-sub-chip${bbState.activeSub?'':' active'}" onclick="bbSelectSub('')">Tümü</button>`]
-    .concat(subs.map(s =>
-      `<button type="button" class="bb-sub-chip${bbState.activeSub===s.key?' active':''}" onclick="bbSelectSub('${jsArg(s.key)}')">${aiEscape(s.label)}</button>`
-    ));
-  wrap.innerHTML = chips.join('');
-  wrap.classList.add('open');
-}
-
 function bbSelectCat(key){
   bbState.activeCat = String(key||'');
-  bbState.activeSub = null;
   bbRenderCatTabs();
   bbRenderProducts();
 }
 
-function bbSelectSub(key){
-  bbState.activeSub = key ? String(key) : null;
-  bbRenderSubChips();
-  bbRenderProducts();
-}
-
-function bbRenderProducts(){
-  const wrap = document.getElementById('bbProdGrid');
-  if(!wrap) return;
-  let list = bbEligibleProducts().filter(p => bbProductCat(p) === bbState.activeCat);
-  if(bbState.activeSub) list = list.filter(p => bbProdMatchesSub(p, bbState.activeSub));
-  list.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0));
-  if(!list.length){
-    wrap.innerHTML = '<div class="bb-prod-empty">Bu kategoride henüz çantaya eklenebilir ürün yok. Panelden ürüne "Çanta Setine Uygun" işaretleyebilirsiniz.</div>';
-    return;
-  }
-  wrap.innerHTML = list.map(p => {
-    const id = Number(p.id);
-    const added = bbState.items.has(id);
-    const img = bbProdImage(p);
-    const cat = bbProductCat(p);
-    const tint = BB_TINT[cat] || BB_TINT.diger;
-    const thumb = img
-      ? `<img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}">`
-      : `<div class="bb-prod-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div>`;
-    return `<div class="bb-prod-card${added?' added':''}">
+// v7-6: tek satır yerine — alt-kategorisi olan ana kategorilerde (Miyuki) her
+// alt-kategori kendi yatay kaydırmalı rayında; alt-kategorisi olmayanlarda
+// (Mumlar/Koku/3D/Diğer) tüm ürünler tek bir rayda gösterilir.
+function bbProdCardHtml(p){
+  const id = Number(p.id);
+  const added = bbState.items.has(id);
+  const img = bbProdImage(p);
+  const cat = bbProductCat(p);
+  const tint = BB_TINT[cat] || BB_TINT.diger;
+  const thumb = img
+    ? `<img src="${aiEscape(img)}" alt="${aiEscape(p.name||'')}">`
+    : `<div class="bb-prod-fallback ${tint}">${aiEscape(bbFirstLetter(p.name))}</div>`;
+  return `<div class="bb-prod-card${added?' added':''}" data-id="${id}">
       <div class="bb-prod-thumb">${thumb}</div>
       <div class="bb-prod-info">
         <div class="bb-prod-name">${aiEscape(p.name||'')}</div>
@@ -2315,7 +2265,41 @@ function bbRenderProducts(){
         </div>
       </div>
     </div>`;
+}
+
+function bbRenderProducts(){
+  const wrap = document.getElementById('bbProdGrid');
+  if(!wrap) return;
+  const def = bbActiveCatDef();
+  const inCat = bbEligibleProducts().filter(p => bbProductCat(p) === bbState.activeCat);
+  if(!inCat.length){
+    wrap.innerHTML = '<div class="bb-prod-empty">Bu kategoride henüz çantaya eklenebilir ürün yok. Panelden ürüne "Çanta Setine Uygun" işaretleyebilirsiniz.</div>';
+    return;
+  }
+  const subs = (def && Array.isArray(def.subs)) ? def.subs : [];
+  const rows = subs.length
+    ? subs.map(s => ({ title: s.label, items: inCat.filter(p => bbProdMatchesSub(p, s.key)) })).filter(r => r.items.length)
+    : [{ title: '', items: inCat }];
+  rows.forEach(r => r.items.sort((a,b)=>(Number.isFinite(a.order)?a.order:0)-(Number.isFinite(b.order)?b.order:0)));
+  wrap.innerHTML = rows.map(row => {
+    const titleHtml = row.title ? `<h4 class="bb-prod-row-title">${aiEscape(row.title)}</h4>` : '';
+    const cards = row.items.map(p => bbProdCardHtml(p)).join('');
+    return `<div class="bb-prod-row">${titleHtml}<div class="bb-prod-rail">${cards}</div></div>`;
   }).join('');
+}
+
+// Rayların scroll pozisyonunu bozmamak için tam yeniden render yerine
+// sadece tıklanan kartın "eklendi" durumunu günceller.
+function bbUpdateProductCard(id){
+  const added = bbState.items.has(id);
+  document.querySelectorAll(`.bb-prod-card[data-id="${id}"]`).forEach(card => {
+    card.classList.toggle('added', added);
+    const btn = card.querySelector('.bb-prod-add');
+    if(btn){
+      btn.textContent = added ? '✓ Eklendi' : '+';
+      btn.setAttribute('aria-label', added ? 'Çantadan çıkar' : 'Çantaya ekle');
+    }
+  });
 }
 
 function bbToggleProduct(id){
@@ -2323,7 +2307,7 @@ function bbToggleProduct(id){
   if(!Number.isFinite(num)) return;
   if(bbState.items.has(num)) bbState.items.delete(num);
   else bbState.items.add(num);
-  bbRenderProducts();
+  bbUpdateProductCard(num);
   bbRenderPreview();
   bbRenderSummary();
 }
