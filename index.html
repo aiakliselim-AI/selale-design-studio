@@ -200,6 +200,20 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 @media (hover:none){.strip-arrow{display:none;}}
 @media (prefers-reduced-motion:reduce){.strip-card{transition:none;}}
 
+/* ═══ KOKU — çanta seti ile koleksiyon arasında ara bölüm ═══ */
+.koku-section{padding:4rem 5% 5rem;}
+.koku-section .section-title{text-align:center;margin-bottom:2.2rem;}
+.koku-section .section-title h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.4rem);font-style:italic;font-weight:500;color:var(--text);}
+.koku-rail{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;max-width:1200px;margin:0 auto;padding:.3rem 5% .5rem;scrollbar-width:none;}
+.koku-rail::-webkit-scrollbar{display:none;}
+.koku-card{flex:0 0 160px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s;}
+.koku-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(44,33,24,.1);}
+.koku-card-img{aspect-ratio:1/1;background:var(--placeholder);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.koku-card-img img{width:100%;height:100%;object-fit:cover;}
+.koku-card-name{padding:.6rem .7rem .8rem;font-size:.82rem;color:var(--text);line-height:1.3;}
+.koku-empty{flex:0 0 auto;width:100%;max-width:420px;margin:0 auto;text-align:center;padding:2.2rem 1.4rem;background:#fff;border:1px dashed var(--line);border-radius:8px;color:var(--neutral-muted);font-size:.88rem;cursor:pointer;transition:border-color .2s,color .2s;}
+.koku-empty:hover{border-color:#888;color:var(--text);}
+
 /* ═══ PRODUCTS ═══ */
 .products{padding:7rem 5%;}
 .filter-bar{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;}
@@ -803,6 +817,15 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
       </div>
     </div>
   </div>
+</section>
+
+<!-- KOKU -->
+<section class="koku-section" id="koku-section">
+  <div class="section-title reveal">
+    <div class="tag">✦ Koku</div>
+    <h2>Koku</h2>
+  </div>
+  <div class="koku-rail" id="kokuRail"></div>
 </section>
 
 <!-- ÜRÜNLER -->
@@ -1524,7 +1547,7 @@ const AI_CAT_LABEL = {
   'anahtarlik-hayvan':'hayvanlı anahtarlık','anahtarlik-karakter':'karakter anahtarlık',
   'anahtarlik-spor':'spor takımı anahtarlık','anahtarlik-arac':'araç anahtarlığı',
   'anahtarlik-isimli':'isimli anahtarlık',
-  mum:'mum',koku:'koku & parfüm sunumu',parfum:'parfüm',
+  mum:'mum',koku:'koku',parfum:'parfüm',
   'seffaf-canta':'çanta seti','canta-icerik':'çanta seti içerik kalemleri',
   '3d':'3D baskı ürünleri'
 };
@@ -1809,6 +1832,7 @@ async function loadProducts(){
     products = data.filter(p => p && Number.isInteger(p.id) && p.id > 0 && p.id < 10000);
     renderProducts(products);
     renderFeaturedProducts();
+    renderKokuSection();
     if(typeof renderCategoryStrips === 'function') renderCategoryStrips(products);
     if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
     if(typeof renderPrinter === 'function' && _printerData) renderPrinter(_printerData);
@@ -1823,6 +1847,7 @@ async function loadProducts(){
     if(grid) grid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Ürünler şu anda yüklenemedi. Lütfen sayfayı yenileyin.</p>';
     // Şeritleri yine de placeholder ile bas, sayfa görünmesin diye.
     if(typeof renderCategoryStrips === 'function') renderCategoryStrips([]);
+    renderKokuSection();
   }
 }
 loadProducts();
@@ -1980,6 +2005,35 @@ function renderFeaturedProducts() {
   }).join('');
 
   if (window.observeRevealIn) window.observeRevealIn(grid);
+}
+
+// Çanta seti ile Koleksiyon arasındaki ara bölüm — kategorisi "koku" olan
+// ürünleri gösterir. Şu an gerçek üründe koku etiketi yoksa tıklanabilir
+// "yakında" kartı gösterir (showComingSoon).
+function renderKokuSection() {
+  const rail = document.getElementById('kokuRail');
+  if (!rail) return;
+  const kokuProducts = (Array.isArray(products) ? products : [])
+    .filter(p => p && Array.isArray(p.cat) && p.cat.includes('koku') && featuredHasContent(p))
+    .sort((a, b) => (b.id || 0) - (a.id || 0));
+
+  if (!kokuProducts.length) {
+    rail.innerHTML = `<div class="koku-empty" onclick="showComingSoon('Koku ürünleri yakında hizmetinizde')">Koku ürünleri yakında hizmetinizde</div>`;
+    return;
+  }
+
+  rail.innerHTML = kokuProducts.map(p => {
+    const firstImage = p.image
+      || (Array.isArray(p.images) && p.images[0] && (typeof p.images[0] === 'string' ? p.images[0] : p.images[0].src))
+      || '';
+    const img = firstImage ? `<img src="${aiEscape(firstImage)}" alt="${aiEscape(p.name||'')}" loading="lazy">` : '';
+    return `<div class="koku-card" onclick="openModal(${p.id})">
+      <div class="koku-card-img">${img}</div>
+      <div class="koku-card-name">${aiEscape(p.name||'')}</div>
+    </div>`;
+  }).join('');
+
+  if (window.observeRevealIn) window.observeRevealIn(rail);
 }
 
 function renderCategoryStrips(list){
@@ -2197,7 +2251,7 @@ const BB_CATS = [
       { key: 'anahtarlik', label: 'Anahtarlık' },
     ] },
   { key: 'mum',     label: 'Mumlar',      match: ['mum'] },
-  { key: 'koku',    label: 'Koku & Parfüm', match: ['koku','parfum'] },
+  { key: 'koku',    label: 'Koku', match: ['koku','parfum'] },
   { key: '3d',      label: '3D Baskı',    match: ['3d','3d-anahtarlik','3d-oyuncak','3d-alet','3d-deko'] },
   { key: 'diger',   label: 'Koku',        match: null },
 ];

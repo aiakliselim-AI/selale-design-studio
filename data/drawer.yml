@@ -33,19 +33,10 @@ categories:
     action: { type: filter, target: mum }
     order: 2
 
-  - label: Koku & Parfüm
+  - label: Koku
     icon: 🌷
-    expandable: true
+    action: { type: scroll, target: koku-section }
     order: 3
-    children:
-      - label: Çiçekli Kart Sunum
-        icon: 💐
-        action: { type: filter, target: koku-cicekli }
-        order: 1
-      - label: Tek Şişe Süsleme
-        icon: 🌸
-        action: { type: filter, target: koku-sise }
-        order: 2
 
   - label: Çanta Setleri
     icon: 🛍️
