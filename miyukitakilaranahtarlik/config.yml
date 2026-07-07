@@ -365,7 +365,7 @@ collections:
           - { label: 'Anahtarlık — Araç', value: anahtarlik-arac }
           - { label: 'Anahtarlık — İsimli', value: anahtarlik-isimli }
           - { label: 'Mum', value: mum }
-          - { label: 'Koku & Parfüm', value: koku }
+          - { label: 'Koku', value: koku }
           - { label: 'Parfüm', value: parfum }
           - { label: 'Çanta Seti', value: seffaf-canta }
           - { label: 'Çanta Seti İçeriği', value: canta-icerik }
