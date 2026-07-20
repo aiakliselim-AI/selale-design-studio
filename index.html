@@ -1131,6 +1131,8 @@ function imgContent(p){
 /* ════ RENDER ════ */
 function renderProducts(list){
   const grid = document.getElementById('productGrid');
+  // İsmi veya görseli boş "hayalet" ürünleri (bkz. #21 featured fix) listeden düşür.
+  list = list.filter(featuredHasContent);
   if(!list.length){ grid.innerHTML='<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:3rem">Bu kategoride ürün bulunamadı.</p>'; return; }
   grid.innerHTML = list.map(p=>{
     const catRaw = Array.isArray(p.cat) ? p.cat[0] : p.cat;
