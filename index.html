@@ -2222,6 +2222,11 @@ function renderEvents(list){
 // Etkinlik kartından çanta builder'a yönlendirme — bag ön seçilir (varsa).
 // Eski preset items akışı yeni sisteme uymadığı için yalnızca çanta seçimi taşınır.
 function aiApplyGiftbagPreset(bagSlug, _itemSlugs){
+  if(!BB_ACTIVE){
+    showComingSoon(BB_SOON_MSG);
+    goTo('giftbag-builder');
+    return;
+  }
   if(bagSlug && bagSlug in {} === false){
     bbState.bag = String(bagSlug);
   }
@@ -2238,6 +2243,10 @@ function openGiftbagFromEvent(slug){
 loadEvents();
 
 /* ════ ÇANTA BUILDER v2 — görsel, resim tabanlı ════ */
+// v7-9: gerçek ürün fiyatları (giftBagPrice) henüz girilmediği için bölüm
+// geçici olarak pasif — UI aynı kalır, tıklamalar "yakında" toast'ı gösterir.
+const BB_ACTIVE = false;
+const BB_SOON_MSG = 'Çanta seçimi yakında aktif olacak';
 let bbBags = [];
 const bbState = { bag: null, items: new Set(), activeCat: 'miyuki' };
 
@@ -2297,7 +2306,7 @@ async function bbLoadBags(){
   bbBags = bbBags.filter(b => b && b.active !== false && b.id);
   bbBags.sort((a,b)=>(Number.isFinite(a.order)?a.order:9999)-(Number.isFinite(b.order)?b.order:9999));
   // Tek çanta varsa otomatik seç
-  if(!bbState.bag && bbBags.length){
+  if(BB_ACTIVE && !bbState.bag && bbBags.length){
     bbState.bag = bbBags[0].id;
   }
   bbRenderBags();
@@ -2327,6 +2336,7 @@ function bbRenderBags(){
 }
 
 function bbSelectBag(id){
+  if(!BB_ACTIVE){ showComingSoon(BB_SOON_MSG); return; }
   bbState.bag = String(id||'');
   bbRenderBags();
   bbRenderPreview();
@@ -2422,6 +2432,7 @@ function bbUpdateProductCard(id){
 }
 
 function bbToggleProduct(id){
+  if(!BB_ACTIVE){ showComingSoon(BB_SOON_MSG); return; }
   const num = Number(id);
   if(!Number.isFinite(num)) return;
   if(bbState.items.has(num)) bbState.items.delete(num);
@@ -2478,6 +2489,12 @@ function bbRenderSummary(){
   const btn = document.getElementById('bbSendBtn');
   const hint = document.getElementById('bbSendHint');
   if(!sum || !btn) return;
+  if(!BB_ACTIVE){
+    sum.innerHTML = `<div class="bb-sum-row"><span class="bb-sum-label">${aiEscape(BB_SOON_MSG)}</span><span></span></div>`;
+    btn.disabled = false;
+    if(hint) hint.textContent = BB_SOON_MSG;
+    return;
+  }
   const bag = bbSelectedBag();
   if(!bag){
     sum.innerHTML = `<div class="bb-sum-row"><span class="bb-sum-label">Önce bir çanta seçin</span><span></span></div>`;
@@ -2531,12 +2548,28 @@ function bbBuildMessage(){
 }
 
 function bbSend(){
+  if(!BB_ACTIVE){ showComingSoon(BB_SOON_MSG); return; }
   const msg = bbBuildMessage();
   if(!msg) return;
   openWA(msg);
 }
 
 bbLoadBags();
+
+// v7-9: bölüm görünüme her girişinde "yakında aktif olacak" banner'ı gösterir
+// (revealObserver'dan ayrı — bu, .visible class'ı kalıcı olduğu için tekrar
+// tetiklenmez; burada her giriş-çıkıştan sonra yeniden görünmesi isteniyor).
+if(!BB_ACTIVE){
+  const bbNoticeSection = document.getElementById('giftbag-builder');
+  if(bbNoticeSection){
+    const bbNoticeObserver = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) showComingSoon(BB_SOON_MSG);
+      });
+    }, { threshold: .3 });
+    bbNoticeObserver.observe(bbNoticeSection);
+  }
+}
 
 /* ════ CMS METİN VERİSİ — data/*.yml'den yükle ════ */
 async function fetchYaml(path){
