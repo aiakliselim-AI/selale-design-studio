@@ -494,6 +494,15 @@ Repo public olduğu için:
 - **v7 başladı (2026-05-13):** Canlıda 3 bug/eksik çıktı, Bölüm 5B'ye
   3 aşama yazıldı. Her aşama mockup → onay → ayrı branch → push akışı
   ile yürütülür.
+- **⚠️ YAPILACAK — Çanta builder'ı yeniden aktifleştirme (2026-07-20):**
+  `index.html` içinde `BB_ACTIVE = false` yapılarak çanta builder
+  (#giftbag-builder) geçici pasifleştirildi — Adım 1-3 tıklamaları
+  (çanta seç, ürün ekle, WhatsApp gönder) şu an "yakında" toast'ı
+  gösteriyor, gerçek state değiştirmiyor. Sebep: hiçbir üründe
+  `giftBagPrice` girilmemiş (`data/products.json`, 102 üründe 0 tanesi
+  `giftBagEligible && giftBagPrice>0`). **Sveltia panelinden ürünlere
+  `giftBagPrice` girildikten sonra `index.html`'de `BB_ACTIVE`'i
+  `true` yap** ve builder'ı gerçek verilerle uçtan uca tekrar test et.
 
 ---
 
