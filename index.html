@@ -261,7 +261,8 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.4rem;}
 /* Adım 1 — Çanta seçim grid */
 .bb-bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem;}
-.bb-bag-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:.9rem;cursor:pointer;transition:border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.6rem;text-align:left;font:inherit;color:inherit;position:relative;}
+/* Kart yalnızca çanta görselini gösterir — isim/fiyat bilinçli olarak yok. */
+.bb-bag-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:.7rem;cursor:pointer;transition:border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.6rem;text-align:left;font:inherit;color:inherit;position:relative;}
 .bb-bag-card:hover{border-color:#888;}
 .bb-bag-card.selected{border-color:#1a1a1a;box-shadow:0 0 0 1px #1a1a1a inset;}
 .bb-bag-card .bb-bag-check{position:absolute;top:.5rem;right:.5rem;width:22px;height:22px;border-radius:50%;background:#1a1a1a;color:#fff;display:none;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;}
@@ -308,9 +309,11 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06);}
 .bb-cat-tab:hover{border-color:#888;}
 .bb-cat-tab.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
 /* Adım 2 — her alt-kategori kendi yatay kaydırmalı rayında (carousel, saf CSS scroll-snap) */
-.bb-prod-grid{display:flex;flex-direction:column;gap:1.5rem;}
+.bb-prod-grid{display:flex;flex-direction:column;gap:1.8rem;}
 .bb-prod-row-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--text);margin-bottom:.7rem;font-weight:500;}
-.bb-prod-rail{display:flex;gap:.7rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.3rem .3rem .5rem;}
+.bb-rail-wrap{position:relative;}
+.bb-prod-rail{display:flex;gap:.7rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.3rem .3rem .5rem;scrollbar-width:none;}
+.bb-prod-rail::-webkit-scrollbar{display:none;}
 .bb-prod-card{position:relative;flex:0 0 100px;width:100px;aspect-ratio:1/1;border-radius:8px;overflow:hidden;scroll-snap-align:start;transition:transform .2s ease,box-shadow .2s ease;}
 .bb-prod-card:hover{transform:scale(1.12);z-index:2;box-shadow:0 8px 20px rgba(0,0,0,.18);}
 .bb-prod-card.added{box-shadow:0 0 0 2px #1a1a1a;}
@@ -793,7 +796,6 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <div class="bb-card">
       <span class="bb-step">Adım 2</span>
       <h3 class="bb-col-title">İçini doldurun</h3>
-      <div class="bb-cat-tabs" id="bbCatTabs"></div>
       <div class="bb-prod-grid" id="bbProdGrid"></div>
     </div>
     <div class="bb-label-area">
@@ -804,17 +806,20 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
         <span><span id="bbLabelCount">0</span>/100</span>
       </div>
     </div>
-    <div class="bb-card">
+    <!-- Adım 3 (önizleme + fiyat özeti): geçici olarak kullanıcıya kapalı.
+         Kod ve JS bağlantıları duruyor — `hidden` kaldırılınca geri açılır. -->
+    <div class="bb-card" id="bbStep3" hidden>
       <span class="bb-step">Adım 3</span>
       <h3 class="bb-col-title">Çantanızın görünümü</h3>
       <div class="bb-preview-wrap">
         <div class="bb-preview" id="bbPreview"></div>
       </div>
       <div class="bb-summary" id="bbSummary"></div>
-      <div class="bb-send-row">
-        <button type="button" class="bb-send-btn" id="bbSendBtn" onclick="bbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
-        <p class="bb-send-hint" id="bbSendHint">En az 1 ürün ekleyin</p>
-      </div>
+    </div>
+    <!-- Sipariş butonu Adım 3'ün dışında: önizleme kapalıyken de görünür kalır. -->
+    <div class="bb-send-row">
+      <button type="button" class="bb-send-btn" id="bbSendBtn" onclick="bbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
+      <p class="bb-send-hint" id="bbSendHint">Önce bir çanta seçin</p>
     </div>
   </div>
 </section>
@@ -1838,8 +1843,7 @@ async function loadProducts(){
     if(typeof renderCategoryStrips === 'function') renderCategoryStrips(products);
     if(typeof refreshDynamicWALinks === 'function') refreshDynamicWALinks();
     if(typeof renderPrinter === 'function' && _printerData) renderPrinter(_printerData);
-    // Çanta builder: ürünler yüklenince kategori tab + ürün gridi + önizleme yenilenmeli
-    if(typeof bbRenderCatTabs === 'function') bbRenderCatTabs();
+    // Çanta builder: ürünler yüklenince ürün rayları + önizleme yenilenmeli
     if(typeof bbRenderProducts === 'function') bbRenderProducts();
     if(typeof bbRenderPreview === 'function') bbRenderPreview();
     if(typeof bbRenderSummary === 'function') bbRenderSummary();
@@ -2245,9 +2249,12 @@ function openGiftbagFromEvent(slug){
 loadEvents();
 
 /* ════ ÇANTA BUILDER v2 — görsel, resim tabanlı ════ */
-// v7-9: gerçek ürün fiyatları (giftBagPrice) henüz girilmediği için bölüm
-// geçici olarak pasif — UI aynı kalır, tıklamalar "yakında" toast'ı gösterir.
-const BB_ACTIVE = false;
+// v7-10: bölüm tekrar aktif. Fiyat hiçbir yerde gösterilmiyor (giftBagPrice
+// hâlâ girilmedi), bu yüzden akış tamamen fiyatsız: müşteri çanta + ürün seçer,
+// WhatsApp mesajı yalnızca seçimleri listeler. Fiyatlar girilip önizleme
+// (Adım 3) geri açılınca özet/toplam satırları da geri gelir.
+// false yapılırsa eski pasif davranış ("yakında" toast'ı) geri döner.
+const BB_ACTIVE = true;
 const BB_SOON_MSG = 'Çanta seçimi yakında aktif olacak';
 let bbBags = [];
 const bbState = { bag: null, items: new Set(), activeCat: 'miyuki' };
@@ -2307,12 +2314,11 @@ async function bbLoadBags(){
   }
   bbBags = bbBags.filter(b => b && b.active !== false && b.id);
   bbBags.sort((a,b)=>(Number.isFinite(a.order)?a.order:9999)-(Number.isFinite(b.order)?b.order:9999));
-  // Tek çanta varsa otomatik seç
-  if(BB_ACTIVE && !bbState.bag && bbBags.length){
+  // Tek çanta varsa otomatik seç — birden fazlaysa seçim müşteriye bırakılır.
+  if(BB_ACTIVE && !bbState.bag && bbBags.length === 1){
     bbState.bag = bbBags[0].id;
   }
   bbRenderBags();
-  bbRenderCatTabs();
   bbRenderProducts();
   bbRenderPreview();
   bbRenderSummary();
@@ -2325,14 +2331,15 @@ function bbRenderBags(){
     wrap.innerHTML = '<p class="bb-empty">Çanta yakında eklenecek.</p>';
     return;
   }
-  wrap.innerHTML = bbBags.map(b => {
+  // Kartta yalnızca görsel var: isim ve fiyat bilinçli olarak gösterilmiyor.
+  // (İsim erişilebilirlik için aria-label'da kalıyor.)
+  wrap.innerHTML = bbBags.map((b, i) => {
     const sel = bbState.bag === b.id ? ' selected' : '';
-    const img = b.image ? `<img src="${aiEscape(b.image)}" alt="${aiEscape(b.name||'')}">` : `${BB_BAG_SVG}<span class="bb-bag-placeholder-text">Foto yakında</span>`;
-    return `<button type="button" class="bb-bag-card${sel}" data-bag="${aiEscape(b.id)}" onclick="bbSelectBag('${jsArg(b.id)}')">
+    const label = `${i+1}. çanta`;
+    const img = b.image ? `<img src="${aiEscape(b.image)}" alt="">` : `${BB_BAG_SVG}<span class="bb-bag-placeholder-text">Foto yakında</span>`;
+    return `<button type="button" class="bb-bag-card${sel}" data-bag="${aiEscape(b.id)}" aria-pressed="${sel?'true':'false'}" aria-label="${aiEscape(label)}" onclick="bbSelectBag('${jsArg(b.id)}')">
       <span class="bb-bag-check" aria-hidden="true">✓</span>
       <div class="bb-bag-thumb">${img}</div>
-      <span class="bb-bag-name">${aiEscape(b.name||'')}</span>
-      <span class="bb-bag-price">₺${aiEscape(String(b.price ?? ''))}</span>
     </button>`;
   }).join('');
 }
@@ -2345,6 +2352,10 @@ function bbSelectBag(id){
   bbRenderSummary();
 }
 
+/* v7-10: Adım 2 artık sekmesiz — "Miyuki Takılar" ve "El Yapımı Mumlar" alt alta
+   iki ray olarak gösteriliyor. Aşağıdaki sekme fonksiyonları (bbRenderCatTabs,
+   bbActiveCatDef, bbProdMatchesSub, bbSelectCat) ve bbEligibleProducts artık
+   çağrılmıyor; sekmeli düzene dönülürse diye korunuyor. */
 function bbRenderCatTabs(){
   const wrap = document.getElementById('bbCatTabs');
   if(!wrap) return;
@@ -2379,9 +2390,6 @@ function bbSelectCat(key){
   bbRenderProducts();
 }
 
-// v7-6: tek satır yerine — alt-kategorisi olan ana kategorilerde (Miyuki) her
-// alt-kategori kendi yatay kaydırmalı rayında; alt-kategorisi olmayanlarda
-// (Mumlar/Koku/3D/Diğer) tüm ürünler tek bir rayda gösterilir.
 function bbProdCardHtml(p){
   const id = Number(p.id);
   const added = bbState.items.has(id);
@@ -2397,25 +2405,60 @@ function bbProdCardHtml(p){
     </div>`;
 }
 
+// v7-10: Adım 2 iki sabit gruptan oluşur ve ürünleri anasayfa şeritleriyle
+// AYNI kaynaktan alır — STRIP_DEFS'teki 'miyuki' ve 'mum' tanımları yeniden
+// kullanılır, böylece iki bölüm birbiriyle otomatik senkron kalır.
+const BB_GROUP_KEYS = ['miyuki', 'mum'];
+function bbGroups(){
+  const defs = (typeof STRIP_DEFS !== 'undefined' && Array.isArray(STRIP_DEFS)) ? STRIP_DEFS : [];
+  return BB_GROUP_KEYS.map(k => defs.find(d => d && d.key === k)).filter(Boolean);
+}
+
 function bbRenderProducts(){
   const wrap = document.getElementById('bbProdGrid');
   if(!wrap) return;
-  const def = bbActiveCatDef();
-  const inCat = bbEligibleProducts().filter(p => bbProductCat(p) === bbState.activeCat);
-  if(!inCat.length){
-    wrap.innerHTML = '<div class="bb-prod-empty">Bu kategoride henüz çantaya eklenebilir ürün yok. Panelden ürüne "Çanta Setine Uygun" işaretleyebilirsiniz.</div>';
+  const rows = bbGroups()
+    .map(def => ({ title: def.label, items: stripPickProducts(products||[], def.match) }))
+    .filter(r => r.items.length);
+  if(!rows.length){
+    wrap.innerHTML = '<div class="bb-prod-empty">Ürünler yükleniyor…</div>';
     return;
   }
-  const subs = (def && Array.isArray(def.subs)) ? def.subs : [];
-  const rows = subs.length
-    ? subs.map(s => ({ title: s.label, items: inCat.filter(p => bbProdMatchesSub(p, s.key)) })).filter(r => r.items.length)
-    : [{ title: '', items: inCat }];
-  rows.forEach(r => r.items.sort((a,b)=>(b.id||0)-(a.id||0)));
   wrap.innerHTML = rows.map(row => {
-    const titleHtml = row.title ? `<h4 class="bb-prod-row-title">${aiEscape(row.title)}</h4>` : '';
     const cards = row.items.map(p => bbProdCardHtml(p)).join('');
-    return `<div class="bb-prod-row">${titleHtml}<div class="bb-prod-rail">${cards}</div></div>`;
+    return `<div class="bb-prod-row">
+      <h4 class="bb-prod-row-title">${aiEscape(row.title)}</h4>
+      <div class="bb-rail-wrap">
+        <button type="button" class="strip-arrow strip-arrow-left" aria-label="Geriye kaydır" data-dir="-1">‹</button>
+        <div class="bb-prod-rail" data-bb-rail>${cards}</div>
+        <button type="button" class="strip-arrow strip-arrow-right" aria-label="İleriye kaydır" data-dir="1">›</button>
+      </div>
+    </div>`;
   }).join('');
+  bbBindRailArrows(wrap);
+}
+
+// Ray okları — anasayfa şeritleriyle aynı manuel rAF kaydırması (scroll-snap
+// ile native smooth scroll çalışmadığı için). Şeritlerdeki hover auto-scroll
+// burada bilinçli olarak yok: kartlardaki "+" butonuna tıklanabilmesi gerekiyor.
+function bbBindRailArrows(scope){
+  const CARD_STEP = 111; // kart 100px + gap .7rem
+  scope.querySelectorAll('.bb-rail-wrap').forEach(w => {
+    const rail = w.querySelector('[data-bb-rail]');
+    if(!rail) return;
+    const leftBtn  = w.querySelector('.strip-arrow-left');
+    const rightBtn = w.querySelector('.strip-arrow-right');
+    const page = () => Math.max(1, Math.round(rail.clientWidth / CARD_STEP) - 1) * CARD_STEP;
+    function updateArrows(){
+      const max = rail.scrollWidth - rail.clientWidth - 1;
+      if(leftBtn)  leftBtn.toggleAttribute('disabled',  rail.scrollLeft <= 0);
+      if(rightBtn) rightBtn.toggleAttribute('disabled', rail.scrollLeft >= max);
+    }
+    updateArrows();
+    rail.addEventListener('scroll', updateArrows, { passive:true });
+    if(leftBtn)  leftBtn.addEventListener('click',  () => smoothScrollRailBy(rail, -page(), 380));
+    if(rightBtn) rightBtn.addEventListener('click', () => smoothScrollRailBy(rail,  page(), 380));
+  });
 }
 
 // Rayların scroll pozisyonunu bozmamak için tam yeniden render yerine
@@ -2505,14 +2548,11 @@ function bbRenderSummary(){
     return;
   }
   const itemsCount = bbState.items.size;
-  const itemsTotal = bbItemsTotal();
-  const bagPrice = Number(bag.price||0);
-  const total = bagPrice + itemsTotal;
+  // v7-10: fiyatlar (giftBagPrice) henüz girilmediği için özet fiyatsız —
+  // sadece seçim sayısını gösterir. Özet bloğu şu an zaten gizli (#bbStep3).
   sum.innerHTML = `
-    <div class="bb-sum-row"><span class="bb-sum-label">Çanta: ${aiEscape(bag.name||'')}</span><span>₺${aiEscape(String(bagPrice))}</span></div>
-    <div class="bb-sum-row"><span class="bb-sum-label">+ ${itemsCount} ürün</span><span>₺${aiEscape(String(itemsTotal))}</span></div>
-    <div class="bb-sum-divider"></div>
-    <div class="bb-sum-total"><span>Toplam</span><span>₺${aiEscape(String(total))}</span></div>
+    <div class="bb-sum-row"><span class="bb-sum-label">Seçilen çanta</span><span>${aiEscape(bbBagLabel(bag))}</span></div>
+    <div class="bb-sum-row"><span class="bb-sum-label">Eklenen ürün</span><span>${itemsCount}</span></div>
   `;
   if(itemsCount === 0){
     btn.disabled = true;
@@ -2531,6 +2571,16 @@ document.addEventListener('input', (e)=>{
   }
 });
 
+// Çantaların adı müşteriye gösterilmiyor; satıcının hangi görselin seçildiğini
+// ayırt edebilmesi için sıra numarası + görsel dosya adı yazılır.
+function bbBagLabel(bag){
+  if(!bag) return '';
+  const idx = bbBags.indexOf(bag) + 1;
+  const file = String(bag.image||'').split('/').pop();
+  const nth = idx > 0 ? `${idx}. çanta` : 'Çanta';
+  return file ? `${nth} (${file})` : nth;
+}
+
 function bbBuildMessage(){
   const bag = bbSelectedBag();
   if(!bag) return null;
@@ -2540,12 +2590,10 @@ function bbBuildMessage(){
   if(!items.length) return null;
   const labelEl = document.getElementById('bbLabel');
   const label = labelEl && labelEl.value ? labelEl.value.trim().slice(0,100) : '';
-  const bagPrice = Number(bag.price||0);
-  const itemsTotal = items.reduce((s,p)=>s+Number(p.giftBagPrice||0),0);
-  const total = bagPrice + itemsTotal;
-  const lines = items.map(p => `  - ${p.name} (+₺${Number(p.giftBagPrice||0)})`).join('\n');
-  let msg = `Merhaba! 🛍️\nÇanta Seti Siparişi:\n• Çanta: ${bag.name} (₺${bagPrice})\n• İçerik:\n${lines}\n\nToplam: ₺${total}`;
-  if(label) msg += `\nEtiket: "${label}"`;
+  // v7-10: fiyat satırı yok — fiyatlandırma WhatsApp'ta konuşuluyor.
+  const lines = items.map(p => `  - ${p.name}`).join('\n');
+  let msg = `Merhaba! 🛍️\nÇanta Seti Siparişi:\n• Çanta: ${bbBagLabel(bag)}\n• İçerik:\n${lines}`;
+  if(label) msg += `\n\nEtiket: "${label}"`;
   return msg;
 }
 
