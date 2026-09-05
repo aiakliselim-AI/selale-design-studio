@@ -6,5 +6,29 @@
     "price": 250,
     "active": true,
     "order": 1
+  },
+  {
+    "id": "seffaf-canta-2",
+    "name": "Şeffaf Çanta 2",
+    "image": "/assets/urunler/cantaSet/canta2.jpeg",
+    "price": 0,
+    "active": true,
+    "order": 2
+  },
+  {
+    "id": "seffaf-canta-3",
+    "name": "Şeffaf Çanta 3",
+    "image": "/assets/urunler/cantaSet/canta3.jpeg",
+    "price": 0,
+    "active": true,
+    "order": 3
+  },
+  {
+    "id": "seffaf-canta-4",
+    "name": "Şeffaf Çanta 4",
+    "image": "/assets/urunler/cantaSet/canta4.jpeg",
+    "price": 0,
+    "active": true,
+    "order": 4
   }
 ]
