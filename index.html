@@ -815,7 +815,7 @@ footer{background:#1a1a1a;color:rgba(255,255,255,.55);padding:5rem 5% 2rem;}
     <!-- Sipariş butonu Adım 3'ün dışında: önizleme kapalıyken de görünür kalır. -->
     <div class="bb-send-row">
       <button type="button" class="bb-send-btn" id="bbSendBtn" onclick="bbSend()" disabled>WhatsApp'tan Sipariş Ver</button>
-      <p class="bb-send-hint" id="bbSendHint">Önce bir çanta seçin</p>
+      <p class="bb-send-hint" id="bbSendHint">En az 1 ürün seçin</p>
     </div>
   </div>
 </section>
@@ -2534,22 +2534,16 @@ function bbRenderSummary(){
     return;
   }
   const bag = bbSelectedBag();
-  if(!bag){
-    sum.innerHTML = `<div class="bb-sum-row"><span class="bb-sum-label">Önce bir çanta seçin</span><span></span></div>`;
-    btn.disabled = true;
-    if(hint) hint.textContent = 'Önce çanta seçin';
-    return;
-  }
   const itemsCount = bbState.items.size;
-  // v7-10: fiyatlar (giftBagPrice) henüz girilmediği için özet fiyatsız —
-  // sadece seçim sayısını gösterir. Özet bloğu şu an zaten gizli (#bbStep3).
+  // v7-13: çanta seçimi kaldırıldı — buton koşulu yalnızca seçilen ürün sayısına bakar.
+  // Özet bloğu şu an zaten gizli (#bbStep3).
   sum.innerHTML = `
     <div class="bb-sum-row"><span class="bb-sum-label">Seçilen çanta</span><span>${aiEscape(bbBagLabel(bag))}</span></div>
     <div class="bb-sum-row"><span class="bb-sum-label">Eklenen ürün</span><span>${itemsCount}</span></div>
   `;
   if(itemsCount === 0){
     btn.disabled = true;
-    if(hint) hint.textContent = 'En az 1 ürün ekleyin';
+    if(hint) hint.textContent = 'En az 1 ürün seçin';
   } else {
     btn.disabled = false;
     if(hint) hint.textContent = 'WhatsApp ile bağlanacaksınız';
@@ -2575,18 +2569,17 @@ function bbBagLabel(bag){
 }
 
 function bbBuildMessage(){
-  const bag = bbSelectedBag();
-  if(!bag) return null;
+  // v7-13: çanta seçimi kaldırıldı — mesajda sabit "Şeffaf Hediye Çantası" yazar,
+  // fiyat/toplam satırı yok (fiyatlandırma WhatsApp'ta konuşuluyor).
   const items = Array.from(bbState.items)
     .map(id => (products||[]).find(p => Number(p.id) === Number(id)))
     .filter(Boolean);
   if(!items.length) return null;
   const labelEl = document.getElementById('bbLabel');
   const label = labelEl && labelEl.value ? labelEl.value.trim().slice(0,100) : '';
-  // v7-10: fiyat satırı yok — fiyatlandırma WhatsApp'ta konuşuluyor.
   const lines = items.map(p => `  - ${p.name}`).join('\n');
-  let msg = `Merhaba! 🛍️\nÇanta Seti Siparişi:\n• Çanta: ${bbBagLabel(bag)}\n• İçerik:\n${lines}`;
-  if(label) msg += `\n\nEtiket: "${label}"`;
+  let msg = `Merhaba! 🛍️\nselale-design-studio.com adresinden ulaşmaktayım.\n\nHediye Çantası Siparişim:\n• Çanta: Şeffaf Hediye Çantası\n• İçerik:\n${lines}`;
+  if(label) msg += `\n• Etiket: "${label}"`;
   return msg;
 }
 
